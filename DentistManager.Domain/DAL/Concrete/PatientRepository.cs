@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.Entities;
+using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.Domain.DAL.Concrete
 {
@@ -17,6 +18,7 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 ctx.Patients.Add(patient);
                 count=ctx.SaveChanges();
+               int test= patient.PatientID;
             }
             return count > 0 ? true : false;
         }
@@ -52,6 +54,20 @@ namespace DentistManager.Domain.DAL.Concrete
                 count = ctx.SaveChanges();
             }
             return count > 0 ? true : false;
+        }
+
+
+        public IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<PatientMiniData> patientList;
+                var patients = ctx.Patients;
+                patientList = (from p in patients
+                               orderby p.Name 
+                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
+                return patientList;       
+            }
         }
     }
 }

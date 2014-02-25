@@ -177,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\SecretaryDashboard\SecretaryDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -211,6 +212,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\SecretaryDashboard\Views\web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="Areas\SecretaryDashboard\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\Index.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientDelete.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientEdit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -253,10 +262,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\SecretaryDashboard\Controllers\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

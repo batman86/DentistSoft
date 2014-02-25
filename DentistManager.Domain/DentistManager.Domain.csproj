@@ -160,6 +160,7 @@
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\PatientMiniData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Entities\DentistModel.edmx">

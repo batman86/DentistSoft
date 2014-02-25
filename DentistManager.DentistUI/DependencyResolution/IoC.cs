@@ -33,7 +33,7 @@ namespace DentistManager.DentistUI.DependencyResolution {
                                     });
 
 
-
+                            x.For<IPatientRepository>().Use<PatientRepository>();
 
                             x.For<Microsoft.AspNet.Identity.IUserStore<ApplicationUser>>()
                             .Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>>();
