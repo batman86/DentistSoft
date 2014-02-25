@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2d730016826c468ca9d9bb62ba27e6d7" Name="Diagram1">
+        <EntityTypeShape EntityType="DentistModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Appointment" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetRole" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUser" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Clinic" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.CustomMaterial" Width="1.5" PointX="7.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Doctor" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.ImageCategory" Width="1.5" PointX="7.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Image" Width="1.5" PointX="9.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Material" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.MaterialTreatment" Width="1.5" PointX="15" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Medicine" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.opperation" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Patient" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.PatientHistory" Width="1.5" PointX="8.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.PatientPayment" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.PaymentReceipt" Width="1.5" PointX="10.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Prescription" Width="1.5" PointX="12.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.RecivingItem" Width="1.5" PointX="10.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Secretary" Width="1.5" PointX="5.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.SessionsStat" Width="1.5" PointX="12.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.SessionValue" Width="1.5" PointX="15" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Storage" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.suppcontact" Width="1.5" PointX="10.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.supplier" Width="1.5" PointX="8.25" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.sysdiagram" Width="1.5" PointX="2.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Treatment" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Warehouse" Width="1.5" PointX="13.5" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="DentistModel.FK_Appointments_Clinics" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Appointments_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Appointments_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Images_Appointments" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Prescriptions_Appointments" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Treatment_Appointments" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Doctors_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PatientPayment_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PaymentReceipt_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Secretary_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PatientPayment_Clinics" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PaymentReceipt_Clinics" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Storages_Clinics" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_CustomMaterial_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Prescriptions_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Treatment_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Images_ImageCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Images_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_MaterialTreatment_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_opperation_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_RecivingItems_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Warehouse_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_MaterialTreatment_Treatment" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Prescriptions_Medicine" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Treatment_opperation" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PatientHistory_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PatientPayment_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Prescriptions_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_PaymentReceipt_PatientPayment" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_RecivingItems_Storages" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_RecivingItems_suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_SessionValues_SessionsStats" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Warehouse_Storages" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.suppcontact_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
