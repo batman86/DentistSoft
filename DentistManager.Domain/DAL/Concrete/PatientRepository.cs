@@ -69,5 +69,21 @@ namespace DentistManager.Domain.DAL.Concrete
                 return patientList;       
             }
         }
+
+
+        public IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<PatientMiniData> patientList;
+                var patients = ctx.Patients;
+                patientList = (from p in patients
+                              where p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber || p.Name.Contains(Name)
+                              orderby p.Name
+                              select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
+
+                return patientList;   
+            }
+        }
     }
 }

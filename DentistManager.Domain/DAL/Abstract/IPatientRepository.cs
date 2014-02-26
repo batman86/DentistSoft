@@ -15,6 +15,6 @@ namespace DentistManager.Domain.DAL.Abstract
         Patient getPatinetBasicInfo(int patientID);
         bool deletepatientBasicInfo(int patientID);
         IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize);
-
+        IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name);
     }
 }
