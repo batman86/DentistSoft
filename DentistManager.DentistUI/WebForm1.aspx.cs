@@ -15,8 +15,6 @@ namespace DentistManager.DentistUI
             PatientRepository pt = new PatientRepository();
             var patient = pt.getPatinetBasicInfo(1);
             Response.Write(patient.Name);
-         
-            
 
         }
     }
