@@ -22,7 +22,7 @@ namespace DentistManager.Domain.Entities
         public int OpperationID { get; set; }
         public string Name { get; set; }
         public string Color { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
         public Nullable<int> MaterialID { get; set; }
     
         public virtual Material Material { get; set; }

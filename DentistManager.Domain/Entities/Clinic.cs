@@ -27,6 +27,7 @@ namespace DentistManager.Domain.Entities
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
+        public Nullable<bool> Acitve { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<PatientPayment> PatientPayments { get; set; }

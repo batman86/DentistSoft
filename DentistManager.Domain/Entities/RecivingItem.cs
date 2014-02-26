@@ -15,12 +15,12 @@ namespace DentistManager.Domain.Entities
     public partial class RecivingItem
     {
         public int ReciveID { get; set; }
-        public Nullable<int> ItemID { get; set; }
-        public Nullable<int> SuppID { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public int ItemID { get; set; }
+        public int SuppID { get; set; }
+        public int Amount { get; set; }
         public Nullable<System.DateTime> ExpireDate { get; set; }
-        public Nullable<System.DateTime> ReciveDate { get; set; }
-        public Nullable<int> StorageID { get; set; }
+        public System.DateTime ReciveDate { get; set; }
+        public int StorageID { get; set; }
         public Nullable<bool> Recived { get; set; }
     
         public virtual Material Material { get; set; }

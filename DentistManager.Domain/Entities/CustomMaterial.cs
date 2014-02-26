@@ -15,11 +15,11 @@ namespace DentistManager.Domain.Entities
     public partial class CustomMaterial
     {
         public int CustomMaterialID { get; set; }
-        public Nullable<System.DateTime> RequestDate { get; set; }
+        public System.DateTime RequestDate { get; set; }
         public Nullable<System.DateTime> ReciveDate { get; set; }
-        public Nullable<int> PatientID { get; set; }
+        public int PatientID { get; set; }
         public Nullable<decimal> Cost { get; set; }
-        public Nullable<int> DoctorID { get; set; }
+        public int DoctorID { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
     

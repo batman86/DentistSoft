@@ -15,11 +15,11 @@ namespace DentistManager.Domain.Entities
     public partial class PaymentReceipt
     {
         public int ReceiptID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public Nullable<int> PatientPaymentID { get; set; }
+        public System.DateTime Date { get; set; }
+        public decimal Amount { get; set; }
+        public int PatientPaymentID { get; set; }
         public string UserID { get; set; }
-        public Nullable<int> ClinicID { get; set; }
+        public int ClinicID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Clinic Clinic { get; set; }

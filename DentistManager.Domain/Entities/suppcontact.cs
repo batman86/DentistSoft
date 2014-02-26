@@ -15,7 +15,7 @@ namespace DentistManager.Domain.Entities
     public partial class suppcontact
     {
         public int Id { get; set; }
-        public Nullable<int> SuppId { get; set; }
+        public int SuppId { get; set; }
         public string ContactName { get; set; }
         public string ContactTitel { get; set; }
         public string ContactDep { get; set; }

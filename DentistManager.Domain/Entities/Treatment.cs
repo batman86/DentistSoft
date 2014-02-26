@@ -21,10 +21,11 @@ namespace DentistManager.Domain.Entities
     
         public int TeratmentID { get; set; }
         public string Description { get; set; }
-        public Nullable<int> AppointmentID { get; set; }
-        public Nullable<int> DoctorID { get; set; }
-        public Nullable<int> PatientID { get; set; }
-        public Nullable<int> OpperationID { get; set; }
+        public int AppointmentID { get; set; }
+        public int DoctorID { get; set; }
+        public int PatientID { get; set; }
+        public int OpperationID { get; set; }
+        public decimal TeratmentCost { get; set; }
     
         public virtual Appointment Appointment { get; set; }
         public virtual Doctor Doctor { get; set; }

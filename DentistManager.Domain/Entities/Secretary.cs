@@ -18,7 +18,7 @@ namespace DentistManager.Domain.Entities
         public string UserID { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
-        public Nullable<System.DateTime> BrithDate { get; set; }
+        public System.DateTime BrithDate { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string Address { get; set; }

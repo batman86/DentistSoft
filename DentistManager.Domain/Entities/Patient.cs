@@ -29,7 +29,7 @@ namespace DentistManager.Domain.Entities
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public Nullable<int> Age { get; set; }
-        public Nullable<System.DateTime> BrithDate { get; set; }
+        public System.DateTime BrithDate { get; set; }
         public string gender { get; set; }
         public string E_mail { get; set; }
         public string Notice { get; set; }

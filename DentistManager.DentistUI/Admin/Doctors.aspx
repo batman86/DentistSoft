@@ -60,7 +60,7 @@
                                     <dx:ListEditItem Text="Female" Value="Female" />
                                 </Items>
                                 <ItemStyle>
-                                <Border BorderWidth="12px" />
+                                <Border BorderWidth="0px" />
                                 </ItemStyle>
                             </PropertiesComboBox>
                             <EditFormSettings Visible="True" />

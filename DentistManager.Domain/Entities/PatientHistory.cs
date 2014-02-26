@@ -15,7 +15,7 @@ namespace DentistManager.Domain.Entities
     public partial class PatientHistory
     {
         public int HistoryID { get; set; }
-        public Nullable<int> PatientID { get; set; }
+        public int PatientID { get; set; }
         public string Name { get; set; }
         public string Descripation { get; set; }
     

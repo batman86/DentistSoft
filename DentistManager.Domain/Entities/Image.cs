@@ -17,9 +17,9 @@ namespace DentistManager.Domain.Entities
         public int ImageID { get; set; }
         public string Name { get; set; }
         public string Notice { get; set; }
-        public Nullable<int> appointmentID { get; set; }
-        public Nullable<int> ImageCategoryID { get; set; }
-        public Nullable<int> PatientID { get; set; }
+        public int appointmentID { get; set; }
+        public int ImageCategoryID { get; set; }
+        public int PatientID { get; set; }
         public string FullImageURL { get; set; }
         public string MediumImageURL { get; set; }
         public string MinImageURL { get; set; }

@@ -22,7 +22,7 @@ namespace DentistManager.Domain.Entities
         public int MedicineID { get; set; }
         public string Name { get; set; }
         public string SideEffectDecsription { get; set; }
-        public string Unit { get; set; }
+        public string ScaleType { get; set; }
     
         public virtual ICollection<Prescription> Prescriptions { get; set; }
     }

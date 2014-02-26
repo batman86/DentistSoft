@@ -25,8 +25,8 @@ namespace DentistManager.Domain.Entities
         public string Address { get; set; }
         public string City { get; set; }
         public string Countery { get; set; }
-        public string Phone1 { get; set; }
-        public string Phone2 { get; set; }
+        public string Phone { get; set; }
+        public string Mobile { get; set; }
         public string Fax { get; set; }
         public string WebSite { get; set; }
         public string TaxFileNo { get; set; }

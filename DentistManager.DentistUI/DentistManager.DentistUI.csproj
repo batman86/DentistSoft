@@ -233,7 +233,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\SecretaryDashboard\Views\web.config" />
+    <Content Include="Areas\SecretaryDashboard\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebForm1.aspx" />
     <Content Include="Areas\SecretaryDashboard\Views\_ViewStart.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\Shared\_Layout.cshtml" />

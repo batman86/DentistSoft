@@ -20,9 +20,10 @@ namespace DentistManager.Domain.Entities
         }
     
         public int PatientPaymentID { get; set; }
-        public Nullable<int> PatientID { get; set; }
-        public Nullable<decimal> TotalPrice { get; set; }
-        public Nullable<decimal> PaidAmount { get; set; }
+        public int PatientID { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal PaidAmount { get; set; }
+        public Nullable<decimal> RemainedAmount { get; set; }
         public string UserID { get; set; }
         public int ClinicID { get; set; }
     

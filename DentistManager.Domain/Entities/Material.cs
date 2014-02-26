@@ -25,11 +25,12 @@ namespace DentistManager.Domain.Entities
         public int ItemID { get; set; }
         public string ItemName { get; set; }
         public string PartNumber { get; set; }
-        public Nullable<int> CatID { get; set; }
+        public int CatID { get; set; }
         public Nullable<int> ProdCompany { get; set; }
         public string ScaleType { get; set; }
         public Nullable<int> ReOrder { get; set; }
         public string Note { get; set; }
+        public decimal MaterialCost { get; set; }
     
         public virtual ICollection<MaterialTreatment> MaterialTreatments { get; set; }
         public virtual ICollection<opperation> opperations { get; set; }

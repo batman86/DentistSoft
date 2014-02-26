@@ -25,7 +25,7 @@ namespace DentistManager.Domain.Entities
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
-        public Nullable<int> ClinicID { get; set; }
+        public int ClinicID { get; set; }
         public Nullable<bool> Active { get; set; }
     
         public virtual Clinic Clinic { get; set; }

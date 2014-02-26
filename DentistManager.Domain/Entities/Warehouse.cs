@@ -15,10 +15,10 @@ namespace DentistManager.Domain.Entities
     public partial class Warehouse
     {
         public int WarehouseID { get; set; }
-        public Nullable<int> StorageID { get; set; }
-        public Nullable<int> ItemID { get; set; }
-        public Nullable<int> Available { get; set; }
-        public Nullable<int> Reserved { get; set; }
+        public int StorageID { get; set; }
+        public int ItemID { get; set; }
+        public int Available { get; set; }
+        public int Reserved { get; set; }
         public Nullable<int> Total { get; set; }
         public Nullable<decimal> CostPrice { get; set; }
     
