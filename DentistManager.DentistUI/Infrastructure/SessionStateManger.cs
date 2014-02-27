@@ -16,7 +16,7 @@ namespace DentistManager.DentistUI.Infrastructure
 
         }
 
-       public  string  getSecyrtaryActivePatinet(int userID)
+        public string getSecyrtaryActivePatinet(string userID)
        {
             string probertyValue=string.Empty;
 

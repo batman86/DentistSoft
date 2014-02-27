@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/27/2014 14:55:31
+-- Date Created: 02/27/2014 21:19:22
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -61,6 +61,9 @@ IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Treatment]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_opperation_Material]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[opperation] DROP CONSTRAINT [FK_opperation_Material];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Patient_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Patient] DROP CONSTRAINT [FK_Patient_Clinics];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PatientHistory_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatientHistory] DROP CONSTRAINT [FK_PatientHistory_Patient];
@@ -397,6 +400,7 @@ GO
 -- Creating table 'Patients'
 CREATE TABLE [dbo].[Patients] (
     [PatientID] int IDENTITY(1,1) NOT NULL,
+    [ClinicID] int  NULL,
     [Name] nvarchar(100)  NOT NULL,
     [Address] nvarchar(500)  NULL,
     [Phone] nvarchar(50)  NULL,
@@ -484,7 +488,7 @@ GO
 -- Creating table 'SessionsStats'
 CREATE TABLE [dbo].[SessionsStats] (
     [SessionID] int IDENTITY(1,1) NOT NULL,
-    [UserID] int  NULL,
+    [UserID] nvarchar(128)  NULL,
     [SessionName] nvarchar(50)  NULL
 );
 GO
@@ -941,6 +945,20 @@ ADD CONSTRAINT [FK_Secretary_AspNetUsers]
 CREATE INDEX [IX_FK_Secretary_AspNetUsers]
 ON [dbo].[Secretaries]
     ([UserID]);
+GO
+
+-- Creating foreign key on [ClinicID] in table 'Patients'
+ALTER TABLE [dbo].[Patients]
+ADD CONSTRAINT [FK_Patient_Clinics]
+    FOREIGN KEY ([ClinicID])
+    REFERENCES [dbo].[Clinics]
+        ([ClinicID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Patient_Clinics'
+CREATE INDEX [IX_FK_Patient_Clinics]
+ON [dbo].[Patients]
+    ([ClinicID]);
 GO
 
 -- Creating foreign key on [ClinicID] in table 'PatientPayments'

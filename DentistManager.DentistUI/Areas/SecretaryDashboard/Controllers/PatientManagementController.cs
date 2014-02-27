@@ -141,7 +141,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         public ActionResult ActivePatientTopBar()
         {
              //User.Identity.GetUserId();
-            int userID = 1;
+            string userID = "1";
             string patientID;
 
             SessionStateManger stm = new SessionStateManger(sessionStateBL);

@@ -5,7 +5,7 @@ namespace DentistManager.Domain.BL.Abstract
 {
     public interface ISeassionStateBL
     {
-        IEnumerable<SessionValuesViewModel> getSessionValueList(string sessionName ,int userID);
-        bool setSessionProbertyValue(string sessionName, int userID,string probertyName ,string probertyValue);
+        IEnumerable<SessionValuesViewModel> getSessionValueList(string sessionName, string userID);
+        bool setSessionProbertyValue(string sessionName, string userID, string probertyName, string probertyValue);
     }
 }

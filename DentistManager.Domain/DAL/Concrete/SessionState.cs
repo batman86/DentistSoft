@@ -11,7 +11,7 @@ namespace DentistManager.Domain.DAL.Concrete
 {
     public class SessionState : ISessionState
     {
-        public int getSessionID(string SessionName, int userID)
+        public int getSessionID(string SessionName, string userID)
         {
             int? sessionID;
             using (Entities.Entities ctx = new Entities.Entities())
@@ -21,7 +21,7 @@ namespace DentistManager.Domain.DAL.Concrete
             return sessionID ?? 0;
         }
 
-        public int addSessionAndGetID(string SessionName, int userID)
+        public int addSessionAndGetID(string SessionName, string userID)
         {
             int sessionID;
             using (Entities.Entities ctx = new Entities.Entities())
