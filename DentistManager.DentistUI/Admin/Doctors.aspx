@@ -67,7 +67,7 @@
                             <EditFormSettings Visible="True" />
                         </dx:GridViewDataComboBoxColumn>
                         <dx:GridViewDataTextColumn FieldName="Age" VisibleIndex="5" Visible="False">
-                            <EditFormSettings Visible="True" />
+                            <EditFormSettings Visible="False" />
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataDateColumn FieldName="BrithDate" VisibleIndex="6" Visible="False">
                             <EditFormSettings Visible="True" />
@@ -213,14 +213,13 @@
                         </DetailRow>
                     </Templates>
                 </dx:ASPxGridView>
-                    <asp:SqlDataSource ID="dsDoctors" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Doctors] SET Active= 0  where DoctorID=@DoctorID" InsertCommand="INSERT INTO [Doctors] ( [Name], [Gender], [Age], [BrithDate], [Phone], [Mobile], [Address], [E-mail], [Active]) VALUES ( @Name, @Gender, @Age, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Doctors]" UpdateCommand="UPDATE [Doctors] SET  [Name] = @Name, [Gender] = @Gender, [Age] = @Age, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E-mail] = @column1, [Active] = @Active WHERE [DoctorID] = @DoctorID">
+                    <asp:SqlDataSource ID="dsDoctors" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Doctors] SET Active= 0  where DoctorID=@DoctorID" InsertCommand="INSERT INTO [Doctors] ( [Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E-mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Doctors]" UpdateCommand="UPDATE [Doctors] SET  [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E-mail] = @column1, [Active] = @Active WHERE [DoctorID] = @DoctorID">
                         <DeleteParameters>
                             <asp:Parameter Name="DoctorID" />
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="Name" Type="String" />
                             <asp:Parameter Name="Gender" Type="String" />
-                            <asp:Parameter Name="Age" Type="Int32" />
                             <asp:Parameter DbType="Date" Name="BrithDate" />
                             <asp:Parameter Name="Phone" Type="String" />
                             <asp:Parameter Name="Mobile" Type="String" />
@@ -231,7 +230,6 @@
                         <UpdateParameters>
                             <asp:Parameter Name="Name" Type="String" />
                             <asp:Parameter Name="Gender" Type="String" />
-                            <asp:Parameter Name="Age" Type="Int32" />
                             <asp:Parameter DbType="Date" Name="BrithDate" />
                             <asp:Parameter Name="Phone" Type="String" />
                             <asp:Parameter Name="Mobile" Type="String" />
