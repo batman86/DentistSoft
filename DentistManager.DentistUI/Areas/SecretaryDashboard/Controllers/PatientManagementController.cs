@@ -13,11 +13,10 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
     public class PatientManagementController : Controller
     {
         IPatientRepository patientRepository;
-        ISeassionStateBL sessionStateBL;
-        public PatientManagementController(IPatientRepository _patientRepository, ISeassionStateBL _sessionStateBL)
+
+        public PatientManagementController(IPatientRepository _patientRepository)
         {
             patientRepository = _patientRepository;
-            sessionStateBL = _sessionStateBL;
         }
         //
         // GET: /SecretaryDashboard/PatientManagement/
