@@ -194,6 +194,13 @@
     <Compile Include="Admin\Doctors.aspx.designer.cs">
       <DependentUpon>Doctors.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Secretary.aspx.cs">
+      <DependentUpon>Secretary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Secretary.aspx.designer.cs">
+      <DependentUpon>Secretary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -225,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Doctors.aspx" />
+    <Content Include="Admin\Secretary.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

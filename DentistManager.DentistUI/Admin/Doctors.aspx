@@ -9,7 +9,7 @@
             width: 80%;
         }
         .auto-style2 {
-            width: 117px;
+            width: 22px;
         }
     </style>
 </asp:Content>
@@ -48,7 +48,8 @@
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="3">
                             <PropertiesTextEdit>
-                                <ValidationSettings>
+                                <ValidationSettings ErrorDisplayMode="ImageWithText">
+                                    <RegularExpression ErrorText="Enter Full Name" ValidationExpression="^[a-zA-Z ]{3,}$" />
                                     <RequiredField IsRequired="True" />
                                 </ValidationSettings>
                             </PropertiesTextEdit>
@@ -56,7 +57,7 @@
                         <dx:GridViewDataComboBoxColumn FieldName="Gender" Visible="False" VisibleIndex="4">
                             <PropertiesComboBox EnableFocusedStyle="False">
                                 <Items>
-                                    <dx:ListEditItem Selected="True" Text="Male" Value="Male" />
+                                    <dx:ListEditItem Text="Male" Value="Male" />
                                     <dx:ListEditItem Text="Female" Value="Female" />
                                 </Items>
                                 <ItemStyle>
@@ -74,14 +75,14 @@
                         <dx:GridViewDataTextColumn FieldName="Phone" VisibleIndex="7">
                             <PropertiesTextEdit>
                                 <ValidationSettings ErrorDisplayMode="ImageWithText" SetFocusOnError="True">
-                                    <RegularExpression ErrorText="Enter Phone Number" ValidationExpression="\d{9}" />
+                                    <RegularExpression ErrorText="Wrong Format" ValidationExpression="\d{9}" />
                                 </ValidationSettings>
                             </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="Mobile" VisibleIndex="8">
                             <PropertiesTextEdit>
                                 <ValidationSettings ErrorDisplayMode="ImageWithText">
-                                    <RegularExpression ErrorText="Enter Mobile Phone" ValidationExpression="^\d{10,11}$" />
+                                    <RegularExpression ErrorText="Wrong Format" ValidationExpression="^\d{10,11}$" />
                                 </ValidationSettings>
                             </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
@@ -100,7 +101,7 @@
                     <SettingsDetail ShowDetailRow="True" />
                     <Templates>
                         <DetailRow>
-                            <asp:FormView ID="Details" runat="server" DataKeyNames="DoctorID" DataSourceID="dsDoctors">
+                            <asp:FormView ID="fvDetails" runat="server" DataKeyNames="DoctorID" DataSourceID="dsDoctors">
                                 <EditItemTemplate>
                                     DoctorID:
                                     <asp:Label ID="DoctorIDLabel1" runat="server" Text='<%# Eval("DoctorID") %>' />
