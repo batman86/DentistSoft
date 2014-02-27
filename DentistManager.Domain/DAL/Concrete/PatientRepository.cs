@@ -50,8 +50,11 @@ namespace DentistManager.Domain.DAL.Concrete
             using(Entities.Entities ctx =new Entities.Entities ())
             {
                 Patient patient = ctx.Patients.Find(patientID);
-                ctx.Patients.Remove(patient);
-                count = ctx.SaveChanges();
+                if (patient != null)
+                {
+                    ctx.Patients.Remove(patient);
+                    count = ctx.SaveChanges();
+                }
             }
             return count > 0 ? true : false;
         }
@@ -83,6 +86,118 @@ namespace DentistManager.Domain.DAL.Concrete
                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
 
                 return patientList;   
+            }
+        }
+
+        // if the patient id is not exist return first patient
+        public PatientMiniData getPatinetMiniInfo(int patientID)
+        {
+            PatientMiniData patientMini;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Patient patient = ctx.Patients.Find(patientID);
+                if (patient != null)
+                    patient = ctx.Patients.FirstOrDefault();
+
+                  patientMini = new PatientMiniData { PatientID = patient.PatientID, Name = patient.Name, Phone = patient.Phone, Mobile = patient.Mobile, Address = patient.Address };
+                //var patientIQ = ctx.Patients;
+                //patient = (from p in patientIQ
+                //           where p.PatientID == patientID
+                //           select new PatientMiniData { PatientID = p.PatientID, Name = p.Name, Mobile = p.Mobile, Phone = p.Phone, Address = p.Address }).;
+
+            }
+            return patientMini;
+        }
+
+
+        public bool addNewPatinetHistory(PatientHistoryViewModel patientHistory)
+        {
+            int count = 0;
+
+            PatientHistory patientHistoryEntity = new PatientHistory {
+                 PatientID=patientHistory.PatientID ,
+                 Name=patientHistory.Name,
+                 Descripation=patientHistory.Descripation,
+            };
+
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                ctx.PatientHistories.Add(patientHistoryEntity);
+                count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
+
+        public bool updatePatinetHistory(PatientHistoryViewModel patientHistory)
+        {
+            int count = 0;
+
+            PatientHistory patientHistoryEntity = new PatientHistory
+            {
+                HistoryID = patientHistory.HistoryID,
+                PatientID = patientHistory.PatientID,
+                Name = patientHistory.Name,
+                Descripation = patientHistory.Descripation,
+            };
+
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                ctx.Entry(patientHistoryEntity).State = System.Data.Entity.EntityState.Modified;
+                count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
+
+        public PatientHistoryViewModel getPatinetHistoryDetails(int patientHistorytID)
+        {
+            PatientHistoryViewModel patientHistoryViewModel;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                PatientHistory patientHistoryEntity = ctx.PatientHistories.Find(patientHistorytID);
+                if (patientHistoryEntity != null)
+                {
+                    patientHistoryViewModel = new PatientHistoryViewModel
+                    {
+                        HistoryID = patientHistoryEntity.HistoryID,
+                        Name = patientHistoryEntity.Name,
+                        Descripation = patientHistoryEntity.Descripation,
+                        PatientID = patientHistoryEntity.PatientID
+                    };
+                }
+                else
+                    patientHistoryViewModel = null;
+            }
+            return patientHistoryViewModel;
+        }
+
+        public bool deletePatientHistory(int patientHistorytID)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                PatientHistory patientHistory = ctx.PatientHistories.Find(patientHistorytID);
+                if (patientHistory != null)
+                {
+                    ctx.PatientHistories.Remove(patientHistory);
+                    count = ctx.SaveChanges();
+                }
+            }
+            return count > 0 ? true : false;
+        }
+
+        public IEnumerable<PatientHistoryViewModel> getPatientHistoryList(int patientID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<PatientHistoryViewModel> patienthistoryList;
+
+                var patienthistoris = ctx.PatientHistories;
+
+                patienthistoryList = (from ph in patienthistoris
+                                      where ph.PatientID == patientID
+                                      select new PatientHistoryViewModel { PatientID=ph.PatientID , Name= ph.Name, Descripation=ph.Descripation, HistoryID= ph.HistoryID}).ToList();
+
+                return patienthistoryList;
             }
         }
     }

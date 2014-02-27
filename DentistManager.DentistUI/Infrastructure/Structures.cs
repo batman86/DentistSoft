@@ -7,6 +7,6 @@ namespace DentistManager.DentistUI.Infrastructure
     };
     public enum seassionProbertyNamesList
     {
-        ActivePatient
+        ActivePatientID
     };
 }

@@ -16,8 +16,8 @@ namespace DentistManager.DentistUI.Infrastructure
 
         }
 
-        string  getSecyrtaryActivePatinet(int userID)
-        {
+       public  string  getSecyrtaryActivePatinet(int userID)
+       {
             string probertyValue=string.Empty;
 
             var sessionHolder = HttpContext.Current.Session[seassionNamesList.SecurtaryActivePatient.ToString()];
@@ -28,7 +28,7 @@ namespace DentistManager.DentistUI.Infrastructure
                 {
                     foreach (var item in sessionValuesList)
                     {
-                        if (item.propertyName == seassionProbertyNamesList.ActivePatient.ToString())
+                        if (item.propertyName == seassionProbertyNamesList.ActivePatientID.ToString())
                         {
                             probertyValue = item.sessionValue;
                             break;

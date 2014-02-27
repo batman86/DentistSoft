@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientManagementController.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentController.cs" />
     <Compile Include="Areas\SecretaryDashboard\SecretaryDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -254,6 +255,9 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientDelete.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientEdit.cshtml" />
     <Content Include="Admin\Admin.Master" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\ActivePatientTopBar.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientHistoryList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDetails.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -297,6 +301,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
+    <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>
