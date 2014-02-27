@@ -6,15 +6,18 @@ using System.Web.Mvc;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.Entities;
 using DentistManager.Domain.ViewModel;
+using DentistManager.Domain.BL.Abstract;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
     public class PatientManagementController : Controller
     {
         IPatientRepository patientRepository;
-        public PatientManagementController(IPatientRepository _patientRepository)
+        ISeassionStateBL sessionStateBL;
+        public PatientManagementController(IPatientRepository _patientRepository, ISeassionStateBL _sessionStateBL)
         {
             patientRepository = _patientRepository;
+            sessionStateBL = _sessionStateBL;
         }
         //
         // GET: /SecretaryDashboard/PatientManagement/

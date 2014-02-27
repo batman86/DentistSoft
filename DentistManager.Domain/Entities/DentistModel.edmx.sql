@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/25/2014 19:02:35
+-- Date Created: 02/27/2014 14:55:31
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -246,13 +246,13 @@ GO
 -- Creating table 'Appointments'
 CREATE TABLE [dbo].[Appointments] (
     [AppointmentID] int IDENTITY(1,1) NOT NULL,
-    [Date] datetime  NULL,
-    [Time] time  NULL,
-    [DoctorID] int  NULL,
-    [PatientID] int  NULL,
+    [Date] datetime  NOT NULL,
+    [Time] time  NOT NULL,
+    [DoctorID] int  NOT NULL,
+    [PatientID] int  NOT NULL,
     [Reason] nvarchar(500)  NULL,
-    [ClinicID] int  NULL,
-    [Status] nvarchar(50)  NULL
+    [ClinicID] int  NOT NULL,
+    [Status] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -293,23 +293,24 @@ GO
 -- Creating table 'Clinics'
 CREATE TABLE [dbo].[Clinics] (
     [ClinicID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(50)  NULL,
-    [Address] nvarchar(50)  NULL,
+    [Name] nvarchar(50)  NOT NULL,
+    [Address] nvarchar(50)  NOT NULL,
     [Phone] nvarchar(50)  NULL,
-    [Mobile] nvarchar(50)  NULL
+    [Mobile] nvarchar(50)  NOT NULL,
+    [Acitve] bit  NULL
 );
 GO
 
 -- Creating table 'CustomMaterials'
 CREATE TABLE [dbo].[CustomMaterials] (
     [CustomMaterialID] int IDENTITY(1,1) NOT NULL,
-    [RequestDate] datetime  NULL,
+    [RequestDate] datetime  NOT NULL,
     [ReciveDate] datetime  NULL,
-    [PatientID] int  NULL,
+    [PatientID] int  NOT NULL,
     [Cost] decimal(18,4)  NULL,
-    [DoctorID] int  NULL,
+    [DoctorID] int  NOT NULL,
     [Description] nvarchar(200)  NULL,
-    [Name] nvarchar(50)  NULL
+    [Name] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -317,12 +318,12 @@ GO
 CREATE TABLE [dbo].[Doctors] (
     [DoctorID] int IDENTITY(1,1) NOT NULL,
     [UserID] nvarchar(128)  NULL,
-    [Name] nvarchar(100)  NULL,
-    [Gender] nvarchar(50)  NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Gender] nvarchar(50)  NOT NULL,
     [Age] int  NULL,
     [BrithDate] datetime  NULL,
     [Phone] nvarchar(50)  NULL,
-    [Mobile] nvarchar(50)  NULL,
+    [Mobile] nvarchar(50)  NOT NULL,
     [Address] nvarchar(100)  NULL,
     [E_mail] nvarchar(100)  NULL,
     [Active] bit  NULL
@@ -332,7 +333,7 @@ GO
 -- Creating table 'ImageCategories'
 CREATE TABLE [dbo].[ImageCategories] (
     [ImageCategoryID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(50)  NULL,
+    [Name] nvarchar(50)  NOT NULL,
     [Price] decimal(18,4)  NULL
 );
 GO
@@ -340,15 +341,15 @@ GO
 -- Creating table 'Images'
 CREATE TABLE [dbo].[Images] (
     [ImageID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(50)  NULL,
+    [Name] nvarchar(50)  NOT NULL,
     [Notice] nvarchar(50)  NULL,
-    [appointmentID] int  NULL,
-    [ImageCategoryID] int  NULL,
-    [PatientID] int  NULL,
-    [FullImageURL] nvarchar(500)  NULL,
-    [MediumImageURL] nvarchar(500)  NULL,
-    [MinImageURL] nvarchar(500)  NULL,
-    [LocalImageURL] nvarchar(500)  NULL
+    [appointmentID] int  NOT NULL,
+    [ImageCategoryID] int  NOT NULL,
+    [PatientID] int  NOT NULL,
+    [FullImageURL] nvarchar(500)  NOT NULL,
+    [MediumImageURL] nvarchar(500)  NOT NULL,
+    [MinImageURL] nvarchar(500)  NOT NULL,
+    [LocalImageURL] nvarchar(500)  NOT NULL
 );
 GO
 
@@ -357,11 +358,12 @@ CREATE TABLE [dbo].[Materials] (
     [ItemID] int IDENTITY(1,1) NOT NULL,
     [ItemName] nvarchar(700)  NOT NULL,
     [PartNumber] nvarchar(50)  NULL,
-    [CatID] int  NULL,
+    [CatID] int  NOT NULL,
     [ProdCompany] int  NULL,
-    [ScaleType] nvarchar(30)  NULL,
+    [ScaleType] nvarchar(30)  NOT NULL,
     [ReOrder] int  NULL,
-    [Note] nvarchar(200)  NULL
+    [Note] nvarchar(200)  NULL,
+    [MaterialCost] decimal(18,0)  NOT NULL
 );
 GO
 
@@ -369,8 +371,7 @@ GO
 CREATE TABLE [dbo].[MaterialTreatments] (
     [TeratmentID] int  NOT NULL,
     [MaterialID] int  NOT NULL,
-    [Amonut] float  NULL,
-    [MaterialCost] decimal(18,4)  NULL
+    [Quantity] float  NOT NULL
 );
 GO
 
@@ -379,16 +380,16 @@ CREATE TABLE [dbo].[Medicines] (
     [MedicineID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(50)  NOT NULL,
     [SideEffectDecsription] nvarchar(300)  NULL,
-    [Unit] nvarchar(50)  NULL
+    [ScaleType] nvarchar(50)  NOT NULL
 );
 GO
 
 -- Creating table 'opperations'
 CREATE TABLE [dbo].[opperations] (
     [OpperationID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(50)  NULL,
+    [Name] nvarchar(50)  NOT NULL,
     [Color] nvarchar(50)  NULL,
-    [Price] decimal(18,4)  NULL,
+    [Price] decimal(18,4)  NOT NULL,
     [MaterialID] int  NULL
 );
 GO
@@ -396,13 +397,13 @@ GO
 -- Creating table 'Patients'
 CREATE TABLE [dbo].[Patients] (
     [PatientID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(100)  NULL,
+    [Name] nvarchar(100)  NOT NULL,
     [Address] nvarchar(500)  NULL,
     [Phone] nvarchar(50)  NULL,
-    [Mobile] nvarchar(50)  NULL,
+    [Mobile] nvarchar(50)  NOT NULL,
     [Age] int  NULL,
-    [BrithDate] datetime  NULL,
-    [gender] nvarchar(50)  NULL,
+    [BrithDate] datetime  NOT NULL,
+    [gender] nvarchar(50)  NOT NULL,
     [E_mail] nvarchar(50)  NULL,
     [Notice] nvarchar(50)  NULL
 );
@@ -411,8 +412,8 @@ GO
 -- Creating table 'PatientHistories'
 CREATE TABLE [dbo].[PatientHistories] (
     [HistoryID] int  NOT NULL,
-    [PatientID] int  NULL,
-    [Name] nvarchar(50)  NULL,
+    [PatientID] int  NOT NULL,
+    [Name] nvarchar(50)  NOT NULL,
     [Descripation] nvarchar(500)  NULL
 );
 GO
@@ -420,9 +421,10 @@ GO
 -- Creating table 'PatientPayments'
 CREATE TABLE [dbo].[PatientPayments] (
     [PatientPaymentID] int IDENTITY(1,1) NOT NULL,
-    [PatientID] int  NULL,
-    [TotalPrice] decimal(18,4)  NULL,
-    [PaidAmount] decimal(18,4)  NULL,
+    [PatientID] int  NOT NULL,
+    [TotalPrice] decimal(18,4)  NOT NULL,
+    [PaidAmount] decimal(18,4)  NOT NULL,
+    [RemainedAmount] decimal(19,4)  NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [ClinicID] int  NOT NULL
 );
@@ -431,11 +433,11 @@ GO
 -- Creating table 'PaymentReceipts'
 CREATE TABLE [dbo].[PaymentReceipts] (
     [ReceiptID] int IDENTITY(1,1) NOT NULL,
-    [Date] datetime  NULL,
-    [Amount] decimal(18,4)  NULL,
-    [PatientPaymentID] int  NULL,
-    [UserID] nvarchar(128)  NULL,
-    [ClinicID] int  NULL
+    [Date] datetime  NOT NULL,
+    [Amount] decimal(18,4)  NOT NULL,
+    [PatientPaymentID] int  NOT NULL,
+    [UserID] nvarchar(128)  NOT NULL,
+    [ClinicID] int  NOT NULL
 );
 GO
 
@@ -454,12 +456,12 @@ GO
 -- Creating table 'RecivingItems'
 CREATE TABLE [dbo].[RecivingItems] (
     [ReciveID] int IDENTITY(1,1) NOT NULL,
-    [ItemID] int  NULL,
-    [SuppID] int  NULL,
-    [Amount] int  NULL,
+    [ItemID] int  NOT NULL,
+    [SuppID] int  NOT NULL,
+    [Amount] int  NOT NULL,
     [ExpireDate] datetime  NULL,
-    [ReciveDate] datetime  NULL,
-    [StorageID] int  NULL,
+    [ReciveDate] datetime  NOT NULL,
+    [StorageID] int  NOT NULL,
     [Recived] bit  NULL
 );
 GO
@@ -468,11 +470,11 @@ GO
 CREATE TABLE [dbo].[Secretaries] (
     [SecretaryID] int IDENTITY(1,1) NOT NULL,
     [UserID] nvarchar(128)  NULL,
-    [Name] nvarchar(50)  NULL,
-    [Gender] nvarchar(50)  NULL,
-    [BrithDate] datetime  NULL,
+    [Name] nvarchar(50)  NOT NULL,
+    [Gender] nvarchar(50)  NOT NULL,
+    [BrithDate] datetime  NOT NULL,
     [Phone] nvarchar(50)  NULL,
-    [Mobile] nvarchar(50)  NULL,
+    [Mobile] nvarchar(50)  NOT NULL,
     [Address] nvarchar(50)  NULL,
     [E_mail] nvarchar(50)  NULL,
     [Active] bit  NULL
@@ -499,11 +501,11 @@ GO
 -- Creating table 'Storages'
 CREATE TABLE [dbo].[Storages] (
     [StorageID] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(50)  NULL,
+    [Name] nvarchar(50)  NOT NULL,
     [Address] nvarchar(50)  NULL,
     [Phone] nvarchar(50)  NULL,
     [Mobile] nvarchar(50)  NULL,
-    [ClinicID] int  NULL,
+    [ClinicID] int  NOT NULL,
     [Active] bit  NULL
 );
 GO
@@ -511,8 +513,8 @@ GO
 -- Creating table 'suppcontacts'
 CREATE TABLE [dbo].[suppcontacts] (
     [Id] int  NOT NULL,
-    [SuppId] int  NULL,
-    [ContactName] nvarchar(70)  NULL,
+    [SuppId] int  NOT NULL,
+    [ContactName] nvarchar(70)  NOT NULL,
     [ContactTitel] nvarchar(30)  NULL,
     [ContactDep] nvarchar(30)  NULL,
     [City] nvarchar(30)  NULL,
@@ -526,12 +528,12 @@ GO
 -- Creating table 'suppliers'
 CREATE TABLE [dbo].[suppliers] (
     [SuppID] int IDENTITY(1,1) NOT NULL,
-    [CompanyName] nvarchar(50)  NULL,
+    [CompanyName] nvarchar(50)  NOT NULL,
     [Address] nvarchar(70)  NULL,
     [City] nvarchar(30)  NULL,
     [Countery] nvarchar(30)  NULL,
-    [Phone1] nvarchar(20)  NULL,
-    [Phone2] nvarchar(20)  NULL,
+    [Phone] nvarchar(20)  NOT NULL,
+    [Mobile] nvarchar(20)  NULL,
     [Fax] nvarchar(20)  NULL,
     [WebSite] nvarchar(70)  NULL,
     [TaxFileNo] nvarchar(50)  NULL,
@@ -539,7 +541,7 @@ CREATE TABLE [dbo].[suppliers] (
     [TaxRegNo] nvarchar(50)  NULL,
     [Notes] nvarchar(200)  NULL,
     [openbalance] decimal(19,2)  NULL,
-    [Type] nvarchar(50)  NULL
+    [Type] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -557,20 +559,21 @@ GO
 CREATE TABLE [dbo].[Treatments] (
     [TeratmentID] int IDENTITY(1,1) NOT NULL,
     [Description] nvarchar(500)  NULL,
-    [AppointmentID] int  NULL,
-    [DoctorID] int  NULL,
-    [PatientID] int  NULL,
-    [OpperationID] int  NULL
+    [AppointmentID] int  NOT NULL,
+    [DoctorID] int  NOT NULL,
+    [PatientID] int  NOT NULL,
+    [OpperationID] int  NOT NULL,
+    [TeratmentCost] decimal(18,4)  NOT NULL
 );
 GO
 
 -- Creating table 'Warehouses'
 CREATE TABLE [dbo].[Warehouses] (
     [WarehouseID] int IDENTITY(1,1) NOT NULL,
-    [StorageID] int  NULL,
-    [ItemID] int  NULL,
-    [Available] int  NULL,
-    [Reserved] int  NULL,
+    [StorageID] int  NOT NULL,
+    [ItemID] int  NOT NULL,
+    [Available] int  NOT NULL,
+    [Reserved] int  NOT NULL,
     [Total] int  NULL,
     [CostPrice] decimal(18,4)  NULL
 );

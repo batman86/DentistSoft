@@ -20,6 +20,8 @@ using DentistManager.DentistUI.Models;
 using StructureMap;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.DAL.Concrete;
+using DentistManager.Domain.BL.Abstract;
+using DentistManager.Domain.BL.Concrete;
 
 namespace DentistManager.DentistUI.DependencyResolution {
     public static class IoC {
@@ -34,7 +36,7 @@ namespace DentistManager.DentistUI.DependencyResolution {
 
 
                             x.For<IPatientRepository>().Use<PatientRepository>();
-
+                            x.For<ISeassionStateBL>().Use<SeassionStateBL>();
                             x.For<Microsoft.AspNet.Identity.IUserStore<ApplicationUser>>()
                             .Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>>();
 
