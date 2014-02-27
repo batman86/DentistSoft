@@ -20,7 +20,7 @@ namespace DentistManager.Domain.Entities
         }
     
         public int SessionID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public string UserID { get; set; }
         public string SessionName { get; set; }
     
         public virtual ICollection<SessionValue> SessionValues { get; set; }

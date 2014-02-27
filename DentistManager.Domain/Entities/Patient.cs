@@ -24,6 +24,7 @@ namespace DentistManager.Domain.Entities
         }
     
         public int PatientID { get; set; }
+        public Nullable<int> ClinicID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -35,6 +36,7 @@ namespace DentistManager.Domain.Entities
         public string Notice { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual Clinic Clinic { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<PatientHistory> PatientHistories { get; set; }
         public virtual ICollection<PatientPayment> PatientPayments { get; set; }
