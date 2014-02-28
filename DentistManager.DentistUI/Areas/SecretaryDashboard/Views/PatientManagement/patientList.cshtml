@@ -41,9 +41,12 @@
             @Html.DisplayFor(modelItem => item.Mobile)
         </td>
         <td>
+            @Html.ActionLink("patient Illness History", "patientHistoryList", new { patientID = item.PatientID })
             @Html.ActionLink("Edit", "PatientEdit", new { patientID = item.PatientID }) |
             @Html.ActionLink("Details", "PatientDetails", new { patientID = item.PatientID }) |
             @Html.ActionLink("Delete", "PatientDelete", new { patientID = item.PatientID })
+
+            
         </td>
     </tr>
 }

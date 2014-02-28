@@ -266,6 +266,9 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\ActivePatientTopBar.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientHistoryList.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryEdit.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDelete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -114,14 +114,13 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             int count = 0;
 
-            PatientHistory patientHistoryEntity = new PatientHistory {
-                 PatientID=patientHistory.PatientID ,
-                 Name=patientHistory.Name,
-                 Descripation=patientHistory.Descripation,
-            };
-
             using (Entities.Entities ctx = new Entities.Entities())
             {
+                PatientHistory patientHistoryEntity =ctx.PatientHistories.Create();
+                patientHistoryEntity.PatientID = patientHistory.PatientID;
+                patientHistoryEntity.Name = patientHistory.Name;
+                patientHistoryEntity.Descripation = patientHistory.Descripation;
+                
                 ctx.PatientHistories.Add(patientHistoryEntity);
                 count = ctx.SaveChanges();
             }
@@ -132,16 +131,23 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             int count = 0;
 
-            PatientHistory patientHistoryEntity = new PatientHistory
-            {
-                HistoryID = patientHistory.HistoryID,
-                PatientID = patientHistory.PatientID,
-                Name = patientHistory.Name,
-                Descripation = patientHistory.Descripation,
-            };
+            //PatientHistory patientHistoryEntity = new PatientHistory
+            //{
+            //    HistoryID = patientHistory.HistoryID,
+            //    PatientID = patientHistory.PatientID,
+            //    Name = patientHistory.Name,
+            //    Descripation = patientHistory.Descripation,
+            //};
 
             using (Entities.Entities ctx = new Entities.Entities())
             {
+                PatientHistory patientHistoryEntity = ctx.PatientHistories.Find(patientHistory.HistoryID);
+                if (patientHistoryEntity == null)
+                    return false;
+
+                patientHistoryEntity.Name = patientHistory.Name;
+                patientHistory.Descripation = patientHistory.Descripation;
+
                 ctx.Entry(patientHistoryEntity).State = System.Data.Entity.EntityState.Modified;
                 count = ctx.SaveChanges();
             }
@@ -198,6 +204,85 @@ namespace DentistManager.Domain.DAL.Concrete
                                       select new PatientHistoryViewModel { PatientID=ph.PatientID , Name= ph.Name, Descripation=ph.Descripation, HistoryID= ph.HistoryID}).ToList();
 
                 return patienthistoryList;
+            }
+        }
+
+        //****************************************
+        public bool addNewPatinetImages(ImagesViewModel patientImages)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Image patientimageEntity = ctx.Images.Create();
+
+                patientimageEntity.Name = patientImages.Name;
+                patientimageEntity.Notice = patientImages.Notice;
+                patientimageEntity.ImageCategoryID = patientImages.ImageCategoryID;
+                patientimageEntity.appointmentID = patientImages.appointmentID;
+                patientimageEntity.PatientID = patientImages.PatientID;
+                patientimageEntity.MinImageURL = patientImages.MinImageURL;
+                patientimageEntity.MediumImageURL = patientImages.MediumImageURL;
+                patientimageEntity.FullImageURL = patientImages.FullImageURL;
+                patientimageEntity.LocalImageURL = patientImages.LocalImageURL;
+
+                ctx.Images.Add(patientimageEntity);
+                count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
+
+        public ImagesViewModel getPatinetImagesDetails(int patinetImagestID)
+        {
+            ImagesViewModel imagesViewModel;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Image imageEntity = ctx.Images.Find(patinetImagestID);
+                if (imageEntity != null)
+                {
+                    imagesViewModel = new ImagesViewModel
+                    {
+                            Name = imageEntity.Name,
+                            Notice = imageEntity.Notice,
+                            ImageCategoryID = imageEntity.ImageCategoryID,
+                            appointmentID = imageEntity.appointmentID,
+                            PatientID = imageEntity.PatientID,
+                            MinImageURL = imageEntity.MinImageURL,
+                            MediumImageURL = imageEntity.MediumImageURL,
+                            FullImageURL = imageEntity.FullImageURL,
+                            LocalImageURL = imageEntity.LocalImageURL
+                    };
+                }
+                else
+                    imagesViewModel = null;
+            }
+            return imagesViewModel;
+        }
+
+        public bool deletePatientImages(int patinetImagestID)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Image image = ctx.Images.Find(patinetImagestID);
+                if (image != null)
+                {
+                    ctx.Images.Remove(image);
+                    count = ctx.SaveChanges();
+                }
+            }
+            return count > 0 ? true : false;
+        }
+
+        public IEnumerable<ImagesViewModel> getPatientImagesList(int patientID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<ImagesViewModel> patientImagesList;
+                var patientsImages = ctx.Images;
+                patientImagesList = (from i in patientsImages
+                                     orderby i.PatientID == patientID
+                                     select new ImagesViewModel { Name=i.Name, Notice=i.Notice, ImageID=i.ImageID , MinImageURL=i.MinImageURL, MediumImageURL=i.MediumImageURL,FullImageURL=i.FullImageURL, LocalImageURL=i.LocalImageURL, ImageCategoryID=i.ImageCategoryID, appointmentID=i.appointmentID, PatientID=i.PatientID }).ToList();
+                return patientImagesList;
             }
         }
     }

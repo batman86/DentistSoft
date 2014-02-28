@@ -25,5 +25,12 @@ namespace DentistManager.Domain.DAL.Abstract
         PatientHistoryViewModel getPatinetHistoryDetails(int patientHistorytID);
         bool deletePatientHistory(int patientHistorytID);
         IEnumerable<PatientHistoryViewModel> getPatientHistoryList(int patientID);
+
+
+        //patient Images
+        bool addNewPatinetImages(ImagesViewModel patinetImages);
+        bool deletePatientImages(int patinetImagestID);
+        ImagesViewModel getPatinetImagesDetails(int patinetImagestID);
+        IEnumerable<ImagesViewModel> getPatientImagesList(int patientID);
     }
 }
