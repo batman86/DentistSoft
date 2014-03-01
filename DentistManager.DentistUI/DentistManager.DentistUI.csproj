@@ -231,6 +231,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\GenerateDropDownListHelpers.cs" />
+    <Compile Include="Infrastructure\ImagesDrawing.cs" />
     <Compile Include="Infrastructure\SessionStateManger.cs" />
     <Compile Include="Infrastructure\Structures.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -277,6 +279,11 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryEdit.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDelete.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientImagesList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesEdit.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesDelete.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesCreate.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,9 +342,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

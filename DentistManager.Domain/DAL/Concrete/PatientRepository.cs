@@ -285,5 +285,36 @@ namespace DentistManager.Domain.DAL.Concrete
                 return patientImagesList;
             }
         }
+
+
+        public bool checkIfImagePathExist(string imagePath)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                 count = ctx.Images.Where(x => x.FullImageURL == imagePath).Count();
+            }
+            return count > 0 ? true : false;
+        }
+
+
+        public bool updatePatinetImage(ImagesViewModel patientImagesViewModel)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Image patientImageEntity = ctx.Images.Find(patientImagesViewModel.ImageID);
+                if (patientImageEntity == null)
+                    return false;
+
+                patientImageEntity.Name = patientImagesViewModel.Name;
+                patientImageEntity.Notice = patientImagesViewModel.Notice;
+                patientImageEntity.ImageCategoryID = patientImagesViewModel.ImageCategoryID;
+
+                ctx.Entry(patientImageEntity).State = System.Data.Entity.EntityState.Modified;
+                count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
     }
 }

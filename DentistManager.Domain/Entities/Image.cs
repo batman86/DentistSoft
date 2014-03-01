@@ -11,8 +11,7 @@ namespace DentistManager.Domain.Entities
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Image
     {
         public int ImageID { get; set; }
@@ -25,6 +24,7 @@ namespace DentistManager.Domain.Entities
         public string MediumImageURL { get; set; }
         public string MinImageURL { get; set; }
         public string LocalImageURL { get; set; }
+    
         public virtual Appointment Appointment { get; set; }
         public virtual ImageCategory ImageCategory { get; set; }
         public virtual Patient Patient { get; set; }

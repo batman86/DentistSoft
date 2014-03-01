@@ -30,7 +30,9 @@ namespace DentistManager.Domain.DAL.Abstract
         //patient Images
         bool addNewPatinetImages(ImagesViewModel patinetImages);
         bool deletePatientImages(int patinetImagestID);
+        bool updatePatinetImage(ImagesViewModel patientImagesViewModel);
         ImagesViewModel getPatinetImagesDetails(int patinetImagestID);
         IEnumerable<ImagesViewModel> getPatientImagesList(int patientID);
+        bool checkIfImagePathExist(string imagePath);
     }
 }

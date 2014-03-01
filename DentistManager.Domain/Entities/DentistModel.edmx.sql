@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/27/2014 21:19:22
+-- Date Created: 02/28/2014 13:11:38
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -415,7 +415,7 @@ GO
 
 -- Creating table 'PatientHistories'
 CREATE TABLE [dbo].[PatientHistories] (
-    [HistoryID] int  NOT NULL,
+    [HistoryID] int IDENTITY(1,1) NOT NULL,
     [PatientID] int  NOT NULL,
     [Name] nvarchar(50)  NOT NULL,
     [Descripation] nvarchar(500)  NULL

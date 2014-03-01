@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DentistManager.Domain.Common
 {
-    class GeneratRandomValue
+    public class GeneratRandomValue
     {
         public string generatRandomValue()
         {

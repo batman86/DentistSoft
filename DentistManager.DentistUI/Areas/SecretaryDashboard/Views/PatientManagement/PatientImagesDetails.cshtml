@@ -1,0 +1,98 @@
+﻿@model DentistManager.Domain.ViewModel.ImagesViewModel
+
+@{
+    ViewBag.Title = "Patient Images Details";
+}
+
+<h2>PatientImagesDetails</h2>
+
+<div>
+    <h4>ImagesViewModel</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.appointmentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.appointmentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageCategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageCategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediumImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediumImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalImageURL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "PatientImagesEdit", new { patientImageID = Model.ImageID }) |
+    @Html.ActionLink("Back to List", "patientImagesList",new { patientID = Model.PatientID})
+</p>

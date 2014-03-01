@@ -9,4 +9,17 @@ namespace DentistManager.DentistUI.Infrastructure
     {
         ActivePatientID
     };
+
+    public enum ImageSize
+    {
+        large,
+        medium,
+        small,
+        icon
+    };
+
+    public enum ImageExtension
+    {
+        jpeg
+    };
 }
