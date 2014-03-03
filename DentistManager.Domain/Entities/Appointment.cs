@@ -22,13 +22,13 @@ namespace DentistManager.Domain.Entities
         }
     
         public int AppointmentID { get; set; }
-        public System.DateTime Date { get; set; }
-        public System.TimeSpan Time { get; set; }
         public int DoctorID { get; set; }
         public int PatientID { get; set; }
         public string Reason { get; set; }
         public int ClinicID { get; set; }
         public string Status { get; set; }
+        public Nullable<System.DateTime> Start_date { get; set; }
+        public Nullable<System.DateTime> End_date { get; set; }
     
         public virtual Clinic Clinic { get; set; }
         public virtual Doctor Doctor { get; set; }
