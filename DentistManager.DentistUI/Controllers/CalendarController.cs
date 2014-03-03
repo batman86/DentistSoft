@@ -11,18 +11,47 @@ using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
 
 using DentistManager.DentistUI.Models;
+using DentistManager.Domain.DAL.Abstract;
+using DentistManager.Domain.ViewModel;
+
 namespace DentistManager.DentistUI.Controllers
 {
     public class CalendarController : Controller
     {
+        IDoctorRepository doctorRepository;
+        IAppointmentRepository  appointmentRepository;
+        public CalendarController(IDoctorRepository _doctorRepository, IAppointmentRepository _appointmentRepository)
+        {
+            doctorRepository = _doctorRepository;
+            appointmentRepository = _appointmentRepository;
+        }
+
+
         public ActionResult Index()
         {
             var scheduler = new DHXScheduler();
             scheduler.DataAction = Url.Action("Data");
             scheduler.SaveAction = Url.Action("Save");
-            
- 
-          //  scheduler.InitialDate = new DateTime(2012, 09, 03);
+
+            var selectDoctor = new LightboxSelect("DoctorID", "Doctor");
+            var items = new List<object>();
+            IEnumerable<DoctorMiniInfoViewModel> doctorList= doctorRepository.getDoctorMiniInfoList();
+            foreach (DoctorMiniInfoViewModel item in doctorList)
+            {
+                items.Add(new { key = item.DoctorID, label = item.DoctorName});
+            }
+            selectDoctor.AddOptions(items);
+
+            var Reason = new LightboxText("reason", "Reason");
+            var Define = new LightboxText("text", "Define");
+            var date = new LightboxMiniCalendar("Date");
+
+            scheduler.Lightbox.Add(Define);
+            scheduler.Lightbox.Add(Reason);
+            scheduler.Lightbox.Add(selectDoctor);
+            scheduler.Lightbox.Add(date);
+
+            scheduler.Config.hour_size_px= 100;
 
             scheduler.LoadData = true;
             scheduler.EnableDataprocessor = true;
@@ -31,26 +60,8 @@ namespace DentistManager.DentistUI.Controllers
 
         public ContentResult Data()
         {
-            List<CalendarEvent> eventList = new List<CalendarEvent>{ 
-                        new CalendarEvent{
-                            id = 1, 
-                            text = "Sample Event", 
-                            start_date = new DateTime(2014, 03, 03, 6, 00, 00), 
-                            end_date = new DateTime(2014, 03, 03, 8, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 2, 
-                            text = "New Event", 
-                            start_date = new DateTime(2014, 04, 05, 9, 00, 00), 
-                            end_date = new DateTime(2012, 04, 05, 12, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 3, 
-                            text = "Multiday Event", 
-                            start_date = new DateTime(2014, 03, 03, 10, 00, 00), 
-                            end_date = new DateTime(2012, 03, 10, 12, 00, 00)
-                        }
-                    };
+            int clinecID = 1;
+            List<AppointmentViewModelFull> eventList = appointmentRepository.getClinecAppointmentList(clinecID);
 
             return Content(new SchedulerAjaxData(eventList), "text/json");
         }
@@ -61,21 +72,25 @@ namespace DentistManager.DentistUI.Controllers
             
             try
             {
-                var changedEvent = (CalendarEvent)DHXEventsHelper.Bind(typeof(CalendarEvent), actionValues);
+                AppointmentViewModelFull appointmentViewModel = (AppointmentViewModelFull)DHXEventsHelper.Bind(typeof(AppointmentViewModelFull), actionValues);
 
      
 
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
-                        //do insert
-                        action.TargetId = changedEvent.id;//assign postoperational id
+                        appointmentViewModel.ClinicID = 1;
+                        appointmentViewModel.PatientID = 1;
+                        appointmentViewModel.Status = "state";
+                        appointmentViewModel.text = "Doctor Name + Patient Name";
+                        appointmentRepository.AddNewAppointment(appointmentViewModel);
+                        action.TargetId = appointmentViewModel.id; //assign post operational id
                         break;
                     case DataActionTypes.Delete:
-                        //do delete
+                        appointmentRepository.deleteAppointment(appointmentViewModel.id);
                         break;
-                    default:// "update"                          
-                        //do update
+                    default:  
+                        appointmentRepository.alterAppointment(appointmentViewModel);
                         break;
                 }
             }
@@ -83,7 +98,8 @@ namespace DentistManager.DentistUI.Controllers
             {
                 action.Type = DataActionTypes.Error;
             }
-            return (ContentResult)new AjaxSaveResponse(action);
+
+            return Content(new AjaxSaveResponse(action), "text/xml");
         }
     }
 }

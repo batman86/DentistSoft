@@ -33,7 +33,7 @@ namespace DentistManager.DentistUI.DependencyResolution {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-
+                            x.For<IDoctorRepository>().Use<DoctorRepository>();
                             x.For<IimagesRepository>().Use<ImagesRepository>();
                             x.For<IAppointmentRepository>().Use<AppointmentRepository>();
                             x.For<IPatientRepository>().Use<PatientRepository>();

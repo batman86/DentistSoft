@@ -9,6 +9,10 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface IAppointmentRepository
     {
-        IEnumerable<AppointmentViewModel> getPatientAppountmentList(int patientID);   
+        IEnumerable<AppointmentViewModel> getPatientAppountmentList(int patientID);
+        List<AppointmentViewModelFull> getClinecAppointmentList(int ClinecID);
+        bool AddNewAppointment(AppointmentViewModelFull appointment);
+        bool alterAppointment(AppointmentViewModelFull appointment);
+        bool deleteAppointment(int appointmentID);
     }
 }

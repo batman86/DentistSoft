@@ -55,10 +55,12 @@
     <Compile Include="Common\GeneratRandomValue.cs" />
     <Compile Include="Common\Hashing.cs" />
     <Compile Include="DAL\Abstract\IAppointmentRepository.cs" />
+    <Compile Include="DAL\Abstract\IDoctorRepository.cs" />
     <Compile Include="DAL\Abstract\IimagesRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientRepository.cs" />
     <Compile Include="DAL\Abstract\ISessionState.cs" />
     <Compile Include="DAL\Concrete\AppointmentRepository.cs" />
+    <Compile Include="DAL\Concrete\DoctorRepository.cs" />
     <Compile Include="DAL\Concrete\ImagesRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />
@@ -168,7 +170,9 @@
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AppointmentViewModelFull.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
+    <Compile Include="ViewModel\DoctorMiniInfoViewModel.cs" />
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
