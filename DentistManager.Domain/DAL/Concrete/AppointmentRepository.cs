@@ -20,7 +20,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 var appointmentsIQ = ctx.Appointments;
 
                 appointmentViewModel = (from a in appointmentsIQ
-                                        select new AppointmentViewModel {  AppointmentID=a.AppointmentID , Date=a.Date }).ToList();
+                                        select new AppointmentViewModel {  AppointmentID=a.AppointmentID , Date=a.Start_date }).ToList();
                 return appointmentViewModel;
             }
         }

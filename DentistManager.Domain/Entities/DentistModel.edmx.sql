@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/28/2014 13:11:38
+-- Date Created: 03/03/2014 20:27:37
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -249,13 +249,14 @@ GO
 -- Creating table 'Appointments'
 CREATE TABLE [dbo].[Appointments] (
     [AppointmentID] int IDENTITY(1,1) NOT NULL,
-    [Date] datetime  NOT NULL,
-    [Time] time  NOT NULL,
     [DoctorID] int  NOT NULL,
     [PatientID] int  NOT NULL,
     [Reason] nvarchar(500)  NULL,
     [ClinicID] int  NOT NULL,
-    [Status] nvarchar(50)  NOT NULL
+    [Status] nvarchar(50)  NOT NULL,
+    [Start_date] datetime  NOT NULL,
+    [End_date] datetime  NOT NULL,
+    [Text] nvarchar(200)  NOT NULL
 );
 GO
 
