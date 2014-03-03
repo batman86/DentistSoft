@@ -17,6 +17,7 @@ namespace DentistManager.Domain.Entities
         public opperation()
         {
             this.Treatments = new HashSet<Treatment>();
+            this.Materials = new HashSet<Material>();
         }
     
         public int OpperationID { get; set; }
@@ -27,5 +28,6 @@ namespace DentistManager.Domain.Entities
     
         public virtual Material Material { get; set; }
         public virtual ICollection<Treatment> Treatments { get; set; }
+        public virtual ICollection<Material> Materials { get; set; }
     }
 }

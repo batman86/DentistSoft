@@ -20,6 +20,7 @@ namespace DentistManager.Domain.Entities
             this.opperations = new HashSet<opperation>();
             this.RecivingItems = new HashSet<RecivingItem>();
             this.Warehouses = new HashSet<Warehouse>();
+            this.opperations1 = new HashSet<opperation>();
         }
     
         public int ItemID { get; set; }
@@ -36,5 +37,6 @@ namespace DentistManager.Domain.Entities
         public virtual ICollection<opperation> opperations { get; set; }
         public virtual ICollection<RecivingItem> RecivingItems { get; set; }
         public virtual ICollection<Warehouse> Warehouses { get; set; }
+        public virtual ICollection<opperation> opperations1 { get; set; }
     }
 }
