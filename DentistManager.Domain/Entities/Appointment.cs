@@ -27,8 +27,9 @@ namespace DentistManager.Domain.Entities
         public string Reason { get; set; }
         public int ClinicID { get; set; }
         public string Status { get; set; }
-        public Nullable<System.DateTime> Start_date { get; set; }
-        public Nullable<System.DateTime> End_date { get; set; }
+        public System.DateTime Start_date { get; set; }
+        public System.DateTime End_date { get; set; }
+        public string Text { get; set; }
     
         public virtual Clinic Clinic { get; set; }
         public virtual Doctor Doctor { get; set; }
