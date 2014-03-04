@@ -92,7 +92,7 @@
                 <Templates >
                     
                     <DetailRow>
-                        <asp:FormView ID="fvDetails" runat="server" CellPadding="4" DataKeyNames="SecretaryID" DataSourceID="dsSecretary" ForeColor="#333333">
+                        <asp:FormView ID="fvDetails" runat="server" CellPadding="4" DataKeyNames="SecretaryID"  ForeColor="#333333">
                             <EditItemTemplate>
                                 SecretaryID:
                                 <asp:Label ID="SecretaryIDLabel1" runat="server" Text='<%# Eval("SecretaryID") %>' />

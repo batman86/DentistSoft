@@ -101,79 +101,8 @@
                     <SettingsDetail ShowDetailRow="True" />
                     <Templates>
                         <DetailRow>
-                            <asp:FormView ID="fvDetails" runat="server" DataKeyNames="DoctorID" DataSourceID="dsDoctors">
-                                <EditItemTemplate>
-                                    DoctorID:
-                                    <asp:Label ID="DoctorIDLabel1" runat="server" Text='<%# Eval("DoctorID") %>' />
-                                    <br />
-                                    UserID:
-                                    <asp:TextBox ID="UserIDTextBox" runat="server" Text='<%# Bind("UserID") %>' />
-                                    <br />
-                                    Name:
-                                    <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
-                                    <br />
-                                    Gender:
-                                    <asp:TextBox ID="GenderTextBox" runat="server" Text='<%# Bind("Gender") %>' />
-                                    <br />
-                                    Age:
-                                    <asp:TextBox ID="AgeTextBox" runat="server" Text='<%# Bind("Age") %>' />
-                                    <br />
-                                    BrithDate:
-                                    <asp:TextBox ID="BrithDateTextBox" runat="server" Text='<%# Bind("BrithDate") %>' />
-                                    <br />
-                                    Phone:
-                                    <asp:TextBox ID="PhoneTextBox" runat="server" Text='<%# Bind("Phone") %>' />
-                                    <br />
-                                    Mobile:
-                                    <asp:TextBox ID="MobileTextBox" runat="server" Text='<%# Bind("Mobile") %>' />
-                                    <br />
-                                    Address:
-                                    <asp:TextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address") %>' />
-                                    <br />
-                                    E-mail:
-                                    <asp:TextBox ID="E_mailTextBox" runat="server" Text='<%# Bind("[E-mail]") %>' />
-                                    <br />
-                                    Active:
-                                    <asp:CheckBox ID="ActiveCheckBox" runat="server" Checked='<%# Bind("Active") %>' />
-                                    <br />
-                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
-                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                </EditItemTemplate>
-                                <InsertItemTemplate>
-                                    UserID:
-                                    <asp:TextBox ID="UserIDTextBox" runat="server" Text='<%# Bind("UserID") %>' />
-                                    <br />
-                                    Name:
-                                    <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
-                                    <br />
-                                    Gender:
-                                    <asp:TextBox ID="GenderTextBox" runat="server" Text='<%# Bind("Gender") %>' />
-                                    <br />
-                                    Age:
-                                    <asp:TextBox ID="AgeTextBox" runat="server" Text='<%# Bind("Age") %>' />
-                                    <br />
-                                    BrithDate:
-                                    <asp:TextBox ID="BrithDateTextBox" runat="server" Text='<%# Bind("BrithDate") %>' />
-                                    <br />
-                                    Phone:
-                                    <asp:TextBox ID="PhoneTextBox" runat="server" Text='<%# Bind("Phone") %>' />
-                                    <br />
-                                    Mobile:
-                                    <asp:TextBox ID="MobileTextBox" runat="server" Text='<%# Bind("Mobile") %>' />
-                                    <br />
-                                    Address:
-                                    <asp:TextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address") %>' />
-                                    <br />
-                                    E-mail:
-                                    <asp:TextBox ID="E_mailTextBox" runat="server" Text='<%# Bind("[E-mail]") %>' />
-                                    <br />
-                                    Active:
-                                    <asp:CheckBox ID="ActiveCheckBox" runat="server" Checked='<%# Bind("Active") %>' />
-                                    <br />
-                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
-                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                </InsertItemTemplate>
-                                <ItemTemplate>
+                            <asp:FormView ID="fvDetails" runat="server" DataKeyNames="DoctorID"  OnDataBinding="fvDetails_DataBinding">
+                                 <ItemTemplate>
                                     DoctorID:
                                     <asp:Label ID="DoctorIDLabel" runat="server" Text='<%# Eval("DoctorID") %>' />
                                     <br />
@@ -215,7 +144,7 @@
                 </dx:ASPxGridView>
                     <asp:SqlDataSource ID="dsDoctors" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Doctors] SET Active= 0  where DoctorID=@DoctorID" InsertCommand="INSERT INTO [Doctors] ( [Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E-mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Doctors]" UpdateCommand="UPDATE [Doctors] SET  [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E-mail] = @column1, [Active] = @Active WHERE [DoctorID] = @DoctorID">
                         <DeleteParameters>
-                            <asp:Parameter Name="DoctorID" />
+                            <asp:Parameter  Name="DoctorID" />
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="Name" Type="String" />
@@ -238,6 +167,11 @@
                             <asp:Parameter Name="Active" Type="Boolean" />
                             <asp:Parameter Name="DoctorID" Type="Int32" />
                         </UpdateParameters>
+                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="dsDetails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Doctors] WHERE ([DoctorID] = @DoctorID)">
+                        <SelectParameters>
+                            <asp:Parameter Name="DoctorID" Type="Int32" />
+                        </SelectParameters>
                     </asp:SqlDataSource>
                     </div>
             </td>

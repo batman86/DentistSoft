@@ -40,7 +40,8 @@ namespace DentistManager.DentistUI.Admin
                 else
                 {
                     var sec = new DentistManager.Domain.Entities.Secretary() { SecretaryID = int.Parse(cbEmployee.SelectedItem.ValueString), UserID = identiyRole.UserId };
-                    //DentistManager.Domain.DAL.Concrete.
+                    SecertaryRepository secertaryRepository = new SecertaryRepository();
+                    secertaryRepository.updateSecertaryUserID(sec);
                 }
 
                 
