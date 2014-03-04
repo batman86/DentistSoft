@@ -13,5 +13,7 @@ namespace DentistManager.DentistUI.Models
             : base("Dentist")
         {
         }
+     
     }
+  
 }

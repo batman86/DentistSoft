@@ -56,14 +56,19 @@
     <Compile Include="Common\Hashing.cs" />
     <Compile Include="DAL\Abstract\IAppointmentRepository.cs" />
     <Compile Include="DAL\Abstract\ICustomMatrialRepository.cs" />
-    <Compile Include="DAL\Abstract\IDoctorRepository.cs" />
-    <Compile Include="DAL\Abstract\IimagesRepository.cs" />
+    <Compile Include="DAL\Abstract\IDoctorRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DAL\Abstract\IimagesRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DAL\Abstract\IOpperationRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientPaymentRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientRepository.cs" />
     <Compile Include="DAL\Abstract\IPaymentReceiptRerpository.cs" />
     <Compile Include="DAL\Abstract\ISessionState.cs" />
     <Compile Include="DAL\Abstract\ITreatmentRepository.cs" />
+    <Compile Include="DAL\Abstract\ISecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\AppointmentRepository.cs" />
     <Compile Include="DAL\Concrete\CustomMatrialRepository.cs" />
     <Compile Include="DAL\Concrete\DoctorRepository.cs" />
@@ -72,6 +77,7 @@
     <Compile Include="DAL\Concrete\PatientPaymentRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
     <Compile Include="DAL\Concrete\PaymentReceiptRerpository.cs" />
+    <Compile Include="DAL\Concrete\SecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />
     <Compile Include="DAL\Concrete\TreatmentRepository.cs" />
     <Compile Include="Entities\Appointment.cs">
@@ -138,9 +144,6 @@
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\PatientHistory.cs">
-      <DependentUpon>DentistModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\PatientPayment.cs">
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\PaymentReceipt.cs">

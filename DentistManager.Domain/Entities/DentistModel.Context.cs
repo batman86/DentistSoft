@@ -42,7 +42,6 @@ namespace DentistManager.Domain.Entities
         public virtual DbSet<opperation> opperations { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PatientHistory> PatientHistories { get; set; }
-        public virtual DbSet<PatientPayment> PatientPayments { get; set; }
         public virtual DbSet<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual DbSet<Prescription> Prescriptions { get; set; }
         public virtual DbSet<RecivingItem> RecivingItems { get; set; }

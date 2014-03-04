@@ -14,7 +14,7 @@ namespace DentistManager.Domain.DAL.Concrete
            int patientPaymentID=0;
            using(Entities.Entities ctx=new Entities.Entities ())
            {
-               patientPaymentID = ctx.PatientPayments.Where(x => x.PatientID == patientID).Select(x => x.PatientPaymentID).FirstOrDefault();
+               //patientPaymentID = ctx.PatientPayments.Where(x => x.PatientID == patientID).Select(x => x.PatientPaymentID).FirstOrDefault();
            }
            return patientPaymentID;
         }

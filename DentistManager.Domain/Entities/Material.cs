@@ -17,10 +17,9 @@ namespace DentistManager.Domain.Entities
         public Material()
         {
             this.MaterialTreatments = new HashSet<MaterialTreatment>();
-            this.opperations = new HashSet<opperation>();
             this.RecivingItems = new HashSet<RecivingItem>();
             this.Warehouses = new HashSet<Warehouse>();
-            this.opperations1 = new HashSet<opperation>();
+            this.opperations = new HashSet<opperation>();
         }
     
         public int ItemID { get; set; }
@@ -34,9 +33,8 @@ namespace DentistManager.Domain.Entities
         public decimal MaterialCost { get; set; }
     
         public virtual ICollection<MaterialTreatment> MaterialTreatments { get; set; }
-        public virtual ICollection<opperation> opperations { get; set; }
         public virtual ICollection<RecivingItem> RecivingItems { get; set; }
         public virtual ICollection<Warehouse> Warehouses { get; set; }
-        public virtual ICollection<opperation> opperations1 { get; set; }
+        public virtual ICollection<opperation> opperations { get; set; }
     }
 }

@@ -23,6 +23,5 @@ namespace DentistManager.Domain.Entities
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Clinic Clinic { get; set; }
-        public virtual PatientPayment PatientPayment { get; set; }
     }
 }

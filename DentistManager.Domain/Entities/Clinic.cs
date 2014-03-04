@@ -18,7 +18,6 @@ namespace DentistManager.Domain.Entities
         {
             this.Appointments = new HashSet<Appointment>();
             this.Patients = new HashSet<Patient>();
-            this.PatientPayments = new HashSet<PatientPayment>();
             this.PaymentReceipts = new HashSet<PaymentReceipt>();
             this.Storages = new HashSet<Storage>();
         }
@@ -32,7 +31,6 @@ namespace DentistManager.Domain.Entities
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
-        public virtual ICollection<PatientPayment> PatientPayments { get; set; }
         public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual ICollection<Storage> Storages { get; set; }
     }

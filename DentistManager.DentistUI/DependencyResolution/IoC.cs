@@ -38,7 +38,7 @@ namespace DentistManager.DentistUI.DependencyResolution {
                             x.For<IAppointmentRepository>().Use<AppointmentRepository>();
                             x.For<IPatientRepository>().Use<PatientRepository>();
                             x.For<ISeassionStateBL>().Use<SeassionStateBL>();
-
+                            
                             x.For<Microsoft.AspNet.Identity.IUserStore<ApplicationUser>>()
                             .Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>>();
 

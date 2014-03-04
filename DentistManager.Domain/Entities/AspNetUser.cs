@@ -19,7 +19,6 @@ namespace DentistManager.Domain.Entities
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.Doctors = new HashSet<Doctor>();
-            this.PatientPayments = new HashSet<PatientPayment>();
             this.PaymentReceipts = new HashSet<PaymentReceipt>();
             this.Secretaries = new HashSet<Secretary>();
             this.AspNetRoles = new HashSet<AspNetRole>();
@@ -34,7 +33,6 @@ namespace DentistManager.Domain.Entities
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<Doctor> Doctors { get; set; }
-        public virtual ICollection<PatientPayment> PatientPayments { get; set; }
         public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual ICollection<Secretary> Secretaries { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }

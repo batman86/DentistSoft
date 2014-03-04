@@ -19,7 +19,6 @@ namespace DentistManager.Domain.Entities
             this.Appointments = new HashSet<Appointment>();
             this.Images = new HashSet<Image>();
             this.PatientHistories = new HashSet<PatientHistory>();
-            this.PatientPayments = new HashSet<PatientPayment>();
             this.Prescriptions = new HashSet<Prescription>();
         }
     
@@ -39,7 +38,6 @@ namespace DentistManager.Domain.Entities
         public virtual Clinic Clinic { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<PatientHistory> PatientHistories { get; set; }
-        public virtual ICollection<PatientPayment> PatientPayments { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 }

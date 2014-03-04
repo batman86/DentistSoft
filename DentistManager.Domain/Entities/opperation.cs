@@ -24,9 +24,7 @@ namespace DentistManager.Domain.Entities
         public string Name { get; set; }
         public string Color { get; set; }
         public decimal Price { get; set; }
-        public Nullable<int> MaterialID { get; set; }
     
-        public virtual Material Material { get; set; }
         public virtual ICollection<Treatment> Treatments { get; set; }
         public virtual ICollection<Material> Materials { get; set; }
     }

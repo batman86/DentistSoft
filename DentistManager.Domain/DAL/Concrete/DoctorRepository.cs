@@ -21,5 +21,17 @@ namespace DentistManager.Domain.DAL.Concrete
               return DoctorList;
            }
         }
+        public bool updateDoctorUserID(Entities.Doctor doctor)
+        {
+            int count;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var doc = ctx.Doctors.FirstOrDefault(d => d.DoctorID == doctor.DoctorID);
+                doc.UserID = doctor.UserID;
+              count=  ctx.SaveChanges();
+                
+            }
+            return count > 0 ? true:false;
+        }
     }
 }

@@ -176,7 +176,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Color" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="MaterialID" Type="int" />
         </EntityType>
         <EntityType Name="OpperationMaterials">
           <Key>
@@ -210,18 +209,6 @@
           <Property Name="PatientID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripation" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="PatientPayment">
-          <Key>
-            <PropertyRef Name="PatientPaymentID" />
-          </Key>
-          <Property Name="PatientPaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PatientID" Type="int" Nullable="false" />
-          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="RemainedAmount" Type="decimal" Precision="19" Scale="4" StoreGeneratedPattern="Computed" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClinicID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentReceipt">
           <Key>
@@ -548,18 +535,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_opperation_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
-          <End Role="opperation" Type="Self.opperation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="ItemID" />
-            </Principal>
-            <Dependent Role="opperation">
-              <PropertyRef Name="MaterialID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OpperationMaterials_Material">
           <End Role="Material" Type="Self.Material" Multiplicity="1" />
           <End Role="OpperationMaterials" Type="Self.OpperationMaterials" Multiplicity="*" />
@@ -608,42 +583,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientPayment_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientPayment">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientPayment_Clinics">
-          <End Role="Clinics" Type="Self.Clinics" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clinics">
-              <PropertyRef Name="ClinicID" />
-            </Principal>
-            <Dependent Role="PatientPayment">
-              <PropertyRef Name="ClinicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientPayment_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patient">
-              <PropertyRef Name="PatientID" />
-            </Principal>
-            <Dependent Role="PatientPayment">
-              <PropertyRef Name="PatientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PaymentReceipt_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
@@ -665,18 +604,6 @@
             </Principal>
             <Dependent Role="PaymentReceipt">
               <PropertyRef Name="ClinicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaymentReceipt_PatientPayment">
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="1" />
-          <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientPayment">
-              <PropertyRef Name="PatientPaymentID" />
-            </Principal>
-            <Dependent Role="PaymentReceipt">
-              <PropertyRef Name="PatientPaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -892,7 +819,6 @@
           <EntitySet Name="OpperationMaterials" EntityType="Self.OpperationMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientHistory" EntityType="Self.PatientHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PatientPayment" EntityType="Self.PatientPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentReceipt" EntityType="Self.PaymentReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecivingItems" EntityType="Self.RecivingItems" Schema="dbo" store:Type="Tables" />
@@ -961,10 +887,6 @@
             <End Role="Treatment" EntitySet="Treatment" />
             <End Role="MaterialTreatment" EntitySet="MaterialTreatment" />
           </AssociationSet>
-          <AssociationSet Name="FK_opperation_Material" Association="Self.FK_opperation_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="opperation" EntitySet="opperation" />
-          </AssociationSet>
           <AssociationSet Name="FK_OpperationMaterials_Material" Association="Self.FK_OpperationMaterials_Material">
             <End Role="Material" EntitySet="Material" />
             <End Role="OpperationMaterials" EntitySet="OpperationMaterials" />
@@ -981,28 +903,12 @@
             <End Role="Patient" EntitySet="Patient" />
             <End Role="PatientHistory" EntitySet="PatientHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_AspNetUsers" Association="Self.FK_PatientPayment_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="PatientPayment" EntitySet="PatientPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_Clinics" Association="Self.FK_PatientPayment_Clinics">
-            <End Role="Clinics" EntitySet="Clinics" />
-            <End Role="PatientPayment" EntitySet="PatientPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_Patient" Association="Self.FK_PatientPayment_Patient">
-            <End Role="Patient" EntitySet="Patient" />
-            <End Role="PatientPayment" EntitySet="PatientPayment" />
-          </AssociationSet>
           <AssociationSet Name="FK_PaymentReceipt_AspNetUsers" Association="Self.FK_PaymentReceipt_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="PaymentReceipt" EntitySet="PaymentReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentReceipt_Clinics" Association="Self.FK_PaymentReceipt_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
-            <End Role="PaymentReceipt" EntitySet="PaymentReceipt" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaymentReceipt_PatientPayment" Association="Self.FK_PaymentReceipt_PatientPayment">
-            <End Role="PatientPayment" EntitySet="PatientPayment" />
             <End Role="PaymentReceipt" EntitySet="PaymentReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_Prescriptions_Appointments" Association="Self.FK_Prescriptions_Appointments">
@@ -1146,7 +1052,6 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_AspNetUsers" FromRole="AspNetUsers" ToRole="Doctors" />
-          <NavigationProperty Name="PatientPayments" Relationship="Self.FK_PatientPayment_AspNetUsers" FromRole="AspNetUsers" ToRole="PatientPayment" />
           <NavigationProperty Name="PaymentReceipts" Relationship="Self.FK_PaymentReceipt_AspNetUsers" FromRole="AspNetUsers" ToRole="PaymentReceipt" />
           <NavigationProperty Name="Secretaries" Relationship="Self.FK_Secretary_AspNetUsers" FromRole="AspNetUsers" ToRole="Secretary" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -1163,7 +1068,6 @@
           <Property Name="Acitve" Type="Boolean" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Clinics" FromRole="Clinics" ToRole="Appointments" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Clinics" FromRole="Clinics" ToRole="Patient" />
-          <NavigationProperty Name="PatientPayments" Relationship="Self.FK_PatientPayment_Clinics" FromRole="Clinics" ToRole="PatientPayment" />
           <NavigationProperty Name="PaymentReceipts" Relationship="Self.FK_PaymentReceipt_Clinics" FromRole="Clinics" ToRole="PaymentReceipt" />
           <NavigationProperty Name="Storages" Relationship="Self.FK_Storages_Clinics" FromRole="Clinics" ToRole="Storages" />
         </EntityType>
@@ -1243,10 +1147,9 @@
           <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MaterialCost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="MaterialTreatments" Relationship="Self.FK_MaterialTreatment_Material" FromRole="Material" ToRole="MaterialTreatment" />
-          <NavigationProperty Name="opperations" Relationship="Self.FK_opperation_Material" FromRole="Material" ToRole="opperation" />
           <NavigationProperty Name="RecivingItems" Relationship="Self.FK_RecivingItems_Material" FromRole="Material" ToRole="RecivingItems" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Material" FromRole="Material" ToRole="Warehouse" />
-          <NavigationProperty Name="opperations1" Relationship="Self.OpperationMaterials" FromRole="Material" ToRole="opperation" />
+          <NavigationProperty Name="opperations" Relationship="Self.OpperationMaterials" FromRole="Material" ToRole="opperation" />
         </EntityType>
         <EntityType Name="MaterialTreatment">
           <Key>
@@ -1277,8 +1180,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="MaterialID" Type="Int32" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_opperation_Material" FromRole="opperation" ToRole="Material" />
           <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatment_opperation" FromRole="opperation" ToRole="Treatment" />
           <NavigationProperty Name="Materials" Relationship="Self.OpperationMaterials" FromRole="opperation" ToRole="Material" />
         </EntityType>
@@ -1301,7 +1202,6 @@
           <NavigationProperty Name="Clinic" Relationship="Self.FK_Patient_Clinics" FromRole="Patient" ToRole="Clinics" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Images_Patient" FromRole="Patient" ToRole="Images" />
           <NavigationProperty Name="PatientHistories" Relationship="Self.FK_PatientHistory_Patient" FromRole="Patient" ToRole="PatientHistory" />
-          <NavigationProperty Name="PatientPayments" Relationship="Self.FK_PatientPayment_Patient" FromRole="Patient" ToRole="PatientPayment" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Patient" FromRole="Patient" ToRole="Prescriptions" />
         </EntityType>
         <EntityType Name="PatientHistory">
@@ -1313,22 +1213,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_PatientHistory_Patient" FromRole="PatientHistory" ToRole="Patient" />
-        </EntityType>
-        <EntityType Name="PatientPayment">
-          <Key>
-            <PropertyRef Name="PatientPaymentID" />
-          </Key>
-          <Property Name="PatientPaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PatientID" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="RemainedAmount" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClinicID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_PatientPayment_AspNetUsers" FromRole="PatientPayment" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Clinic" Relationship="Self.FK_PatientPayment_Clinics" FromRole="PatientPayment" ToRole="Clinics" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientPayment_Patient" FromRole="PatientPayment" ToRole="Patient" />
-          <NavigationProperty Name="PaymentReceipts" Relationship="Self.FK_PaymentReceipt_PatientPayment" FromRole="PatientPayment" ToRole="PaymentReceipt" />
         </EntityType>
         <EntityType Name="PaymentReceipt">
           <Key>
@@ -1342,7 +1226,6 @@
           <Property Name="ClinicID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_PaymentReceipt_AspNetUsers" FromRole="PaymentReceipt" ToRole="AspNetUsers" />
           <NavigationProperty Name="Clinic" Relationship="Self.FK_PaymentReceipt_Clinics" FromRole="PaymentReceipt" ToRole="Clinics" />
-          <NavigationProperty Name="PatientPayment" Relationship="Self.FK_PaymentReceipt_PatientPayment" FromRole="PaymentReceipt" ToRole="PatientPayment" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -1616,18 +1499,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientPayment_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientPayment">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PaymentReceipt_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
@@ -1660,18 +1531,6 @@
               <PropertyRef Name="ClinicID" />
             </Principal>
             <Dependent Role="Patient">
-              <PropertyRef Name="ClinicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientPayment_Clinics">
-          <End Role="Clinics" Type="Self.Clinic" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clinics">
-              <PropertyRef Name="ClinicID" />
-            </Principal>
-            <Dependent Role="PatientPayment">
               <PropertyRef Name="ClinicID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1772,18 +1631,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_opperation_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
-          <End Role="opperation" Type="Self.opperation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="ItemID" />
-            </Principal>
-            <Dependent Role="opperation">
-              <PropertyRef Name="MaterialID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RecivingItems_Material">
           <End Role="Material" Type="Self.Material" Multiplicity="1" />
           <End Role="RecivingItems" Type="Self.RecivingItem" Multiplicity="*" />
@@ -1856,18 +1703,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientPayment_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patient">
-              <PropertyRef Name="PatientID" />
-            </Principal>
-            <Dependent Role="PatientPayment">
-              <PropertyRef Name="PatientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Prescriptions_Patient">
           <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
           <End Role="Prescriptions" Type="Self.Prescription" Multiplicity="*" />
@@ -1877,18 +1712,6 @@
             </Principal>
             <Dependent Role="Prescriptions">
               <PropertyRef Name="PatientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaymentReceipt_PatientPayment">
-          <End Role="PatientPayment" Type="Self.PatientPayment" Multiplicity="1" />
-          <End Role="PaymentReceipt" Type="Self.PaymentReceipt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientPayment">
-              <PropertyRef Name="PatientPaymentID" />
-            </Principal>
-            <Dependent Role="PaymentReceipt">
-              <PropertyRef Name="PatientPaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1978,7 +1801,6 @@
           <EntitySet Name="opperations" EntityType="Self.opperation" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="PatientHistories" EntityType="Self.PatientHistory" />
-          <EntitySet Name="PatientPayments" EntityType="Self.PatientPayment" />
           <EntitySet Name="PaymentReceipts" EntityType="Self.PaymentReceipt" />
           <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
           <EntitySet Name="RecivingItems" EntityType="Self.RecivingItem" />
@@ -2027,10 +1849,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Doctors" EntitySet="Doctors" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_AspNetUsers" Association="Self.FK_PatientPayment_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="PatientPayment" EntitySet="PatientPayments" />
-          </AssociationSet>
           <AssociationSet Name="FK_PaymentReceipt_AspNetUsers" Association="Self.FK_PaymentReceipt_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="PaymentReceipt" EntitySet="PaymentReceipts" />
@@ -2042,10 +1860,6 @@
           <AssociationSet Name="FK_Patient_Clinics" Association="Self.FK_Patient_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
             <End Role="Patient" EntitySet="Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_Clinics" Association="Self.FK_PatientPayment_Clinics">
-            <End Role="Clinics" EntitySet="Clinics" />
-            <End Role="PatientPayment" EntitySet="PatientPayments" />
           </AssociationSet>
           <AssociationSet Name="FK_PaymentReceipt_Clinics" Association="Self.FK_PaymentReceipt_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
@@ -2079,10 +1893,6 @@
             <End Role="Material" EntitySet="Materials" />
             <End Role="MaterialTreatment" EntitySet="MaterialTreatments" />
           </AssociationSet>
-          <AssociationSet Name="FK_opperation_Material" Association="Self.FK_opperation_Material">
-            <End Role="Material" EntitySet="Materials" />
-            <End Role="opperation" EntitySet="opperations" />
-          </AssociationSet>
           <AssociationSet Name="FK_RecivingItems_Material" Association="Self.FK_RecivingItems_Material">
             <End Role="Material" EntitySet="Materials" />
             <End Role="RecivingItems" EntitySet="RecivingItems" />
@@ -2107,17 +1917,9 @@
             <End Role="Patient" EntitySet="Patients" />
             <End Role="PatientHistory" EntitySet="PatientHistories" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientPayment_Patient" Association="Self.FK_PatientPayment_Patient">
-            <End Role="Patient" EntitySet="Patients" />
-            <End Role="PatientPayment" EntitySet="PatientPayments" />
-          </AssociationSet>
           <AssociationSet Name="FK_Prescriptions_Patient" Association="Self.FK_Prescriptions_Patient">
             <End Role="Patient" EntitySet="Patients" />
             <End Role="Prescriptions" EntitySet="Prescriptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaymentReceipt_PatientPayment" Association="Self.FK_PaymentReceipt_PatientPayment">
-            <End Role="PatientPayment" EntitySet="PatientPayments" />
-            <End Role="PaymentReceipt" EntitySet="PaymentReceipts" />
           </AssociationSet>
           <AssociationSet Name="FK_RecivingItems_Storages" Association="Self.FK_RecivingItems_Storages">
             <End Role="Storages" EntitySet="Storages" />
@@ -2326,7 +2128,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2354,19 +2155,6 @@
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Descripation" ColumnName="Descripation" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PatientPayments">
-            <EntityTypeMapping TypeName="DentistModel.PatientPayment">
-              <MappingFragment StoreEntitySet="PatientPayment">
-                <ScalarProperty Name="PatientPaymentID" ColumnName="PatientPaymentID" />
-                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-                <ScalarProperty Name="RemainedAmount" ColumnName="RemainedAmount" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
