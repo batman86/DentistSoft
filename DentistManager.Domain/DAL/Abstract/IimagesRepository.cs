@@ -10,5 +10,6 @@ namespace DentistManager.Domain.DAL.Abstract
     public interface IimagesRepository
     {
        IEnumerable<ImageCategoryViewModel> getImagesCategoryList();
+       string getIMageCategoryNameByID(int ImageCategoryID); 
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/03/2014 20:27:37
+-- Date Created: 03/04/2014 14:03:33
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -59,8 +59,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Treatment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MaterialTreatment] DROP CONSTRAINT [FK_MaterialTreatment_Treatment];
 GO
-IF OBJECT_ID(N'[dbo].[FK_opperation_Material]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[opperation] DROP CONSTRAINT [FK_opperation_Material];
+IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_Material]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_Material];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_opperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_opperation];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Patient_Clinics]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Patient] DROP CONSTRAINT [FK_Patient_Clinics];
@@ -68,23 +71,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PatientHistory_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatientHistory] DROP CONSTRAINT [FK_PatientHistory_Patient];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PatientPayment_AspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatientPayment] DROP CONSTRAINT [FK_PatientPayment_AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PatientPayment_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatientPayment] DROP CONSTRAINT [FK_PatientPayment_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PatientPayment_Patient]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatientPayment] DROP CONSTRAINT [FK_PatientPayment_Patient];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_AspNetUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_AspNetUsers];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Clinics]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_PatientPayment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_PatientPayment];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Appointments]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Appointments];
@@ -187,14 +178,14 @@ GO
 IF OBJECT_ID(N'[dbo].[opperation]', 'U') IS NOT NULL
     DROP TABLE [dbo].[opperation];
 GO
+IF OBJECT_ID(N'[dbo].[OpperationMaterials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OpperationMaterials];
+GO
 IF OBJECT_ID(N'[dbo].[Patient]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Patient];
 GO
 IF OBJECT_ID(N'[dbo].[PatientHistory]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PatientHistory];
-GO
-IF OBJECT_ID(N'[dbo].[PatientPayment]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PatientPayment];
 GO
 IF OBJECT_ID(N'[dbo].[PaymentReceipt]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentReceipt];
@@ -393,8 +384,7 @@ CREATE TABLE [dbo].[opperations] (
     [OpperationID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(50)  NOT NULL,
     [Color] nvarchar(50)  NULL,
-    [Price] decimal(18,4)  NOT NULL,
-    [MaterialID] int  NULL
+    [Price] decimal(18,4)  NOT NULL
 );
 GO
 
@@ -420,18 +410,6 @@ CREATE TABLE [dbo].[PatientHistories] (
     [PatientID] int  NOT NULL,
     [Name] nvarchar(50)  NOT NULL,
     [Descripation] nvarchar(500)  NULL
-);
-GO
-
--- Creating table 'PatientPayments'
-CREATE TABLE [dbo].[PatientPayments] (
-    [PatientPaymentID] int IDENTITY(1,1) NOT NULL,
-    [PatientID] int  NOT NULL,
-    [TotalPrice] decimal(18,4)  NOT NULL,
-    [PaidAmount] decimal(18,4)  NOT NULL,
-    [RemainedAmount] decimal(19,4)  NULL,
-    [UserID] nvarchar(128)  NOT NULL,
-    [ClinicID] int  NOT NULL
 );
 GO
 
@@ -591,6 +569,13 @@ CREATE TABLE [dbo].[AspNetUserRoles] (
 );
 GO
 
+-- Creating table 'OpperationMaterials'
+CREATE TABLE [dbo].[OpperationMaterials] (
+    [Materials_ItemID] int  NOT NULL,
+    [opperations_OpperationID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -697,12 +682,6 @@ ADD CONSTRAINT [PK_PatientHistories]
     PRIMARY KEY CLUSTERED ([HistoryID] ASC);
 GO
 
--- Creating primary key on [PatientPaymentID] in table 'PatientPayments'
-ALTER TABLE [dbo].[PatientPayments]
-ADD CONSTRAINT [PK_PatientPayments]
-    PRIMARY KEY CLUSTERED ([PatientPaymentID] ASC);
-GO
-
 -- Creating primary key on [ReceiptID] in table 'PaymentReceipts'
 ALTER TABLE [dbo].[PaymentReceipts]
 ADD CONSTRAINT [PK_PaymentReceipts]
@@ -779,6 +758,12 @@ GO
 ALTER TABLE [dbo].[AspNetUserRoles]
 ADD CONSTRAINT [PK_AspNetUserRoles]
     PRIMARY KEY CLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
+GO
+
+-- Creating primary key on [Materials_ItemID], [opperations_OpperationID] in table 'OpperationMaterials'
+ALTER TABLE [dbo].[OpperationMaterials]
+ADD CONSTRAINT [PK_OpperationMaterials]
+    PRIMARY KEY CLUSTERED ([Materials_ItemID], [opperations_OpperationID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -906,20 +891,6 @@ ON [dbo].[Doctors]
     ([UserID]);
 GO
 
--- Creating foreign key on [UserID] in table 'PatientPayments'
-ALTER TABLE [dbo].[PatientPayments]
-ADD CONSTRAINT [FK_PatientPayment_AspNetUsers]
-    FOREIGN KEY ([UserID])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PatientPayment_AspNetUsers'
-CREATE INDEX [IX_FK_PatientPayment_AspNetUsers]
-ON [dbo].[PatientPayments]
-    ([UserID]);
-GO
-
 -- Creating foreign key on [UserID] in table 'PaymentReceipts'
 ALTER TABLE [dbo].[PaymentReceipts]
 ADD CONSTRAINT [FK_PaymentReceipt_AspNetUsers]
@@ -959,20 +930,6 @@ ADD CONSTRAINT [FK_Patient_Clinics]
 -- Creating non-clustered index for FOREIGN KEY 'FK_Patient_Clinics'
 CREATE INDEX [IX_FK_Patient_Clinics]
 ON [dbo].[Patients]
-    ([ClinicID]);
-GO
-
--- Creating foreign key on [ClinicID] in table 'PatientPayments'
-ALTER TABLE [dbo].[PatientPayments]
-ADD CONSTRAINT [FK_PatientPayment_Clinics]
-    FOREIGN KEY ([ClinicID])
-    REFERENCES [dbo].[Clinics]
-        ([ClinicID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PatientPayment_Clinics'
-CREATE INDEX [IX_FK_PatientPayment_Clinics]
-ON [dbo].[PatientPayments]
     ([ClinicID]);
 GO
 
@@ -1088,20 +1045,6 @@ ON [dbo].[MaterialTreatments]
     ([MaterialID]);
 GO
 
--- Creating foreign key on [MaterialID] in table 'opperations'
-ALTER TABLE [dbo].[opperations]
-ADD CONSTRAINT [FK_opperation_Material]
-    FOREIGN KEY ([MaterialID])
-    REFERENCES [dbo].[Materials]
-        ([ItemID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_opperation_Material'
-CREATE INDEX [IX_FK_opperation_Material]
-ON [dbo].[opperations]
-    ([MaterialID]);
-GO
-
 -- Creating foreign key on [ItemID] in table 'RecivingItems'
 ALTER TABLE [dbo].[RecivingItems]
 ADD CONSTRAINT [FK_RecivingItems_Material]
@@ -1181,20 +1124,6 @@ ON [dbo].[PatientHistories]
     ([PatientID]);
 GO
 
--- Creating foreign key on [PatientID] in table 'PatientPayments'
-ALTER TABLE [dbo].[PatientPayments]
-ADD CONSTRAINT [FK_PatientPayment_Patient]
-    FOREIGN KEY ([PatientID])
-    REFERENCES [dbo].[Patients]
-        ([PatientID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PatientPayment_Patient'
-CREATE INDEX [IX_FK_PatientPayment_Patient]
-ON [dbo].[PatientPayments]
-    ([PatientID]);
-GO
-
 -- Creating foreign key on [PatientID] in table 'Prescriptions'
 ALTER TABLE [dbo].[Prescriptions]
 ADD CONSTRAINT [FK_Prescriptions_Patient]
@@ -1207,20 +1136,6 @@ ADD CONSTRAINT [FK_Prescriptions_Patient]
 CREATE INDEX [IX_FK_Prescriptions_Patient]
 ON [dbo].[Prescriptions]
     ([PatientID]);
-GO
-
--- Creating foreign key on [PatientPaymentID] in table 'PaymentReceipts'
-ALTER TABLE [dbo].[PaymentReceipts]
-ADD CONSTRAINT [FK_PaymentReceipt_PatientPayment]
-    FOREIGN KEY ([PatientPaymentID])
-    REFERENCES [dbo].[PatientPayments]
-        ([PatientPaymentID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PaymentReceipt_PatientPayment'
-CREATE INDEX [IX_FK_PaymentReceipt_PatientPayment]
-ON [dbo].[PaymentReceipts]
-    ([PatientPaymentID]);
 GO
 
 -- Creating foreign key on [StorageID] in table 'RecivingItems'
@@ -1314,6 +1229,29 @@ ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUsers]
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [Materials_ItemID] in table 'OpperationMaterials'
+ALTER TABLE [dbo].[OpperationMaterials]
+ADD CONSTRAINT [FK_OpperationMaterials_Material]
+    FOREIGN KEY ([Materials_ItemID])
+    REFERENCES [dbo].[Materials]
+        ([ItemID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [opperations_OpperationID] in table 'OpperationMaterials'
+ALTER TABLE [dbo].[OpperationMaterials]
+ADD CONSTRAINT [FK_OpperationMaterials_opperation]
+    FOREIGN KEY ([opperations_OpperationID])
+    REFERENCES [dbo].[opperations]
+        ([OpperationID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OpperationMaterials_opperation'
+CREATE INDEX [IX_FK_OpperationMaterials_opperation]
+ON [dbo].[OpperationMaterials]
+    ([opperations_OpperationID]);
 GO
 
 -- --------------------------------------------------

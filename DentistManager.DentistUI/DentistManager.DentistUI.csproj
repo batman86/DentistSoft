@@ -239,6 +239,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentController.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientSearchController.cs" />
     <Compile Include="Areas\SecretaryDashboard\SecretaryDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -598,7 +599,6 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientDelete.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientEdit.cshtml" />
     <Content Include="Admin\Admin.Master" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\ActivePatientTopBar.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientHistoryList.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDetails.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryCreate.cshtml" />
@@ -609,6 +609,8 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesEdit.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesDelete.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\ActivePatientTopBar.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\PatientSearchInfo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -655,6 +657,9 @@
     <Folder Include="Areas\SecretaryDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
+    <Folder Include="Content\Images\xray\large\" />
+    <Folder Include="Content\Images\xray\medium\" />
+    <Folder Include="Content\Images\xray\small\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -668,9 +673,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

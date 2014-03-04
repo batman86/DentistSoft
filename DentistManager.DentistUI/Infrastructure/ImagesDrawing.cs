@@ -53,13 +53,14 @@ namespace DentistManager.DentistUI.Infrastructure
 
             image.Dispose();
 
+            imageViewModel.LocalImageURL = "NA";
             PatientRepository pr = new PatientRepository();
             check = pr.addNewPatinetImages(imageViewModel);
         }
 
         private string ImagePathMaker(string serverPath, string imageName, ImageSize imageSize)
         {
-            return serverPath + "/PatientImages/" + imageSize.ToString() + "/" + imageName + "." + ImageExtension.jpeg;
+            return serverPath + imageSize.ToString() + "/" + imageName + "." + ImageExtension.jpeg;
         }
 
         private void DrawingFullImage(string SaveingPath, System.Drawing.Image img)

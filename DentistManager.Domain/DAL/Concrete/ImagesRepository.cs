@@ -23,5 +23,15 @@ namespace DentistManager.Domain.DAL.Concrete
                 return imageCategoryViewModel;
             }
         }
+
+        public string getIMageCategoryNameByID(int ImageCategoryID)
+        {
+             string imageCategoryName;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                imageCategoryName = ctx.ImageCategories.Find(ImageCategoryID).Name;
+            }
+            return imageCategoryName;
+        }
     }
 }

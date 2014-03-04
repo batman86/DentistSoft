@@ -79,6 +79,7 @@ namespace DentistManager.DentistUI.Controllers
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
+                        // get Real value here
                         appointmentViewModel.ClinicID = 1;
                         appointmentViewModel.PatientID = 1;
                         appointmentViewModel.Status = "state";

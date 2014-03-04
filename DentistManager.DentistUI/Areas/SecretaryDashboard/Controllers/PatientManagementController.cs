@@ -39,6 +39,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             if (patientList == null)
                 return HttpNotFound();
             return View(patientList);
+           
         }
 
         //
@@ -112,6 +113,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             catch
             {
                 return View();
+               
             }
         }
 
@@ -140,22 +142,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             {
                 return View();
             }
-        }
-
-        public ActionResult ActivePatientTopBar()
-        {
-             //get the member ship user id
-            string userID = User.Identity.GetUserId();
-            string patientID;
-
-            SessionStateManger stm = new SessionStateManger(sessionStateBL);
-            patientID = stm.getSecyrtaryActivePatinet(userID);
-           
-
-            PatientMiniData patient = patientRepository.getPatinetMiniInfo(int.Parse(patientID));
-
-            return PartialView(patient);
-
         }
 
 
@@ -327,8 +313,16 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                         List<HttpPostedFileBase> list = files.ToList();
                         if (list[0] != null)
                         {
+                           
+                            // get patientID  based on Current User ID
+                            string CurrentUserID = "1";
+                            SessionStateManger stm = new SessionStateManger(sessionStateBL);
+                            imagesViewModel.PatientID = int.Parse(stm.getSecyrtaryActivePatinet(CurrentUserID));
+
+                            string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
+
                             ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images"), imagesViewModel);
+                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/"+imageCategoryName+"/"), imagesViewModel);
 
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }

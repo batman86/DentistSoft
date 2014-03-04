@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DentistManager.Domain.DAL.Concrete
 {
-    class SecertaryRepository
+    public class SecertaryRepository
     {
         public bool updateSecertaryUserID(Entities.Secretary secretary)
         {
