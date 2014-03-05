@@ -31,9 +31,10 @@ namespace DentistManager.DentistUI.Admin
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {
-                if (cbRoles.SelectedItem.Value != "3")
+                if (cbRoles.SelectedItem.Value.ToString() != "3")
                 {
-                    var doc = new Doctor() { DoctorID = int.Parse(cbEmployee.SelectedItem.ValueString),UserID=identiyRole.UserId};
+                  
+                    var doc = new Doctor() { DoctorID = int.Parse(cbEmployee.SelectedItem.Value.ToString()),UserID=identiyRole.UserId};
                     DoctorRepository doctorRepository = new DoctorRepository();
                     doctorRepository.updateDoctorUserID(doc);
                 }
@@ -44,7 +45,7 @@ namespace DentistManager.DentistUI.Admin
                     secertaryRepository.updateSecertaryUserID(sec);
                 }
 
-                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Saved sucessfully');window.location ='Accounts.aspx';", true);  
             }
             else
             {
@@ -55,7 +56,7 @@ namespace DentistManager.DentistUI.Admin
         protected void cbRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewState["Password"] = Password.Text;
-            if (cbRoles.SelectedItem.Value != "3")
+            if (cbRoles.SelectedItem.Value.ToString() != "3")
             {
                 dsEmployees.SelectCommand = "SELECT [DoctorID], [Name] FROM [Doctors] WHERE [UserID] IS NULL";
                 dsEmployees.ConnectionString = ConfigurationManager.ConnectionStrings["Dentist"].ToString();
@@ -65,12 +66,12 @@ namespace DentistManager.DentistUI.Admin
             }
             else
             {
-                dsEmployees.SelectCommand = "SELECT [SecretaryID],[Name] FROM [Dentist].[dbo].[Secretary] where [USERID] is null";
+                dsEmployees.SelectCommand = "SELECT [SecretaryID],[Name] FROM [Dentist].[dbo].[Secretary] where [UserID] IS NULL";
                 dsEmployees.ConnectionString = ConfigurationManager.ConnectionStrings["Dentist"].ToString();
                 cbEmployee.DataBind();
                 cbEmployee.TextField = "Name";
                 cbEmployee.ValueField = "SecretaryID";
-
+                    
             }
         }
 

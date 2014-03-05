@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using DevExpress.Web.ASPxGridView;
 namespace DentistManager.DentistUI.Admin
 {
     public partial class Secretary : System.Web.UI.Page
@@ -18,5 +18,14 @@ namespace DentistManager.DentistUI.Admin
         {
             e.NewValues["Active"] = true;
         }
+        protected void fvDetails_DataBinding(object sender, EventArgs e)
+        {
+            FormView fv = (FormView)sender;
+            GridViewDetailRowTemplateContainer row = (GridViewDetailRowTemplateContainer)fv.Parent;
+            fv.DataSource = dsDetails;
+            dsDetails.SelectParameters["SecretaryID"].DefaultValue = row.KeyValue.ToString();
+        }
+
+       
     }
 }

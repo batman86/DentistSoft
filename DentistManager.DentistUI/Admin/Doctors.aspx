@@ -89,7 +89,12 @@
                         <dx:GridViewDataTextColumn FieldName="Address" VisibleIndex="9" Visible="False">
                             <EditFormSettings Visible="True" />
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="E-mail" VisibleIndex="10" Visible="False">
+                        <dx:GridViewDataTextColumn FieldName="E_mail" VisibleIndex="10" Visible="False">
+                            <PropertiesTextEdit>
+                                <ValidationSettings>
+                                    <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
+                                </ValidationSettings>
+                            </PropertiesTextEdit>
                             <EditFormSettings Visible="True" />
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataCheckColumn FieldName="Active" VisibleIndex="11" Name="checkActive">
@@ -131,7 +136,7 @@
                                     <asp:Label ID="AddressLabel" runat="server" Text='<%# Bind("Address") %>' />
                                     <br />
                                     E-mail:
-                                    <asp:Label ID="E_mailLabel" runat="server" Text='<%# Bind("[E-mail]") %>' />
+                                    <asp:Label ID="E_mailLabel" runat="server" Text='<%# Bind("[E_mail]") %>' />
                                     <br />
                                     Active:
                                     <asp:CheckBox ID="ActiveCheckBox" runat="server" Checked='<%# Bind("Active") %>' Enabled="false" />
@@ -142,7 +147,7 @@
                         </DetailRow>
                     </Templates>
                 </dx:ASPxGridView>
-                    <asp:SqlDataSource ID="dsDoctors" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Doctors] SET Active= 0  where DoctorID=@DoctorID" InsertCommand="INSERT INTO [Doctors] ( [Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E-mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Doctors]" UpdateCommand="UPDATE [Doctors] SET  [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E-mail] = @column1, [Active] = @Active WHERE [DoctorID] = @DoctorID">
+                    <asp:SqlDataSource ID="dsDoctors" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Doctors] SET Active= 0  where DoctorID=@DoctorID" InsertCommand="INSERT INTO [Doctors] ( [Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @E_mail, @Active)" SelectCommand="SELECT * FROM [Doctors]" UpdateCommand="UPDATE [Doctors] SET  [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @E_mail [Active] = @Active WHERE [DoctorID] = @DoctorID">
                         <DeleteParameters>
                             <asp:Parameter  Name="DoctorID" />
                         </DeleteParameters>
@@ -153,7 +158,7 @@
                             <asp:Parameter Name="Phone" Type="String" />
                             <asp:Parameter Name="Mobile" Type="String" />
                             <asp:Parameter Name="Address" Type="String" />
-                            <asp:Parameter Name="column1" Type="String" />
+                            <asp:Parameter Name="E_mail" />
                             <asp:Parameter Name="Active" Type="Boolean" />
                         </InsertParameters>
                         <UpdateParameters>
@@ -163,7 +168,7 @@
                             <asp:Parameter Name="Phone" Type="String" />
                             <asp:Parameter Name="Mobile" Type="String" />
                             <asp:Parameter Name="Address" Type="String" />
-                            <asp:Parameter Name="column1" Type="String" />
+                            <asp:Parameter Name="E_mail" />
                             <asp:Parameter Name="Active" Type="Boolean" />
                             <asp:Parameter Name="DoctorID" Type="Int32" />
                         </UpdateParameters>

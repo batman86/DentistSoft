@@ -76,7 +76,7 @@
                     <dx:GridViewDataTextColumn FieldName="Address" VisibleIndex="8" Visible="False">
                         <EditFormSettings Visible="True" />
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="E-mail" VisibleIndex="9" Visible="False">
+                    <dx:GridViewDataTextColumn FieldName="E_mail" VisibleIndex="9" Visible="False">
                         <PropertiesTextEdit>
                             <ValidationSettings>
                                 <RegularExpression ErrorText="Wrong Format" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
@@ -92,45 +92,9 @@
                 <Templates >
                     
                     <DetailRow>
-                        <asp:FormView ID="fvDetails" runat="server" CellPadding="4" DataKeyNames="SecretaryID"  ForeColor="#333333">
-                            <EditItemTemplate>
-                                SecretaryID:
-                                <asp:Label ID="SecretaryIDLabel1" runat="server" Text='<%# Eval("SecretaryID") %>' />
-                                <br />
-                                UserID:
-                                <asp:TextBox ID="UserIDTextBox" runat="server" Text='<%# Bind("UserID") %>' />
-                                <br />
-                                Name:
-                                <asp:TextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' />
-                                <br />
-                                Gender:
-                                <asp:TextBox ID="GenderTextBox" runat="server" Text='<%# Bind("Gender") %>' />
-                                <br />
-                                BrithDate:
-                                <asp:TextBox ID="BrithDateTextBox" runat="server" Text='<%# Bind("BrithDate") %>' />
-                                <br />
-                                Phone:
-                                <asp:TextBox ID="PhoneTextBox" runat="server" Text='<%# Bind("Phone") %>' />
-                                <br />
-                                Mobile:
-                                <asp:TextBox ID="MobileTextBox" runat="server" Text='<%# Bind("Mobile") %>' />
-                                <br />
-                                Address:
-                                <asp:TextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address") %>' />
-                                <br />
-                                E-mail:
-                                <asp:TextBox ID="E_mailTextBox" runat="server" Text='<%# Bind("[E-mail]") %>' />
-                                <br />
-                                Active:
-                                <asp:CheckBox ID="ActiveCheckBox" runat="server" Checked='<%# Bind("Active") %>' />
-                                <br />
-                                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
-                                &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                            </EditItemTemplate>
-                            <EditRowStyle BackColor="#999999" />
-                            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                         
+                        <asp:FormView ID="fvDetails" runat="server" CellPadding="4" DataKeyNames="SecretaryID"  ForeColor="#333333"  OnDataBinding="fvDetails_DataBinding">
+
+                            
                             <ItemTemplate>
                                 SecretaryID:
                                 <asp:Label ID="SecretaryIDLabel" runat="server" Text='<%# Eval("SecretaryID") %>' />
@@ -156,22 +120,20 @@
                                 Address:
                                 <asp:Label ID="AddressLabel" runat="server" Text='<%# Bind("Address") %>' />
                                 <br />
-                                E-mail:
-                                <asp:Label ID="E_mailLabel" runat="server" Text='<%# Bind("[E-mail]") %>' />
+                                E_mail:
+                                <asp:Label ID="E_mailLabel" runat="server" Text='<%# Bind("E_mail") %>' />
                                 <br />
                                 Active:
                                 <asp:CheckBox ID="ActiveCheckBox" runat="server" Checked='<%# Bind("Active") %>' Enabled="false" />
                                 <br />
-                             
                             </ItemTemplate>
-                            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                           
                         </asp:FormView>
                     </DetailRow>
                     
                 </Templates>
                 </dx:ASPxGridView> 
-                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="update Secretary set Active = 0 where SecretaryID = @SecretaryID" InsertCommand="INSERT INTO [Secretary] ([Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E-mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Secretary]" UpdateCommand="UPDATE [Secretary] SET [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E-mail] = @column1, [Active] = @Active WHERE [SecretaryID] = @SecretaryID">
+                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="update Secretary set Active = 0 where SecretaryID = @SecretaryID" InsertCommand="INSERT INTO [Secretary] ([Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Secretary]" UpdateCommand="UPDATE [Secretary] SET [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @column1, [Active] = @Active WHERE [SecretaryID] = @SecretaryID">
                     <DeleteParameters>
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </DeleteParameters>
@@ -197,6 +159,12 @@
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
+                <asp:SqlDataSource ID="dsDetails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Secretary] WHERE ([SecretaryID] = @SecretaryID)">
+                    <SelectParameters>
+                        <asp:Parameter Name="SecretaryID" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <br />
             </td>
         </tr>
 
