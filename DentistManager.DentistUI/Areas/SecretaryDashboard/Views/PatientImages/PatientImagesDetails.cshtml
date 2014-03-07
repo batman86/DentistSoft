@@ -1,12 +1,11 @@
 ﻿@model DentistManager.Domain.ViewModel.ImagesViewModel
 
 @{
-    ViewBag.Title = "PatientImagesDelete";
+    ViewBag.Title = "Patient Images Details";
 }
 
-<h2>PatientImagesDelete</h2>
+<h2>PatientImagesDetails</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>ImagesViewModel</h4>
     <hr />
@@ -92,13 +91,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "patientImagesList", new { patientID = Model.PatientID })
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Edit", "PatientImagesEdit", new { patientImageID = Model.ImageID }) |
+    @Html.ActionLink("Back to List", "patientImagesList", new { patientID = Model.PatientID })
+</p>

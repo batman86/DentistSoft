@@ -8,17 +8,29 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="TopBar">
         <div class="container">
-            <div class="navbar-collapse collapse">
+            <div>
+                @{
+                    Html.RenderAction("ActivePatientTopBarSearch", "PatientSearch");
+                    Html.RenderAction("ActivePatientTopBar", "PatientSearch");
+                }
+            </div>
+
+            <aside>
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Patient Mangement", "patientList", "PatientManagement")</li>
+                    <li>@Html.ActionLink("Patient History", "patientHistoryList", "PatientIllnessHistory")</li>
+                    <li>@Html.ActionLink("Patient Images", "patientImagesList", "PatientImages")</li>
+                    <li>@Html.ActionLink("Patient Payment", "Index", "PatientPayment")</li>
+                    <li>@Html.ActionLink("Patient Search", "Index", "PatientSearch")</li>
                 </ul>
-            </div>
+            </aside>
+
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="MainWrap">
         @RenderBody()
         <hr />
         <footer>

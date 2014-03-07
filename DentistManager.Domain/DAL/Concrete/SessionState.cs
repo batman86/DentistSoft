@@ -51,7 +51,7 @@ namespace DentistManager.Domain.DAL.Concrete
         {
           using (Entities.Entities ctx = new Entities.Entities())
           {
-              SessionValue sessionValue =  ctx.SessionValues.Where(x=>x.SessionID == sessionID && x.SessionValue1== probertyName).FirstOrDefault();
+              SessionValue sessionValue =  ctx.SessionValues.Where(x=>x.SessionID == sessionID && x.PrortyName == probertyName).FirstOrDefault();
               return sessionValue;
           }
         }

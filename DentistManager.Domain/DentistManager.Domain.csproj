@@ -189,6 +189,7 @@
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
+    <Compile Include="ViewModel\PatientFullDataViewModel.cs" />
     <Compile Include="ViewModel\PatientHistoryViewModel.cs" />
     <Compile Include="ViewModel\PatientMiniData.cs" />
     <Compile Include="ViewModel\PaymentReceiptViewModel.cs" />

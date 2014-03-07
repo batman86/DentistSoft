@@ -11,7 +11,7 @@ namespace DentistManager.Domain.DAL.Abstract
     {
         IEnumerable<AppointmentViewModel> getPatientAppountmentList(int patientID);
         List<AppointmentViewModelFull> getClinecAppointmentList(int ClinecID);
-        bool AddNewAppointment(AppointmentViewModelFull appointment);
+        int AddNewAppointment(AppointmentViewModelFull appointment);
         bool alterAppointment(AppointmentViewModelFull appointment);
         bool deleteAppointment(int appointmentID);
     }

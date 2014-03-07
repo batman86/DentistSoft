@@ -237,6 +237,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientIllnessHistoryController.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientSearchController.cs" />
@@ -252,6 +254,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\GenerateDropDownListHelpers.cs" />
     <Compile Include="Infrastructure\ImagesDrawing.cs" />
+    <Compile Include="Infrastructure\ISessionStateManger.cs" />
     <Compile Include="Infrastructure\SessionStateManger.cs" />
     <Compile Include="Infrastructure\Structures.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -599,18 +602,20 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientDelete.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientEdit.cshtml" />
     <Content Include="Admin\Admin.Master" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientHistoryList.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDetails.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryCreate.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryEdit.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientHistoryDelete.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\patientImagesList.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesDetails.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesEdit.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesDelete.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientManagement\PatientImagesCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\ActivePatientTopBar.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\PatientSearchInfo.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientImages\patientImagesList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientImages\PatientImagesDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientImages\PatientImagesCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientImages\PatientImagesEdit.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientImages\PatientImagesDelete.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\patientHistoryList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\PatientHistoryDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\PatientHistoryCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\PatientHistoryEdit.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\PatientHistoryDelete.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\Shared\NoActivePatientView.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\ActivePatientTopBarSearch.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -656,7 +661,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
     <Folder Include="Content\Images\xray\large\" />
     <Folder Include="Content\Images\xray\medium\" />
     <Folder Include="Content\Images\xray\small\" />

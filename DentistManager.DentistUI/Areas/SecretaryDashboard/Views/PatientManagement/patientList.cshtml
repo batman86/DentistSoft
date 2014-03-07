@@ -3,11 +3,8 @@
 @{
     ViewBag.Title = "patientList";
 }
-
-<h2>patientList</h2>
-
 <p>
-    @Html.ActionLink("Create New", "PatientCreate")
+    @Html.ActionLink("Create New Patient", "PatientCreate")
 </p>
 <table class="table">
     <tr>
@@ -41,15 +38,10 @@
             @Html.DisplayFor(modelItem => item.Mobile)
         </td>
         <td>
-            @Html.ActionLink("patient Images", "patientImagesList", new { patientID = item.PatientID })
-            @Html.ActionLink("patient Illness History", "patientHistoryList", new { patientID = item.PatientID })
             @Html.ActionLink("Edit", "PatientEdit", new { patientID = item.PatientID }) |
             @Html.ActionLink("Details", "PatientDetails", new { patientID = item.PatientID }) |
             @Html.ActionLink("Delete", "PatientDelete", new { patientID = item.PatientID })
-
-            
         </td>
     </tr>
 }
-
 </table>

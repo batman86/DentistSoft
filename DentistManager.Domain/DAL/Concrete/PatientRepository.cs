@@ -11,14 +11,25 @@ namespace DentistManager.Domain.DAL.Concrete
 {
     public class PatientRepository : IPatientRepository
     {
-        public bool addNewPatinetBasicInfo(Entities.Patient patient)
+        public bool addNewPatinetBasicInfo(PatientFullDataViewModel patientViewModel)
         {
-            int count=0;
-            using(Entities.Entities ctx=new Entities.Entities ())
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
             {
-                ctx.Patients.Add(patient);
-                count=ctx.SaveChanges();
-               int test= patient.PatientID;
+                Patient patientEntity = ctx.Patients.Create();
+                patientEntity.ClinicID = patientViewModel.ClinicID;
+                patientEntity.Name = patientViewModel.Name;
+                patientEntity.Mobile = patientViewModel.Mobile;
+                patientEntity.Phone = patientViewModel.Phone;
+                patientEntity.E_mail = patientViewModel.E_mail;
+                patientEntity.gender = patientViewModel.gender;
+                patientEntity.Notice = patientViewModel.Notice;
+                patientEntity.BrithDate = patientViewModel.BrithDate;
+                patientEntity.Age = patientViewModel.Age;
+
+                ctx.Patients.Add(patientEntity);
+                count = ctx.SaveChanges();
+                int test = patientEntity.PatientID;
             }
             return count > 0 ? true : false;
         }
@@ -36,18 +47,18 @@ namespace DentistManager.Domain.DAL.Concrete
 
         public Patient getPatinetBasicInfo(int patientID)
         {
-           Patient patient;
-           using(Entities.Entities ctx=new Entities.Entities ())
-           {
-               patient= ctx.Patients.Find(patientID);
-           }
-           return patient;
+            Patient patient;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                patient = ctx.Patients.Find(patientID);
+            }
+            return patient;
         }
 
         public bool deletepatientBasicInfo(int patientID)
         {
             int count = 0;
-            using(Entities.Entities ctx =new Entities.Entities ())
+            using (Entities.Entities ctx = new Entities.Entities())
             {
                 Patient patient = ctx.Patients.Find(patientID);
                 if (patient != null)
@@ -67,9 +78,9 @@ namespace DentistManager.Domain.DAL.Concrete
                 IEnumerable<PatientMiniData> patientList;
                 var patients = ctx.Patients;
                 patientList = (from p in patients
-                               orderby p.Name 
+                               orderby p.Name
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
-                return patientList;       
+                return patientList;
             }
         }
 
@@ -81,25 +92,26 @@ namespace DentistManager.Domain.DAL.Concrete
                 IEnumerable<PatientMiniData> patientList;
                 var patients = ctx.Patients;
                 patientList = (from p in patients
-                              where p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber || p.Name.Contains(Name)
-                              orderby p.Name
-                              select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
+                               where p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber || p.Name.Contains(Name)
+                               orderby p.Name
+                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
 
-                return patientList;   
+                return patientList;
             }
         }
 
         // if the patient id is not exist return first patient
         public PatientMiniData getPatinetMiniInfo(int patientID)
         {
-            PatientMiniData patientMini;
+            PatientMiniData patientMini = null;
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 Patient patient = ctx.Patients.Find(patientID);
-                if (patient != null)
+                if (patient == null)
                     patient = ctx.Patients.FirstOrDefault();
 
-                  patientMini = new PatientMiniData { PatientID = patient.PatientID, Name = patient.Name, Phone = patient.Phone, Mobile = patient.Mobile, Address = patient.Address };
+                if (patient != null)
+                    patientMini = new PatientMiniData { PatientID = patient.PatientID, Name = patient.Name, Phone = patient.Phone, Mobile = patient.Mobile, Address = patient.Address };
                 //var patientIQ = ctx.Patients;
                 //patient = (from p in patientIQ
                 //           where p.PatientID == patientID
@@ -116,11 +128,11 @@ namespace DentistManager.Domain.DAL.Concrete
 
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                PatientHistory patientHistoryEntity =ctx.PatientHistories.Create();
+                PatientHistory patientHistoryEntity = ctx.PatientHistories.Create();
                 patientHistoryEntity.PatientID = patientHistory.PatientID;
                 patientHistoryEntity.Name = patientHistory.Name;
                 patientHistoryEntity.Descripation = patientHistory.Descripation;
-                
+
                 ctx.PatientHistories.Add(patientHistoryEntity);
                 count = ctx.SaveChanges();
             }
@@ -131,13 +143,6 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             int count = 0;
 
-            //PatientHistory patientHistoryEntity = new PatientHistory
-            //{
-            //    HistoryID = patientHistory.HistoryID,
-            //    PatientID = patientHistory.PatientID,
-            //    Name = patientHistory.Name,
-            //    Descripation = patientHistory.Descripation,
-            //};
 
             using (Entities.Entities ctx = new Entities.Entities())
             {
@@ -146,7 +151,7 @@ namespace DentistManager.Domain.DAL.Concrete
                     return false;
 
                 patientHistoryEntity.Name = patientHistory.Name;
-                patientHistory.Descripation = patientHistory.Descripation;
+                patientHistoryEntity.Descripation = patientHistory.Descripation;
 
                 ctx.Entry(patientHistoryEntity).State = System.Data.Entity.EntityState.Modified;
                 count = ctx.SaveChanges();
@@ -201,7 +206,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
                 patienthistoryList = (from ph in patienthistoris
                                       where ph.PatientID == patientID
-                                      select new PatientHistoryViewModel { PatientID=ph.PatientID , Name= ph.Name, Descripation=ph.Descripation, HistoryID= ph.HistoryID}).ToList();
+                                      select new PatientHistoryViewModel { PatientID = ph.PatientID, Name = ph.Name, Descripation = ph.Descripation, HistoryID = ph.HistoryID }).ToList();
 
                 return patienthistoryList;
             }
@@ -241,15 +246,15 @@ namespace DentistManager.Domain.DAL.Concrete
                 {
                     imagesViewModel = new ImagesViewModel
                     {
-                            Name = imageEntity.Name,
-                            Notice = imageEntity.Notice,
-                            ImageCategoryID = imageEntity.ImageCategoryID,
-                            appointmentID = imageEntity.appointmentID,
-                            PatientID = imageEntity.PatientID,
-                            MinImageURL = imageEntity.MinImageURL,
-                            MediumImageURL = imageEntity.MediumImageURL,
-                            FullImageURL = imageEntity.FullImageURL,
-                            LocalImageURL = imageEntity.LocalImageURL
+                        Name = imageEntity.Name,
+                        Notice = imageEntity.Notice,
+                        ImageCategoryID = imageEntity.ImageCategoryID,
+                        appointmentID = imageEntity.appointmentID,
+                        PatientID = imageEntity.PatientID,
+                        MinImageURL = imageEntity.MinImageURL,
+                        MediumImageURL = imageEntity.MediumImageURL,
+                        FullImageURL = imageEntity.FullImageURL,
+                        LocalImageURL = imageEntity.LocalImageURL
                     };
                 }
                 else
@@ -281,7 +286,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 var patientsImages = ctx.Images;
                 patientImagesList = (from i in patientsImages
                                      orderby i.PatientID == patientID
-                                     select new ImagesViewModel { Name=i.Name, Notice=i.Notice, ImageID=i.ImageID , MinImageURL=i.MinImageURL, MediumImageURL=i.MediumImageURL,FullImageURL=i.FullImageURL, LocalImageURL=i.LocalImageURL, ImageCategoryID=i.ImageCategoryID, appointmentID=i.appointmentID, PatientID=i.PatientID }).ToList();
+                                     select new ImagesViewModel { Name = i.Name, Notice = i.Notice, ImageID = i.ImageID, MinImageURL = i.MinImageURL, MediumImageURL = i.MediumImageURL, FullImageURL = i.FullImageURL, LocalImageURL = i.LocalImageURL, ImageCategoryID = i.ImageCategoryID, appointmentID = i.appointmentID, PatientID = i.PatientID }).ToList();
                 return patientImagesList;
             }
         }
@@ -292,7 +297,7 @@ namespace DentistManager.Domain.DAL.Concrete
             int count = 0;
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                 count = ctx.Images.Where(x => x.FullImageURL == imagePath).Count();
+                count = ctx.Images.Where(x => x.FullImageURL == imagePath).Count();
             }
             return count > 0 ? true : false;
         }
@@ -315,6 +320,45 @@ namespace DentistManager.Domain.DAL.Concrete
                 count = ctx.SaveChanges();
             }
             return count > 0 ? true : false;
+        }
+
+
+        public int getFirstPatientInClinec(int clinecID)
+        {
+            int patientID = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Patient patient = ctx.Patients.Where(x => x.ClinicID == clinecID).FirstOrDefault();
+                if (patient != null)
+                    patientID = patient.PatientID;
+            }
+            return patientID;
+        }
+
+
+        public int getPatientIDSearchResultByMobileOrID(int patientID, string mobileNumber)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                PatientMiniData patient;
+                var patients = ctx.Patients;
+                patient = (from p in patients
+                           where p.PatientID == patientID || p.Mobile == mobileNumber
+                           orderby p.Name
+                           select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).FirstOrDefault();
+
+                return patient == null ? 0 : patient.PatientID;
+            }
+        }
+
+        public string getPatientNameByID(int patientID)
+        {
+            string Name ;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Name=ctx.Patients.Find(patientID).Name;
+            }
+            return Name;
         }
     }
 }

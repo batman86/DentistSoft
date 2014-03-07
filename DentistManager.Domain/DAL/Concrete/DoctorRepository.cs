@@ -13,13 +13,13 @@ namespace DentistManager.Domain.DAL.Concrete
 
         public IEnumerable<DoctorMiniInfoViewModel> getDoctorMiniInfoList()
         {
-           using(Entities.Entities ctx=new Entities.Entities ())
-           {
-              var DoctorsIQ= ctx.Doctors;
-              IEnumerable<DoctorMiniInfoViewModel>  DoctorList= (from d in DoctorsIQ
-                                                                select new DoctorMiniInfoViewModel{ DoctorID=d.DoctorID, DoctorName = d.Name}).ToList();
-              return DoctorList;
-           }
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var DoctorsIQ = ctx.Doctors;
+                IEnumerable<DoctorMiniInfoViewModel> DoctorList = (from d in DoctorsIQ
+                                                                   select new DoctorMiniInfoViewModel { DoctorID = d.DoctorID, DoctorName = d.Name }).ToList();
+                return DoctorList;
+            }
         }
         public bool updateDoctorUserID(Entities.Doctor doctor)
         {
@@ -28,10 +28,21 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 var doc = ctx.Doctors.FirstOrDefault(d => d.DoctorID == doctor.DoctorID);
                 doc.UserID = doctor.UserID;
-              count=  ctx.SaveChanges();
-                
+                count = ctx.SaveChanges();
+
             }
-            return count > 0 ? true:false;
+            return count > 0 ? true : false;
+        }
+
+
+        public string getDoctorNameByID(int doctorID)
+        {
+            string Name;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Name=ctx.Doctors.Find(doctorID).Name;
+            }
+            return Name;
         }
     }
 }

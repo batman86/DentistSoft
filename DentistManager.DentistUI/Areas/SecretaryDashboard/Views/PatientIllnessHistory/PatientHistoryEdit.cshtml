@@ -10,14 +10,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>PatientHistoryViewModel</h4>
         <hr />
         <input type="hidden" name="PatientID" value="@Model.PatientID" />
-        <input type="hidden" name="patientHistoryID" value="@Model.HistoryID" />
+        <input type="hidden" name="HistoryID" value="@Model.HistoryID" />
 
-               @Html.ValidationSummary(true)><div class="form-group">
+        @Html.ValidationSummary(true)><div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)

@@ -14,17 +14,24 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
     public class PatientManagementController : Controller
     {
-        ISeassionStateBL sessionStateBL;
         IPatientRepository patientRepository;
         IAppointmentRepository appointmentRepository;
         IimagesRepository imageRepository;
-        public PatientManagementController(IPatientRepository _patientRepository, ISeassionStateBL _sessionStateBL, IAppointmentRepository _appointmentRepository, IimagesRepository _imageRepository)
+        ISessionStateManger sessionStateManger;
+        public PatientManagementController(IPatientRepository _patientRepository, IAppointmentRepository _appointmentRepository, IimagesRepository _imageRepository, ISessionStateManger _sessionStateManger)
         {
             patientRepository = _patientRepository;
-            sessionStateBL = _sessionStateBL;
             appointmentRepository = _appointmentRepository;
             imageRepository = _imageRepository;
+            sessionStateManger = _sessionStateManger;
         }
+
+        [NonAction]
+        public int getCurrentPatientID()
+        {
+            return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
+        }
+
         //
         // GET: /SecretaryDashboard/PatientManagement/
         public ActionResult Index()
@@ -39,13 +46,15 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             if (patientList == null)
                 return HttpNotFound();
             return View(patientList);
-           
         }
 
         //
         // GET: /SecretaryDashboard/PatientManagement/PatientDetails/5
-        public ActionResult PatientDetails(int patientID)
+        public ActionResult PatientDetails(int patientID=0)
         {
+            if (patientID == 0)
+                patientID = getCurrentPatientID();
+
             Patient patient = patientRepository.getPatinetBasicInfo(patientID);
             if (patient == null)
                 return HttpNotFound();
@@ -62,7 +71,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         //
         // POST: /SecretaryDashboard/PatientManagement/PatientCreate
         [HttpPost]
-        public ActionResult PatientCreate(Patient patient)
+        public ActionResult PatientCreate(PatientFullDataViewModel patient)
         {
             try
             {
@@ -85,8 +94,11 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         //
         // GET: /SecretaryDashboard/PatientManagement/PatientEdit/5
-        public ActionResult PatientEdit(int patientID)
+        public ActionResult PatientEdit(int patientID= 0)
         {
+            if (patientID == 0)
+                patientID = getCurrentPatientID();
+
             Patient patient = patientRepository.getPatinetBasicInfo(patientID);
             if (patient == null)
                 return HttpNotFound();
@@ -119,8 +131,11 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         //
         // GET: /SecretaryDashboard/PatientManagement/PatientDelete/5
-        public ActionResult PatientDelete(int patientID)
+        public ActionResult PatientDelete(int patientID=0)
         {
+            if (patientID == 0)
+                patientID = getCurrentPatientID();
+
             Patient patient= patientRepository.getPatinetBasicInfo(patientID);
             if (patient == null)
                 return HttpNotFound();
@@ -145,271 +160,9 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
 
-        // patient History -------------------------------------------------********************************************------------------------------------- //
+       
 
-        public ActionResult patientHistoryList(int patientID)
-        {
-            IEnumerable<PatientHistoryViewModel> patientHistoryList = patientRepository.getPatientHistoryList(patientID);
-            if (patientHistoryList == null)
-                return HttpNotFound();
-            ViewBag.patientID = patientID;
-
-            return View(patientHistoryList);
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientHistoryDetails/PatientDetails/5
-        public ActionResult PatientHistoryDetails(int patientHistoryID)
-        {
-            PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
-            if (patientHistory == null)
-                return HttpNotFound();
-            return PartialView(patientHistory);
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
-        public ActionResult PatientHistoryCreate(int patientID)
-        {
-            ViewBag.patientID = patientID;
-            return View();
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
-        [HttpPost]
-        public ActionResult PatientHistoryCreate(PatientHistoryViewModel patientHistory)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    bool check = patientRepository.addNewPatinetHistory(patientHistory);
-                }
-                else
-                {
-                    ViewBag.patientID = patientHistory.PatientID;
-                    return View();
-                }
-
-                return RedirectToAction("patientHistoryList", new { patientID = patientHistory.PatientID });
-            }
-            catch
-            {
-                ViewBag.patientID = patientHistory.PatientID;
-                return View();
-            }
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryEdit/5
-        public ActionResult PatientHistoryEdit(int patientHistoryID)
-        {
-            PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
-            if (patientHistory == null)
-                return HttpNotFound();
-          //  ViewBag.patientID = patientHistory.PatientID;
-            
-            return View(patientHistory);
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryEdit/5
-        [HttpPost]
-        public ActionResult PatientHistoryEdit(PatientHistoryViewModel patientHistory)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    bool check = patientRepository.updatePatinetHistory(patientHistory);
-                }
-                else
-                {
-                    return View(patientHistory);
-                }
-                return RedirectToAction("patientHistoryList", new { patientID = patientHistory.PatientID });
-            }
-            catch
-            {
-                return View(patientHistory);
-            }
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
-        public ActionResult PatientHistoryDelete(int patientHistoryID)
-        {
-            PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
-            if (patientHistory == null)
-                return HttpNotFound();
-            ViewBag.patientID = patientHistory.PatientID;
-            return View(patientHistory);
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
-        [HttpPost]
-        [ActionName("PatientHistoryDelete")]
-        public ActionResult ConfirmPatientHistoryDelete(int patientHistoryID,string patientID)
-        {
-            try
-            {
-                bool check = patientRepository.deletePatientHistory(patientHistoryID);
-                return RedirectToAction("patientHistoryList", new { patientID = patientID });
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // patient Images -------------------------------------------------********************************************------------------------------------- //
-        public ActionResult patientImagesList(int patientID)
-        {
-            IEnumerable<ImagesViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
-            if (patientImageList == null)
-                return HttpNotFound();
-            ViewBag.patientID = patientID;
-
-            return View(patientImageList);
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientHistoryDetails/PatientImagesDetails/5
-        public ActionResult PatientImagesDetails(int patientImageID)
-        {
-            ImagesViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
-            if (patientImage == null)
-                return HttpNotFound();
-            return PartialView(patientImage);
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesCreate
-        public ActionResult PatientImagesCreate(int patientID)
-        {
-            ImageCreateViewModel imageCreateViewModel = new ImageCreateViewModel();
-
-           // imageCreateViewModel.image = new ImagesViewModel();
-            imageCreateViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
-            imageCreateViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(patientID);
-
-            ViewBag.patientID = patientID;
-            return View(imageCreateViewModel);
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientImagesCreate
-        [HttpPost]
-        public ActionResult PatientImagesCreate(ImagesViewModel imagesViewModel, string name, IEnumerable<HttpPostedFileBase> files, FormCollection coll)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    if (files != null)
-                    {
-                        List<HttpPostedFileBase> list = files.ToList();
-                        if (list[0] != null)
-                        {
-                           
-                            // get patientID  based on Current User ID
-                            string CurrentUserID = "1";
-                            SessionStateManger stm = new SessionStateManger(sessionStateBL);
-                            imagesViewModel.PatientID = int.Parse(stm.getSecyrtaryActivePatinet(CurrentUserID));
-
-                            string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
-
-                            ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/"+imageCategoryName+"/"), imagesViewModel);
-
-                            return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.patientID = imagesViewModel.PatientID;
-                        return View();
-                    }
-
-                }
-                else
-                {
-                    ViewBag.patientID = imagesViewModel.PatientID;
-                    return View();
-                }
-
-                return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
-            }
-            catch
-            {
-                ViewBag.patientID = imagesViewModel.PatientID;
-                return View();
-            }
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesEdit/5
-        public ActionResult PatientImagesEdit(int patientImageID)
-        {
-            ImagesViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
-            if (patientImagesViewModel == null)
-                return HttpNotFound();
-            //  ViewBag.patientID = patientHistory.PatientID;
-
-            return View(patientImagesViewModel);
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientImagesEdit/5
-        [HttpPost]
-        public ActionResult PatientImagesEdit(ImagesViewModel patientImageViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    bool check = patientRepository.updatePatinetImage(patientImageViewModel);
-                }
-                else
-                {
-                    return View();
-                }
-                return RedirectToAction("patientImagesList", new { patientID = patientImageViewModel.PatientID });
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesDelete/5
-        public ActionResult PatientImagesDelete(int patientImageID)
-        {
-            ImagesViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
-            if (patientImageViewModel == null)
-                return HttpNotFound();
-            return View(patientImageViewModel);
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientManagement/ConfirmPatientImagesDelete/5
-        [HttpPost]
-        [ActionName("PatientImagesDelete")]
-        public ActionResult ConfirmPatientImagesDelete(int patientImageID, string patientID)
-        {
-            try
-            {
-                bool check = patientRepository.deletePatientImages(patientImageID);
-                return RedirectToAction("patientImagesList", new { patientID = patientID });
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
     }
 }

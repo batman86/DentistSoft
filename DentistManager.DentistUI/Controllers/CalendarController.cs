@@ -13,6 +13,9 @@ using DHTMLX.Scheduler.Controls;
 using DentistManager.DentistUI.Models;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.ViewModel;
+using DentistManager.DentistUI.Infrastructure;
+using DentistManager.Domain.BL.Abstract;
+using Microsoft.AspNet.Identity;
 
 namespace DentistManager.DentistUI.Controllers
 {
@@ -20,10 +23,14 @@ namespace DentistManager.DentistUI.Controllers
     {
         IDoctorRepository doctorRepository;
         IAppointmentRepository  appointmentRepository;
-        public CalendarController(IDoctorRepository _doctorRepository, IAppointmentRepository _appointmentRepository)
+        IPatientRepository patientRepository;
+        ISessionStateManger sessionStateManger;
+        public CalendarController(IDoctorRepository _doctorRepository, IAppointmentRepository _appointmentRepository,IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
         {
             doctorRepository = _doctorRepository;
             appointmentRepository = _appointmentRepository;
+            patientRepository = _patientRepository;
+            sessionStateManger = _sessionStateManger;
         }
 
 
@@ -74,18 +81,16 @@ namespace DentistManager.DentistUI.Controllers
             {
                 AppointmentViewModelFull appointmentViewModel = (AppointmentViewModelFull)DHXEventsHelper.Bind(typeof(AppointmentViewModelFull), actionValues);
 
-     
-
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
                         // get Real value here
-                        appointmentViewModel.ClinicID = 1;
-                        appointmentViewModel.PatientID = 1;
+                        int patientID=int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
+                        appointmentViewModel.ClinicID = sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+                        appointmentViewModel.PatientID = patientID;
                         appointmentViewModel.Status = "state";
-                        appointmentViewModel.text = "Doctor Name + Patient Name";
-                        appointmentRepository.AddNewAppointment(appointmentViewModel);
-                        action.TargetId = appointmentViewModel.id; //assign post operational id
+                        appointmentViewModel.text = "DR:" + doctorRepository.getDoctorNameByID(appointmentViewModel.DoctorID) + "\n Patient:" + patientRepository.getPatientNameByID(patientID);
+                        action.TargetId = appointmentRepository.AddNewAppointment(appointmentViewModel);
                         break;
                     case DataActionTypes.Delete:
                         appointmentRepository.deleteAppointment(appointmentViewModel.id);

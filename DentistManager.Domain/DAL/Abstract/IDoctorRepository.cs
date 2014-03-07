@@ -10,5 +10,6 @@ namespace DentistManager.Domain.DAL.Abstract
     public interface IDoctorRepository
     {
         IEnumerable<DoctorMiniInfoViewModel> getDoctorMiniInfoList();
+        string getDoctorNameByID(int doctorID);
     }
 }

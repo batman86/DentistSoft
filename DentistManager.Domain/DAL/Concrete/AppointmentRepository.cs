@@ -42,9 +42,9 @@ namespace DentistManager.Domain.DAL.Concrete
         }
 
 
-        public bool AddNewAppointment(AppointmentViewModelFull appointment)
+        public int AddNewAppointment(AppointmentViewModelFull appointment)
         {
-            int count = 0;
+            int appointmentID = 0;
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 
@@ -59,9 +59,10 @@ namespace DentistManager.Domain.DAL.Concrete
                 appointmentEntity.Text = appointment.text;
 
                 ctx.Appointments.Add(appointmentEntity);
-                count =ctx.SaveChanges();
+                ctx.SaveChanges();
+                appointmentID = appointmentEntity.AppointmentID;
             }
-            return count > 0 ? true : false;
+            return appointmentID;
         }
 
 

@@ -13,16 +13,15 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
     public class PatientSearchController : Controller
     {
-        ISeassionStateBL sessionStateBL;
+
         IPatientRepository patientRepository;
-        public PatientSearchController(ISeassionStateBL _sessionStateBL, IPatientRepository _patientRepository)
+        ISessionStateManger sessionStateManger;
+        public PatientSearchController(IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
         {
-            sessionStateBL = _sessionStateBL;
+           // sessionStateBL = _sessionStateBL;
             patientRepository = _patientRepository;
+            sessionStateManger = _sessionStateManger;
         }
-
-
-
 
         //
         // GET: /SecretaryDashboard/PatientSearch/
@@ -31,23 +30,66 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View();
         }
 
-
-
-        public ActionResult ActivePatientTopBar()
+        // /SecretaryDashboard/PatientSearch/getCurrentPatientID
+       // [NonAction]
+        public int getCurrentPatientID()
         {
-            //get the member ship user id
-            string userID = User.Identity.GetUserId();
+            string CurrentUserID = User.Identity.GetUserId();
             string patientID;
 
-            SessionStateManger stm = new SessionStateManger(sessionStateBL);
-            patientID = stm.getSecyrtaryActivePatinet(userID);
+            patientID = sessionStateManger.getSecyrtaryActivePatinet(CurrentUserID);
 
+            if (patientID == null)
+                return 0;
 
-            PatientMiniData patient = patientRepository.getPatinetMiniInfo(int.Parse(patientID));
+             return int.Parse(patientID);
+        }
+        // /SecretaryDashboard/PatientSearch/ActivePatientTopBar
+        public ActionResult ActivePatientTopBar()
+        {
+            int patientID = getCurrentPatientID();
+            if (patientID == 0)
+                return PartialView("NoActivePatientView");
+
+            PatientMiniData patient = patientRepository.getPatinetMiniInfo(patientID);
+            if(patient ==null)
+                return PartialView("NoActivePatientView");
 
             return PartialView(patient);
-
         }
+
+
+        // /SecretaryDashboard/PatientSearch/ActivePatientTopBarSearch
+        public ActionResult ActivePatientTopBarSearch()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ActivePatientTopBarSearch(string mobileNumber, int PatientID=0)
+        {
+            try
+            {
+                int patientID = patientRepository.getPatientIDSearchResultByMobileOrID(PatientID, mobileNumber);
+                if (patientID != 0)
+                {
+                    sessionStateManger.setSecyrtaryActivePatinet(User.Identity.GetUserId(), patientID);
+             
+                    ViewBag.Msg = "Patient Findes";
+                }
+
+                else
+                    ViewBag.Msg = "Could Not Find this Patient";
+
+               return  View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
 
         public ActionResult PatientSearchInfo()
         {
@@ -57,7 +99,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             var s= patientRepository.getPatientListSearchResult(patientID, mobileNumber, phoneNumber, Name);
 
             return null;
-
         }
 	}
 }
