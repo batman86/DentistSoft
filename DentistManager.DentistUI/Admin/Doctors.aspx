@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Doctors.aspx.cs" Inherits="DentistManager.DentistUI.Admin.Doctors" %>
 
+<%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPanel" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxCallbackPanel" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
+
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Data.Linq" tagprefix="dx" %>
@@ -14,6 +20,78 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+      <asp:ScriptManager ID="sm" runat="server" />
+      
+    <dx:ASPxPopupControl ID="popup" runat="server" ClientInstanceName="popup" RenderMode="Lightweight"
+         Height="251px" Theme="Office2003Silver" Width="328px" AllowResize="True"
+         PopupHorizontalAlign ="Center" AllowDragging="True" >
+        <ContentCollection>
+            <dx:PopupControlContentControl>
+                <asp:Panel runat="server">  
+        <table style="width:231px">
+                                    <tr>
+                                        <td align="center" colspan="2"><strong>Sign Up for Your New Account</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+                                        </td>
+                                        <td>
+                                            <dx:ASPxTextBox ID="UserName" runat="server" Width="170px" Theme="Office2003Silver">
+                                                <ValidationSettings SetFocusOnError="True">
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+                                        </td>
+                                        <td class="auto-style1">
+                                            <dx:ASPxTextBox ID="Password" runat="server" Password="True" Width="170px" Theme="Office2010Silver">
+                                                <ValidationSettings CausesValidation="True" SetFocusOnError="True">
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            <asp:Label ID="PasswordLabel0" runat="server" AssociatedControlID="Password">Role:</asp:Label>
+                                        </td>
+                                        <td>
+                                           
+                                            <dx:ASPxComboBox ID="cbRoles" runat="server" AutoPostBack="True" DataSourceID="dsRole" OnSelectedIndexChanged="cbRoles_SelectedIndexChanged" TextField="Name" ValueField="Id">
+                                                <ValidationSettings>
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxComboBox>
+                                            <asp:SqlDataSource ID="dsRole" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [AspNetRoles]"></asp:SqlDataSource>
+                                            
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            </td>
+                                        <td style="text-align: right" class="auto-style1">
+                                            <dx:ASPxButton ID="CreateUser" runat="server" OnClick="CreateUser_Click" Text="Create User" Theme="RedWine">
+                                            </dx:ASPxButton>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="2">
+                                            <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
+                                        </td>
+                                    </tr>
+                                    </table>
+        </asp:Panel> 
+            </dx:PopupControlContentControl>     
+        </ContentCollection>
+           
+    </dx:ASPxPopupControl>
 
     <table class="auto-style1">
         <tr>
@@ -21,7 +99,7 @@
             <td>
                 <div style="width: 100%; height: 100%; position: relative">
                 <dx:ASPxGridView ID="gvxDoctors" runat="server" AutoGenerateColumns="False" ClientInstanceName="MainGirdDoctors" 
-                    DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" Theme="Office2003Silver" Width="100%" OnInitNewRow="gvxDoctors_InitNewRow">
+                    DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" Theme="Office2003Silver" Width="100%" OnInitNewRow="gvxDoctors_InitNewRow" OnCustomButtonCallback="gvxDoctors_CustomButtonCallback">
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
                             <EditButton Visible="True">
@@ -101,6 +179,16 @@
                             <PropertiesCheckEdit ClientInstanceName="chkAcitve">
                             </PropertiesCheckEdit>
                         </dx:GridViewDataCheckColumn>
+                        <dx:GridViewDataTextColumn Caption="Create" VisibleIndex="12">
+                            <EditFormSettings Visible="False" />
+                            <DataItemTemplate >
+                                <dx:ASPxButton ID="CreateButton" runat="server" AutoPostBack="true"
+                                Text="CreateUser" OnClick="CreateButton_Click">
+                                </dx:ASPxButton>
+                                   <%--<a href="javascript:void(0);" onclick="OnMoreInfoClick(this, '<%# Container.KeyValue %>')">
+                                      Create User </a>--%>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFilterRow="True" />
                     <SettingsDetail ShowDetailRow="True" />

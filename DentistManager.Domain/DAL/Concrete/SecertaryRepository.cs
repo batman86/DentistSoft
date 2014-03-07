@@ -22,5 +22,16 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false;
         }
+        public string GetUserIDBySecertaryID(int SecrtaryID)
+        {
+            string UserID = string.Empty;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var sec = ctx.Secretaries.FirstOrDefault(s => s.SecretaryID == SecrtaryID);
+                UserID = sec.UserID;
+
+            }
+            return UserID;
+        }
     }
 }
