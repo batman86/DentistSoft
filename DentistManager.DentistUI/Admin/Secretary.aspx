@@ -1,13 +1,90 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Secretary.aspx.cs" Inherits="DentistManager.DentistUI.Admin.Secretary" %>
 
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+                  
+    <dx:ASPxPopupControl ID="popup" runat="server" ClientInstanceName="popup" RenderMode="Lightweight"
+         Height="251px" Theme="Office2003Silver" Width="328px" AllowResize="True"
+         PopupHorizontalAlign ="Center" AllowDragging="True" >
+        <ContentCollection>
+            <dx:PopupControlContentControl>
+                <asp:Panel runat="server">  
+        <table style="width:231px">
+                                    <tr>
+                                        <td align="center" colspan="2"><strong>Sign Up for Your New Account</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+                                        </td>
+                                        <td>
+                                            <dx:ASPxTextBox ID="UserName" runat="server" Width="170px" Theme="Office2003Silver">
+                                                <ValidationSettings SetFocusOnError="True">
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+                                        </td>
+                                        <td class="auto-style1">
+                                            <dx:ASPxTextBox ID="Password" runat="server" Password="True" Width="170px" Theme="Office2010Silver">
+                                                <ValidationSettings CausesValidation="True" SetFocusOnError="True">
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            <asp:Label ID="PasswordLabel0" runat="server" AssociatedControlID="Password">Role:</asp:Label>
+                                        </td>
+                                        <td>
+                                           
+                                            <dx:ASPxComboBox ID="cbRoles" runat="server" DataSourceID="dsRole" TextField="Name" ValueField="Id">
+                                                <ValidationSettings>
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxComboBox>
+                                            <asp:SqlDataSource ID="dsRole" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [AspNetRoles]"></asp:SqlDataSource>
+                                            
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            </td>
+                                        <td style="text-align: right" class="auto-style1">
+                                            <dx:ASPxButton ID="CreateUser" runat="server" OnClick="CreateUser_Click" Text="Create User" Theme="RedWine">
+                                            </dx:ASPxButton>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="2">
+                                            <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
+                                        </td>
+                                    </tr>
+                                    </table>
+        </asp:Panel> 
+            </dx:PopupControlContentControl>     
+        </ContentCollection>
+           
+    </dx:ASPxPopupControl>
+
     <table style="width:800px ">
         <tr>
-            <td style="width:500px "> <dx:ASPxGridView ID="gvxSecretary" runat="server" AutoGenerateColumns="False" ClientInstanceName="SecretaryGrid"
+          
+            <td style="width:500px ">
+
+                 <dx:ASPxGridView ID="gvxSecretary" runat="server" AutoGenerateColumns="False" ClientInstanceName="SecretaryGrid"
                 DataSourceID="dsSecretary" EnableTheming="True" KeyFieldName="SecretaryID" Theme="Office2003Silver" OnInitNewRow="gvxSecretary_InitNewRow" Width="100%" style="margin-bottom: 5px">
                 
                 <Columns>
@@ -86,6 +163,14 @@
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataCheckColumn FieldName="Active" VisibleIndex="10">
                     </dx:GridViewDataCheckColumn>
+                    <dx:GridViewDataTextColumn Caption="Create" VisibleIndex="11">
+                        <EditFormSettings Visible="False" />
+                        <DataItemTemplate >
+                          <dx:ASPxButton ID="CreateButton" runat="server" AutoPostBack="true"
+                                Text="CreateUser" OnClick="CreateButton_Click">
+                              </dx:ASPxButton>
+                            </DataItemTemplate>
+                    </dx:GridViewDataTextColumn>
                 </Columns>
                 <Settings ShowFilterRow="True" />
                 <SettingsDetail ShowDetailRow="True" />
@@ -133,7 +218,7 @@
                     
                 </Templates>
                 </dx:ASPxGridView> 
-                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="update Secretary set Active = 0 where SecretaryID = @SecretaryID" InsertCommand="INSERT INTO [Secretary] ([Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Secretary]" UpdateCommand="UPDATE [Secretary] SET [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @column1, [Active] = @Active WHERE [SecretaryID] = @SecretaryID">
+                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="update Secretaries set Active = 0 where SecretaryID = @SecretaryID" InsertCommand="INSERT INTO [Secretaries] ([Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Secretaries]" UpdateCommand="UPDATE [Secretaries] SET [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @column1, [Active] = @Active WHERE [SecretaryID] = @SecretaryID">
                     <DeleteParameters>
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </DeleteParameters>
@@ -159,7 +244,7 @@
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="dsDetails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Secretary] WHERE ([SecretaryID] = @SecretaryID)">
+                <asp:SqlDataSource ID="dsDetails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Secretaries] WHERE ([SecretaryID] = @SecretaryID)">
                     <SelectParameters>
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </SelectParameters>

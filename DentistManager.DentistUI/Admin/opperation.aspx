@@ -13,16 +13,20 @@
                      EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver" ClientInstanceName="MedicinGrid" 
                    >
                     <Columns>
-                        <dx:GridViewDataTextColumn FieldName="OpperationID" ReadOnly="True" VisibleIndex="0">
+                        <dx:GridViewCommandColumn VisibleIndex="0">
+                            <NewButton Visible="True">
+                            </NewButton>
+                            <DeleteButton Visible="True">
+                            </DeleteButton>
+                        </dx:GridViewCommandColumn>
+                        <dx:GridViewDataTextColumn FieldName="OpperationID" ReadOnly="True" VisibleIndex="1">
                             <EditFormSettings Visible="False" />
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="1">
+                        <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="2">
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="Color" VisibleIndex="2">
+                        <dx:GridViewDataTextColumn FieldName="Color" VisibleIndex="3">
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="Price" VisibleIndex="3">
-                        </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="MaterialID" VisibleIndex="4">
+                        <dx:GridViewDataTextColumn FieldName="Price" VisibleIndex="4">
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFilterRow="True" />
