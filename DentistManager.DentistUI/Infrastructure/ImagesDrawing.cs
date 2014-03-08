@@ -60,7 +60,7 @@ namespace DentistManager.DentistUI.Infrastructure
 
         private string ImagePathMaker(string serverPath, string imageName, ImageSize imageSize)
         {
-            return serverPath + imageSize.ToString() + "/" + imageName + "." + ImageExtension.jpeg;
+            return serverPath + "/"+ imageSize.ToString() + "/" + imageName + "." + ImageExtension.jpeg;
         }
 
         private void DrawingFullImage(string SaveingPath, System.Drawing.Image img)

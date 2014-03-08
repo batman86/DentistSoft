@@ -92,10 +92,18 @@ namespace DentistManager.Domain.DAL.Concrete
                 IEnumerable<PatientMiniData> patientList;
                 var patients = ctx.Patients;
                 patientList = (from p in patients
-                               where p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber || p.Name.Contains(Name)
                                orderby p.Name
+                               where  p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
 
+                if(patientList.Count()==0 && Name!=string.Empty)
+                {
+                    patientList = (from p in patients
+                                   orderby p.Name
+                                   where p.Name.Contains(Name) 
+                                   select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
+
+                }
                 return patientList;
             }
         }

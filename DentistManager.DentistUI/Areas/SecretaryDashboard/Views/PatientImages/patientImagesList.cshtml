@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<DentistManager.Domain.ViewModel.ImagesViewModel>
 
 @{
-    ViewBag.Title = "patientImagesList";
+    ViewBag.Title = "patient Images";
 }
-
-<h2>patientImagesList</h2>
-
 <p>
     @Html.ActionLink("Create New", "PatientImagesCreate", new { patientID = ViewBag.patientID })
 </p>
@@ -27,9 +24,6 @@
             @Html.DisplayNameFor(model => model.ImageCategoryID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PatientID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.FullImageURL)
         </th>
         <th>
@@ -37,9 +31,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MinImageURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocalImageURL)
         </th>
         <th></th>
     </tr>
@@ -63,19 +54,13 @@
                 @Html.DisplayFor(modelItem => item.ImageCategoryID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientID)
+                <a href="@item.FullImageURL">Full Image</a>
+             </td>
+            <td>
+                <a href="@item.MediumImageURL">Medium Image</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FullImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MediumImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocalImageURL)
+                <a href="@item.MinImageURL">Mini Image</a>
             </td>
             <td>
                 @Html.ActionLink("Edit", "PatientImagesEdit", new { patientImageID = ViewBag.patientImageID }) |

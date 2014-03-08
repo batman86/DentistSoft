@@ -21,40 +21,24 @@ namespace DentistManager.DentistUI.Infrastructure
 
         public string getSecyrtaryActivePatinet(string userID)
         {
-            string probertyValue = null;
+            string probertyValue = getSeassionValue(userID, seassionNamesList.SecurtaryActivePatient.ToString(), seassionProbertyNamesList.ActivePatientID.ToString());
 
-            var sessionHolder = HttpContext.Current.Session[seassionNamesList.SecurtaryActivePatient.ToString()];
-            if (sessionHolder == null)
-            {
-                IEnumerable<SessionValuesViewModel> sessionValuesList = sessionStateBL.getSessionValueList(seassionNamesList.SecurtaryActivePatient.ToString(), userID);
-                if (sessionValuesList != null)
-                {
-                    foreach (var item in sessionValuesList)
-                    {
-                        if (item.propertyName == seassionProbertyNamesList.ActivePatientID.ToString())
-                        {
-                            probertyValue = item.sessionValue;
-                            break;
-                        }
-                    }
-                    HttpContext.Current.Session[seassionNamesList.SecurtaryActivePatient.ToString()] = probertyValue;
-                }
-            }
-            else
-            {
-                probertyValue = sessionHolder.ToString();
-            }
             if (probertyValue == null)
             {
                 int patientID = patientRepository.getFirstPatientInClinec(getClinecIDForCurrentSecurtary(userID));
-                  if (patientID != 0)
-                  {
-                      setSecyrtaryActivePatinet(userID, patientID);
-                       probertyValue = patientID.ToString();
-                  }
+                if (patientID != 0)
+                {
+                   setSecyrtaryActivePatinet(userID, patientID);
+                   probertyValue = patientID.ToString();
+                }
             }
             // if probertyValue still == null this mean no patients in the database for this clinec
             return probertyValue;
+        }
+
+        public void setSecyrtaryActivePatinet(string userID, int patientID)
+        {
+            setSeassionValue(userID, seassionNamesList.SecurtaryActivePatient.ToString(), seassionProbertyNamesList.ActivePatientID.ToString(), patientID.ToString());
         }
 
         public int getClinecIDForCurrentSecurtary(string userID)
@@ -68,10 +52,41 @@ namespace DentistManager.DentistUI.Infrastructure
             return 1;
         }
 
-        public void setSecyrtaryActivePatinet(string userID,int patientID)
+
+
+        public void setSeassionValue(string userID, string seassionName, string probertyName,string probertyValue)
         {
-            sessionStateBL.setSessionProbertyValue(seassionNamesList.SecurtaryActivePatient.ToString(), userID, seassionProbertyNamesList.ActivePatientID.ToString(), patientID.ToString());
-            HttpContext.Current.Session[seassionNamesList.SecurtaryActivePatient.ToString()] = patientID.ToString();
+            sessionStateBL.setSessionProbertyValue(seassionName, userID, probertyName, probertyValue);
+            HttpContext.Current.Session[seassionName] = probertyValue;
+        }
+
+        public string getSeassionValue(string userID,string seassionName, string probertyName)
+        {
+            string probertyValue = null;
+
+            var sessionHolder = HttpContext.Current.Session[seassionName];
+            if (sessionHolder == null)
+            {
+                IEnumerable<SessionValuesViewModel> sessionValuesList = sessionStateBL.getSessionValueList(seassionName, userID);
+                if (sessionValuesList != null)
+                {
+                    foreach (var item in sessionValuesList)
+                    {
+                        if (item.propertyName == probertyName)
+                        {
+                            probertyValue = item.sessionValue;
+                            break;
+                        }
+                    }
+                    HttpContext.Current.Session[seassionName] = probertyValue;
+                }
+            }
+            else
+            {
+                probertyValue = sessionHolder.ToString();
+            }
+
+            return probertyValue;
         }
     }
 

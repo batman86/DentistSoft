@@ -616,6 +616,8 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientIllnessHistory\PatientHistoryDelete.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\Shared\NoActivePatientView.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\ActivePatientTopBarSearch.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\PatientAdvancedSearch.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientSearch\PatientAdvancedSearchForm.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -18,7 +18,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         ISessionStateManger sessionStateManger;
         public PatientSearchController(IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
         {
-           // sessionStateBL = _sessionStateBL;
             patientRepository = _patientRepository;
             sessionStateManger = _sessionStateManger;
         }
@@ -68,6 +67,8 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         [HttpPost]
         public ActionResult ActivePatientTopBarSearch(string mobileNumber, int PatientID=0)
         {
+            if (mobileNumber == string.Empty && PatientID == 0)
+                return View();
             try
             {
                 int patientID = patientRepository.getPatientIDSearchResultByMobileOrID(PatientID, mobileNumber);
@@ -90,15 +91,17 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
 
-
-        public ActionResult PatientSearchInfo()
+        // /SecretaryDashboard/PatientSearch/PatientAdvancedSearch
+        public ActionResult PatientAdvancedSearch()
         {
-            int patientID=1;
-            string mobileNumber="a", phoneNumber="a", Name="a";
+            return View("PatientAdvancedSearchForm");
+        }
 
-            var s= patientRepository.getPatientListSearchResult(patientID, mobileNumber, phoneNumber, Name);
-
-            return null;
+        [HttpPost]
+        public ActionResult PatientAdvancedSearch(string patientMobileNumber, string patientPhoneNumber, string patientName, int patientID = 0)
+        {
+            IEnumerable<PatientMiniData> patintSearchResultList = patientRepository.getPatientListSearchResult(patientID, patientMobileNumber, patientPhoneNumber, patientName);
+            return View(patintSearchResultList);
         }
 	}
 }
