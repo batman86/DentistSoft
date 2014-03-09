@@ -13,5 +13,13 @@ namespace DentistManager.DentistUI.Admin
         {
 
         }
+
+        protected void gvxMedicine_RowInserted(object sender, DevExpress.Web.Data.ASPxDataInsertedEventArgs e)
+        {
+            //insert materials
+
+        }
+
+       
     }
 }

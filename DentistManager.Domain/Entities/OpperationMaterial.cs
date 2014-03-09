@@ -12,20 +12,13 @@ namespace DentistManager.Domain.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class opperation
+    public partial class OpperationMaterial
     {
-        public opperation()
-        {
-            this.OpperationMaterials = new HashSet<OpperationMaterial>();
-            this.Treatments = new HashSet<Treatment>();
-        }
-    
         public int OpperationID { get; set; }
-        public string Name { get; set; }
-        public string Color { get; set; }
-        public decimal Price { get; set; }
+        public int ItemID { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
-        public virtual ICollection<OpperationMaterial> OpperationMaterials { get; set; }
-        public virtual ICollection<Treatment> Treatments { get; set; }
+        public virtual Material Material { get; set; }
+        public virtual opperation opperation { get; set; }
     }
 }

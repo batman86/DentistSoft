@@ -22,6 +22,15 @@ namespace DentistManager.DentistUI.Admin {
         protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvxMedicine;
         
         /// <summary>
+        /// dsMaterails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dsMaterails;
+        
+        /// <summary>
         /// dsOpperation control.
         /// </summary>
         /// <remarks>

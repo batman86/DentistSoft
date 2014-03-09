@@ -73,6 +73,7 @@
     <Compile Include="DAL\Concrete\CustomMatrialRepository.cs" />
     <Compile Include="DAL\Concrete\DoctorRepository.cs" />
     <Compile Include="DAL\Concrete\ImagesRepository.cs" />
+    <Compile Include="DAL\Concrete\OpperationMaterialsRepository.cs" />
     <Compile Include="DAL\Concrete\OpperationRepository.cs" />
     <Compile Include="DAL\Concrete\PatientPaymentRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
@@ -138,6 +139,9 @@
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\opperation.cs">
+      <DependentUpon>DentistModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OpperationMaterial.cs">
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Patient.cs">

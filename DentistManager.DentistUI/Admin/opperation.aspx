@@ -4,33 +4,84 @@
 <%@ Register assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            width: 72px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table style="width:800px ">
         <tr>
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxMedicine" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
-                     EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver" ClientInstanceName="MedicinGrid" 
+                     EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver" ClientInstanceName="OpperationGrid" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
-                            <NewButton Visible="True">
-                            </NewButton>
-                            <DeleteButton Visible="True">
-                            </DeleteButton>
+                          
+                           
+                            <EditButton Visible="True">
+                            </EditButton>
+                          
+                           
+                            <HeaderTemplate>
+                                <dx:ASPxButton ID="btnAddNew" runat="server" AutoPostBack="False" Text="Add Opperation" Width="108px">
+                                    <ClientSideEvents Click="function(s, e) {OpperationGrid.AddNewRow();}" />
+                                </dx:ASPxButton>
+                            </HeaderTemplate>
                         </dx:GridViewCommandColumn>
                         <dx:GridViewDataTextColumn FieldName="OpperationID" ReadOnly="True" VisibleIndex="1">
                             <EditFormSettings Visible="False" />
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="2">
+                            <PropertiesTextEdit>
+                                <ValidationSettings>
+                                    <RequiredField IsRequired="True" />
+                                </ValidationSettings>
+                            </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="Color" VisibleIndex="3">
-                        </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="Price" VisibleIndex="4">
-                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataColorEditColumn FieldName="Color" VisibleIndex="3">
+                        </dx:GridViewDataColorEditColumn>
+                        <dx:GridViewDataSpinEditColumn FieldName="Price" VisibleIndex="4">
+                            <PropertiesSpinEdit DisplayFormatString="g">
+                                <ValidationSettings>
+                                    <RequiredField IsRequired="True" />
+                                </ValidationSettings>
+                            </PropertiesSpinEdit>
+                        </dx:GridViewDataSpinEditColumn>
                     </Columns>
                     <Settings ShowFilterRow="True" />
+                    <Templates>
+                        <EditForm>
+                            <dx:ASPxGridViewTemplateReplacement ID="replaceEditor" runat="server" ReplacementType="EditFormEditors" />
+                            <table class="auto-style1">
+                                <tr>
+                                    <td class="auto-style2">
+                                        <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Materials :">
+                                        </dx:ASPxLabel>
+                                    </td>
+                                    <td>
+                                        <dx:ASPxDropDownEdit ID="ddMaterails" runat="server">
+                                            <DropDownWindowTemplate>
+                                                <dx:ASPxCheckBoxList ID="ASPxCheckBoxList1" runat="server" DataSourceID="dsMaterails" TextField="ItemName" ValueField="ItemID">
+                                                </dx:ASPxCheckBoxList>
+                                            </DropDownWindowTemplate>
+                                        </dx:ASPxDropDownEdit>
+                                    </td>
+                                </tr>
+                            </table>
+                            <dx:ASPxGridViewTemplateReplacement ID="replaceUpdate" runat="server" ReplacementType="EditFormUpdateButton" />
+                            <dx:ASPxGridViewTemplateReplacement ID="replaceCancel" runat="server" ReplacementType="EditFormCancelButton" />
+                        </EditForm>
+                    </Templates>
                 </dx:ASPxGridView>
+                <asp:SqlDataSource ID="dsMaterails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT [ItemID], [ItemName] FROM [Material]"></asp:SqlDataSource>
+                <br />
+               
                 <asp:SqlDataSource ID="dsOpperation" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [opperation] WHERE [OpperationID] = @OpperationID" InsertCommand="INSERT INTO [opperation] ([Name], [Color], [Price], [MaterialID]) VALUES (@Name, @Color, @Price, @MaterialID)" SelectCommand="SELECT * FROM [opperation]" UpdateCommand="UPDATE [opperation] SET [Name] = @Name, [Color] = @Color, [Price] = @Price, [MaterialID] = @MaterialID WHERE [OpperationID] = @OpperationID">
                     <DeleteParameters>
                         <asp:Parameter Name="OpperationID" Type="Int32" />

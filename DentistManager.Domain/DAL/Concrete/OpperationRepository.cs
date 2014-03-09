@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.Entities;
-
+using System.Data.SqlClient;
+using System.Configuration;
 namespace DentistManager.Domain.DAL.Concrete
 {
     public class OpperationRepository : IOpperationRepository
@@ -21,5 +22,7 @@ namespace DentistManager.Domain.DAL.Concrete
         //                        where o.p
         //   }
         //}
+
+      
     }
 }

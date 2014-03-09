@@ -40,8 +40,9 @@ namespace DentistManager.Domain.Entities
         public virtual DbSet<MaterialTreatment> MaterialTreatments { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<opperation> opperations { get; set; }
-        public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<OpperationMaterial> OpperationMaterials { get; set; }
         public virtual DbSet<PatientHistory> PatientHistories { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual DbSet<Prescription> Prescriptions { get; set; }
         public virtual DbSet<RecivingItem> RecivingItems { get; set; }
