@@ -14,21 +14,24 @@ namespace DentistManager.Domain.DAL.Concrete
     {
        public bool AddMaterialForOpperations(List<OpperationMaterial> opperMaterials)
        {
-            int result;
+            int result = 0;
            using (Entities.Entities ctx = new Entities.Entities())
            {
-              
+
                foreach (OpperationMaterial opperMaterial in opperMaterials)
                {
                    var opperMat = ctx.OpperationMaterials.Create();
                    opperMat.OpperationID = opperMaterial.OpperationID;
                    opperMat.ItemID = opperMaterial.ItemID;
-                 
+                   ctx.OpperationMaterials.Add(opperMat);
+                   result += ctx.SaveChanges();
 
                }
-               result = ctx.SaveChanges();
+              
            }
-           return result > 0 ? true : false;
+           return result == opperMaterials.Count ? true : false;
        }
+
+       
     }
 }

@@ -13,13 +13,13 @@ namespace DentistManager.DentistUI.Admin {
     public partial class opperation {
         
         /// <summary>
-        /// gvxMedicine control.
+        /// gvxOpperation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvxMedicine;
+        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvxOpperation;
         
         /// <summary>
         /// dsMaterails control.

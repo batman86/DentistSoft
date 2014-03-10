@@ -17,8 +17,9 @@
     <table style="width:800px ">
         <tr>
             <td style="width:500px ">
-                <dx:ASPxGridView ID="gvxMedicine" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
-                     EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver" ClientInstanceName="OpperationGrid" 
+                <dx:ASPxGridView ID="gvxOpperation" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
+                     EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver"
+                     ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
@@ -45,6 +46,7 @@
                             </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataColorEditColumn FieldName="Color" VisibleIndex="3">
+                            <Settings AllowAutoFilter="False" />
                         </dx:GridViewDataColorEditColumn>
                         <dx:GridViewDataSpinEditColumn FieldName="Price" VisibleIndex="4">
                             <PropertiesSpinEdit DisplayFormatString="g">
@@ -67,7 +69,7 @@
                                     <td>
                                         <dx:ASPxDropDownEdit ID="ddMaterails" runat="server">
                                             <DropDownWindowTemplate>
-                                                <dx:ASPxCheckBoxList ID="ASPxCheckBoxList1" runat="server" DataSourceID="dsMaterails" TextField="ItemName" ValueField="ItemID">
+                                                <dx:ASPxCheckBoxList ID="chlMaterails" runat="server" DataSourceID="dsMaterails" TextField="ItemName" ValueField="ItemID" Width="100%">
                                                 </dx:ASPxCheckBoxList>
                                             </DropDownWindowTemplate>
                                         </dx:ASPxDropDownEdit>
@@ -82,7 +84,12 @@
                 <asp:SqlDataSource ID="dsMaterails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT [ItemID], [ItemName] FROM [Material]"></asp:SqlDataSource>
                 <br />
                
-                <asp:SqlDataSource ID="dsOpperation" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [opperation] WHERE [OpperationID] = @OpperationID" InsertCommand="INSERT INTO [opperation] ([Name], [Color], [Price], [MaterialID]) VALUES (@Name, @Color, @Price, @MaterialID)" SelectCommand="SELECT * FROM [opperation]" UpdateCommand="UPDATE [opperation] SET [Name] = @Name, [Color] = @Color, [Price] = @Price, [MaterialID] = @MaterialID WHERE [OpperationID] = @OpperationID">
+                <asp:SqlDataSource ID="dsOpperation" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [opperation] WHERE [OpperationID] = @OpperationID" 
+                    InsertCommand="INSERT INTO [opperation] ([Name], [Color], [Price]) VALUES (@Name, @Color, @Price) 
+                    SELECT @GetOpperationID = SCOPE_IDENTITY()"
+                     SelectCommand="SELECT * FROM [opperation]" 
+                    UpdateCommand="UPDATE [opperation] SET [Name] = @Name, [Color] = @Color, [Price] = @Price WHERE [OpperationID] = @OpperationID" 
+                    OnInserted="dsOpperation_Inserted">
                     <DeleteParameters>
                         <asp:Parameter Name="OpperationID" Type="Int32" />
                     </DeleteParameters>
@@ -90,13 +97,12 @@
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="Color" Type="String" />
                         <asp:Parameter Name="Price" Type="Decimal" />
-                        <asp:Parameter Name="MaterialID" Type="Int32" />
+                        <asp:Parameter Direction="Output"  Name="GetOpperationID" Type="Int32" />
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="Color" Type="String" />
                         <asp:Parameter Name="Price" Type="Decimal" />
-                        <asp:Parameter Name="MaterialID" Type="Int32" />
                         <asp:Parameter Name="OpperationID" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
