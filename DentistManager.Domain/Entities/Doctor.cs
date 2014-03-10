@@ -33,11 +33,13 @@ namespace DentistManager.Domain.Entities
         public string Address { get; set; }
         public string E_mail { get; set; }
         public Nullable<bool> Active { get; set; }
+        public int ClinicID { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual ICollection<CustomMaterial> CustomMaterials { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }
         public virtual ICollection<Treatment> Treatments { get; set; }
+        public virtual Clinic Clinic { get; set; }
     }
 }

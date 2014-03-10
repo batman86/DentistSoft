@@ -70,6 +70,8 @@
         <AssociationConnector Association="DentistModel.FK_Warehouse_Storages" ManuallyRouted="false" />
         <AssociationConnector Association="DentistModel.suppcontact_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="DentistModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.FK_Doctors_Clinics" />
+        <AssociationConnector Association="DentistModel.FK_Secretaries_Clinics" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

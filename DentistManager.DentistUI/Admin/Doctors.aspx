@@ -62,7 +62,7 @@
                                         </td>
                                         <td>
                                            
-                                            <dx:ASPxComboBox ID="cbRoles" runat="server" AutoPostBack="True" DataSourceID="dsRole" OnSelectedIndexChanged="cbRoles_SelectedIndexChanged" TextField="Name" ValueField="Id">
+                                            <dx:ASPxComboBox ID="cbRoles" runat="server" DataSourceID="dsRole" OnSelectedIndexChanged="cbRoles_SelectedIndexChanged" TextField="Name" ValueField="Id">
                                                 <ValidationSettings>
                                                     <RequiredField IsRequired="True" />
                                                 </ValidationSettings>

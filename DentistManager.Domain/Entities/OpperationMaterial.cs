@@ -17,7 +17,7 @@ namespace DentistManager.Domain.Entities
         public int OpperationID { get; set; }
         public int ItemID { get; set; }
         public Nullable<int> Quantity { get; set; }
-
+    
         public virtual Material Material { get; set; }
         public virtual opperation opperation { get; set; }
     }

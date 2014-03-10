@@ -20,6 +20,8 @@ namespace DentistManager.Domain.Entities
             this.Patients = new HashSet<Patient>();
             this.PaymentReceipts = new HashSet<PaymentReceipt>();
             this.Storages = new HashSet<Storage>();
+            this.Doctors = new HashSet<Doctor>();
+            this.Secretaries = new HashSet<Secretary>();
         }
     
         public int ClinicID { get; set; }
@@ -33,5 +35,7 @@ namespace DentistManager.Domain.Entities
         public virtual ICollection<Patient> Patients { get; set; }
         public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual ICollection<Storage> Storages { get; set; }
+        public virtual ICollection<Doctor> Doctors { get; set; }
+        public virtual ICollection<Secretary> Secretaries { get; set; }
     }
 }

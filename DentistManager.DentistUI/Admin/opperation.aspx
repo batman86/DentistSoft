@@ -19,7 +19,7 @@
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxOpperation" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
                      EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver"
-                     ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" 
+                     ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" OnRowUpdating="gvxOpperation_RowUpdating" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">

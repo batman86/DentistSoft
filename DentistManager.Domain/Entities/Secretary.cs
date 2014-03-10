@@ -24,7 +24,9 @@ namespace DentistManager.Domain.Entities
         public string Address { get; set; }
         public string E_mail { get; set; }
         public Nullable<bool> Active { get; set; }
+        public int ClinicID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Clinic Clinic { get; set; }
     }
 }
