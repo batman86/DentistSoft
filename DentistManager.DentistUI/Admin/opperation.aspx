@@ -19,7 +19,7 @@
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxOpperation" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
                      EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver"
-                     ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" OnRowUpdating="gvxOpperation_RowUpdating" 
+                     ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" OnCellEditorInitialize="gvxOpperation_CellEditorInitialize" OnRowUpdated="gvxOpperation_RowUpdated" OnStartRowEditing="gvxOpperation_StartRowEditing" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
@@ -82,6 +82,19 @@
                     </Templates>
                 </dx:ASPxGridView>
                 <asp:SqlDataSource ID="dsMaterails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT [ItemID], [ItemName] FROM [Material]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="dsOpperationMaterails" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT Material.ItemID, Material.ItemName FROM Material INNER JOIN OpperationMaterials ON Material.ItemID = OpperationMaterials.ItemID WHERE (OpperationMaterials.OpperationID = @OpperationID)" DeleteCommand="DELETE FROM OpperationMaterials WHERE (OpperationID = @OpperationID AND ItemID = @ItemID)" InsertCommand="INSERT INTO OpperationMaterials(OpperationID, ItemID) VALUES (@OpperationID, @ItemID)">
+                    <DeleteParameters>
+                        <asp:Parameter Name="OpperationID" />
+                        <asp:Parameter Name="ItemID" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="OpperationID" />
+                        <asp:Parameter Name="ItemID" />
+                    </InsertParameters>
+                    <SelectParameters>
+                        <asp:Parameter Name="OpperationID" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
                 <br />
                
                 <asp:SqlDataSource ID="dsOpperation" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [opperation] WHERE [OpperationID] = @OpperationID" 
