@@ -163,7 +163,7 @@
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataCheckColumn FieldName="Active" VisibleIndex="10">
                     </dx:GridViewDataCheckColumn>
-                    <dx:GridViewDataTextColumn Caption="Create" VisibleIndex="11">
+                    <dx:GridViewDataTextColumn Caption="Create" VisibleIndex="12">
                         <EditFormSettings Visible="False" />
                         <DataItemTemplate >
                           <dx:ASPxButton ID="CreateButton" runat="server" AutoPostBack="true"
@@ -171,6 +171,13 @@
                               </dx:ASPxButton>
                             </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataComboBoxColumn FieldName="ClinicID" VisibleIndex="11">
+                        <PropertiesComboBox DataSourceID="dsClinics" TextField="Name" ValueField="ClinicID">
+                            <ValidationSettings>
+                                <RequiredField IsRequired="True" />
+                            </ValidationSettings>
+                        </PropertiesComboBox>
+                    </dx:GridViewDataComboBoxColumn>
                 </Columns>
                 <Settings ShowFilterRow="True" />
                 <SettingsDetail ShowDetailRow="True" />
@@ -218,29 +225,33 @@
                     
                 </Templates>
                 </dx:ASPxGridView> 
-                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="update Secretaries set Active = 0 where SecretaryID = @SecretaryID" InsertCommand="INSERT INTO [Secretaries] ([Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active]) VALUES ( @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @column1, @Active)" SelectCommand="SELECT * FROM [Secretaries]" UpdateCommand="UPDATE [Secretaries] SET [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @column1, [Active] = @Active WHERE [SecretaryID] = @SecretaryID">
+                <asp:SqlDataSource ID="dsSecretary" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="UPDATE [Secretaries] SET Active= 0  where  [SecretaryID] = @SecretaryID" InsertCommand="INSERT INTO [Secretaries] ([UserID], [Name], [Gender], [BrithDate], [Phone], [Mobile], [Address], [E_mail], [Active], [ClinicID]) VALUES (@UserID, @Name, @Gender, @BrithDate, @Phone, @Mobile, @Address, @E_mail, @Active, @ClinicID)" SelectCommand="SELECT * FROM [Secretaries]" UpdateCommand="UPDATE [Secretaries] SET [UserID] = @UserID, [Name] = @Name, [Gender] = @Gender, [BrithDate] = @BrithDate, [Phone] = @Phone, [Mobile] = @Mobile, [Address] = @Address, [E_mail] = @E_mail, [Active] = @Active, [ClinicID] = @ClinicID WHERE [SecretaryID] = @SecretaryID">
                     <DeleteParameters>
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </DeleteParameters>
                     <InsertParameters>
+                        <asp:Parameter Name="UserID" Type="String" />
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="Gender" Type="String" />
-                        <asp:Parameter DbType="Date" Name="BrithDate" />
+                        <asp:Parameter Name="BrithDate" DbType="Date" />
                         <asp:Parameter Name="Phone" Type="String" />
                         <asp:Parameter Name="Mobile" Type="String" />
                         <asp:Parameter Name="Address" Type="String" />
-                        <asp:Parameter Name="column1" Type="String" />
+                        <asp:Parameter Name="E_mail" Type="String" />
                         <asp:Parameter Name="Active" Type="Boolean" />
+                        <asp:Parameter Name="ClinicID" Type="Int32" />
                     </InsertParameters>
                     <UpdateParameters>
+                        <asp:Parameter Name="UserID" Type="String" />
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="Gender" Type="String" />
-                        <asp:Parameter DbType="Date" Name="BrithDate" />
+                        <asp:Parameter Name="BrithDate" DbType="Date" />
                         <asp:Parameter Name="Phone" Type="String" />
                         <asp:Parameter Name="Mobile" Type="String" />
                         <asp:Parameter Name="Address" Type="String" />
-                        <asp:Parameter Name="column1" Type="String" />
+                        <asp:Parameter Name="E_mail" Type="String" />
                         <asp:Parameter Name="Active" Type="Boolean" />
+                        <asp:Parameter Name="ClinicID" Type="Int32" />
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
@@ -249,6 +260,8 @@
                         <asp:Parameter Name="SecretaryID" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="dsClinics" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT [ClinicID], [Name] FROM [Clinics]">
+                    </asp:SqlDataSource>
                 <br />
             </td>
         </tr>
