@@ -239,6 +239,13 @@
     <Compile Include="Admin\Secretary.aspx.designer.cs">
       <DependentUpon>Secretary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Suppliers.aspx.cs">
+      <DependentUpon>Suppliers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Suppliers.aspx.designer.cs">
+      <DependentUpon>Suppliers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -284,6 +291,7 @@
     <Content Include="Admin\Medicine.aspx" />
     <Content Include="Admin\opperation.aspx" />
     <Content Include="Admin\Secretary.aspx" />
+    <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
@@ -682,10 +690,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
+    <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
     <Folder Include="Content\Images\xray\large\" />
     <Folder Include="Content\Images\xray\medium\" />
     <Folder Include="Content\Images\xray\small\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
