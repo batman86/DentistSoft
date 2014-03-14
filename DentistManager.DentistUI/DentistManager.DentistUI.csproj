@@ -239,6 +239,13 @@
     <Compile Include="Admin\Secretary.aspx.designer.cs">
       <DependentUpon>Secretary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Storages.aspx.cs">
+      <DependentUpon>Storages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Storages.aspx.designer.cs">
+      <DependentUpon>Storages.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Suppliers.aspx.cs">
       <DependentUpon>Suppliers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,6 +298,7 @@
     <Content Include="Admin\Medicine.aspx" />
     <Content Include="Admin\opperation.aspx" />
     <Content Include="Admin\Secretary.aspx" />
+    <Content Include="Admin\Storages.aspx" />
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
