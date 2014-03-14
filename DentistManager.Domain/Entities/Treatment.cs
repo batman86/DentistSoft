@@ -25,6 +25,9 @@ namespace DentistManager.Domain.Entities
         public int DoctorID { get; set; }
         public int PatientID { get; set; }
         public int OpperationID { get; set; }
+        public Nullable<int> ToothSideNumber { get; set; }
+        public Nullable<int> ToothNumber { get; set; }
+        public Nullable<decimal> OpperationCost { get; set; }
         public decimal TeratmentCost { get; set; }
     
         public virtual Appointment Appointment { get; set; }

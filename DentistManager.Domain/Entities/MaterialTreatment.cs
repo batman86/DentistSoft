@@ -16,6 +16,7 @@ namespace DentistManager.Domain.Entities
     {
         public int TeratmentID { get; set; }
         public int MaterialID { get; set; }
+        public Nullable<decimal> MaterialCost { get; set; }
         public double Quantity { get; set; }
     
         public virtual Material Material { get; set; }

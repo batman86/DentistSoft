@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -158,6 +158,7 @@
           </Key>
           <Property Name="TeratmentID" Type="int" Nullable="false" />
           <Property Name="MaterialID" Type="int" Nullable="false" />
+          <Property Name="MaterialCost" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Quantity" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicine">
@@ -348,6 +349,9 @@
           <Property Name="DoctorID" Type="int" Nullable="false" />
           <Property Name="PatientID" Type="int" Nullable="false" />
           <Property Name="OpperationID" Type="int" Nullable="false" />
+          <Property Name="ToothSideNumber" Type="int" />
+          <Property Name="ToothNumber" Type="int" />
+          <Property Name="OpperationCost" Type="decimal" Precision="18" Scale="4" />
           <Property Name="TeratmentCost" Type="decimal" Precision="18" Scale="4" Nullable="false" />
         </EntityType>
         <EntityType Name="Warehouse">
@@ -1011,7 +1015,8 @@
             <End Role="suppcontact" EntitySet="suppcontact" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DentistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1101,11 +1106,11 @@
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Acitve" Type="Boolean" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Clinics" FromRole="Clinics" ToRole="Appointments" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_Clinics" FromRole="Clinics" ToRole="Doctors" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Clinics" FromRole="Clinics" ToRole="Patients" />
           <NavigationProperty Name="PaymentReceipts" Relationship="Self.FK_PaymentReceipt_Clinics" FromRole="Clinics" ToRole="PaymentReceipt" />
+          <NavigationProperty Name="Secretaries" Relationship="Self.FK_Secretaries_Clinics" FromRole="Clinics" ToRole="Secretaries" />
           <NavigationProperty Name="Storages" Relationship="Self.FK_Storages_Clinics" FromRole="Clinics" ToRole="Storages" />
-          <NavigationProperty Name="Doctors" Relationship="DentistModel.FK_Doctors_Clinics" FromRole="Clinic" ToRole="Doctor" />
-          <NavigationProperty Name="Secretaries" Relationship="DentistModel.FK_Secretaries_Clinics" FromRole="Clinic" ToRole="Secretary" />
         </EntityType>
         <EntityType Name="CustomMaterial">
           <Key>
@@ -1136,13 +1141,13 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="E_mail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="ClinicID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Doctors" FromRole="Doctors" ToRole="Appointments" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Doctors_AspNetUsers" FromRole="Doctors" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Clinic" Relationship="Self.FK_Doctors_Clinics" FromRole="Doctors" ToRole="Clinics" />
           <NavigationProperty Name="CustomMaterials" Relationship="Self.FK_CustomMaterial_Doctors" FromRole="Doctors" ToRole="CustomMaterial" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Doctors" FromRole="Doctors" ToRole="Prescriptions" />
           <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatment_Doctors" FromRole="Doctors" ToRole="Treatment" />
-          <Property Name="ClinicID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Clinic" Relationship="DentistModel.FK_Doctors_Clinics" FromRole="Doctor" ToRole="Clinic" />
         </EntityType>
         <EntityType Name="ImageCategory">
           <Key>
@@ -1196,6 +1201,7 @@
           </Key>
           <Property Name="TeratmentID" Type="Int32" Nullable="false" />
           <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialCost" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <NavigationProperty Name="Material" Relationship="Self.FK_MaterialTreatment_Material" FromRole="MaterialTreatment" ToRole="Material" />
           <NavigationProperty Name="Treatment" Relationship="Self.FK_MaterialTreatment_Treatment" FromRole="MaterialTreatment" ToRole="Treatment" />
@@ -1322,9 +1328,9 @@
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Secretary_AspNetUsers" FromRole="Secretaries" ToRole="AspNetUsers" />
           <Property Name="ClinicID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Clinic" Relationship="DentistModel.FK_Secretaries_Clinics" FromRole="Secretary" ToRole="Clinic" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Secretary_AspNetUsers" FromRole="Secretaries" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Clinic" Relationship="Self.FK_Secretaries_Clinics" FromRole="Secretaries" ToRole="Clinics" />
         </EntityType>
         <EntityType Name="SessionsStat">
           <Key>
@@ -1418,6 +1424,9 @@
           <Property Name="DoctorID" Type="Int32" Nullable="false" />
           <Property Name="PatientID" Type="Int32" Nullable="false" />
           <Property Name="OpperationID" Type="Int32" Nullable="false" />
+          <Property Name="ToothSideNumber" Type="Int32" />
+          <Property Name="ToothNumber" Type="Int32" />
+          <Property Name="OpperationCost" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="TeratmentCost" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
           <NavigationProperty Name="Appointment" Relationship="Self.FK_Treatment_Appointments" FromRole="Treatment" ToRole="Appointments" />
           <NavigationProperty Name="Doctor" Relationship="Self.FK_Treatment_Doctors" FromRole="Treatment" ToRole="Doctors" />
@@ -1574,6 +1583,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Doctors_Clinics">
+          <End Role="Clinics" Type="Self.Clinic" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinics">
+              <PropertyRef Name="ClinicID" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="ClinicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Patient_Clinics">
           <End Role="Clinics" Type="Self.Clinic" Multiplicity="0..1" />
           <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
@@ -1594,6 +1615,18 @@
               <PropertyRef Name="ClinicID" />
             </Principal>
             <Dependent Role="PaymentReceipt">
+              <PropertyRef Name="ClinicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Secretaries_Clinics">
+          <End Role="Clinics" Type="Self.Clinic" Multiplicity="1" />
+          <End Role="Secretaries" Type="Self.Secretary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clinics">
+              <PropertyRef Name="ClinicID" />
+            </Principal>
+            <Dependent Role="Secretaries">
               <PropertyRef Name="ClinicID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1929,6 +1962,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Secretaries" EntitySet="Secretaries" />
           </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Clinics" Association="Self.FK_Doctors_Clinics">
+            <End Role="Clinics" EntitySet="Clinics" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
           <AssociationSet Name="FK_Patient_Clinics" Association="Self.FK_Patient_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
             <End Role="Patients" EntitySet="Patients" />
@@ -1936,6 +1973,10 @@
           <AssociationSet Name="FK_PaymentReceipt_Clinics" Association="Self.FK_PaymentReceipt_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
             <End Role="PaymentReceipt" EntitySet="PaymentReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Secretaries_Clinics" Association="Self.FK_Secretaries_Clinics">
+            <End Role="Clinics" EntitySet="Clinics" />
+            <End Role="Secretaries" EntitySet="Secretaries" />
           </AssociationSet>
           <AssociationSet Name="FK_Storages_Clinics" Association="Self.FK_Storages_Clinics">
             <End Role="Clinics" EntitySet="Clinics" />
@@ -2025,39 +2066,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doctors_Clinics" Association="DentistModel.FK_Doctors_Clinics">
-            <End Role="Clinic" EntitySet="Clinics" />
-            <End Role="Doctor" EntitySet="Doctors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Secretaries_Clinics" Association="DentistModel.FK_Secretaries_Clinics">
-            <End Role="Clinic" EntitySet="Clinics" />
-            <End Role="Secretary" EntitySet="Secretaries" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Doctors_Clinics">
-          <End Type="DentistModel.Clinic" Role="Clinic" Multiplicity="1" />
-          <End Type="DentistModel.Doctor" Role="Doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clinic">
-              <PropertyRef Name="ClinicID" />
-            </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="ClinicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Secretaries_Clinics">
-          <End Type="DentistModel.Clinic" Role="Clinic" Multiplicity="1" />
-          <End Type="DentistModel.Secretary" Role="Secretary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clinic">
-              <PropertyRef Name="ClinicID" />
-            </Principal>
-            <Dependent Role="Secretary">
-              <PropertyRef Name="ClinicID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2156,7 +2165,6 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="DentistModel.Doctor">
               <MappingFragment StoreEntitySet="Doctors">
-                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
                 <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2168,6 +2176,7 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="E_mail" ColumnName="E_mail" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2216,6 +2225,7 @@
               <MappingFragment StoreEntitySet="MaterialTreatment">
                 <ScalarProperty Name="TeratmentID" ColumnName="TeratmentID" />
                 <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2318,7 +2328,6 @@
           <EntitySetMapping Name="Secretaries">
             <EntityTypeMapping TypeName="DentistModel.Secretary">
               <MappingFragment StoreEntitySet="Secretaries">
-                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
                 <ScalarProperty Name="SecretaryID" ColumnName="SecretaryID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2329,6 +2338,7 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="E_mail" ColumnName="E_mail" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2421,6 +2431,9 @@
                 <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="OpperationID" ColumnName="OpperationID" />
+                <ScalarProperty Name="ToothSideNumber" ColumnName="ToothSideNumber" />
+                <ScalarProperty Name="ToothNumber" ColumnName="ToothNumber" />
+                <ScalarProperty Name="OpperationCost" ColumnName="OpperationCost" />
                 <ScalarProperty Name="TeratmentCost" ColumnName="TeratmentCost" />
               </MappingFragment>
             </EntityTypeMapping>
