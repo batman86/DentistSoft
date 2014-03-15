@@ -11,7 +11,8 @@ var selector,
             TreatmentList: $('#TreatmentList'),
             appointmentDate: $('#appointmentDate').val(),
             btnRemoveTreatment: $('.btnRemoveTreatment'),
-            btnSaveTreatments: $('#btnSaveTreatments')
+            btnSaveTreatments: $('#btnSaveTreatments'),
+            treatmentItemID:1
         },
         Init: function () {
 
@@ -26,8 +27,9 @@ var selector,
         BindUiActions: function () {
 
             selector.btnSaveTreatments.on("click", function () {
-                //Save the filed in the object and submit
-                alert('sss');
+
+                Main.saveTreatmentToObject();
+                Main.saveTreatmentToDatabase();
             });
 
             $(document).on('click', '.btnRemoveTreatment', function () {
@@ -42,13 +44,15 @@ var selector,
 
                 Main.RemoveTreatmentItem(s);
                 $(this).parent().remove();
+
                 Main.loadGraphDraw();
             });
 
 
 
         },
-        obTreatmentListItem: function (TeratmentID, Description, AppointmentDate, opperatioName, TeratmentCost, treatmentState, toothNumber, toothSideNumber, opperationColor) {
+        obTreatmentListItem: function (treatmentItemID,TeratmentID, Description, AppointmentDate, opperatioName, TeratmentCost, treatmentState, toothNumber, toothSideNumber, opperationColor) {
+            this.treatmentItemID = treatmentItemID;
             this.TeratmentID = TeratmentID;
             this.Description = Description;
             this.AppointmentDate = AppointmentDate;
@@ -68,10 +72,11 @@ var selector,
                 contentType: "application/json",
                 cache: false,
                 async: false,
-                data: JSON.stringify({ patientID: 9 }),
+                data: JSON.stringify({ patientID: patientID }),
                 success: function (result) {
                     for (var i = 0; i < result.length; i++) {
-                        vm.push(new Main.obTreatmentListItem(result[i].TeratmentID, result[i].Description, result[i].AppointmentDate, result[i].opperatioName, result[i].TeratmentCost, result[i].treatmentState, result[i].toothNumber, result[i].toothSideNumber, result[i].opperationColor));
+                        selector.treatmentItemID = selector.treatmentItemID + 1;
+                        vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, result[i].TeratmentID, result[i].Description, result[i].AppointmentDate, result[i].opperatioName, result[i].TeratmentCost, result[i].treatmentState, result[i].toothNumber, result[i].toothSideNumber, result[i].opperationColor));
                     }
                 }
             });
@@ -93,18 +98,45 @@ var selector,
         },
         loadTreatmentList: function () {
             for (var i = 0; i < vm.length; i++) {
-                $('#TreatmentList').append('<li> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label>   <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label>  <label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label> <input class="TeratmentCost" type="text" value="' + Main.vmTreatmentList[i].Description + '" />   <input class="TeratmentCost" type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
+                $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label>   <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label>  <label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" />   <input class="TeratmentCost" type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
             }
+        },
+        saveTreatmentToObject:function(){
+            $('#TreatmentListWrap ul li').each(function () {
+                var s = $(this).children('.treatmentItemID').val();
+                var description = $(this).children('.Description').val();
+                var treatmentCost = $(this).children('.TeratmentCost').val();
+
+                for (var i = 0; i < vm.length; i++) {
+                    if (vm[i].treatmentItemID == s) {
+                        vm[i].Description = description;
+                        vm[i].TeratmentCost = treatmentCost;
+                    }
+                }
+            });
+        },
+        saveTreatmentToDatabase: function () {
+            $.ajax({
+                url: "/DoctorDashboard/TreatmentSession/TreatmentSave",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                async: false,
+                data: JSON.stringify({ treatmentList: vm }),
+                success: function () {
+                    alert('Treatments Has Been Saved');
+                }
+            });
         },
         loadGraphDraw: function () {
 
-            var stage = new Kinetic.Stage({
+            stage = new Kinetic.Stage({
                 container: 'container',
                 width: 1200,
                 height: 500
             });
-
-            var layer = new Kinetic.Layer();
+            layer = new Kinetic.Layer();
 
             drawCircle = function (X, Y, Radius, FillColor, StrokeColor, StrokeWidth, ID) {
                 var circle = new Kinetic.Circle({
@@ -153,6 +185,9 @@ var selector,
             var wedge1color4;
             var wedge1color5;
             var count = 0;
+
+           
+            
             for (var i = 1; i < 33; i++) {
 
                 wedge1color1 = '#ffffff';
@@ -186,11 +221,12 @@ var selector,
                 var circle1 = drawCircle(xPosation, yPosation, 12, wedge1color5, 'black', 2, i + "-5");
                 var text1 = drawText(xPosation - 5, yPosation + 40, i, 14, 'arial', 'black');
 
-                wedge1.on("click", clickEventMsg)
-                wedge2.on("click", clickEventMsg);
-                wedge3.on("click", clickEventMsg);
-                wedge4.on("click", clickEventMsg);
-                circle1.on("click", clickEventMsg);
+                wedge1.on("click", Main.clickEventMsg)
+                wedge2.on("click", Main.clickEventMsg);
+                wedge3.on("click", Main.clickEventMsg);
+                wedge4.on("click", Main.clickEventMsg);
+                circle1.on("click", Main.clickEventMsg);
+
 
                 layer.add(wedge1);
                 layer.add(wedge2);
@@ -206,28 +242,30 @@ var selector,
                     xPosation = 100;
                 }
             }
-            function clickEventMsg() {
-
-                var selectedValue = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').val();
-                if (typeof selectedValue === 'undefined') {
-                    alert('Please Select Opperation');
-                    return;
-                }
-
-                var oppName = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('opperationname');
-                var oppColor = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('FillColor');
-
-                var index = this.attrs.id.indexOf('-');
-                var toothNumber = this.attrs.id.substr(0, index);
-                var toothSideNumber = this.attrs.id.substr(index + 1, this.attrs.id.length - 1);
-
-                vm.push(new Main.obTreatmentListItem(0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor));
-
-                $('#TreatmentList').append('<li> <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label> <label id="toothNumber" > ' + toothNumber + '</label>   <label id="opperatioName" > ' + oppName + '</label>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label> <input class="TeratmentCost" type="text" value="" />   <input class="TeratmentCost" type="text" value="" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
-
-                Main.loadGraphDraw();
-            }
             stage.add(layer);
+        },
+        clickEventMsg: function () {
+            var selectedValue = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').val();
+            if (typeof selectedValue === 'undefined') {
+                alert('Please Select Opperation');
+                return;
+            }
+
+            var oppName = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('opperationname');
+            var oppColor = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('fillcolor');
+            var index = this.attrs.id.indexOf('-');
+            var toothNumber = this.attrs.id.substr(0, index);
+            var toothSideNumber = this.attrs.id.substr(index + 1, this.attrs.id.length - 1);
+
+            selector.treatmentItemID = selector.treatmentItemID + 1;
+
+            vm.push(new Main.obTreatmentListItem(selector.treatmentItemID,0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor));
+
+            $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label> <label id="toothNumber" > ' + toothNumber + '</label>   <label id="opperatioName" > ' + oppName + '</label>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label> <input class="Description" type="text" value="" />   <input class="TeratmentCost" type="text" value="" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
+
+            Main.loadGraphDraw();
+            alert('test');
+
         },
         vmTreatmentList: []
     };

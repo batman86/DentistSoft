@@ -36,17 +36,16 @@ namespace DentistManager.Domain.DAL.Concrete
         }
         public int getClinecIDByUserID(string UserID)
         {
-            // get the clinec id insted of secertyry id same for doctor
-            int securtaryID;
+            int ClinecID;
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 Secretary securtary = ctx.Secretaries.Where(x => x.UserID == UserID).FirstOrDefault();
                 if (securtary != null)
-                    securtaryID = securtary.SecretaryID;
+                    ClinecID = securtary.ClinicID;
                 else
-                    securtaryID = 0;
+                    ClinecID = 0;
             }
-            return securtaryID;
+            return ClinecID;
         }
     }
 }

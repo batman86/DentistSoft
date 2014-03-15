@@ -1,0 +1,50 @@
+﻿@model DentistManager.Domain.ViewModel.PatientHistoryViewModel
+
+@{
+    ViewBag.Title = "Patient History Add";
+}
+
+<h2>PatientHistoryCreate</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PatientHistoryViewModel</h4>
+        <hr />
+        <input id="HiddenPatientID" name="PatientID" type="hidden" value="@ViewBag.patientID" />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripation)
+                @Html.ValidationMessageFor(model => model.Descripation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "patientHistoryList", new { patientID = ViewBag.patientID })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

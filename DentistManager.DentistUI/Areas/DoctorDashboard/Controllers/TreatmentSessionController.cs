@@ -31,7 +31,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             // get last appointment date by patient and doctor id
             ViewBag.AppointmentID = 1;
             ViewBag.DoctorID = 1;
-            ViewBag.PatientID = 9;
+            ViewBag.PatientID = 1;
             ViewBag.appointmentDate = DateTime.Now;
             return View();
         }
@@ -54,6 +54,12 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         public void RemoveTreatmentItem(int treatmentID = 0)
         {
             treatmentRepository.RemoveTreatmentByID(treatmentID);
+        }
+
+        [HttpPost]
+        public void TreatmentSave(IEnumerable<TreatmentPresntViewModel> treatmentList)
+        {
+           
         }
 	}
 }

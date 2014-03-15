@@ -33,7 +33,7 @@ namespace DentistManager.Domain.DAL.Concrete
                                                                        join a in appointmentIQ on t.AppointmentID equals a.AppointmentID
                                                                        join o in opperationIQ on t.OpperationID equals o.OpperationID
                                                                        where t.PatientID == patientID
-                                                                       select new TreatmentPresntViewModel { TeratmentID = t.TeratmentID, TeratmentCost = t.TeratmentCost, toothNumber = 1, toothSideNumber = 1, Description = t.Description, treatmentState = "In Progress", AppointmentDate = a.Start_date, opperatioName = o.Name, opperationColor = o.Color }).ToList();
+                                                                       select new TreatmentPresntViewModel { TeratmentID = t.TeratmentID, TeratmentCost = t.TeratmentCost, toothNumber = t.ToothNumber, toothSideNumber = t.ToothSideNumber, Description = t.Description, treatmentState = "In Progress", AppointmentDate = a.Start_date, opperatioName = o.Name, opperationColor = o.Color }).ToList();
                 return treatmentList;
             }
         }

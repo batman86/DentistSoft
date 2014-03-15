@@ -1,20 +1,19 @@
-﻿using DentistManager.Domain.BL.Abstract;
+﻿using DentistManager.DentistUI.Infrastructure;
+using DentistManager.Domain.DAL.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using DentistManager.DentistUI.Infrastructure;
-using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.ViewModel;
 
-
-namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
+namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
     public class PatientSearchController : Controller
     {
-
+        //
+        // GET: /DoctorDashboard/PatientSearch/
         IPatientRepository patientRepository;
         ISessionStateManger sessionStateManger;
         public PatientSearchController(IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
@@ -24,7 +23,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // GET: /SecretaryDashboard/PatientSearch/
+        // GET: /DoctorDashboard/PatientSearch/
         public ActionResult Index()
         {
             return View();
@@ -34,25 +33,25 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         [NonAction]
         public int getUserCurrentClinecID()
         {
-            return sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+            return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
         }
 
-        // /SecretaryDashboard/PatientSearch/getCurrentPatientID
-       // [NonAction]
+        // /DoctorDashboard/PatientSearch/getCurrentPatientID
+        // [NonAction]
         public int getCurrentPatientID()
         {
             string CurrentUserID = User.Identity.GetUserId();
             string patientID;
 
-            patientID = sessionStateManger.getSecyrtaryActivePatinet(CurrentUserID);
+            patientID = sessionStateManger.getDoctorActivePatinet(CurrentUserID);
 
             if (patientID == null)
                 return 0;
 
-             return int.Parse(patientID);
+            return int.Parse(patientID);
         }
 
-        // /SecretaryDashboard/PatientSearch/ActivePatientTopBar
+        // /DoctorDashboard/PatientSearch/ActivePatientTopBar
         public ActionResult ActivePatientTopBar()
         {
             int patientID = getCurrentPatientID();
@@ -60,21 +59,21 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                 return PartialView("NoActivePatientView");
 
             PatientMiniData patient = patientRepository.getPatinetMiniInfo(patientID);
-            if(patient ==null)
+            if (patient == null)
                 return PartialView("NoActivePatientView");
 
             return PartialView(patient);
         }
 
 
-        // /SecretaryDashboard/PatientSearch/ActivePatientTopBarSearch
+        // /DoctorDashboard/PatientSearch/ActivePatientTopBarSearch
         public ActionResult ActivePatientTopBarSearch()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult ActivePatientTopBarSearch(string mobileNumber, int PatientID=0)
+        public ActionResult ActivePatientTopBarSearch(string mobileNumber, int PatientID = 0)
         {
             if (mobileNumber == string.Empty && PatientID == 0)
                 return View();
@@ -83,15 +82,15 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                 int patientID = patientRepository.getPatientIDSearchResultByMobileOrID(PatientID, mobileNumber);
                 if (patientID != 0)
                 {
-                    sessionStateManger.setSecyrtaryActivePatinet(User.Identity.GetUserId(), patientID);
-             
+                    sessionStateManger.setDoctorActivePatinet(User.Identity.GetUserId(), patientID);
+
                     ViewBag.Msg = "Patient Findes";
                 }
 
                 else
                     ViewBag.Msg = "Could Not Find this Patient";
 
-               return  View();
+                return View();
             }
             catch
             {
@@ -100,7 +99,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
 
-        // /SecretaryDashboard/PatientSearch/PatientAdvancedSearch
+        // /DoctorDashboard/PatientSearch/PatientAdvancedSearch
         public ActionResult PatientAdvancedSearch()
         {
             return View("PatientAdvancedSearchForm");

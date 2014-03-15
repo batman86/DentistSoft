@@ -1,19 +1,19 @@
 ﻿using DentistManager.DentistUI.Infrastructure;
-using DentistManager.Domain.BL.Abstract;
 using DentistManager.Domain.DAL.Abstract;
-using DentistManager.Domain.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using DentistManager.Domain.ViewModel;
 
-namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
+namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
     public class PatientIllnessHistoryController : Controller
     {
-
+        //
+        // GET: /DoctorDashboard/PatientIllnessHistory/
         IPatientRepository patientRepository;
         ISessionStateManger sessionStateManger;
         public PatientIllnessHistoryController(IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
@@ -25,11 +25,11 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         [NonAction]
         public int getCurrentPatientID()
         {
-            return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
+            return int.Parse(sessionStateManger.getDoctorActivePatinet(User.Identity.GetUserId()));
         }
-        
+
         //
-        // GET: /SecretaryDashboard/PatientIllnessHistory/
+        // GET: /DoctorDashboard/PatientIllnessHistory/
         public ActionResult Index()
         {
             return View();
@@ -49,7 +49,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // GET: /SecretaryDashboard/PatientHistoryDetails/PatientDetails/5
+        // GET: /DoctorDashboard/PatientHistoryDetails/PatientDetails/5
         public ActionResult PatientHistoryDetails(int patientHistoryID)
         {
             PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
@@ -59,7 +59,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
+        // GET: /DoctorDashboard/PatientManagement/PatientHistoryCreate
         public ActionResult PatientHistoryCreate(int patientID = 0)
         {
             if (patientID == 0)
@@ -70,7 +70,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
+        // POST: /DoctorDashboard/PatientManagement/PatientHistoryCreate
         [HttpPost]
         public ActionResult PatientHistoryCreate(PatientHistoryViewModel patientHistory)
         {
@@ -96,7 +96,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryEdit/5
+        // GET: /DoctorDashboard/PatientManagement/PatientHistoryEdit/5
         public ActionResult PatientHistoryEdit(int patientHistoryID)
         {
             PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
@@ -106,7 +106,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryEdit/5
+        // POST: /DoctorDashboard/PatientManagement/PatientHistoryEdit/5
         [HttpPost]
         public ActionResult PatientHistoryEdit(PatientHistoryViewModel patientHistory)
         {
@@ -129,7 +129,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
+        // GET: /DoctorDashboard/PatientManagement/PatientHistoryDelete/5
         public ActionResult PatientHistoryDelete(int patientHistoryID)
         {
             PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);

@@ -9,8 +9,11 @@ namespace DentistManager.DentistUI.Infrastructure
     public interface ISessionStateManger
     {
         string getSecyrtaryActivePatinet(string userID);
+        void setSecyrtaryActivePatinet(string userID, int patientID);
+        string getDoctorActivePatinet(string userID);
+        void setDoctorActivePatinet(string userID, int patientID);
         int getClinecIDForCurrentSecurtary(string userID);
         int getClinecIDForCurrentDoctor(string userID);
-        void setSecyrtaryActivePatinet(string userID, int patientID);
+
     }
 }

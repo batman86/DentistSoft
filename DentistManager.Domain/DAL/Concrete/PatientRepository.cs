@@ -71,13 +71,14 @@ namespace DentistManager.Domain.DAL.Concrete
         }
 
 
-        public IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize)
+        public IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize, int clinectID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 IEnumerable<PatientMiniData> patientList;
                 var patients = ctx.Patients;
                 patientList = (from p in patients
+                               where p.ClinicID == clinectID
                                orderby p.Name
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
                 return patientList;
@@ -85,7 +86,7 @@ namespace DentistManager.Domain.DAL.Concrete
         }
 
 
-        public IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name)
+        public IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name, int clinectID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
@@ -93,7 +94,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 var patients = ctx.Patients;
                 patientList = (from p in patients
                                orderby p.Name
-                               where  p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber
+                               where  p.PatientID == patientID || p.Mobile == mobileNumber || p.Phone == phoneNumber && p.ClinicID == clinectID
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Take(20).ToList();
 
                 if(patientList.Count()==0 && Name!=string.Empty)

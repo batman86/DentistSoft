@@ -42,11 +42,36 @@ namespace DentistManager.DentistUI.Infrastructure
             // if probertyValue still == null this mean no patients in the database for this clinec
             return probertyValue;
         }
-
         public void setSecyrtaryActivePatinet(string userID, int patientID)
         {
             setSeassionValue(userID, seassionNamesList.SecurtaryActivePatient.ToString(), seassionProbertyNamesList.ActivePatientID.ToString(), patientID.ToString());
         }
+
+
+        public string getDoctorActivePatinet(string userID)
+        {
+            string probertyValue = getSeassionValue(userID, seassionNamesList.DoctorActivePatient.ToString(), seassionProbertyNamesList.ActivePatientID.ToString());
+
+            if (probertyValue == null)
+            {
+                PatientRepository patientRepository = new PatientRepository();
+                int patientID = patientRepository.getFirstPatientInClinec(getClinecIDForCurrentDoctor(userID));
+                if (patientID != 0)
+                {
+                    setDoctorActivePatinet(userID, patientID);
+                    probertyValue = patientID.ToString();
+                }
+            }
+            // if probertyValue still == null this mean no patients in the database for this clinec
+            return probertyValue;
+        }
+        public void setDoctorActivePatinet(string userID, int patientID)
+        {
+            setSeassionValue(userID, seassionNamesList.DoctorActivePatient.ToString(), seassionProbertyNamesList.ActivePatientID.ToString(), patientID.ToString());
+        }
+
+
+
 
         public int getClinecIDForCurrentSecurtary(string userID)
         {
@@ -65,13 +90,13 @@ namespace DentistManager.DentistUI.Infrastructure
         public int getClinecIDForCurrentDoctor(string userID)
         {
 
-            string clinecID = getSeassionValue(userID, seassionNamesList.SecurtaryActiveClinec.ToString(), seassionProbertyNamesList.ActiveClinecID.ToString());
+            string clinecID = getSeassionValue(userID, seassionNamesList.DoctorActiveClinec.ToString(), seassionProbertyNamesList.ActiveClinecID.ToString());
             if (clinecID == null)
             {
                 DoctorRepository doctorRepository = new DoctorRepository();
                 int clinecIDholder = doctorRepository.getClinecIDByUserID(userID);
                 clinecID = clinecIDholder.ToString();
-                setSeassionValue(userID, seassionNamesList.SecurtaryActiveClinec.ToString(), seassionProbertyNamesList.ActiveClinecID.ToString(), clinecID);
+                setSeassionValue(userID, seassionNamesList.DoctorActiveClinec.ToString(), seassionProbertyNamesList.ActiveClinecID.ToString(), clinecID);
             }
             return int.Parse(clinecID);
         }

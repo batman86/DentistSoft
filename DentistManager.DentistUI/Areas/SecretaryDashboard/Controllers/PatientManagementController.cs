@@ -32,6 +32,12 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
         }
 
+        [NonAction]
+        public int getUserCurrentClinecID()
+        {
+            return sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+        }
+
         //
         // GET: /SecretaryDashboard/PatientManagement/
         public ActionResult Index()
@@ -42,7 +48,8 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         // GET: /SecretaryDashboard/PatientManagement/patientList
         public ActionResult patientList()
         {
-            IEnumerable<PatientMiniData> patientList = patientRepository.getPatientList(0, 10);
+            // filter by clinec id
+            IEnumerable<PatientMiniData> patientList = patientRepository.getPatientList(0, 10, getUserCurrentClinecID());
             if (patientList == null)
                 return HttpNotFound();
             return View(patientList);

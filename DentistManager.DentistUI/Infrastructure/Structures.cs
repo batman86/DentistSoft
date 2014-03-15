@@ -4,7 +4,9 @@ namespace DentistManager.DentistUI.Infrastructure
     public enum seassionNamesList
     {
         SecurtaryActivePatient,
-        SecurtaryActiveClinec
+        SecurtaryActiveClinec,
+        DoctorActivePatient,
+        DoctorActiveClinec
     };
     public enum seassionProbertyNamesList
     {
