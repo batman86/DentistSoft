@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DentistManager.Domain.Entities;
+using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.Domain.DAL.Abstract
 {
     public interface IOpperationRepository
     {
-     //   IEnumerable<opperation> getPatientOpperationList(int patientID);
+        IEnumerable<opperationMiniDataViewModel> getOpperationList();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DentistManager.Domain.DAL.Abstract;
+using DentistManager.Domain.Entities;
 using DentistManager.Domain.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,20 @@ namespace DentistManager.Domain.DAL.Concrete
 
             }
             return UserID;
+        }
+        public int getClinecIDByUserID(string UserID)
+        {
+            // get the clinec id insted of secertyry id same for doctor
+            int securtaryID;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Secretary securtary = ctx.Secretaries.Where(x => x.UserID == UserID).FirstOrDefault();
+                if (securtary != null)
+                    securtaryID = securtary.SecretaryID;
+                else
+                    securtaryID = 0;
+            }
+            return securtaryID;
         }
     }
 }

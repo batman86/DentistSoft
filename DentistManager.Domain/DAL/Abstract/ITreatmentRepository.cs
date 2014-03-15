@@ -1,4 +1,5 @@
 ﻿using DentistManager.Domain.Entities;
+using DentistManager.Domain.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface ITreatmentRepository 
     {
-          IEnumerable<Treatment> getPatientTreatmentList(int patientID);
+        IEnumerable<Treatment> getPatientTreatmentList(int patientID);
+        IEnumerable<TreatmentPresntViewModel> getPatientPresntTreatmentList(int patientID);
+        bool RemoveTreatmentByID(int treatmentID);
+        bool addTreatment(Treatment treatment);
+        bool updateTreatment(Treatment treatment);
     }
 }

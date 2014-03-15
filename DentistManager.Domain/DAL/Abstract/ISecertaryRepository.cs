@@ -9,5 +9,6 @@ namespace DentistManager.Domain.DAL.Abstract
     interface ISecertaryRepository
     {
         bool updateSecertaryUserID(Entities.Secretary secretary);
+        int getClinecIDByUserID(string UserID);
     }
 }

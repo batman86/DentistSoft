@@ -3,11 +3,13 @@ namespace DentistManager.DentistUI.Infrastructure
 {
     public enum seassionNamesList
     {
-        SecurtaryActivePatient
+        SecurtaryActivePatient,
+        SecurtaryActiveClinec
     };
     public enum seassionProbertyNamesList
     {
-        ActivePatientID
+        ActivePatientID,
+        ActiveClinecID
     };
 
     public enum ImageSize
@@ -16,6 +18,15 @@ namespace DentistManager.DentistUI.Infrastructure
         medium,
         small,
         icon
+    };
+
+    public enum PatientSchduelStatus
+    {
+        waiting,
+        postponed,
+        canceled,
+        progress,
+        finished
     };
 
     public enum ImageExtension

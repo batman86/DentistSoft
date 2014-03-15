@@ -13,20 +13,19 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
     public class PatientIllnessHistoryController : Controller
     {
-        ISeassionStateBL sessionStateBL;
+
         IPatientRepository patientRepository;
-        public PatientIllnessHistoryController(IPatientRepository _patientRepository, ISeassionStateBL _sessionStateBL)
+        ISessionStateManger sessionStateManger;
+        public PatientIllnessHistoryController(IPatientRepository _patientRepository, ISessionStateManger _sessionStateManger)
         {
-            sessionStateBL = _sessionStateBL;
+            sessionStateManger = _sessionStateManger;
             patientRepository = _patientRepository;
         }
-
 
         [NonAction]
         public int getCurrentPatientID()
         {
-            SessionStateManger stm = new SessionStateManger(sessionStateBL, patientRepository);
-            return int.Parse(stm.getSecyrtaryActivePatinet( User.Identity.GetUserId()));
+            return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
         }
 
         //
@@ -36,13 +35,11 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View();
         }
 
-        public ActionResult patientHistoryList(int patientID=0)
+        public ActionResult patientHistoryList(int patientID = 0)
         {
             if (patientID == 0)
                 patientID = getCurrentPatientID();
 
-            SessionStateManger sessionState = new SessionStateManger(sessionStateBL, patientRepository);
-          
             IEnumerable<PatientHistoryViewModel> patientHistoryList = patientRepository.getPatientHistoryList(patientID);
             if (patientHistoryList == null)
                 return HttpNotFound();
@@ -63,7 +60,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         //
         // GET: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
-        public ActionResult PatientHistoryCreate(int patientID=0)
+        public ActionResult PatientHistoryCreate(int patientID = 0)
         {
             if (patientID == 0)
                 patientID = getCurrentPatientID();
@@ -146,7 +143,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         // POST: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
         [HttpPost]
         [ActionName("PatientHistoryDelete")]
-        public ActionResult ConfirmPatientHistoryDelete(int patientHistoryID, int patientID=0)
+        public ActionResult ConfirmPatientHistoryDelete(int patientHistoryID, int patientID = 0)
         {
             try
             {

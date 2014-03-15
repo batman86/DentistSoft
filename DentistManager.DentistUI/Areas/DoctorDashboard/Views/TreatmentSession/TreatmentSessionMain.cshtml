@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "TreatmentSessionMain";
+}
+
+<input type="hidden" id="AppointmentID" value="@ViewBag.AppointmentID" />
+<input type="hidden" id="DoctorID" value="@ViewBag.DoctorID" />
+<input type="hidden" id="PatientID" value="@ViewBag.PatientID" />
+<input type="hidden" id="ActiveOperationID" value="0" />
+<input type="hidden" id="appointmentDate" value="@ViewBag.appointmentDate" />
+
+@{ Html.RenderAction("opperationList"); }
+<div id="container"></div>
+
+<div id="TreatmentListWrap">
+    <ul id="TreatmentList"></ul>
+</div>
+<input type="button" id="btnSaveTreatments" value="Save Treatment List" />
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/kinetic.js")
+    @Scripts.Render("~/Scripts/DoctorDashboard/TreatmentSession.js")
+}

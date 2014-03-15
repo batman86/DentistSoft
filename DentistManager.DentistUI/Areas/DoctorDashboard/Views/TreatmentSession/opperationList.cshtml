@@ -1,0 +1,8 @@
+﻿@model IEnumerable<DentistManager.Domain.ViewModel.opperationMiniDataViewModel>
+
+<form id="OpperationForm">
+    @foreach (var item in Model)
+    {
+        <input type="radio" name="SelectedOpperation" class="opperationItem" value="@item.OpperationID" data-opperationname="@item.Name" data-fillcolor="@item.FillColor"> @item.Name <br />
+    }
+</form>

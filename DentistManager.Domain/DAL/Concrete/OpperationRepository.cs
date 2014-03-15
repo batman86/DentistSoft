@@ -7,21 +7,23 @@ using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.Entities;
 using System.Data.SqlClient;
 using System.Configuration;
+using DentistManager.Domain.ViewModel;
+
 namespace DentistManager.Domain.DAL.Concrete
 {
     public class OpperationRepository : IOpperationRepository
     {
-        //public IEnumerable<opperation> getPatientOpperationList(int patientID)
-        //{
-        //   using(Entities.Entities ctx=new Entities.Entities ())
-        //   {
-        //       IEnumerable<opperation> opperationList;
-        //       var opperationIQ = ctx.opperations;
+        public IEnumerable<opperationMiniDataViewModel> getOpperationList()
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var opperatioIQ = ctx.opperations;
 
-        //       opperationList = from o in opperationIQ
-        //                        where o.p
-        //   }
-        //}
+                IEnumerable<opperationMiniDataViewModel> opperationList = (from o in opperatioIQ
+                                                                           select new opperationMiniDataViewModel { OpperationID = o.OpperationID, Name = o.Name, FillColor = o.Color }).ToList();
+                return opperationList;
+            }
+        }
 
       
     }
