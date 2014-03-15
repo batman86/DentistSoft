@@ -82,6 +82,7 @@
     <Compile Include="DAL\Concrete\SecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />
     <Compile Include="DAL\Concrete\TreatmentRepository.cs" />
+    <Compile Include="DAL\Concrete\WarehouseRepository.cs" />
     <Compile Include="Entities\Appointment.cs">
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
