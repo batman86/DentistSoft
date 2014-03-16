@@ -79,6 +79,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
         public bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID)
         {
+            // enhance
             int count = 0;
             using (Entities.Entities ctx = new Entities.Entities())
             {
@@ -103,6 +104,8 @@ namespace DentistManager.Domain.DAL.Concrete
 
         public bool updateTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList)
         {
+
+            // enhance
             int count = 0;
             using (Entities.Entities ctx = new Entities.Entities())
             {

@@ -70,6 +70,7 @@
     <Compile Include="DAL\Abstract\IPatientPaymentRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientRepository.cs" />
     <Compile Include="DAL\Abstract\IPaymentReceiptRerpository.cs" />
+    <Compile Include="DAL\Abstract\IPrescriptionRepository.cs" />
     <Compile Include="DAL\Abstract\ISessionState.cs" />
     <Compile Include="DAL\Abstract\ITreatmentRepository.cs" />
     <Compile Include="DAL\Abstract\ISecertaryRepository.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="DAL\Concrete\PatientPaymentRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
     <Compile Include="DAL\Concrete\PaymentReceiptRerpository.cs" />
+    <Compile Include="DAL\Concrete\PrescriptionRepository.cs" />
     <Compile Include="DAL\Concrete\SecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />
     <Compile Include="DAL\Concrete\TreatmentRepository.cs" />
@@ -203,6 +205,8 @@
     <Compile Include="ViewModel\PatientHistoryViewModel.cs" />
     <Compile Include="ViewModel\PatientMiniData.cs" />
     <Compile Include="ViewModel\PaymentReceiptViewModel.cs" />
+    <Compile Include="ViewModel\PrescriptionPresnetViewModel.cs" />
+    <Compile Include="ViewModel\PrescriptionViewModel.cs" />
     <Compile Include="ViewModel\SessionValuesViewModel.cs" />
     <Compile Include="ViewModel\TreatmentPresntViewModel.cs" />
   </ItemGroup>

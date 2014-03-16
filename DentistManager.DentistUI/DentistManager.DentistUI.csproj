@@ -273,6 +273,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientIllnessHistoryController.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientSearchController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\TreatmentSessionController.cs" />
@@ -727,6 +728,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\DoctorDashboard\Models\" />
+    <Folder Include="Areas\DoctorDashboard\Views\PatientImages\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />

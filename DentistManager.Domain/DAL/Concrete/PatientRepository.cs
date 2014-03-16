@@ -152,7 +152,6 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             int count = 0;
 
-
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 PatientHistory patientHistoryEntity = ctx.PatientHistories.Find(patientHistory.HistoryID);
