@@ -15,5 +15,8 @@ namespace DentistManager.Domain.DAL.Abstract
         bool RemoveTreatmentByID(int treatmentID);
         bool addTreatment(Treatment treatment);
         bool updateTreatment(Treatment treatment);
+
+        bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID);
+        bool updateTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList);
     }
 }

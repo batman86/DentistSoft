@@ -17,5 +17,7 @@ namespace DentistManager.Domain.ViewModel
         public int? toothNumber { get; set; }
         public int? toothSideNumber { get; set; }
         public string opperationColor { get; set; }
+        public int OpperationID { get; set; }
+
     }
 }

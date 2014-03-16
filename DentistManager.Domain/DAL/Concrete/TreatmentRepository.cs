@@ -33,7 +33,7 @@ namespace DentistManager.Domain.DAL.Concrete
                                                                        join a in appointmentIQ on t.AppointmentID equals a.AppointmentID
                                                                        join o in opperationIQ on t.OpperationID equals o.OpperationID
                                                                        where t.PatientID == patientID
-                                                                       select new TreatmentPresntViewModel { TeratmentID = t.TeratmentID, TeratmentCost = t.TeratmentCost, toothNumber = t.ToothNumber, toothSideNumber = t.ToothSideNumber, Description = t.Description, treatmentState = "In Progress", AppointmentDate = a.Start_date, opperatioName = o.Name, opperationColor = o.Color }).ToList();
+                                                                       select new TreatmentPresntViewModel { TeratmentID = t.TeratmentID, TeratmentCost = t.TeratmentCost, toothNumber = t.ToothNumber, toothSideNumber = t.ToothSideNumber, Description = t.Description, treatmentState = "In Progress", AppointmentDate = a.Start_date, opperatioName = o.Name, opperationColor = o.Color, OpperationID= o.OpperationID }).ToList();
                 return treatmentList;
             }
         }
@@ -72,6 +72,48 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 ctx.Entry(treatment).State = System.Data.Entity.EntityState.Modified;
                 count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
+
+
+        public bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                foreach (var item in treatmentList)
+                {
+                    Treatment treatment = ctx.Treatments.Create();
+                    treatment.PatientID = PatientID;
+                    treatment.DoctorID = DoctorID;
+                    treatment.AppointmentID = AppointmentID;
+                    treatment.OpperationID = item.OpperationID;
+                    treatment.TeratmentCost = item.TeratmentCost;
+                    treatment.ToothNumber = item.toothNumber;
+                    treatment.ToothSideNumber = item.toothSideNumber;
+                    treatment.Description = item.Description;
+                    treatment.OpperationCost = ctx.opperations.Find(item.OpperationID).Price;
+                    ctx.Treatments.Add(treatment);
+                    count += ctx.SaveChanges();
+                }
+            }
+            return count > 0 ? true : false;
+        }
+
+        public bool updateTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                foreach (var item in treatmentList)
+                {
+                    Treatment treatment = ctx.Treatments.Find(item.TeratmentID);
+                    treatment.Description = item.Description;
+                    treatment.TeratmentCost = item.TeratmentCost;
+
+                    count += ctx.SaveChanges();
+                }
             }
             return count > 0 ? true : false;
         }

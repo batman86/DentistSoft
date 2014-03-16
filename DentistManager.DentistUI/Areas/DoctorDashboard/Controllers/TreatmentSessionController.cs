@@ -59,7 +59,9 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         [HttpPost]
         public void TreatmentSave(IEnumerable<TreatmentPresntViewModel> treatmentList)
         {
-           
+            ViewBag.AppointmentID = 1;
+            ViewBag.DoctorID = 1;
+            ViewBag.PatientID = 1;
         }
 	}
 }
