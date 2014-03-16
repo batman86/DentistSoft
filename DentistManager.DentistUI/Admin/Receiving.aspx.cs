@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DentistManager.Domain.Entities;
 using DentistManager.Domain.DAL.Concrete;
+using DentistManager.Domain.BL.Concrete;
 namespace DentistManager.DentistUI.Admin
 {
     public partial class Receiving : System.Web.UI.Page
@@ -17,25 +18,20 @@ namespace DentistManager.DentistUI.Admin
 
         protected void gvxReceiving_RowInserted(object sender, DevExpress.Web.Data.ASPxDataInsertedEventArgs e)
         {
-            Warehouse warehouse = new Warehouse() { ItemID = int.Parse(e.NewValues["ItemID"].ToString())
-                , StorageID = int.Parse(e.NewValues["StorageID"].ToString())};
-            WarehouseRepository warehouseRepository = new WarehouseRepository();
-          Warehouse Getwarehouse = warehouseRepository.Getwarehouse(warehouse);
-            if (Getwarehouse == null )
+            WarehouseBL warehouseMangement = new WarehouseBL();
+            warehouseMangement.InsertMangment(int.Parse(e.NewValues["ItemID"].ToString()), int.Parse(e.NewValues["StorageID"].ToString()), int.Parse(e.NewValues["Amount"].ToString()));
+
+        }
+
+        protected void gvxReceiving_RowUpdated(object sender, DevExpress.Web.Data.ASPxDataUpdatedEventArgs e)
+        {
+            if (e.OldValues["ItemID"] != e.NewValues["ItemID"] || e.OldValues["StorageID"] != e.NewValues["StorageID"])
             {
-                warehouse.Available = int.Parse(e.NewValues["Amount"].ToString());
-                warehouseRepository.AddNewWarehouse(warehouse);
+                WarehouseBL warhouseManagement = new WarehouseBL();
+                warhouseManagement.UpdateMangment(int.Parse(e.OldValues["ItemID"].ToString()), int.Parse(e.OldValues["StorageID"].ToString()), int.Parse(e.OldValues["Amount"].ToString()));
+                warhouseManagement.InsertMangment(int.Parse(e.NewValues["ItemID"].ToString()), int.Parse(e.NewValues["StorageID"].ToString()), int.Parse(e.NewValues["Amount"].ToString()));
+ 
             }
-            else
-            {
-                Getwarehouse.Available += int.Parse(e.NewValues["Amount"].ToString());
-                warehouseRepository.UpdateWarehouse(Getwarehouse);
-               
-
-            }
-          
-
-
         }
 
      

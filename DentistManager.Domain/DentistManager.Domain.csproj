@@ -55,6 +55,7 @@
     <Compile Include="BL\Concrete\PatientPaymentBL.cs" />
     <Compile Include="BL\Concrete\SeassionStateBL.cs" />
     <Compile Include="BL\Concrete\TreatmentBL.cs" />
+    <Compile Include="BL\Concrete\WarehouseBL.cs" />
     <Compile Include="Common\GeneratRandomValue.cs" />
     <Compile Include="Common\Hashing.cs" />
     <Compile Include="DAL\Abstract\IAppointmentRepository.cs" />

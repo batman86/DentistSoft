@@ -18,7 +18,7 @@
 
     <dx:ASPxGridView ID="gvxReceiving" runat="server" AutoGenerateColumns="False" 
         DataSourceID="dsReceiving" EnableTheming="True" ClientInstanceName="ReceivingGrid"
-         KeyFieldName="ReciveID" Theme="Office2003Silver" OnRowInserted="gvxReceiving_RowInserted">
+         KeyFieldName="ReciveID" Theme="Office2003Silver" OnRowInserted="gvxReceiving_RowInserted" OnRowUpdated="gvxReceiving_RowUpdated">
         <Columns>
             <dx:GridViewCommandColumn VisibleIndex="0">
                 <EditButton Visible="True">
