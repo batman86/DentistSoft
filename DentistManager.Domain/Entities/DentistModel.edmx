@@ -6,6 +6,7 @@
     <edmx:StorageModels>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Schema Namespace="DentistModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DentistModelStoreContainer">
     <EntitySet Name="C__MigrationHistory" EntityType="DentistModel.Store.C__MigrationHistory" store:Type="Tables" Schema="dbo" />
@@ -1015,6 +1016,8 @@
   </Association>
 </Schema></edmx:StorageModels>
 =======
+=======
+>>>>>>> 58df2f6bbebbd479df614cfc46191ae9eb62f74e
 =======
 >>>>>>> 58df2f6bbebbd479df614cfc46191ae9eb62f74e
     <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
@@ -2032,6 +2035,9 @@
         </EntityContainer>
       </Schema></edmx:StorageModels>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 58df2f6bbebbd479df614cfc46191ae9eb62f74e
+=======
 >>>>>>> 58df2f6bbebbd479df614cfc46191ae9eb62f74e
 =======
 >>>>>>> 58df2f6bbebbd479df614cfc46191ae9eb62f74e
