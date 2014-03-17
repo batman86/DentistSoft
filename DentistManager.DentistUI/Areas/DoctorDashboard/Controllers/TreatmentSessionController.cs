@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DentistManager.Domain.BL.Abstract;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
@@ -12,10 +13,14 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
     {
         IOpperationRepository opperationRepository;
         ITreatmentRepository treatmentRepository;
-        public TreatmentSessionController(IOpperationRepository _opperationRepository, ITreatmentRepository _treatmentRepository)
+        ITreatmentBL treatmentBL;
+        IMaterialRepository materialRepository;
+        public TreatmentSessionController(IOpperationRepository _opperationRepository, ITreatmentRepository _treatmentRepository, ITreatmentBL _treatmentBL, IMaterialRepository _materialRepository)
         {
             opperationRepository = _opperationRepository;
             treatmentRepository = _treatmentRepository;
+            treatmentBL = _treatmentBL;
+            materialRepository = _materialRepository;
         }
 
         //
@@ -51,6 +56,13 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetMatrialList(int treatmentID = 0)
+        {
+           IEnumerable<MaterialMiniViewModel> matrailList=  materialRepository.getMatrailMiniList();
+           return Json(matrailList);
+        }
+
+        [HttpPost]
         public void RemoveTreatmentItem(int treatmentID = 0)
         {
             treatmentRepository.RemoveTreatmentByID(treatmentID);
@@ -62,6 +74,8 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             ViewBag.AppointmentID = 1;
             ViewBag.DoctorID = 1;
             ViewBag.PatientID = 1;
+
+            treatmentBL.saveTreatment(treatmentList, 1, 1, 1);
         }
 	}
 }

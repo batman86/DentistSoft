@@ -88,17 +88,23 @@ namespace DentistManager.Domain.DAL.Concrete
             return count > 0 ? true : false;
         }
 
-        public IEnumerable<PrescriptionViewModel> getPrescriptionList(int patientID)
+        public IEnumerable<PrescriptionPresnetViewModel> getPrescriptionList(int patientID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                IEnumerable<PrescriptionViewModel> PrescriptionList;
+                IEnumerable<PrescriptionPresnetViewModel> PrescriptionList;
 
                 var PrescriptionIQ = ctx.Prescriptions;
+                var medicenIQ = ctx.Medicines;
+                var doctorIQ =ctx.Doctors;
+                var appointmentIQ=ctx.Appointments;
 
                 PrescriptionList = (from p in PrescriptionIQ
-                                   where p.PatientID == patientID
-                                   select new PrescriptionViewModel{ Dose= p.Dose, Notice=p.Notice}).ToList();
+                                    join m in medicenIQ on p.MedicineID equals m.MedicineID
+                                    join d in doctorIQ on p.DoctorID equals d.DoctorID
+                                    join a in appointmentIQ on p.AppointmentID equals a.AppointmentID
+                                    where p.PatientID == patientID
+                                    select new PrescriptionPresnetViewModel { Dose = p.Dose, Notice = p.Notice, MedicineName=m.Name, DoctorName=d.Name, AppointmentDate=a.Start_date }).ToList();
 
                 return PrescriptionList;
             }

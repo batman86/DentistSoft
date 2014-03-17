@@ -49,6 +49,19 @@ namespace DentistManager.DentistUI.Controllers
             }
             selectDoctor.AddOptions(items);
 
+
+
+            var selectPatientStatus = new LightboxSelect("StatusID", "Status");
+            var Statusitems = new List<object>();
+            Statusitems.Add(new { key = PatientSchduelStatus.canceled, label = PatientSchduelStatus.canceled });
+            Statusitems.Add(new { key = PatientSchduelStatus.finished, label = PatientSchduelStatus.finished });
+            Statusitems.Add(new { key = PatientSchduelStatus.postponed, label = PatientSchduelStatus.postponed });
+            Statusitems.Add(new { key = PatientSchduelStatus.progress, label = PatientSchduelStatus.progress });
+            Statusitems.Add(new { key = PatientSchduelStatus.waiting, label = PatientSchduelStatus.waiting });
+            selectPatientStatus.AddOptions(Statusitems);
+
+
+
             var Reason = new LightboxText("reason", "Reason");
             var Define = new LightboxText("text", "Define");
             var date = new LightboxMiniCalendar("Date");
@@ -56,6 +69,7 @@ namespace DentistManager.DentistUI.Controllers
             scheduler.Lightbox.Add(Define);
             scheduler.Lightbox.Add(Reason);
             scheduler.Lightbox.Add(selectDoctor);
+            scheduler.Lightbox.Add(selectPatientStatus);
             scheduler.Lightbox.Add(date);
 
             scheduler.Config.hour_size_px= 100;
@@ -67,7 +81,7 @@ namespace DentistManager.DentistUI.Controllers
 
         public ContentResult Data()
         {
-            int clinecID = 1;
+            int clinecID = sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
             List<AppointmentViewModelFull> eventList = appointmentRepository.getClinecAppointmentList(clinecID);
 
             return Content(new SchedulerAjaxData(eventList), "text/json");
@@ -84,11 +98,10 @@ namespace DentistManager.DentistUI.Controllers
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
-                        // get Real value here
                         int patientID=int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
                         appointmentViewModel.ClinicID = sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
                         appointmentViewModel.PatientID = patientID;
-                        appointmentViewModel.Status = "state";
+                        appointmentViewModel.Status = appointmentViewModel.Status;
                         appointmentViewModel.text = "DR:" + doctorRepository.getDoctorNameByID(appointmentViewModel.DoctorID) + "\n Patient:" + patientRepository.getPatientNameByID(patientID);
                         action.TargetId = appointmentRepository.AddNewAppointment(appointmentViewModel);
                         break;

@@ -1,0 +1,58 @@
+﻿@model DentistManager.Domain.ViewModel.PrescriptionPresnetViewModel
+
+@{
+    ViewBag.Title = "PrescriptionDetails";
+}
+
+<h2>PrescriptionDetails</h2>
+
+<div>
+    <h4>PrescriptionPresnetViewModel</h4>
+	<hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoctorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "PrescriptionList")
+</p>

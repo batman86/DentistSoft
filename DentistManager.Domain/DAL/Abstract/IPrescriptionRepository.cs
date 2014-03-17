@@ -13,6 +13,6 @@ namespace DentistManager.Domain.DAL.Abstract
         bool updatePrescription(PrescriptionViewModel prescription);
         PrescriptionPresnetViewModel getPrescriptionDetails(int prescriptiontID);
         bool deletePrescription(int prescriptiontID);
-        IEnumerable<PrescriptionViewModel> getPrescriptionList(int patientID);
+        IEnumerable<PrescriptionPresnetViewModel> getPrescriptionList(int patientID);
     }
 }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DentistManager.Domain.ViewModel.PrescriptionPresnetViewModel>
+
+@{
+    ViewBag.Title = "PrescriptionList";
+}
+
+<h2>PrescriptionList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Notice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "PrescriptionDetails", new { prescriptionID = item.PrescriptionID }) |
+            @Html.ActionLink("Delete", "PrescriptionDelete", new { prescriptionID = item.PrescriptionID })
+        </td>
+    </tr>
+}
+
+</table>

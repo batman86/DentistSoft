@@ -66,6 +66,8 @@
     <Compile Include="DAL\Abstract\IimagesRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DAL\Abstract\IMaterialRepository.cs" />
+    <Compile Include="DAL\Abstract\IMedicineRepository.cs" />
     <Compile Include="DAL\Abstract\IOpperationRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientPaymentRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientRepository.cs" />
@@ -78,6 +80,8 @@
     <Compile Include="DAL\Concrete\CustomMatrialRepository.cs" />
     <Compile Include="DAL\Concrete\DoctorRepository.cs" />
     <Compile Include="DAL\Concrete\ImagesRepository.cs" />
+    <Compile Include="DAL\Concrete\MaterialRepository.cs" />
+    <Compile Include="DAL\Concrete\MedicineReposditory.cs" />
     <Compile Include="DAL\Concrete\OpperationMaterialsRepository.cs" />
     <Compile Include="DAL\Concrete\OpperationRepository.cs" />
     <Compile Include="DAL\Concrete\PatientPaymentRepository.cs" />
@@ -200,6 +204,8 @@
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
+    <Compile Include="ViewModel\MaterialMiniViewModel.cs" />
+    <Compile Include="ViewModel\MedicineMiniViewModel.cs" />
     <Compile Include="ViewModel\opperationMiniDataViewModel.cs" />
     <Compile Include="ViewModel\PatientFullDataViewModel.cs" />
     <Compile Include="ViewModel\PatientHistoryViewModel.cs" />
@@ -207,6 +213,7 @@
     <Compile Include="ViewModel\PaymentReceiptViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionPresnetViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />
+    <Compile Include="ViewModel\PrescriptionWrapViewModel.cs" />
     <Compile Include="ViewModel\SessionValuesViewModel.cs" />
     <Compile Include="ViewModel\TreatmentPresntViewModel.cs" />
   </ItemGroup>

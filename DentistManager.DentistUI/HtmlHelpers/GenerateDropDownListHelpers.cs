@@ -36,5 +36,18 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
         }
+
+        public static MvcHtmlString generatePatientMedicineDropDownList(this HtmlHelper helper, IEnumerable<MedicineMiniViewModel> list)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("<select name=prescriptionViewModel.MedicineID id=MedicineDropDown>");
+            foreach (MedicineMiniViewModel i in list)
+            {
+                result.Append("<option value=\"" + i.MedicineID + "\">" + i.Name + "</option>");
+            }
+            result.Append("</select>");
+            return MvcHtmlString.Create(result.ToString());
+        }
     }
 }

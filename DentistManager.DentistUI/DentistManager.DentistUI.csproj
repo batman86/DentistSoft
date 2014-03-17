@@ -276,6 +276,7 @@
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientSearchController.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\PrescriptionController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\TreatmentSessionController.cs" />
     <Compile Include="Areas\DoctorDashboard\DoctorDashboardAreaRegistration.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientIllnessHistoryController.cs" />
@@ -683,6 +684,10 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientIllnessHistory\PatientHistoryDetails.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientIllnessHistory\PatientHistoryEdit.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientIllnessHistory\patientHistoryList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Shared\NoActivePatientView.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDetails.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionCreate.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -748,9 +753,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

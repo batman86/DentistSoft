@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/15/2014 22:31:10
+-- Date Created: 03/16/2014 22:43:03
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -461,7 +461,9 @@ CREATE TABLE [dbo].[RecivingItems] (
     [ExpireDate] datetime  NULL,
     [ReciveDate] datetime  NOT NULL,
     [StorageID] int  NOT NULL,
-    [Recived] bit  NULL
+    [Recived] bit  NULL,
+    [ByoneCost] decimal(18,4)  NULL,
+    [TotalCost] decimal(29,4)  NULL
 );
 GO
 
