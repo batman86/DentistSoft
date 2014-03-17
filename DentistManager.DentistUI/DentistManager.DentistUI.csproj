@@ -232,6 +232,13 @@
     <Compile Include="Admin\opperation.aspx.designer.cs">
       <DependentUpon>opperation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\PatientStatus.aspx.cs">
+      <DependentUpon>PatientStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PatientStatus.aspx.designer.cs">
+      <DependentUpon>PatientStatus.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Receiving.aspx.cs">
       <DependentUpon>Receiving.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +326,7 @@
     <Content Include="Admin\Materials.aspx" />
     <Content Include="Admin\Medicine.aspx" />
     <Content Include="Admin\opperation.aspx" />
+    <Content Include="Admin\PatientStatus.aspx" />
     <Content Include="Admin\Receiving.aspx" />
     <Content Include="Admin\Secretary.aspx" />
     <Content Include="Admin\Storages.aspx" />
