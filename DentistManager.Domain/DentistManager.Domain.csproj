@@ -85,6 +85,7 @@
     <Compile Include="DAL\Concrete\OpperationRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
     <Compile Include="DAL\Concrete\PaymentReceiptRerpository.cs" />
+    <Compile Include="DAL\Concrete\PaymentRepository.cs" />
     <Compile Include="DAL\Concrete\PrescriptionRepository.cs" />
     <Compile Include="DAL\Concrete\SecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />

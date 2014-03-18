@@ -18,7 +18,7 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 decimal total = 0;
                 // change paymentID to patient id  
-                total = ctx.PaymentReceipts.Where(x => x.PatientPaymentID == patientID && x.ClinicID ==clinecID).Select(x => x.Amount).Sum();
+                total = ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID ==clinecID).Select(x => x.Amount).Sum();
                 return total;
             }
         }
@@ -87,7 +87,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 var secertaryIQ= ctx.Secretaries;
                 IEnumerable<PaymentReceiptPresentViewModel> reciptpresentViewModel = (from p in paymentReciptIQ
                                                                          join s in secertaryIQ on p.UserID equals s.UserID
-                                                                         where p.PatientPaymentID == patientID && p.ClinicID == clinecID
+                                                                         where p.PatientID == patientID && p.ClinicID == clinecID
                                                                          select new PaymentReceiptPresentViewModel { receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.Name }).ToList();
                 return reciptpresentViewModel;
             }
