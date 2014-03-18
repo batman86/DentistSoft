@@ -33,20 +33,45 @@ var selector,
                 Main.saveTreatmentToObject();
                 Main.saveTreatmentToDatabase();
             });
-            selector.btnAddMatrial.on("click", function () {
+            $(document).on('click', '.btnAddMatrial', function () {
+                if (vmMatrailList.length == 0)
+                {
+                    Main.LoadMatrailList();
+                }
+                //alert(vmMatrailList.length);
+                //var tretID = $(this).parent().children('.TeratmentID').val();
+                
 
                 var drop = '<select id="MatrialDropDown" >';
                 for (var i = 0; i < vmMatrailList.length; i++) {
                     drop += '<option value="' + vmMatrailList[i].ItemID + '">' + vmMatrailList[i].ItemName + '</option>';
                 }
                 drop += '</select>';
-                var text = '<input class="MatrailQuantity" type="text" value="" />';
 
-                var btn = '<input type="button" class="insertMatialToList" value="X" />';
-                        
+                //drop += '<input class="treatmentItemID" type="hidden" value="' + tretID + '" />';
+
+                drop += '<input class="txtMatrailQuantity" type="text" value="" />';
+
+                drop += '<input type="button" class="btninsertMatialToList" value="Add" />';
+
+                drop += '<div id="MatrailListHolder"> <ul> </ul> </div>';
                          
+                drop += '<input type="button" class="SaveMatrialList" value="Save Matrail" />';
+
+                $(this).parent().children('.matrialWrap').html(drop);
+               
+
 
             });
+
+            $(document).on('click', '.btninsertMatialToList', function () {
+
+               var innerIL = '<li> <label id="MatrailName" > ' + + '</label>  <label id="lblMatrailQuantity" > ' + + '</label>  <input type="button" class="btnRemoveMatrailFromList" value="X" /> </li>';
+
+               $(this).parent().children('#MatrailListHolder ul').append(innerIL);
+
+            });
+
             $(document).on('click', '.btnRemoveTreatment', function () {
                 var s = $(this).parent().children('.treatmentItemID').val();
                 
@@ -89,7 +114,7 @@ var selector,
                 async: false,
                 success: function (result) {
                     for (var i = 0; i < result.length; i++) {
-                        vm.push(new Main.obMatrailListItem(result[i].ItemID, result[i].ItemName));
+                        vmMatrailList.push(new Main.obMatrailListItem(result[i].ItemID, result[i].ItemName));
                     }
                 }
             });
@@ -129,7 +154,7 @@ var selector,
         },
         loadTreatmentList: function () {
             for (var i = 0; i < vm.length; i++) {
-                $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label>   <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label>  <label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" />   <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /> <input type="button" class="btnAddMatrial" value="Add Matrial" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
+                $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label>   <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label>  <label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" />   <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /> <input type="button" class="btnAddMatrial" value="Add Matrial" /> <input type="button" class="btnRemoveTreatment" value="X" /> <div class="matrialWrap"> </div> </li>');
             }
         },
         saveTreatmentToObject: function () {

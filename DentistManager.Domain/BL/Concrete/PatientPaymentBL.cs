@@ -13,46 +13,46 @@ namespace DentistManager.Domain.BL.Concrete
     {
         public void patientTotalCost(int patientID)
         {
-            //decimal TotalCost=0;
+            decimal? TotalCost = 0;
 
-            //decimal treatmentCost=0;
-            //decimal opperationCost = 0;
-            //decimal materialCost = 0;
-            //decimal? customMatrialCost = 0;
+            decimal treatmentCost = 0;
+            decimal? opperationCost = 0;
+            decimal? materialCost = 0;
+            decimal? customMatrialCost = 0;
 
-            //CustomMatrialRepository customMatrialRepository = new CustomMatrialRepository();
-            //customMatrialCost = customMatrialRepository.getPatientCusmotMatrialCostTotal(patientID);
-           
-           
+            /// filter all by clinec id
+            int clinecID = 1;
 
-            //TreatmentRepository treatmentRepository = new TreatmentRepository();
+            CustomMatrialRepository customMatrialRepository = new CustomMatrialRepository();
+            customMatrialCost = customMatrialRepository.getPatientCusmotMatrialCostTotal(patientID);
 
-            //IEnumerable<Treatment> patientTreatmentList= treatmentRepository.getPatientTreatmentList(patientID);
 
-            //foreach (Treatment treatment in patientTreatmentList)
-            //{
-            //    treatmentCost += treatment.TeratmentCost;
-            //    opperationCost += treatment.opperation.Price;
 
-            //    IEnumerable<MaterialTreatment> matrialTreatmentList = treatment.MaterialTreatments;
+            TreatmentRepository treatmentRepository = new TreatmentRepository();
 
-            //    foreach (MaterialTreatment matrialTreatment in matrialTreatmentList)
-            //    {
-            //       materialCost += matrialTreatment.Material.MaterialCost;
-            //    }
-            //}
-            //TotalCost=treatmentCost+opperationCost+materialCost+customMatrialCost;
+            IEnumerable<Treatment> patientTreatmentList = treatmentRepository.getPatientTreatmentList(patientID);
+
+            foreach (Treatment treatment in patientTreatmentList)
+            {
+                treatmentCost += treatment.TeratmentCost;
+                opperationCost += treatment.OpperationCost;
+
+                IEnumerable<MaterialTreatment> matrialTreatmentList = treatment.MaterialTreatments;
+
+                foreach (MaterialTreatment matrialTreatment in matrialTreatmentList)
+                {
+                    materialCost += matrialTreatment.MaterialCost;
+                }
+            }
+            TotalCost = treatmentCost + opperationCost + materialCost + customMatrialCost;
 
         }
 
         public void patientTotalPayment(int patientID)
         {
-            //PatientPaymentRepository patientPaymentRepository = new PatientPaymentRepository();
-            //int patientPaymentID=  patientPaymentRepository.getPatientPaymentID(patientID);
-
-            //PaymentReceiptRerpository paymentReceiptRepository = new PaymentReceiptRerpository();
-            //decimal patientTotalPayment= paymentReceiptRepository.getPatientTotalReceiptPayment(patientPaymentID);
-
+            int clinecID = 1;
+            PaymentReceiptRerpository patientRecipt = new PaymentReceiptRerpository();
+            decimal totalPayment = patientRecipt.getPatientTotalReceiptPayment(patientID, clinecID);
         }
 
       //  public void patientRemain(decimal patientTotalPayment,)

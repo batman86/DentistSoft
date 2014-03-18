@@ -69,7 +69,6 @@
     <Compile Include="DAL\Abstract\IMaterialRepository.cs" />
     <Compile Include="DAL\Abstract\IMedicineRepository.cs" />
     <Compile Include="DAL\Abstract\IOpperationRepository.cs" />
-    <Compile Include="DAL\Abstract\IPatientPaymentRepository.cs" />
     <Compile Include="DAL\Abstract\IPatientRepository.cs" />
     <Compile Include="DAL\Abstract\IPaymentReceiptRerpository.cs" />
     <Compile Include="DAL\Abstract\IPrescriptionRepository.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="DAL\Concrete\MedicineReposditory.cs" />
     <Compile Include="DAL\Concrete\OpperationMaterialsRepository.cs" />
     <Compile Include="DAL\Concrete\OpperationRepository.cs" />
-    <Compile Include="DAL\Concrete\PatientPaymentRepository.cs" />
     <Compile Include="DAL\Concrete\PatientRepository.cs" />
     <Compile Include="DAL\Concrete\PaymentReceiptRerpository.cs" />
     <Compile Include="DAL\Concrete\PrescriptionRepository.cs" />
@@ -200,6 +198,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AppointmentViewModelFull.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
+    <Compile Include="ViewModel\CustomMaterialPresentViewModel.cs" />
+    <Compile Include="ViewModel\CustomMaterialViewModel.cs" />
     <Compile Include="ViewModel\DoctorMiniInfoViewModel.cs" />
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
@@ -210,6 +210,7 @@
     <Compile Include="ViewModel\PatientFullDataViewModel.cs" />
     <Compile Include="ViewModel\PatientHistoryViewModel.cs" />
     <Compile Include="ViewModel\PatientMiniData.cs" />
+    <Compile Include="ViewModel\PaymentReceiptPresentViewModel.cs" />
     <Compile Include="ViewModel\PaymentReceiptViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionPresnetViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />

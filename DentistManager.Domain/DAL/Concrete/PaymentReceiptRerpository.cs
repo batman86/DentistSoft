@@ -12,13 +12,13 @@ namespace DentistManager.Domain.DAL.Concrete
     public class PaymentReceiptRerpository : IPaymentReceiptRerpository
     {
 
-        public decimal getPatientTotalReceiptPayment(int patientPaymentID)
+        public decimal getPatientTotalReceiptPayment(int patientID,int clinecID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 decimal total = 0;
-
-                total = ctx.PaymentReceipts.Where(x => x.PatientPaymentID == patientPaymentID).Select(x => x.Amount).Sum();
+                // change paymentID to patient id  
+                total = ctx.PaymentReceipts.Where(x => x.PatientPaymentID == patientID && x.ClinicID ==clinecID).Select(x => x.Amount).Sum();
                 return total;
             }
         }
@@ -35,6 +35,8 @@ namespace DentistManager.Domain.DAL.Concrete
                 paymentRercieptEntity.UserID = paymentRecieptViewModel.UserID;
                 paymentRercieptEntity.ClinicID = paymentRecieptViewModel.ClinicID;
                 paymentRercieptEntity.Amount = paymentRecieptViewModel.Amount;
+                paymentRercieptEntity.Date = DateTime.Now;
+                // add patient id
 
                 ctx.PaymentReceipts.Add(paymentRercieptEntity);
                 count = ctx.SaveChanges();
@@ -42,24 +44,53 @@ namespace DentistManager.Domain.DAL.Concrete
             return count > 0 ? true : false;
         }
 
-        public bool alterPatientReceipt(PaymentReceiptViewModel paymentRecieptViewModel)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool deletePatientReceipt(int ReceiptID)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                PaymentReceipt recipt= ctx.PaymentReceipts.Find(ReceiptID);
+                if (recipt == null)
+                    return false;
+                ctx.PaymentReceipts.Remove(recipt);
+                count = ctx.SaveChanges();
+
+            }
+            return count > 0 ? true : false;
         }
 
-        public PaymentReceiptViewModel getPaymentReceiptDetails(int ReceiptID)
+        public PaymentReceiptPresentViewModel getPaymentReceiptDetails(int ReceiptID)
         {
-            throw new NotImplementedException();
+
+            PaymentReceiptPresentViewModel reciptpresentViewModel;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                PaymentReceipt recipt = ctx.PaymentReceipts.Find(ReceiptID);
+
+                if (recipt == null)
+                    return null;
+                 reciptpresentViewModel = new PaymentReceiptPresentViewModel();
+
+                reciptpresentViewModel.receiptAmount = recipt.Amount;
+                reciptpresentViewModel.ReviceDate = recipt.Date;
+                reciptpresentViewModel.reciverName = ctx.Secretaries.Where(x => x.UserID == recipt.UserID).Select(x => x.Name).ToString();
+            }
+            return reciptpresentViewModel;
         }
 
-        public IEnumerable<PaymentReceiptViewModel> getPatientReceiptList(int patientID)
+        public IEnumerable<PaymentReceiptPresentViewModel> getPatientReceiptList(int patientID, int clinecID)
         {
-            throw new NotImplementedException();
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                // in where change payment ID to patient id
+                var paymentReciptIQ=ctx.PaymentReceipts;
+                var secertaryIQ= ctx.Secretaries;
+                IEnumerable<PaymentReceiptPresentViewModel> reciptpresentViewModel = (from p in paymentReciptIQ
+                                                                         join s in secertaryIQ on p.UserID equals s.UserID
+                                                                         where p.PatientPaymentID == patientID && p.ClinicID == clinecID
+                                                                         select new PaymentReceiptPresentViewModel { receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.Name }).ToList();
+                return reciptpresentViewModel;
+            }
         }
     }
 }

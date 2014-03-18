@@ -290,6 +290,7 @@
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentController.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentReceiptController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientSearchController.cs" />
     <Compile Include="Areas\SecretaryDashboard\SecretaryDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -743,6 +744,7 @@
     <Folder Include="Areas\DoctorDashboard\Models\" />
     <Folder Include="Areas\DoctorDashboard\Views\PatientImages\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
+    <Folder Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
     <Folder Include="Content\Images\xray\large\" />

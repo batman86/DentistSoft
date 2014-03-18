@@ -9,12 +9,12 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface IPaymentReceiptRerpository
     {
-        decimal getPatientTotalReceiptPayment(int patientPaymentID);
+        decimal getPatientTotalReceiptPayment(int patientID, int clinecID);
 
         bool addNewPatientReceipt(PaymentReceiptViewModel paymentRecieptViewModel);
-        bool alterPatientReceipt(PaymentReceiptViewModel paymentRecieptViewModel);
         bool deletePatientReceipt(int ReceiptID);
-        PaymentReceiptViewModel getPaymentReceiptDetails(int ReceiptID);
-        IEnumerable<PaymentReceiptViewModel> getPatientReceiptList(int patientID);
+        PaymentReceiptPresentViewModel getPaymentReceiptDetails(int ReceiptID);
+
+        IEnumerable<PaymentReceiptPresentViewModel> getPatientReceiptList(int patientID, int clinecID);
     }
 }
