@@ -17,11 +17,12 @@ namespace DentistManager.Domain.Entities
         public int ReceiptID { get; set; }
         public System.DateTime Date { get; set; }
         public decimal Amount { get; set; }
-        public int PatientPaymentID { get; set; }
+        public int PatientID { get; set; }
         public string UserID { get; set; }
         public int ClinicID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Clinic Clinic { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

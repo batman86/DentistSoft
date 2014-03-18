@@ -29,8 +29,10 @@ namespace DentistManager.Domain.Entities
         public Nullable<int> ToothNumber { get; set; }
         public Nullable<decimal> OpperationCost { get; set; }
         public decimal TeratmentCost { get; set; }
+        public int ClinicID { get; set; }
     
         public virtual Appointment Appointment { get; set; }
+        public virtual Clinic Clinic { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual ICollection<MaterialTreatment> MaterialTreatments { get; set; }
         public virtual opperation opperation { get; set; }

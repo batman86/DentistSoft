@@ -17,11 +17,13 @@ namespace DentistManager.Domain.Entities
         public Clinic()
         {
             this.Appointments = new HashSet<Appointment>();
+            this.CustomMaterials = new HashSet<CustomMaterial>();
             this.Doctors = new HashSet<Doctor>();
             this.Patients = new HashSet<Patient>();
             this.PaymentReceipts = new HashSet<PaymentReceipt>();
             this.Secretaries = new HashSet<Secretary>();
             this.Storages = new HashSet<Storage>();
+            this.Treatments = new HashSet<Treatment>();
         }
     
         public int ClinicID { get; set; }
@@ -32,10 +34,12 @@ namespace DentistManager.Domain.Entities
         public Nullable<bool> Acitve { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<CustomMaterial> CustomMaterials { get; set; }
         public virtual ICollection<Doctor> Doctors { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
         public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual ICollection<Secretary> Secretaries { get; set; }
         public virtual ICollection<Storage> Storages { get; set; }
+        public virtual ICollection<Treatment> Treatments { get; set; }
     }
 }
