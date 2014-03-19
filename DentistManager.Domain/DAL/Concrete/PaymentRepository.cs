@@ -47,11 +47,11 @@ namespace DentistManager.Domain.DAL.Concrete
        public decimal GetAllPaymentReceitByDoctor(int DoctorID, int ClinicID)
        {
            decimal total = 0;
-           using (Entities.Entities ctx = new Entities.Entities())
-           {
-               total = ctx.PaymentReceipts.Where(t => t.ClinicID == ClinicID && t.DoctorID == DoctorID).ToList().Select(p => p.TeratmentCost).Sum();
+           //using (Entities.Entities ctx = new Entities.Entities())
+           //{
+           //    total = ctx.PaymentReceipts.Where(t => t.ClinicID == ClinicID && t.DoctorID == DoctorID).ToList().Select(p => p.TeratmentCost).Sum();
 
-           }
+           //}
 
            return total;
 

@@ -10,13 +10,13 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface ITreatmentRepository 
     {
-        IEnumerable<Treatment> getPatientTreatmentList(int patientID);
+        IEnumerable<Treatment> getPatientTreatmentList(int patientID, int clinecID);
         IEnumerable<TreatmentPresntViewModel> getPatientPresntTreatmentList(int patientID);
         bool RemoveTreatmentByID(int treatmentID);
         bool addTreatment(Treatment treatment);
         bool updateTreatment(Treatment treatment);
 
-        bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID);
+        bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID, int clinecID);
         bool updateTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList);
     }
 }

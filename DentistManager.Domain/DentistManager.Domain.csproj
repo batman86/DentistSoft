@@ -206,6 +206,8 @@
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
     <Compile Include="ViewModel\MaterialMiniViewModel.cs" />
+    <Compile Include="ViewModel\MatrailToSaveViewModel.cs" />
+    <Compile Include="ViewModel\MatrailToSaveWrapViewModel.cs" />
     <Compile Include="ViewModel\MedicineMiniViewModel.cs" />
     <Compile Include="ViewModel\opperationMiniDataViewModel.cs" />
     <Compile Include="ViewModel\PatientFullDataViewModel.cs" />

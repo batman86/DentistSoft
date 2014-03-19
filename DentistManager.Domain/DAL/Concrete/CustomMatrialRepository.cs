@@ -11,13 +11,13 @@ namespace DentistManager.Domain.DAL.Concrete
 {
     public class CustomMatrialRepository : ICustomMatrialRepository 
     {
-        public decimal? getPatientCusmotMatrialCostTotal(int patientID)
+        public decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 decimal? total = 0;
 
-                total = ctx.CustomMaterials.Where(x => x.PatientID == patientID).Select(x => x.Cost).Sum();
+                total = ctx.CustomMaterials.Where(x => x.PatientID == patientID && x.ClinicID == clinecID).Select(x => x.Cost).Sum();
                 return total;
             }
         }

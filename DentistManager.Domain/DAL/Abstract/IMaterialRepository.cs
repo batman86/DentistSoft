@@ -9,6 +9,8 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface IMaterialRepository
     {
-         IEnumerable<MaterialMiniViewModel> getMatrailMiniList();
+        IEnumerable<MaterialMiniViewModel> getMatrailMiniList();
+
+        bool SaveTreatmentMatrail(IEnumerable<MatrailToSaveViewModel> matrailList,int treatmentID);
     }
 }

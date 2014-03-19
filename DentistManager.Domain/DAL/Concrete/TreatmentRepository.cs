@@ -12,11 +12,11 @@ namespace DentistManager.Domain.DAL.Concrete
     public class TreatmentRepository :ITreatmentRepository
     {
 
-        public IEnumerable<Treatment> getPatientTreatmentList(int patientID)
+        public IEnumerable<Treatment> getPatientTreatmentList(int patientID, int clinecID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                IEnumerable<Treatment> treatmentList = ctx.Treatments.Where(x => x.PatientID == patientID).ToList();
+                IEnumerable<Treatment> treatmentList = ctx.Treatments.Where(x => x.PatientID == patientID && x.ClinicID == clinecID).ToList();
                 return treatmentList;
             }
         }
@@ -77,7 +77,7 @@ namespace DentistManager.Domain.DAL.Concrete
         }
 
 
-        public bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID)
+        public bool addTreatmentList(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID, int clinecID)
         {
             // enhance
             int count = 0;
@@ -88,6 +88,7 @@ namespace DentistManager.Domain.DAL.Concrete
                     Treatment treatment = ctx.Treatments.Create();
                     treatment.PatientID = PatientID;
                     treatment.DoctorID = DoctorID;
+                    treatment.ClinicID = clinecID;
                     treatment.AppointmentID = AppointmentID;
                     treatment.OpperationID = item.OpperationID;
                     treatment.TeratmentCost = item.TeratmentCost;

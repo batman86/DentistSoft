@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/16/2014 22:43:03
+-- Date Created: 03/19/2014 01:20:54
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -25,6 +25,9 @@ IF OBJECT_ID(N'[dbo].[FK_Appointments_Doctors]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Appointments_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Patient];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomMaterial] DROP CONSTRAINT [FK_CustomMaterial_Clinics];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Doctors]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CustomMaterial] DROP CONSTRAINT [FK_CustomMaterial_Doctors];
@@ -80,6 +83,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Clinics]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Clinics];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Patients]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Patients];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Appointments]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Appointments];
 GO
@@ -115,6 +121,9 @@ IF OBJECT_ID(N'[dbo].[FK_Storages_Clinics]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Treatment_Appointments]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Appointments];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Treatment_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Clinics];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Treatment_Doctors]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Doctors];
@@ -311,7 +320,8 @@ CREATE TABLE [dbo].[CustomMaterials] (
     [Cost] decimal(18,4)  NULL,
     [DoctorID] int  NOT NULL,
     [Description] nvarchar(200)  NULL,
-    [Name] nvarchar(50)  NOT NULL
+    [Name] nvarchar(50)  NOT NULL,
+    [ClinicID] int  NULL
 );
 GO
 
@@ -434,7 +444,7 @@ CREATE TABLE [dbo].[PaymentReceipts] (
     [ReceiptID] int IDENTITY(1,1) NOT NULL,
     [Date] datetime  NOT NULL,
     [Amount] decimal(18,4)  NOT NULL,
-    [PatientPaymentID] int  NOT NULL,
+    [PatientID] int  NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [ClinicID] int  NOT NULL
 );
@@ -568,7 +578,8 @@ CREATE TABLE [dbo].[Treatments] (
     [ToothSideNumber] int  NULL,
     [ToothNumber] int  NULL,
     [OpperationCost] decimal(18,4)  NULL,
-    [TeratmentCost] decimal(18,4)  NOT NULL
+    [TeratmentCost] decimal(18,4)  NOT NULL,
+    [ClinicID] int  NOT NULL
 );
 GO
 
@@ -934,6 +945,20 @@ ON [dbo].[Secretaries]
     ([UserID]);
 GO
 
+-- Creating foreign key on [ClinicID] in table 'CustomMaterials'
+ALTER TABLE [dbo].[CustomMaterials]
+ADD CONSTRAINT [FK_CustomMaterial_Clinics]
+    FOREIGN KEY ([ClinicID])
+    REFERENCES [dbo].[Clinics]
+        ([ClinicID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomMaterial_Clinics'
+CREATE INDEX [IX_FK_CustomMaterial_Clinics]
+ON [dbo].[CustomMaterials]
+    ([ClinicID]);
+GO
+
 -- Creating foreign key on [ClinicID] in table 'Doctors'
 ALTER TABLE [dbo].[Doctors]
 ADD CONSTRAINT [FK_Doctors_Clinics]
@@ -1001,6 +1026,20 @@ ADD CONSTRAINT [FK_Storages_Clinics]
 -- Creating non-clustered index for FOREIGN KEY 'FK_Storages_Clinics'
 CREATE INDEX [IX_FK_Storages_Clinics]
 ON [dbo].[Storages]
+    ([ClinicID]);
+GO
+
+-- Creating foreign key on [ClinicID] in table 'Treatments'
+ALTER TABLE [dbo].[Treatments]
+ADD CONSTRAINT [FK_Treatment_Clinics]
+    FOREIGN KEY ([ClinicID])
+    REFERENCES [dbo].[Clinics]
+        ([ClinicID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Treatment_Clinics'
+CREATE INDEX [IX_FK_Treatment_Clinics]
+ON [dbo].[Treatments]
     ([ClinicID]);
 GO
 
@@ -1187,6 +1226,20 @@ ADD CONSTRAINT [FK_PatientHistory_Patient]
 -- Creating non-clustered index for FOREIGN KEY 'FK_PatientHistory_Patient'
 CREATE INDEX [IX_FK_PatientHistory_Patient]
 ON [dbo].[PatientHistories]
+    ([PatientID]);
+GO
+
+-- Creating foreign key on [PatientID] in table 'PaymentReceipts'
+ALTER TABLE [dbo].[PaymentReceipts]
+ADD CONSTRAINT [FK_PaymentReceipt_Patients]
+    FOREIGN KEY ([PatientID])
+    REFERENCES [dbo].[Patients]
+        ([PatientID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PaymentReceipt_Patients'
+CREATE INDEX [IX_FK_PaymentReceipt_Patients]
+ON [dbo].[PaymentReceipts]
     ([PatientID]);
 GO
 

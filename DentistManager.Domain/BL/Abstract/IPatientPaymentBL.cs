@@ -9,9 +9,9 @@ namespace DentistManager.Domain.BL.Abstract
     public interface IPatientPaymentBL
     {
         // what patient should pay
-        void patientTotalCost(int patientID);
+        void patientTotalCost(int patientID, int clinecID);
         // what patient did pay
-        void patientTotalPayment(int patientID);
+        void patientTotalPayment(int patientID, int clinecID);
 
     }
 }

@@ -11,7 +11,7 @@ namespace DentistManager.Domain.BL.Concrete
 {
     public class TreatmentBL :ITreatmentBL
     {
-        public bool saveTreatment(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID)
+        public bool saveTreatment(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID,int clinecID)
         {
             bool check = false;
             IEnumerable<TreatmentPresntViewModel> treatmentListToAdd = treatmentList.Where(x => x.TeratmentID == 0);
@@ -20,7 +20,7 @@ namespace DentistManager.Domain.BL.Concrete
             TreatmentRepository tr = new TreatmentRepository();
 
             tr.updateTreatmentList(treatmentListToupdate);
-            tr.addTreatmentList(treatmentListToAdd, AppointmentID, DoctorID, PatientID);
+            tr.addTreatmentList(treatmentListToAdd, AppointmentID, DoctorID, PatientID, clinecID);
 
             return check;
         }

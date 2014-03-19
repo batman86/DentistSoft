@@ -74,8 +74,24 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             ViewBag.AppointmentID = 1;
             ViewBag.DoctorID = 1;
             ViewBag.PatientID = 1;
+            ViewBag.clinecID = 1;
 
-            treatmentBL.saveTreatment(treatmentList, 1, 1, 1);
+            treatmentBL.saveTreatment(treatmentList, 1, 1, 1,1);
+        }
+
+        [HttpPost]
+        public bool matrailTreatmentSave(MatrailToSaveWrapViewModel matrailToSave)
+        {
+            if (matrailToSave.treatmentID == 0)
+                return false;
+            if (matrailToSave.vmMatrailListToSave == null)
+                return false;
+            if (matrailToSave.vmMatrailListToSave.Count() == 0)
+                return false;
+
+            bool check=  materialRepository.SaveTreatmentMatrail(matrailToSave.vmMatrailListToSave, matrailToSave.treatmentID);
+         
+            return check;
         }
 	}
 }

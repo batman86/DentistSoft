@@ -11,7 +11,7 @@ namespace DentistManager.Domain.BL.Concrete
 {
     public class PatientPaymentBL:IPatientPaymentBL
     {
-        public void patientTotalCost(int patientID)
+        public void patientTotalCost(int patientID, int clinecID)
         {
             decimal? TotalCost = 0;
 
@@ -20,17 +20,12 @@ namespace DentistManager.Domain.BL.Concrete
             decimal? materialCost = 0;
             decimal? customMatrialCost = 0;
 
-            /// filter all by clinec id
-            int clinecID = 1;
-
             CustomMatrialRepository customMatrialRepository = new CustomMatrialRepository();
-            customMatrialCost = customMatrialRepository.getPatientCusmotMatrialCostTotal(patientID);
-
-
+            customMatrialCost = customMatrialRepository.getPatientCusmotMatrialCostTotal(patientID, clinecID);
 
             TreatmentRepository treatmentRepository = new TreatmentRepository();
 
-            IEnumerable<Treatment> patientTreatmentList = treatmentRepository.getPatientTreatmentList(patientID);
+            IEnumerable<Treatment> patientTreatmentList = treatmentRepository.getPatientTreatmentList(patientID, clinecID);
 
             foreach (Treatment treatment in patientTreatmentList)
             {
@@ -41,16 +36,14 @@ namespace DentistManager.Domain.BL.Concrete
 
                 foreach (MaterialTreatment matrialTreatment in matrialTreatmentList)
                 {
-                    materialCost += matrialTreatment.MaterialCost;
+                    materialCost += matrialTreatment.MaterialCost * (int)matrialTreatment.Quantity;
                 }
             }
             TotalCost = treatmentCost + opperationCost + materialCost + customMatrialCost;
-
         }
 
-        public void patientTotalPayment(int patientID)
+        public void patientTotalPayment(int patientID, int clinecID)
         {
-            int clinecID = 1;
             PaymentReceiptRerpository patientRecipt = new PaymentReceiptRerpository();
             decimal totalPayment = patientRecipt.getPatientTotalReceiptPayment(patientID, clinecID);
         }

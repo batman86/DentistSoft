@@ -82,7 +82,7 @@ namespace DentistManager.DentistUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(user, isPersistent: true);
                     return RedirectToAction("Index", "Home");
                 }
                 else

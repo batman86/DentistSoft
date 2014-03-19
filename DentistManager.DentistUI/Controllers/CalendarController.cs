@@ -51,7 +51,7 @@ namespace DentistManager.DentistUI.Controllers
 
 
 
-            var selectPatientStatus = new LightboxSelect("StatusID", "Status");
+            var selectPatientStatus = new LightboxSelect("Status", "Status");
             var Statusitems = new List<object>();
             Statusitems.Add(new { key = PatientSchduelStatus.canceled, label = PatientSchduelStatus.canceled });
             Statusitems.Add(new { key = PatientSchduelStatus.finished, label = PatientSchduelStatus.finished });
@@ -102,7 +102,7 @@ namespace DentistManager.DentistUI.Controllers
                         appointmentViewModel.ClinicID = sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
                         appointmentViewModel.PatientID = patientID;
                         appointmentViewModel.Status = appointmentViewModel.Status;
-                        appointmentViewModel.text = "DR:" + doctorRepository.getDoctorNameByID(appointmentViewModel.DoctorID) + "\n Patient:" + patientRepository.getPatientNameByID(patientID);
+                        appointmentViewModel.text = "DR:" + doctorRepository.getDoctorNameByID(appointmentViewModel.DoctorID) + " Patient:" + patientRepository.getPatientNameByID(patientID);
                         action.TargetId = appointmentRepository.AddNewAppointment(appointmentViewModel);
                         break;
                     case DataActionTypes.Delete:

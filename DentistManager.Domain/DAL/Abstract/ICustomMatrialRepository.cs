@@ -9,7 +9,7 @@ namespace DentistManager.Domain.DAL.Abstract
 {
     public interface ICustomMatrialRepository
     {
-        decimal? getPatientCusmotMatrialCostTotal(int patientID);
+        decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID);
 
 
 

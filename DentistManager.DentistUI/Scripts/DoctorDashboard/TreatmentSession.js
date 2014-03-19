@@ -19,8 +19,8 @@ var selector,
 
             selector = this.selectors;
             vm = this.vmTreatmentList;
-            vmMatrailList=this.vmMatrailList;
-
+            vmMatrailList = this.vmMatrailList;
+            vmMatrailWrap = this.matrailToSaveWrap;
             this.getTreatmentList();
             this.loadTreatmentList();
             this.loadGraphDraw();
@@ -37,26 +37,24 @@ var selector,
                 if (vmMatrailList.length == 0)
                 {
                     Main.LoadMatrailList();
+                    alert('lead matrail list');
                 }
-                //alert(vmMatrailList.length);
-                //var tretID = $(this).parent().children('.TeratmentID').val();
-                
 
-                var drop = '<select id="MatrialDropDown" >';
+                var drop = '<select class="MatrialDropDown" >';
                 for (var i = 0; i < vmMatrailList.length; i++) {
                     drop += '<option value="' + vmMatrailList[i].ItemID + '">' + vmMatrailList[i].ItemName + '</option>';
                 }
                 drop += '</select>';
 
-                //drop += '<input class="treatmentItemID" type="hidden" value="' + tretID + '" />';
+                drop += '<input class="MatrailTeratmentID" type="hidden" value="' + $(this).parent().children('.TeratmentID').val() + '" />';
 
                 drop += '<input class="txtMatrailQuantity" type="text" value="" />';
 
                 drop += '<input type="button" class="btninsertMatialToList" value="Add" />';
 
-                drop += '<div id="MatrailListHolder"> <ul> </ul> </div>';
+                drop += '<div class="MatrailListHolder"> <ul> </ul> </div>';
                          
-                drop += '<input type="button" class="SaveMatrialList" value="Save Matrail" />';
+                drop += '<input type="button" class="btnSaveMatrialList" value="Save Matrail" />';
 
                 $(this).parent().children('.matrialWrap').html(drop);
                
@@ -66,11 +64,39 @@ var selector,
 
             $(document).on('click', '.btninsertMatialToList', function () {
 
-               var innerIL = '<li> <label id="MatrailName" > ' + + '</label>  <label id="lblMatrailQuantity" > ' + + '</label>  <input type="button" class="btnRemoveMatrailFromList" value="X" /> </li>';
+               var Quantity = $(this).parent().children('.txtMatrailQuantity').val();
+               var matrailName = $(this).parent().children('.MatrialDropDown').find('option').filter(':selected').text();
+               var matrailID = $(this).parent().children('.MatrialDropDown').val(); 
 
-               $(this).parent().children('#MatrailListHolder ul').append(innerIL);
+               var innerIL = '<li> <input class="MatrailID" type="hidden" value="' + matrailID + '" />  <label id="MatrailName" > ' + matrailName + '</label>  <label class="lblMatrailQuantity" > ' + Quantity + '</label>  <input type="button" class="btnRemoveMatrailFromList" value="X" /> </li>';
+
+               $(this).parent().children('.MatrailListHolder').children('ul').append(innerIL);
 
             });
+
+            $(document).on('click', '.btnRemoveMatrailFromList', function () {
+                $(this).parent().remove();
+            });
+
+            $(document).on('click', '.btnSaveMatrialList', function () {
+                
+
+                vmMatrailWrap.vmMatrailListToSave.length = 0;
+
+                //$(this).parent().children
+                $(this).parent().children('.MatrailListHolder').children('ul').children('li').each(function () {
+                    var martailID = $(this).children('.MatrailID').val();
+                    var quqnt = $(this).children('.lblMatrailQuantity').text();
+                    vmMatrailWrap.vmMatrailListToSave.push(new Main.obMatrailListItemToSave(martailID, quqnt));
+                });
+
+                var treatmentID = $(this).parent().children('.MatrailTeratmentID').val();
+                vmMatrailWrap.treatmentID = treatmentID;
+
+                Main.SaveMatrailOFtreatment(); 
+                $(this).parent().html('');
+            });
+
 
             $(document).on('click', '.btnRemoveTreatment', function () {
                 var s = $(this).parent().children('.treatmentItemID').val();
@@ -103,6 +129,10 @@ var selector,
             this.ItemID = ItemID;
             this.ItemName = ItemName;
         },
+        obMatrailListItemToSave: function (MatrailID, Quantity) {
+            this.MatrailID = MatrailID;
+            this.Quantity = Quantity;
+        },
         LoadMatrailList:function()
         {
             $.ajax({
@@ -116,6 +146,20 @@ var selector,
                     for (var i = 0; i < result.length; i++) {
                         vmMatrailList.push(new Main.obMatrailListItem(result[i].ItemID, result[i].ItemName));
                     }
+                }
+            });
+        },
+        SaveMatrailOFtreatment: function (TreatmentID) {
+            $.ajax({
+                url: "/DoctorDashboard/TreatmentSession/matrailTreatmentSave",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                async: false,
+                data: JSON.stringify({ matrailToSave: vmMatrailWrap }),
+                success: function () {
+                    alert('Materials Has Been Saved');
                 }
             });
         },
@@ -241,10 +285,7 @@ var selector,
             var wedge1color4;
             var wedge1color5;
             var count = 0;
-            //for (var k = 0; k < vm.length; k++) {
-            //    alert('tooth number ' + vm[k].toothNumber);
-            //    alert('opp color ' + vm[k].opperationColor)
-            //}
+
             for (var i = 1; i < 33; i++) {
 
                 wedge1color1 = '#ffffff';
@@ -320,7 +361,12 @@ var selector,
 
         },
         vmTreatmentList: [],
-        vmMatrailList: []
+        vmMatrailList: [],
+        matrailToSaveWrap: {
+            treatmentID:0,
+            vmMatrailListToSave: []
+        }
+       
     };
 
 

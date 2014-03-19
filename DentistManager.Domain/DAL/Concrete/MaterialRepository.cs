@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.ViewModel;
+using DentistManager.Domain.Entities;
 
 namespace DentistManager.Domain.DAL.Concrete
 {
@@ -21,6 +22,36 @@ namespace DentistManager.Domain.DAL.Concrete
                                                                 select new MaterialMiniViewModel{ ItemID=m.ItemID, ItemName=m.ItemName }).ToList();
                 return matrailList;
             }
+        }
+
+
+        public bool SaveTreatmentMatrail(IEnumerable<MatrailToSaveViewModel> matrailList, int treatmentID)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                foreach (var item in matrailList)
+                {
+                    MaterialTreatment materialTreatment = ctx.MaterialTreatments.Where(x => x.TeratmentID == treatmentID && x.MaterialID == item.MatrailID).FirstOrDefault();
+                    if(materialTreatment == null)
+                    {
+                        materialTreatment = ctx.MaterialTreatments.Create();
+                        materialTreatment.TeratmentID = treatmentID;
+                        materialTreatment.MaterialID = item.MatrailID;
+                        materialTreatment.MaterialCost = ctx.Materials.Find(item.MatrailID).MaterialCost;
+                        materialTreatment.Quantity = item.Quantity;
+                        ctx.MaterialTreatments.Add(materialTreatment);
+                    }
+                    else
+                    {
+                        materialTreatment.Quantity = item.Quantity;
+                        ctx.Entry(materialTreatment).State = System.Data.Entity.EntityState.Modified;
+                    }
+
+                  count +=  ctx.SaveChanges();
+                }
+            }
+            return count > 0 ? true : false ;
         }
     }
 }

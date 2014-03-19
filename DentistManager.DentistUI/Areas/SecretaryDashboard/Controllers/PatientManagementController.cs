@@ -84,6 +84,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    patient.ClinicID = getUserCurrentClinecID();
                    bool check= patientRepository.addNewPatinetBasicInfo(patient);
                 }
                 else
