@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DentistManager.Domain.ViewModel.ImagesViewModel>
+﻿@model IEnumerable<DentistManager.Domain.ViewModel.ImagesPresentViewModel>
 
 @{
     ViewBag.Title = "patient Images";
@@ -6,6 +6,7 @@
 <p>
     @Html.ActionLink("Create New", "PatientImagesCreate", new { patientID = ViewBag.patientID })
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -18,10 +19,10 @@
             @Html.DisplayNameFor(model => model.Notice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.appointmentID)
+            @Html.DisplayNameFor(model => model.appointmentDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageCategoryID)
+            @Html.DisplayNameFor(model => model.ImageCategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FullImageURL)
@@ -48,10 +49,10 @@
                 @Html.DisplayFor(modelItem => item.Notice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.appointmentID)
+                @Html.DisplayFor(modelItem => item.appointmentDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageCategoryID)
+                @Html.DisplayFor(modelItem => item.ImageCategoryName)
             </td>
             <td>
                 <a href="@item.FullImageURL">Full Image</a>
@@ -63,9 +64,9 @@
                 <a href="@item.MinImageURL">Mini Image</a>
             </td>
             <td>
-                @Html.ActionLink("Edit", "PatientImagesEdit", new { patientImageID = ViewBag.patientImageID }) |
-                @Html.ActionLink("Details", "PatientImagesDetails", new { patientImageID = ViewBag.patientImageID }) |
-                @Html.ActionLink("Delete", "PatientImagesDelete", new { patientImageID = ViewBag.patientImageID })
+                @Html.ActionLink("Edit", "PatientImagesEdit", new { patientImageID = item.ImageID}) |
+                @Html.ActionLink("Details", "PatientImagesDetails", new { patientImageID = item.ImageID }) |
+                @Html.ActionLink("Delete", "PatientImagesDelete", new { patientImageID = item.ImageID })
             </td>
         </tr>
     }

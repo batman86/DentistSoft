@@ -52,9 +52,7 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 CustomMaterial customMatrailEntity = ctx.CustomMaterials.Find(customMaterialViewModel.CustomMaterialID);
 
-                customMatrailEntity.DoctorID = customMaterialViewModel.DoctorID;
-                customMatrailEntity.PatientID = customMaterialViewModel.PatientID;
-                customMatrailEntity.RequestDate = customMaterialViewModel.RequestDate;
+                customMatrailEntity.ReciveDate = customMaterialViewModel.ReciveDate;
                 customMatrailEntity.Name = customMaterialViewModel.Name;
                 customMatrailEntity.Description = customMaterialViewModel.Description;
                 customMatrailEntity.Cost = customMaterialViewModel.Cost;
@@ -106,6 +104,22 @@ namespace DentistManager.Domain.DAL.Concrete
                                                                          join p in patientIQ on cm.PatientID equals p.PatientID
                                                                          where cm.DoctorID == DoctorID
                                                                          select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
+                return customMatrailViewModel;
+            }
+        }
+
+
+        public IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID, int patientID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var customMatrailIQ = ctx.CustomMaterials;
+                var patientIQ = ctx.Patients;
+
+                IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
+                                                                                      join p in patientIQ on cm.PatientID equals p.PatientID
+                                                                                      where cm.DoctorID == DoctorID && cm.PatientID == patientID
+                                                                                      select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
                 return customMatrailViewModel;
             }
         }

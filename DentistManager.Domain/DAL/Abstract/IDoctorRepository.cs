@@ -12,5 +12,6 @@ namespace DentistManager.Domain.DAL.Abstract
         IEnumerable<DoctorMiniInfoViewModel> getDoctorMiniInfoList();
         string getDoctorNameByID(int doctorID);
         int getClinecIDByUserID(string UserID);
+        int getDoctorIDByUserID(string UserID);
     }
 }

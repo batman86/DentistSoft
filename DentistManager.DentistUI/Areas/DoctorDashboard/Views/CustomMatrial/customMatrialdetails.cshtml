@@ -1,0 +1,74 @@
+﻿@model DentistManager.Domain.ViewModel.CustomMaterialPresentViewModel
+
+@{
+    ViewBag.Title = "customMatrialdetails";
+}
+
+<h2>customMatrialdetails</h2>
+
+<div>
+    <h4>CustomMaterialPresentViewModel</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomMaterialID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomMaterialID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.patienName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.patienName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReciveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReciveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "customMatrialEdit", new { customMatrialID = Model.CustomMaterialID }) |
+    @Html.ActionLink("Back to List", "customMatrialList")
+</p>

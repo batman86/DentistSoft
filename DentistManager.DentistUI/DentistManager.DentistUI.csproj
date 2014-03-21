@@ -286,6 +286,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\CustomMatrialController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientIllnessHistoryController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientManagementController.cs" />
@@ -705,6 +706,16 @@
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionList.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDetails.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptList.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptDetails.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptDelete.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialdetails.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialEdit.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialDelete.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialCreate.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDelete.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -752,7 +763,6 @@
     <Folder Include="Areas\DoctorDashboard\Models\" />
     <Folder Include="Areas\DoctorDashboard\Views\PatientImages\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\" />
     <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
     <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
     <Folder Include="Content\Images\xray\large\" />

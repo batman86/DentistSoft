@@ -11,5 +11,7 @@ namespace DentistManager.Domain.DAL.Abstract
     public interface IOpperationRepository
     {
         IEnumerable<opperationMiniDataViewModel> getOpperationList();
+
+        IEnumerable<MaterialMiniPresentViewModel> getOpperationMatrailList(int opperationID);
     }
 }

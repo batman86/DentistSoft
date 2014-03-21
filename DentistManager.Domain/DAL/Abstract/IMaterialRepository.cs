@@ -12,5 +12,7 @@ namespace DentistManager.Domain.DAL.Abstract
         IEnumerable<MaterialMiniViewModel> getMatrailMiniList();
 
         bool SaveTreatmentMatrail(IEnumerable<MatrailToSaveViewModel> matrailList,int treatmentID);
+
+        IEnumerable<MaterialMiniPresentViewModel> getTreatmentMatrailList(int treatmentID);
     }
 }

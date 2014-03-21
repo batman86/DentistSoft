@@ -72,5 +72,20 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return ClinecID;
         }
+
+
+        public int getDoctorIDByUserID(string UserID)
+        {
+            int DoctorID;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Doctor doctor = ctx.Doctors.Where(x => x.UserID == UserID).FirstOrDefault();
+                if (doctor != null)
+                    DoctorID = doctor.DoctorID;
+                else
+                    DoctorID = 0;
+            }
+            return DoctorID;
+        }
     }
 }

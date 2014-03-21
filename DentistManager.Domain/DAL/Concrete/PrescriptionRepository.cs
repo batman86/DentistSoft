@@ -9,7 +9,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.Domain.DAL.Concrete
 {
-    class PrescriptionRepository :IPrescriptionRepository
+    public class PrescriptionRepository :IPrescriptionRepository
     {
         public bool addNewPrescription(PrescriptionViewModel prescription)
         {
@@ -60,6 +60,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 {
                     prescriptionViewModel = new PrescriptionPresnetViewModel
                     {
+                        PrescriptionID=prescriptionEntity.PrescriptionID,
                         Notice = prescriptionEntity.Notice,
                         DoctorName = prescriptionEntity.Doctor.Name,
                         MedicineName=prescriptionEntity.Medicine.Name,
@@ -104,7 +105,7 @@ namespace DentistManager.Domain.DAL.Concrete
                                     join d in doctorIQ on p.DoctorID equals d.DoctorID
                                     join a in appointmentIQ on p.AppointmentID equals a.AppointmentID
                                     where p.PatientID == patientID
-                                    select new PrescriptionPresnetViewModel { Dose = p.Dose, Notice = p.Notice, MedicineName=m.Name, DoctorName=d.Name, AppointmentDate=a.Start_date }).ToList();
+                                    select new PrescriptionPresnetViewModel { Dose = p.Dose, Notice = p.Notice, MedicineName=m.Name, DoctorName=d.Name, AppointmentDate=a.Start_date, PrescriptionID=p.PrescriptionID  }).ToList();
 
                 return PrescriptionList;
             }

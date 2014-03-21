@@ -254,6 +254,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 {
                     imagesViewModel = new ImagesViewModel
                     {
+                        ImageID=imageEntity.ImageID,
                         Name = imageEntity.Name,
                         Notice = imageEntity.Notice,
                         ImageCategoryID = imageEntity.ImageCategoryID,
@@ -286,15 +287,20 @@ namespace DentistManager.Domain.DAL.Concrete
             return count > 0 ? true : false;
         }
 
-        public IEnumerable<ImagesViewModel> getPatientImagesList(int patientID)
+        public IEnumerable<ImagesPresentViewModel> getPatientImagesList(int patientID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                IEnumerable<ImagesViewModel> patientImagesList;
-                var patientsImages = ctx.Images;
-                patientImagesList = (from i in patientsImages
-                                     orderby i.PatientID == patientID
-                                     select new ImagesViewModel { Name = i.Name, Notice = i.Notice, ImageID = i.ImageID, MinImageURL = i.MinImageURL, MediumImageURL = i.MediumImageURL, FullImageURL = i.FullImageURL, LocalImageURL = i.LocalImageURL, ImageCategoryID = i.ImageCategoryID, appointmentID = i.appointmentID, PatientID = i.PatientID }).ToList();
+                IEnumerable<ImagesPresentViewModel> patientImagesList;
+                var patientsImagesIQ = ctx.Images;
+                var ImageCategoryIQ =ctx.ImageCategories;
+                var appointmnetIQ = ctx.Appointments;
+
+                patientImagesList = (from i in patientsImagesIQ
+                                     join a in appointmnetIQ on i.appointmentID equals a.AppointmentID
+                                     join ic in ImageCategoryIQ on i.ImageCategoryID equals ic.ImageCategoryID
+                                     where i.PatientID == patientID
+                                     select new ImagesPresentViewModel { Name = i.Name, Notice = i.Notice, ImageID = i.ImageID, MinImageURL = i.MinImageURL, MediumImageURL = i.MediumImageURL, FullImageURL = i.FullImageURL, LocalImageURL = i.LocalImageURL, appointmentDate=a.Start_date, ImageCategoryName=ic.Name}).ToList();
                 return patientImagesList;
             }
         }

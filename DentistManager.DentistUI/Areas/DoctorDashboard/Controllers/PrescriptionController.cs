@@ -18,12 +18,14 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         ISessionStateManger sessionStateManger;
         IMedicineRepository medicineRepository;
         IAppointmentRepository appointmentRepository;
-        public PrescriptionController(IPrescriptionRepository _prescriptionRepository, ISessionStateManger _sessionStateManger, IMedicineRepository _medicineRepository, IAppointmentRepository _appointmentRepository)
+        IDoctorRepository doctorRepository;
+        public PrescriptionController(IPrescriptionRepository _prescriptionRepository, ISessionStateManger _sessionStateManger, IMedicineRepository _medicineRepository, IAppointmentRepository _appointmentRepository, IDoctorRepository _doctorRepository)
         {
             sessionStateManger = _sessionStateManger;
             prescriptionRepository = _prescriptionRepository;
             medicineRepository = _medicineRepository;
             appointmentRepository = _appointmentRepository;
+            doctorRepository = _doctorRepository;
         }
 
         [NonAction]
@@ -31,14 +33,18 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         {
             return int.Parse(sessionStateManger.getDoctorActivePatinet(User.Identity.GetUserId()));
         }
-
+        [NonAction]
+        public int getDoctorIDbyUserID()
+        {
+            return doctorRepository.getDoctorIDByUserID(User.Identity.GetUserId());
+        }
         //
         // GET: /DoctorDashboard/Prescription/
         public ActionResult Index()
         {
             return View();
         }
-
+        // /DoctorDashboard/Prescription/PrescriptionList
         public ActionResult PrescriptionList(int patientID = 0)
         {
             if (patientID == 0)
@@ -56,12 +62,14 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 
         //
         // GET: /DoctorDashboard/Prescription/PrescriptionDetails/5
-        public ActionResult PrescriptionDetails(int prescriptionID)
+        public ActionResult PrescriptionDetails(int prescriptionID=0)
         {
+            if (prescriptionID == 0)
+                return HttpNotFound();
             PrescriptionPresnetViewModel prescription = prescriptionRepository.getPrescriptionDetails(prescriptionID);
             if (prescription == null)
                 return HttpNotFound();
-            return PartialView(prescription);
+            return View(prescription);
         }
 
         public ActionResult PrescriptionCreate(int patientID = 0)
@@ -73,9 +81,6 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             var applist = appointmentRepository.getPatientAppountmentList(patientID);
             PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
 
-
-
-            ViewBag.patientID = patientID;
             return View(prescriptionWrapViewModel);
         }
 
@@ -84,14 +89,18 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && prescriptionViewModel.MedicineID != 0 && prescriptionViewModel.AppointmentID != 0)
                 {
+                    prescriptionViewModel.DoctorID = getDoctorIDbyUserID();
+                    prescriptionViewModel.PatientID = getCurrentPatientID();
                     bool check = prescriptionRepository.addNewPrescription(prescriptionViewModel);
                 }
                 else
                 {
-                    ViewBag.patientID = prescriptionViewModel.PatientID;
-                    return View();
+                    var medList = medicineRepository.getMedicineList();
+                    var applist = appointmentRepository.getPatientAppountmentList(getCurrentPatientID());
+                    PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
+                    return View(prescriptionWrapViewModel);
                 }
 
                 return RedirectToAction("PrescriptionList", new { patientID = prescriptionViewModel.PatientID });
@@ -113,55 +122,23 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 
         [HttpPost]
         [ActionName("PrescriptionDelete")]
-        public ActionResult ConfirmPrescriptionDelete(int prescriptionID)
+        public ActionResult ConfirmPrescriptionDelete(int prescriptionID=0)
         {
             try
             {
-                    int patientID = getCurrentPatientID();
+                if(prescriptionID==0)
+                {
+                    return HttpNotFound();
+                }
+               int patientID = getCurrentPatientID();
 
-                bool check = prescriptionRepository.deletePrescription(prescriptionID); 
-                return RedirectToAction("patientHistoryList", new { patientID = patientID });
+                bool check = prescriptionRepository.deletePrescription(prescriptionID);
+                return RedirectToAction("PrescriptionList");
             }
             catch
             {
                 return View();
             }
         }
-
-
-        ////
-        //// GET: /DoctorDashboard/PatientManagement/PatientHistoryEdit/5
-        //public ActionResult PrescriptionEdit(int prescriptionID)
-        //{
-        //    prescriptionRepository.getPrescriptionDetails(prescriptionID);
-        //    PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(prescriptionID);
-        //    if (patientHistory == null)
-        //        return HttpNotFound();
-        //    return View(patientHistory);
-        //}
-
-        ////
-        //// POST: /DoctorDashboard/PatientManagement/PatientHistoryEdit/5
-        //[HttpPost]
-        //public ActionResult PrescriptionEdit(PatientHistoryViewModel patientHistory)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            bool check = patientRepository.updatePatinetHistory(patientHistory);
-        //        }
-        //        else
-        //        {
-        //            return View(patientHistory);
-        //        }
-        //        return RedirectToAction("patientHistoryList", new { patientID = patientHistory.PatientID });
-        //    }
-        //    catch
-        //    {
-        //        return View(patientHistory);
-        //    }
-        //}
-
 	}
 }

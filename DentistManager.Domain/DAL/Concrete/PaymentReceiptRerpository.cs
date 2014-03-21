@@ -36,7 +36,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 paymentRercieptEntity.ClinicID = paymentRecieptViewModel.ClinicID;
                 paymentRercieptEntity.Amount = paymentRecieptViewModel.Amount;
                 paymentRercieptEntity.Date = DateTime.Now;
-                // add patient id
+                paymentRercieptEntity.PatientID = paymentRecieptViewModel.PatientID;
 
                 ctx.PaymentReceipts.Add(paymentRercieptEntity);
                 count = ctx.SaveChanges();
@@ -71,9 +71,10 @@ namespace DentistManager.Domain.DAL.Concrete
                     return null;
                  reciptpresentViewModel = new PaymentReceiptPresentViewModel();
 
+                reciptpresentViewModel.receiptID = recipt.ReceiptID;
                 reciptpresentViewModel.receiptAmount = recipt.Amount;
                 reciptpresentViewModel.ReviceDate = recipt.Date;
-                reciptpresentViewModel.reciverName = ctx.Secretaries.Where(x => x.UserID == recipt.UserID).Select(x => x.Name).ToString();
+                reciptpresentViewModel.reciverName = ctx.Secretaries.Where(x => x.UserID == recipt.UserID) .FirstOrDefault().Name;
             }
             return reciptpresentViewModel;
         }
@@ -88,7 +89,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 IEnumerable<PaymentReceiptPresentViewModel> reciptpresentViewModel = (from p in paymentReciptIQ
                                                                          join s in secertaryIQ on p.UserID equals s.UserID
                                                                          where p.PatientID == patientID && p.ClinicID == clinecID
-                                                                         select new PaymentReceiptPresentViewModel { receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.Name }).ToList();
+                                                                         select new PaymentReceiptPresentViewModel { receiptID =p.ReceiptID, receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.Name }).ToList();
                 return reciptpresentViewModel;
             }
         }

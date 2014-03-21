@@ -53,5 +53,21 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false ;
         }
+
+
+        public IEnumerable<MaterialMiniPresentViewModel> getTreatmentMatrailList(int treatmentID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var matrailIQ = ctx.Materials;
+                var MaterialTreatmentsIQ = ctx.MaterialTreatments;
+
+                IEnumerable<MaterialMiniPresentViewModel> matrailList = (from mt in MaterialTreatmentsIQ
+                                                                         join m in matrailIQ on mt.MaterialID equals m.ItemID
+                                                                         where mt.TeratmentID == treatmentID
+                                                                         select new MaterialMiniPresentViewModel { ItemID = m.ItemID, ItemName = m.ItemName, Quantity = (int)mt.Quantity }).ToList();
+                return matrailList;
+            }
+        }
     }
 }

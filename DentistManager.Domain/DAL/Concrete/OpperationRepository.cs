@@ -25,6 +25,22 @@ namespace DentistManager.Domain.DAL.Concrete
             }
         }
 
-      
+
+        // add quantity to the viewModel 
+
+        public IEnumerable<MaterialMiniPresentViewModel> getOpperationMatrailList(int opperationID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var matrailIQ = ctx.Materials;
+                var opperationMatrialIQ = ctx.OpperationMaterials;
+
+                IEnumerable<MaterialMiniPresentViewModel> matrailList = (from om in opperationMatrialIQ
+                                                                         join m in matrailIQ on om.ItemID equals m.ItemID
+                                                                         where om.OpperationID == opperationID
+                                                                         select new MaterialMiniPresentViewModel { ItemID = m.ItemID, ItemName = m.ItemName , Quantity= om.Quantity}).ToList();
+                return matrailList;
+            }
+        }
     }
 }

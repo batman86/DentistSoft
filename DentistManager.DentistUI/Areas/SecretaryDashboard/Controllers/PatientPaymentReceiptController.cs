@@ -27,6 +27,11 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
         }
 
+        [NonAction]
+        public int getClinecIDForCurrentUser()
+        {
+            return sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+        }
 
         public ActionResult patientReceiptList(int patientID = 0)
         {
@@ -75,9 +80,10 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    paymentReceiptViewModel.ClinicID = 1;
+                    paymentReceiptViewModel.ClinicID = getClinecIDForCurrentUser();
                     paymentReceiptViewModel.Date = DateTime.Now;
-                    paymentReceiptViewModel.UserID =" 1";
+                    paymentReceiptViewModel.UserID = User.Identity.GetUserId();
+                    paymentReceiptViewModel.PatientID = getCurrentPatientID();
 
                     bool check = paymentReceiptRerpository.addNewPatientReceipt(paymentReceiptViewModel);
                 }

@@ -139,6 +139,23 @@ namespace DentistManager.DentistUI.Infrastructure
 
             return probertyValue;
         }
+
+
+        public string getDoctorCustomMatrailFilter(string userID)
+        {
+            string FilterType = getSeassionValue(userID, seassionNamesList.DoctorCustomMatrailFilterParamter.ToString(), seassionProbertyNamesList.FilterType.ToString());
+            if (FilterType == null)
+            {
+                FilterType = "1";
+                setSeassionValue(userID, seassionNamesList.DoctorCustomMatrailFilterParamter.ToString(), seassionProbertyNamesList.FilterType.ToString(), FilterType);
+            }
+            return FilterType;
+        }
+
+        public void setDoctorCustomMatrailFilter(string userID, string FilterType)
+        {
+            setSeassionValue(userID, seassionNamesList.DoctorCustomMatrailFilterParamter.ToString(), seassionProbertyNamesList.FilterType.ToString(), FilterType);
+        }
     }
 
 }

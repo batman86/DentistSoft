@@ -38,33 +38,55 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
         }
 
-
         // patient Images -------------------------------------------------********************************************------------------------------------- //
-        public ActionResult patientImagesList(int patientID=0)
+        public ActionResult patientImagesList(int patientID = 0)
         {
             if (patientID == 0)
                 patientID = getCurrentPatientID();
 
-            IEnumerable<ImagesViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
+            // reorder include patientImageID  appointment date   categoryName
+            IEnumerable<ImagesPresentViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
+
             if (patientImageList == null)
                 return HttpNotFound();
+
             ViewBag.patientID = patientID;
 
             return View(patientImageList);
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientHistoryDetails/PatientImagesDetails/5
+        //[HttpPost]
+        //public ActionResult patientImagesList(int patientID = 0, int ImageCategoryID = 0, int AppointmentID = 0)
+        //{
+        //    if (patientID == 0)
+        //        patientID = getCurrentPatientID();
+
+        //    IEnumerable<ImagesViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
+
+
+        //    ImageListWrapViewModel imageListWrapViewModel = new ImageListWrapViewModel();
+        //    imageListWrapViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
+        //    imageListWrapViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(patientID); ;
+        //    imageListWrapViewModel.patientImageList = patientImageList;
+
+
+        //    if (patientImageList == null)
+        //        return HttpNotFound();
+
+        //    ViewBag.patientID = patientID;
+
+        //    return View(patientImageList);
+        //}
+
+
         public ActionResult PatientImagesDetails(int patientImageID)
         {
             ImagesViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImage == null)
                 return HttpNotFound();
-            return PartialView(patientImage);
+            return View(patientImage);
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesCreate
         public ActionResult PatientImagesCreate(int patientID=0)
         {
             if (patientID == 0)
@@ -79,8 +101,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(imageCreateViewModel);
         }
 
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientImagesCreate
+
         [HttpPost]
         public ActionResult PatientImagesCreate(ImagesViewModel imagesViewModel, string name, IEnumerable<HttpPostedFileBase> files, FormCollection coll)
         {
@@ -103,31 +124,27 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }
                     }
-                    else
-                    {
-                        ViewBag.patientID = imagesViewModel.PatientID;
-                        return View();
-                    }
-
                 }
-                else
-                {
                     ViewBag.patientID = imagesViewModel.PatientID;
-                    return View();
-                }
+                    ImageCreateViewModel imageCreateViewModel = new ImageCreateViewModel();
 
-                return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
+                    imageCreateViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
+                    imageCreateViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(imagesViewModel.PatientID);
+                    return View(imageCreateViewModel);
+
             }
             catch
             {
                 ViewBag.patientID = imagesViewModel.PatientID;
-                return View();
+                ImageCreateViewModel imageCreateViewModel = new ImageCreateViewModel();
+
+                imageCreateViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
+                imageCreateViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(imagesViewModel.PatientID);
+                return View(imageCreateViewModel);
             }
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesEdit/5
-        public ActionResult PatientImagesEdit(int patientImageID)
+        public ActionResult PatientImagesEdit(int patientImageID=0)
         {
             ImagesViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImagesViewModel == null)
@@ -137,8 +154,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(patientImagesViewModel);
         }
 
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientImagesEdit/5
         [HttpPost]
         public ActionResult PatientImagesEdit(ImagesViewModel patientImageViewModel)
         {
@@ -161,7 +176,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
 
-        // GET: /SecretaryDashboard/PatientManagement/PatientImagesDelete/5
         public ActionResult PatientImagesDelete(int patientImageID)
         {
             ImagesViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
@@ -170,8 +184,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(patientImageViewModel);
         }
 
-        //
-        // POST: /SecretaryDashboard/PatientManagement/ConfirmPatientImagesDelete/5
+
         [HttpPost]
         [ActionName("PatientImagesDelete")]
         public ActionResult ConfirmPatientImagesDelete(int patientImageID, string patientID)

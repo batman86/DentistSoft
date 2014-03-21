@@ -69,7 +69,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             Patient patient = patientRepository.getPatinetBasicInfo(patientID);
             if (patient == null)
                 return HttpNotFound();
-            return PartialView(patient);
+            return View(patient);
         }
 	}
 }

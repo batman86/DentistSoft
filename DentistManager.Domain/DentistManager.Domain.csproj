@@ -204,7 +204,10 @@
     <Compile Include="ViewModel\DoctorMiniInfoViewModel.cs" />
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
+    <Compile Include="ViewModel\ImageListWrapViewModel.cs" />
+    <Compile Include="ViewModel\ImagesPresentViewModel.cs" />
     <Compile Include="ViewModel\ImagesViewModel.cs" />
+    <Compile Include="ViewModel\MaterialMiniPresentViewModel.cs" />
     <Compile Include="ViewModel\MaterialMiniViewModel.cs" />
     <Compile Include="ViewModel\MatrailToSaveViewModel.cs" />
     <Compile Include="ViewModel\MatrailToSaveWrapViewModel.cs" />

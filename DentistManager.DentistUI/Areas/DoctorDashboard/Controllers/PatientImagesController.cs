@@ -45,7 +45,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             if (patientID == 0)
                 patientID = getCurrentPatientID();
 
-            IEnumerable<ImagesViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
+            IEnumerable<ImagesPresentViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
             if (patientImageList == null)
                 return HttpNotFound();
             ViewBag.patientID = patientID;
@@ -60,7 +60,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             ImagesViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImage == null)
                 return HttpNotFound();
-            return PartialView(patientImage);
+            return View(patientImage);
         }
 
         //

@@ -14,6 +14,8 @@ namespace DentistManager.DentistUI.Infrastructure
         void setDoctorActivePatinet(string userID, int patientID);
         int getClinecIDForCurrentSecurtary(string userID);
         int getClinecIDForCurrentDoctor(string userID);
+        string getDoctorCustomMatrailFilter(string userID);
+        void setDoctorCustomMatrailFilter(string userID, string FilterType);
 
     }
 }

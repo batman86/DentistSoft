@@ -6,12 +6,14 @@ namespace DentistManager.DentistUI.Infrastructure
         SecurtaryActivePatient,
         SecurtaryActiveClinec,
         DoctorActivePatient,
-        DoctorActiveClinec
+        DoctorActiveClinec,
+        DoctorCustomMatrailFilterParamter
     };
     public enum seassionProbertyNamesList
     {
         ActivePatientID,
-        ActiveClinecID
+        ActiveClinecID,
+        FilterType
     };
 
     public enum ImageSize
@@ -26,7 +28,6 @@ namespace DentistManager.DentistUI.Infrastructure
     {
         waiting,
         postponed,
-        canceled,
         progress,
         finished
     };

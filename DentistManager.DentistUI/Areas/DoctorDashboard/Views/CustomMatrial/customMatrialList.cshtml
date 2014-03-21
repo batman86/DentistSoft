@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DentistManager.Domain.ViewModel.CustomMaterialPresentViewModel>
+
+@{
+    ViewBag.Title = "customMatrialList";
+}
+
+<h2>customMatrialList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "customMatrialCreate")
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    if (ViewBag.FilterType == "1")
+    {
+        <select name="FilterType">
+            <option value="1" selected>All Doctor Custom Matrials</option>
+            <option value="2">All Patient Custom Matrials</option>
+        </select>
+    }
+    else
+    {
+        <select name="FilterType">
+            <option value="1" >All Doctor Custom Matrials</option>
+            <option value="2" selected>All Patient Custom Matrials</option>
+        </select>
+    }
+    <input type="submit" value="Filter" class="btn btn-default" />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomMaterialID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.patienName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReciveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomMaterialID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.patienName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReciveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "customMatrialEdit", new { customMatrialID= item.CustomMaterialID }) |
+            @Html.ActionLink("Details", "customMatrialdetails", new { customMatrialID = item.CustomMaterialID }) |
+            @Html.ActionLink("Delete", "customMatrialDelete", new { customMatrialID = item.CustomMaterialID })
+        </td>
+    </tr>
+}
+
+</table>

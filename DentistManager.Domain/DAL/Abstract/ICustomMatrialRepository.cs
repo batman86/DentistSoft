@@ -19,5 +19,6 @@ namespace DentistManager.Domain.DAL.Abstract
         bool deleteCustomMaterial(int customMaterialtID);
 
         IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID);
+        IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID, int patientID);
     }
 }

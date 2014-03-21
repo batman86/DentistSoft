@@ -1,0 +1,49 @@
+﻿@model DentistManager.Domain.ViewModel.PaymentReceiptPresentViewModel
+
+@{
+    ViewBag.Title = "patientReceiptDetails";
+}
+
+<h2>patientReceiptDetails</h2>
+
+<div>
+    <h4>PaymentReceiptPresentViewModel</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.receiptID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receiptID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.receiptAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.receiptAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reciverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reciverName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "patientReceiptList")
+</p>

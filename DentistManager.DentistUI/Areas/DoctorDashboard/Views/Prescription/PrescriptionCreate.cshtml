@@ -7,7 +7,7 @@
 
 <h2>PrescriptionCreate</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("PrescriptionCreate", "Prescription")) 
 {
     @Html.AntiForgeryToken()
     
@@ -18,28 +18,12 @@
 
             <div class="form-group">
                 select Appointment
-                @Html.generatePatientAppointmentDropDownList(Model.appointmentList)
+                @Html.generatePatientAppointmentDropDownList2(Model.appointmentList)
             </div>
 
             <div class="form-group">
                 select Medicine
                 @Html.generatePatientMedicineDropDownList(Model.MedicineList)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.prescriptionViewModel.AppointmentID, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prescriptionViewModel.AppointmentID)
-                    @Html.ValidationMessageFor(model => model.prescriptionViewModel.AppointmentID)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.prescriptionViewModel.MedicineID, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prescriptionViewModel.MedicineID)
-                    @Html.ValidationMessageFor(model => model.prescriptionViewModel.MedicineID)
-                </div>
             </div>
 
             <div class="form-group">
