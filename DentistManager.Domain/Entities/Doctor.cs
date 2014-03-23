@@ -18,6 +18,8 @@ namespace DentistManager.Domain.Entities
         {
             this.Appointments = new HashSet<Appointment>();
             this.CustomMaterials = new HashSet<CustomMaterial>();
+            this.Patients = new HashSet<Patient>();
+            this.PaymentReceipts = new HashSet<PaymentReceipt>();
             this.Prescriptions = new HashSet<Prescription>();
             this.Treatments = new HashSet<Treatment>();
         }
@@ -39,6 +41,8 @@ namespace DentistManager.Domain.Entities
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Clinic Clinic { get; set; }
         public virtual ICollection<CustomMaterial> CustomMaterials { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
+        public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }
         public virtual ICollection<Treatment> Treatments { get; set; }
     }

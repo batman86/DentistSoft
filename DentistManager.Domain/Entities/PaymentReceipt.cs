@@ -20,9 +20,11 @@ namespace DentistManager.Domain.Entities
         public int PatientID { get; set; }
         public string UserID { get; set; }
         public int ClinicID { get; set; }
+        public int DoctorID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Clinic Clinic { get; set; }
+        public virtual Doctor Doctor { get; set; }
         public virtual Patient Patient { get; set; }
     }
 }

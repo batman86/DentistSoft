@@ -34,9 +34,11 @@ namespace DentistManager.Domain.Entities
         public string gender { get; set; }
         public string E_mail { get; set; }
         public string Notice { get; set; }
+        public Nullable<int> DoctorID { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual Clinic Clinic { get; set; }
+        public virtual Doctor Doctor { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<PatientHistory> PatientHistories { get; set; }
         public virtual ICollection<PaymentReceipt> PaymentReceipts { get; set; }
