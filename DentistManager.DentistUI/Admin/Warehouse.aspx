@@ -42,7 +42,11 @@
                     </Columns>
                     <Settings ShowFilterBar="Visible" ShowFilterRow="True" ShowFilterRowMenu="True" />
                 </dx:ASPxGridView>
-                <asp:SqlDataSource ID="dsWarehouse" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Warehouse]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="dsWarehouse" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT * FROM [Warehouse] WHERE ([Total] &gt; @Total)">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="0" Name="Total" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
