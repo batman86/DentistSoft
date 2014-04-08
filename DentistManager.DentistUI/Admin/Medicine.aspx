@@ -6,9 +6,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+   
     <table style="width:800px ">
         <tr>
+            
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxMedicine" runat="server" AutoGenerateColumns="False" DataSourceID="dsMedicine"
                      EnableTheming="True" KeyFieldName="MedicineID" Theme="Office2003Silver" ClientInstanceName="MedicinGrid" 
@@ -39,6 +40,10 @@
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataComboBoxColumn FieldName="ScaleType" VisibleIndex="4">
                             <PropertiesComboBox>
+                                <Items>
+                                    <dx:ListEditItem Text="Pill" Value="Pill" />
+                                    <dx:ListEditItem Text="liquid" Value="liquid" />
+                                </Items>
                                 <ValidationSettings>
                                     <RequiredField IsRequired="True" />
                                 </ValidationSettings>

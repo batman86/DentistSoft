@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+  <group Text="Adminstration">
+    <item Text="Doctors" NavigateUrl="~\Admin\Doctors.aspx" />
+    <item Text="Secretaries" NavigateUrl="~\Admin\Secretary.aspx" />
+    <item Text="Clinics" NavigateUrl="~\Admin\Clinics.aspx" />
+  </group>
+  <group Text="System Data">
+    <item Text="Materials" NavigateUrl="~\Admin\Materials.aspx" />
+    <item Text="Medicines" NavigateUrl="~\Admin\Medicine.aspx" />
+    <item Text="Opperations" NavigateUrl="~\Admin\opperation.aspx" />
+  </group>
+  <group Text="Warehouse">
+    <item Text="Storages" NavigateUrl="~\Admin\Storages.aspx"  />
+    <item Text="Warehouses" NavigateUrl="~\Admin\Warehouse.aspx"  />
+    <item Text="ReceivingItems" NavigateUrl="~\Admin\Receiving.aspx"  />
+    <item Text="Suppliers" NavigateUrl="~\Admin\Suppliers.aspx" />
+  </group>
+  <group Text="Payment">
+    <item Text="Payments" NavigateUrl="~\Admin\Payment.aspx" />
+
+  </group>
+</menu>

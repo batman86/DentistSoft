@@ -15,7 +15,6 @@
             width: 80%;
         }
         .auto-style2 {
-            width: 22px;
         }
     </style>
 </asp:Content>
@@ -95,8 +94,7 @@
 
     <table class="auto-style1">
         <tr>
-            <td class="auto-style2">&nbsp;</td>
-            <td>
+            <td class="auto-style2" colspan="2">
                 <div style="width: 100%; height: 100%; position: relative">
                 <dx:ASPxGridView ID="gvxDoctors" runat="server" AutoGenerateColumns="False" ClientInstanceName="MainGirdDoctors" 
                     DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" Theme="Office2003Silver" Width="100%" OnInitNewRow="gvxDoctors_InitNewRow" OnCustomButtonCallback="gvxDoctors_CustomButtonCallback">

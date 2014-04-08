@@ -355,7 +355,7 @@
           <Property Name="PatientID" Type="int" Nullable="false" />
           <Property Name="OpperationID" Type="int" Nullable="false" />
           <Property Name="ToothSideNumber" Type="int" />
-          <Property Name="ToothNumber" Type="int" />
+          <Property Name="ToothNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="OpperationCost" Type="decimal" Precision="18" Scale="4" />
           <Property Name="TeratmentCost" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="ClinicID" Type="int" Nullable="false" />
@@ -1525,7 +1525,7 @@
           <Property Name="PatientID" Type="Int32" Nullable="false" />
           <Property Name="OpperationID" Type="Int32" Nullable="false" />
           <Property Name="ToothSideNumber" Type="Int32" />
-          <Property Name="ToothNumber" Type="Int32" />
+          <Property Name="ToothNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OpperationCost" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="TeratmentCost" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="ClinicID" Type="Int32" Nullable="false" />

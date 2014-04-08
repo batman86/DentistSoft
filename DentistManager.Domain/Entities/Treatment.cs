@@ -26,7 +26,7 @@ namespace DentistManager.Domain.Entities
         public int PatientID { get; set; }
         public int OpperationID { get; set; }
         public Nullable<int> ToothSideNumber { get; set; }
-        public Nullable<int> ToothNumber { get; set; }
+        public string ToothNumber { get; set; }
         public Nullable<decimal> OpperationCost { get; set; }
         public decimal TeratmentCost { get; set; }
         public int ClinicID { get; set; }

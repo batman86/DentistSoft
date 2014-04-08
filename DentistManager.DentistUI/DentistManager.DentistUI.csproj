@@ -43,6 +43,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DevExpress.Data.v13.1.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DevExpress.Web.v13.1.dll</HintPath>
@@ -239,6 +240,13 @@
     <Compile Include="Admin\PatientStatus.aspx.designer.cs">
       <DependentUpon>PatientStatus.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\PaymentByTime.aspx.cs">
+      <DependentUpon>PaymentByTime.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PaymentByTime.aspx.designer.cs">
+      <DependentUpon>PaymentByTime.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -252,6 +260,13 @@
     </Compile>
     <Compile Include="Admin\Receiving.aspx.designer.cs">
       <DependentUpon>Receiving.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Root.Master.cs">
+      <DependentUpon>Root.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Root.Master.designer.cs">
+      <DependentUpon>Root.Master</DependentUpon>
     </Compile>
     <Compile Include="Admin\Secretary.aspx.cs">
       <DependentUpon>Secretary.aspx</DependentUpon>
@@ -336,14 +351,22 @@
     <Content Include="Admin\Medicine.aspx" />
     <Content Include="Admin\opperation.aspx" />
     <Content Include="Admin\PatientStatus.aspx" />
+    <Content Include="Admin\PaymentByTime.aspx" />
     <Content Include="Admin\Payment.aspx" />
     <Content Include="Admin\Receiving.aspx" />
     <Content Include="Admin\Secretary.aspx" />
     <Content Include="Admin\Storages.aspx" />
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Admin\Warehouse.aspx" />
+    <Content Include="App_Data\SideMenu.xml" />
+    <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\AquaHeader.jpg" />
+    <Content Include="Content\Images\BlackGlassHeader.jpg" />
+    <Content Include="Content\Images\GlassHeader.jpg" />
+    <Content Include="Content\Images\PlasticBlueHeader.jpg" />
+    <Content Include="Content\Images\RedWineHeader.jpg" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -716,6 +739,7 @@
     <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialDelete.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialCreate.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDelete.cshtml" />
+    <Content Include="Admin\Root.Master" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -759,7 +783,6 @@
     <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\DoctorDashboard\Models\" />
     <Folder Include="Areas\DoctorDashboard\Views\PatientImages\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
