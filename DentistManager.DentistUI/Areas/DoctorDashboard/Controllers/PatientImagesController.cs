@@ -57,7 +57,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         // GET: /DoctorDashboard/PatientHistoryDetails/PatientImagesDetails/5
         public ActionResult PatientImagesDetails(int patientImageID)
         {
-            ImagesViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImage == null)
                 return HttpNotFound();
             return View(patientImage);
@@ -98,7 +98,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                             string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
 
                             ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/" + imageCategoryName), imagesViewModel);
+                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/" + imageCategoryName), @"~/Content/Images/" + imageCategoryName, imagesViewModel);
 
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }
@@ -129,7 +129,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         // GET: /DoctorDashboard/PatientManagement/PatientImagesEdit/5
         public ActionResult PatientImagesEdit(int patientImageID)
         {
-            ImagesViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImagesViewModel == null)
                 return HttpNotFound();
             //  ViewBag.patientID = patientHistory.PatientID;
@@ -164,7 +164,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         // GET: /DoctorDashboard/PatientManagement/PatientImagesDelete/5
         public ActionResult PatientImagesDelete(int patientImageID)
         {
-            ImagesViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImageViewModel == null)
                 return HttpNotFound();
             return View(patientImageViewModel);

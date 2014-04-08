@@ -16,7 +16,7 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                IEnumerable<Treatment> treatmentList = ctx.Treatments.Where(x => x.PatientID == patientID && x.ClinicID == clinecID).ToList();
+                IEnumerable<Treatment> treatmentList = ctx.Treatments.Include("MaterialTreatments").Where(x => x.PatientID == patientID && x.ClinicID == clinecID).ToList();
                 return treatmentList;
             }
         }
@@ -52,7 +52,6 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false;
         }
-
 
         public bool addTreatment(Treatment treatment)
         {

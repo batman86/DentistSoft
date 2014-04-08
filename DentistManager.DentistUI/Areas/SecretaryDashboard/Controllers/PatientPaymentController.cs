@@ -1,51 +1,45 @@
-﻿using System;
+﻿using DentistManager.Domain.BL.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using DentistManager.DentistUI.Infrastructure;
+using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
     public class PatientPaymentController : Controller
     {
+        IPatientPaymentBL patientPaymentBL;
+        ISessionStateManger sessionStateManger;
+        public PatientPaymentController(IPatientPaymentBL _patientPaymentBL, ISessionStateManger _sessionStateManger)
+        {
+            patientPaymentBL = _patientPaymentBL;
+            sessionStateManger = _sessionStateManger;
+        }
+
+        [NonAction]
+        public int getCurrentPatientID()
+        {
+            return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
+        }
+
+        [NonAction]
+        public int getUserCurrentClinecID()
+        {
+            return sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+        }
+
+
         //
         // GET: /SecretaryDashboard/PatientPayment/
         public ActionResult Index()
         {
-            return View();
+            PatientBillInfoWrap billInfo= patientPaymentBL.patientTotalCost(getCurrentPatientID(), getUserCurrentClinecID());
+            return View(billInfo);
         }
-
-        //
-        // GET: /SecretaryDashboard/PatientPayment/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /SecretaryDashboard/PatientPayment/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /SecretaryDashboard/PatientPayment/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
 
     }
 }

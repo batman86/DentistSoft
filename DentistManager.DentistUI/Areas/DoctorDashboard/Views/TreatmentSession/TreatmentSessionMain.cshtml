@@ -8,16 +8,22 @@
 <input type="hidden" id="ActiveOperationID" value="0" />
 <input type="hidden" id="appointmentDate" value="@ViewBag.appointmentDate" />
 
-@{ Html.RenderAction("opperationList"); }
+
 <div id="container"></div>
 
+@{ Html.RenderAction("opperationList"); 
+           @*<li><label class="Treatmentheader">Side</label><label class ="Treatmentheader">Tooth</label>  <label class="Treatmentheader">Opp</label>  <label class="Treatmentheader"> App Date</label>  <label class="Treatmentheader">Notice</label>  <label class="Treatmentheader">Work Cost</label> </li>*@
+
+   }
+
 <div id="TreatmentListWrap">
-    <ul id="TreatmentList"></ul>
+    <table id="TreatmentList">
+        <tr>
+            <td>Side</td><td>Tooth</td><td>Opp</td><td>App Date</td><td>Notice</td><td>Work Cost</td><td></td>
+        </tr>
+    </table>
 </div>
 
-<div id="MatrailHolder">
-    <ul id="MatrailList"></ul>
-</div>
 
 <input type="button" id="btnSaveTreatments" value="Save Treatment List" />
 

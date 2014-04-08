@@ -24,14 +24,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BrithDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BrithDate)
-                @Html.ValidationMessageFor(model => model.BrithDate)
-            </div>
+            @Html.LabelFor(model => model.BrithDate, new { @class = "control-label col-md-2"})
+            <input type="text" id="datepicker" name="BrithDate">
         </div>
-
-
 
         <div class="form-group">
            <p> Gender</p> 
@@ -94,3 +89,19 @@
 <div>
     @Html.ActionLink("Back to List", "patientList")
 </div>
+
+@section Scripts {
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1940:2060'
+            });
+        });
+    </script>
+}

@@ -37,14 +37,13 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         {
             return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
         }
-
+        // /SecretaryDashboard/PatientImages/patientImagesList
         // patient Images -------------------------------------------------********************************************------------------------------------- //
         public ActionResult patientImagesList(int patientID = 0)
         {
             if (patientID == 0)
                 patientID = getCurrentPatientID();
 
-            // reorder include patientImageID  appointment date   categoryName
             IEnumerable<ImagesPresentViewModel> patientImageList = patientRepository.getPatientImagesList(patientID);
 
             if (patientImageList == null)
@@ -81,7 +80,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         public ActionResult PatientImagesDetails(int patientImageID)
         {
-            ImagesViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImage = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImage == null)
                 return HttpNotFound();
             return View(patientImage);
@@ -119,7 +118,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                             string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
 
                             ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/" + imageCategoryName), imagesViewModel);
+                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"/Content/Images/" + imageCategoryName),@"/Content/Images/" + imageCategoryName, imagesViewModel);
 
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }
@@ -146,7 +145,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         public ActionResult PatientImagesEdit(int patientImageID=0)
         {
-            ImagesViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImagesViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImagesViewModel == null)
                 return HttpNotFound();
             //  ViewBag.patientID = patientHistory.PatientID;
@@ -178,7 +177,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 
         public ActionResult PatientImagesDelete(int patientImageID)
         {
-            ImagesViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
+            ImagesPresentViewModel patientImageViewModel = patientRepository.getPatinetImagesDetails(patientImageID);
             if (patientImageViewModel == null)
                 return HttpNotFound();
             return View(patientImageViewModel);

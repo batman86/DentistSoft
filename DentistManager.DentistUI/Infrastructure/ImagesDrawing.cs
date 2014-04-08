@@ -33,22 +33,26 @@ namespace DentistManager.DentistUI.Infrastructure
             return imageName;
         }
 
-        public void PatientImageSaver(Image image, string serverPath,ImagesViewModel imageViewModel)
+        public void PatientImageSaver(Image image, string serverPath, string PathForDB, ImagesViewModel imageViewModel)
         {
             string imageName = getValidImageName(serverPath);
             string pathHolder = string.Empty;
+            string pathHolderDB = string.Empty;
             bool check = false;
 
             pathHolder = ImagePathMaker(serverPath, imageName, ImageSize.large);
-            imageViewModel.FullImageURL = pathHolder;
+            pathHolderDB = ImagePathMaker(PathForDB, imageName, ImageSize.large);
+            imageViewModel.FullImageURL = pathHolderDB;
             DrawingFullImage(pathHolder, image);
 
             pathHolder = ImagePathMaker(serverPath, imageName, ImageSize.medium);
-            imageViewModel.MediumImageURL = pathHolder;
+            pathHolderDB = ImagePathMaker(PathForDB, imageName, ImageSize.medium);
+            imageViewModel.MediumImageURL = pathHolderDB;
             Drawing(mediumWidth, mediumHeight, pathHolder, image);
 
             pathHolder= ImagePathMaker(serverPath, imageName, ImageSize.small);
-            imageViewModel.MinImageURL = pathHolder;
+            pathHolderDB = ImagePathMaker(PathForDB, imageName, ImageSize.small);
+            imageViewModel.MinImageURL = pathHolderDB;
             Drawing(smallSize, smallSize, pathHolder, image);
 
             image.Dispose();

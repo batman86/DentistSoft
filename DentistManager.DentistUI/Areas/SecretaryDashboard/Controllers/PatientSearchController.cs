@@ -99,6 +99,16 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             }
         }
 
+        public ActionResult SecyrtaryPatientActvator(int PatientID = 0)
+        {
+            if (PatientID != 0)
+            {
+                sessionStateManger.setSecyrtaryActivePatinet(User.Identity.GetUserId(), PatientID);
+                ViewBag.Msg = "Patient Findes";
+            }
+
+            return RedirectToAction("patientList", "PatientManagement");
+        }
 
         // /SecretaryDashboard/PatientSearch/PatientAdvancedSearch
         public ActionResult PatientAdvancedSearch()

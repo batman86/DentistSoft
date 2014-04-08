@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DentistManager.Domain.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace DentistManager.Domain.BL.Abstract
     public interface IPatientPaymentBL
     {
         // what patient should pay
-        void patientTotalCost(int patientID, int clinecID);
+        PatientBillInfoWrap patientTotalCost(int patientID, int clinecID);
         // what patient did pay
-        void patientTotalPayment(int patientID, int clinecID);
+        decimal patientTotalPayment(int patientID, int clinecID);
 
     }
 }

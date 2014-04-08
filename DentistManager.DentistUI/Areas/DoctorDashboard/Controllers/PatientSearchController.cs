@@ -37,7 +37,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         }
 
         // /DoctorDashboard/PatientSearch/getCurrentPatientID
-        // [NonAction]
+        [NonAction]
         public int getCurrentPatientID()
         {
             string CurrentUserID = User.Identity.GetUserId();
@@ -97,6 +97,18 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 return View();
             }
         }
+
+        public ActionResult doctorPatientActvator(int PatientID = 0)
+        {
+            if (PatientID != 0)
+            {
+                sessionStateManger.setDoctorActivePatinet(User.Identity.GetUserId(), PatientID);
+                 ViewBag.Msg = "Patient Findes";
+            }
+
+            return RedirectToAction("patientList", "PatientManagement");
+        }
+
 
 
         // /DoctorDashboard/PatientSearch/PatientAdvancedSearch

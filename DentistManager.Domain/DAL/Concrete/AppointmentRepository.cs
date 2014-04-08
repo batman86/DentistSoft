@@ -106,5 +106,30 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false;
         }
+
+
+        public string getAppointmentDateByID(int appointmentID)
+        {
+            string appointmentDate=string.Empty;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                appointmentDate = ctx.Appointments.Where(x => x.AppointmentID == appointmentID).Select(x => x.Start_date).FirstOrDefault().ToString();
+
+                if (appointmentDate == "1/1/0001 12:00:00 AM")
+                    appointmentDate = string.Empty;
+            }
+            return appointmentDate;
+        }
+
+
+        public int getLastAppointmentIDByPatientID(int patientID)
+        {
+            int appointmentID = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                 appointmentID = ctx.Appointments.Where(x => x.PatientID == patientID).Select(x => x.AppointmentID).FirstOrDefault();
+            }
+            return appointmentID;
+        }
     }
 }

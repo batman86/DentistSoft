@@ -6,21 +6,6 @@
 
 <div>
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HistoryID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HistoryID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PatientID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientID)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -40,7 +25,7 @@
 
     </dl>
 </div>
-<p>
+<div class="bttomLink">
     @Html.ActionLink("Edit", "PatientHistoryEdit", new { patientHistoryID = Model.HistoryID }) |
     @Html.ActionLink("Back to List", "patientHistoryList", new { patientID = Model.PatientID })
-</p>
+</div>

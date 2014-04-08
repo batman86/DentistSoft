@@ -244,32 +244,23 @@ namespace DentistManager.Domain.DAL.Concrete
             return count > 0 ? true : false;
         }
 
-        public ImagesViewModel getPatinetImagesDetails(int patinetImagestID)
+        public ImagesPresentViewModel getPatinetImagesDetails(int patinetImagestID)
         {
-            ImagesViewModel imagesViewModel;
+            ImagesPresentViewModel imagesPresentViewModel;
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                Image imageEntity = ctx.Images.Find(patinetImagestID);
-                if (imageEntity != null)
-                {
-                    imagesViewModel = new ImagesViewModel
-                    {
-                        ImageID=imageEntity.ImageID,
-                        Name = imageEntity.Name,
-                        Notice = imageEntity.Notice,
-                        ImageCategoryID = imageEntity.ImageCategoryID,
-                        appointmentID = imageEntity.appointmentID,
-                        PatientID = imageEntity.PatientID,
-                        MinImageURL = imageEntity.MinImageURL,
-                        MediumImageURL = imageEntity.MediumImageURL,
-                        FullImageURL = imageEntity.FullImageURL,
-                        LocalImageURL = imageEntity.LocalImageURL
-                    };
-                }
-                else
-                    imagesViewModel = null;
+                var imagesIQ = ctx.Images;
+                var ImageCategoryIQ = ctx.ImageCategories;
+                var appointmentIQ = ctx.Appointments;
+
+                imagesPresentViewModel = (from i in imagesIQ
+                                          join ic in ImageCategoryIQ on i.ImageCategoryID equals ic.ImageCategoryID
+                                          join a in appointmentIQ on i.appointmentID equals a.AppointmentID
+                                          where i.ImageID == patinetImagestID
+                                          select new ImagesPresentViewModel { appointmentDate = a.Start_date, ImageCategoryName = ic.Name, ImageID = i.ImageID, Name = i.Name, Notice = i.Notice, MinImageURL = i.MinImageURL, FullImageURL = i.FullImageURL, LocalImageURL = i.LocalImageURL, MediumImageURL = i.MediumImageURL }).FirstOrDefault();
+
             }
-            return imagesViewModel;
+            return imagesPresentViewModel;
         }
 
         public bool deletePatientImages(int patinetImagestID)

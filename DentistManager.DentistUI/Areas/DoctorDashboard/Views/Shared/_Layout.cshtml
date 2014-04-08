@@ -6,41 +6,39 @@
     <title>@ViewBag.Title - Secretary Dashboard</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="/Content/styleRest.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
+    <aside>
+        <ul class="nav">
+            <li>@Html.ActionLink("Info", "patientList", "PatientManagement")</li>
+            <li>@Html.ActionLink("History", "patientHistoryList", "PatientIllnessHistory")</li>
+            <li>@Html.ActionLink("Images", "patientImagesList", "PatientImages")</li>
+            <li>@Html.ActionLink("Matrial", "customMatrialList", "CustomMatrial")</li>
+            <li>@Html.ActionLink("Search", "PatientAdvancedSearch", "PatientSearch")</li>
+            <li>@Html.ActionLink("Prescription", "PrescriptionList", "Prescription")</li>
+            <li>@Html.ActionLink("Treatment", "TreatmentSessionMain", "TreatmentSession")</li>
+        </ul>
+    </aside>
+
     <div class="TopBar">
-        <div class="container">
             <div>
                 @{
                     Html.RenderAction("ActivePatientTopBarSearch", "PatientSearch");
                     Html.RenderAction("ActivePatientTopBar", "PatientSearch");
                 }
             </div>
-
-            <aside>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Patient Mangement", "patientList", "PatientManagement")</li>
-                    <li>@Html.ActionLink("Patient History", "patientHistoryList", "PatientIllnessHistory")</li>
-                    <li>@Html.ActionLink("Patient Images", "patientImagesList", "PatientImages")</li>
-                    <li>@Html.ActionLink("Patient Payment", "Index", "PatientPayment")</li>
-                    <li>@Html.ActionLink("Patient Search", "PatientAdvancedSearch", "PatientSearch")</li>
-                </ul>
-            </aside>
-
-        </div>
     </div>
+
+
 
     <div class="MainWrap">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

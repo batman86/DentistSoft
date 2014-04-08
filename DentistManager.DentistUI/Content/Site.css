@@ -1,26 +1,20 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
-TopBar{
-    float:left;
 
-}
 MainWrap{
     float:left;
+    width:1050px;
 }
+a{text-decoration: none;}
+	
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-.ActivePAtientTopBar{
-    float:left;
-}
-.ActivePatientTopBarSearch{
-    float:left;
-}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -51,4 +45,198 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+
+
+aside{
+    float: left;
+    width: 150px;
+    background-color: #30363e;
+    height:800px;
+}
+
+aside .nav{
+    float:left;
+    padding:0;
+
+}
+aside .nav li {
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+    text-align:center;
+   
+}
+aside .nav li a{
+    height: 32px;
+    width: 150px;
+    display:block;
+    margin-top: 10px;
+    padding-top: 7px;
+    color: #ffffff;
+}
+
+aside  .nav  li a.Active{
+	background-color: #ffb3a3;
+}
+aside  .nav  li a:hover{
+    background-color: #f19682;
+    color: #30363e;
+}
+aside  .nav  li a{
+        font-size: 20px;
+}
+.TopBar{
+    display: block;
+    width:100%;
+    height:150px;
+    margin: 0 0 40px 0;
+    padding-top :10px;
+    background-color: #ffb3a3;
+}
+
+.ActivePAtientTopBar{
+    float:left;
+}
+.ActivePatientTopBarSearch{
+    width: 250px;
+    float:left;
+    margin: 0 30px 0 20px;
+}
+.ActivePatientTopBarSearch input{
+      width: 250px;
+      margin-bottom:10px;
+      height: 30px;
+}
+.ActivePatientTopBarSearch input[type=submit]{
+    background-color: #30363e;
+    color: #ffffff;
+    border: none;
+    width: 253px;
+    height: 32px;
+}
+
+.myForm .myText{
+    width:100%;
+    float:left;
+    height:30px;
+    margin-bottom:10px;
+}
+.myForm .mybutton{
+    width:100%;
+    float:left;
+    height:30px;
+    background:#5f9be3;
+}
+.myForm .mybutton:hover{
+     background: #d4e5f9;
+}
+.bttomLink{
+    float: left;
+    width: 600px;
+}
+.topLink   a{
+	color: #737069;
+    font-size: 20px;
+}
+.topLink   a:hover{
+    background-color: #d4e5f9;
+}
+
+dl {
+    margin: 0;
+    float:left;
+}
+dl dt {
+    background:#ffffff;
+    color: #30363e;
+    float:left;
+    font-weight:bold;
+    width:150px;
+    margin:0 15px 10px 0;
+    padding :5px 0;
+    text-align:center;
+}
+dl dd {
+    width: 600px;
+    padding :5px 0;
+    margin:0 15px 10px 0;
+    color: #30363e;
+}
+
+
+table{
+    width:100%;
+    display:block;
+
+}
+table thead{
+    background-color: #d4e5f9;
+    width:100%;
+    display:block;
+}
+
+table a:active   {
+	background-color: #d4e5f9;
+}
+table a:hover   {
+	background-color: #d4e5f9;
+}
+table   a{
+	color: #737069;
+    font-size: 20px;
+}
+table th{
+    height: 20px;
+    padding-top: 5px;
+    min-width:100px;
+    border-right: solid 1px #30363e;
+    border-left: solid 1px #30363e;
+}
+table td{
+    height: 20px;
+    padding-top: 5px;
+    min-width:100px;
+    text-align:center;
+    border: solid 1px #30363e;
+
+}
+
+
+#container{
+    float:left;
+
+}
+#TreatmentListWrap{
+    float:left;
+      background-color: blueviolet;
+      width:900px;
+      background-color:#5b5ed7
+}
+#TreatmentListWrap ul li .Treatmentheader{
+    width:50px;
+    margin-right:80px;
+}
+#TreatmentListWrap ul li input{
+    width:50px;
+    margin-left:10px;
+}
+#TreatmentListWrap ul li label{
+    width:100px;
+    margin-right:80px;
+}
+
+#MatrailHolder{
+    float:left;
+    background-color:red;
+}
+#OpperationForm{
+    float:left;
+    height:900px;
+    width:200px;
+}
+#btnSaveTreatments{
+    float:left;
+    
 }

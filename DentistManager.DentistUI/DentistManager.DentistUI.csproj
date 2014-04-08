@@ -367,6 +367,7 @@
     <Content Include="Content\Images\GlassHeader.jpg" />
     <Content Include="Content\Images\PlasticBlueHeader.jpg" />
     <Content Include="Content\Images\RedWineHeader.jpg" />
+    <Content Include="Content\styleRest.css" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -740,6 +741,12 @@
     <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\customMatrialCreate.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDelete.cshtml" />
     <Content Include="Admin\Root.Master" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientPayment\Index.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesCreate.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesDelete.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesDetails.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesEdit.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientImages\patientImagesList.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -784,10 +791,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\DoctorDashboard\Models\" />
-    <Folder Include="Areas\DoctorDashboard\Views\PatientImages\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\PatientPayment\" />
-    <Folder Include="Areas\SecretaryDashboard\Views\Patient\" />
     <Folder Include="Content\Images\xray\large\" />
     <Folder Include="Content\Images\xray\medium\" />
     <Folder Include="Content\Images\xray\small\" />

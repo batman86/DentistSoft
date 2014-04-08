@@ -14,5 +14,8 @@ namespace DentistManager.Domain.DAL.Abstract
         int AddNewAppointment(AppointmentViewModelFull appointment);
         bool alterAppointment(AppointmentViewModelFull appointment);
         bool deleteAppointment(int appointmentID);
+
+        string getAppointmentDateByID(int appointmentID);
+        int getLastAppointmentIDByPatientID(int patientID);
     }
 }

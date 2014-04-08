@@ -55,7 +55,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             PatientHistoryViewModel patientHistory = patientRepository.getPatinetHistoryDetails(patientHistoryID);
             if (patientHistory == null)
                 return HttpNotFound();
-            return PartialView(patientHistory);
+            return View(patientHistory);
         }
 
         //

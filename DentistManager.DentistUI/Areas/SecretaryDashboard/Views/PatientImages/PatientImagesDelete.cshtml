@@ -1,4 +1,4 @@
-﻿@model DentistManager.Domain.ViewModel.ImagesViewModel
+﻿@model DentistManager.Domain.ViewModel.ImagesPresentViewModel
 
 @{
     ViewBag.Title = "PatientImagesDelete";
@@ -34,72 +34,15 @@
         <dd>
             @Html.DisplayFor(model => model.Notice)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.appointmentID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.appointmentID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageCategoryID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageCategoryID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PatientID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FullImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MediumImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MediumImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MinImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MinImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocalImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocalImageURL)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "patientImagesList", new { patientID = Model.PatientID })
-        </div>
+    <div class="bttomLink">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "patientImagesList")
+    </div>
     }
 </div>

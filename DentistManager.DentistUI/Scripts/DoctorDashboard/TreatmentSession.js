@@ -21,6 +21,7 @@ var selector,
             vm = this.vmTreatmentList;
             vmMatrailList = this.vmMatrailList;
             vmMatrailWrap = this.matrailToSaveWrap;
+            vmTreatmentMatrailList = this.vmTreatmentMatrailList
             this.getTreatmentList();
             this.loadTreatmentList();
             this.loadGraphDraw();
@@ -37,28 +38,40 @@ var selector,
                 if (vmMatrailList.length == 0)
                 {
                     Main.LoadMatrailList();
-                    alert('lead matrail list');
                 }
+                var htmlString =$.trim($(this).parent().children('.matrialWrap').html());
+                if (htmlString.length  == 0)
+                {
+                    vmTreatmentMatrailList.length = 0;
 
-                var drop = '<select class="MatrialDropDown" >';
-                for (var i = 0; i < vmMatrailList.length; i++) {
-                    drop += '<option value="' + vmMatrailList[i].ItemID + '">' + vmMatrailList[i].ItemName + '</option>';
+                    Main.LoadTreatmentMatrailList($(this).parent().children('.TeratmentID').val());
+                    var innerIL = '';
+                    for (var i = 0; i < vmTreatmentMatrailList.length; i++) {
+                        innerIL += '<li> <input class="MatrailID" type="hidden" value="' + vmTreatmentMatrailList[i].ItemID + '" />  <label id="MatrailName" > ' + vmTreatmentMatrailList[i].ItemName + '</label>  <label class="lblMatrailQuantity" > ' + vmTreatmentMatrailList[i].Quantity + '</label>  <input type="button" class="btnRemoveMatrailFromList" value="X" /> </li>';
+                    }
+
+                    var drop = '<select class="MatrialDropDown" >';
+                    for (var i = 0; i < vmMatrailList.length; i++) {
+                        drop += '<option value="' + vmMatrailList[i].ItemID + '">' + vmMatrailList[i].ItemName + '</option>';
+                    }
+                    drop += '</select>';
+
+                    drop += '<input class="MatrailTeratmentID" type="hidden" value="' + $(this).parent().children('.TeratmentID').val() + '" />';
+
+                    drop += '<input class="txtMatrailQuantity" type="text" value="" />';
+
+                    drop += '<input type="button" class="btninsertMatialToList" value="Add" />';
+
+                    drop += '<div class="MatrailListHolder"> <ul>'+ innerIL +' </ul> </div>';
+
+                    drop += '<input type="button" class="btnSaveMatrialList" value="Save Matrail" />';
+
+                    $(this).parent().children('.matrialWrap').html(drop);
                 }
-                drop += '</select>';
-
-                drop += '<input class="MatrailTeratmentID" type="hidden" value="' + $(this).parent().children('.TeratmentID').val() + '" />';
-
-                drop += '<input class="txtMatrailQuantity" type="text" value="" />';
-
-                drop += '<input type="button" class="btninsertMatialToList" value="Add" />';
-
-                drop += '<div class="MatrailListHolder"> <ul> </ul> </div>';
-                         
-                drop += '<input type="button" class="btnSaveMatrialList" value="Save Matrail" />';
-
-                $(this).parent().children('.matrialWrap').html(drop);
-               
-
+                else
+                {
+                    $(this).parent().children('.matrialWrap').html('');
+                }
 
             });
 
@@ -99,15 +112,21 @@ var selector,
 
 
             $(document).on('click', '.btnRemoveTreatment', function () {
-                var s = $(this).parent().children('.treatmentItemID').val();
+                var s = $(this).parent().parent().find('td .treatmentItemID').val();
+                var s2 = $(this).parent().parent().find('td .TeratmentID').val();
                 
+                //var s3 = $(this).parent().parent().children('.treatmentItemID').val();
+
                 for (var i = 0; i < vm.length; i++) {
                     if (vm[i].treatmentItemID == s) {
                         vm.splice(i, 1);
                     }
                 }
-                Main.RemoveTreatmentItem(s);
-                $(this).parent().remove();
+                if (s2 != 0) {
+                    Main.RemoveTreatmentItem(s2);
+                }
+               
+                $(this).parent().parent().remove();
 
                 Main.loadGraphDraw();
             });
@@ -129,6 +148,11 @@ var selector,
             this.ItemID = ItemID;
             this.ItemName = ItemName;
         },
+        obTreatmentMatrailListItem: function (ItemID, ItemName, Quantity) {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Quantity = Quantity;
+        },
         obMatrailListItemToSave: function (MatrailID, Quantity) {
             this.MatrailID = MatrailID;
             this.Quantity = Quantity;
@@ -145,6 +169,22 @@ var selector,
                 success: function (result) {
                     for (var i = 0; i < result.length; i++) {
                         vmMatrailList.push(new Main.obMatrailListItem(result[i].ItemID, result[i].ItemName));
+                    }
+                }
+            });
+        },
+        LoadTreatmentMatrailList: function (treatmentid) {
+            $.ajax({
+                url: "/DoctorDashboard/TreatmentSession/GetTreatmentMatrialList",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                async: false,
+                data: JSON.stringify({ treatmentID: treatmentid }),
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        vmTreatmentMatrailList.push(new Main.obTreatmentMatrailListItem(result[i].ItemID, result[i].ItemName, result[i].Quantity));
                     }
                 }
             });
@@ -176,7 +216,9 @@ var selector,
                 success: function (result) {
                     for (var i = 0; i < result.length; i++) {
                         selector.treatmentItemID = selector.treatmentItemID + 1;
-                        vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, result[i].TeratmentID, result[i].Description, result[i].AppointmentDate, result[i].opperatioName, result[i].TeratmentCost, result[i].treatmentState, result[i].toothNumber, result[i].toothSideNumber, result[i].opperationColor,result[i].OpperationID));
+                        var date=new Date(parseInt(result[i].AppointmentDate.substr(6)));
+                        var formatted = date.getFullYear() + "-" +  ("0" + (date.getMonth() + 1)).slice(-2) + "-" +  ("0" + date.getDate()).slice(-2) ;    
+                        vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, result[i].TeratmentID, result[i].Description, formatted, result[i].opperatioName, result[i].TeratmentCost, result[i].treatmentState, result[i].toothNumber, result[i].toothSideNumber, result[i].opperationColor, result[i].OpperationID));
                     }
                 }
             });
@@ -198,15 +240,14 @@ var selector,
         },
         loadTreatmentList: function () {
             for (var i = 0; i < vm.length; i++) {
-                $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label>   <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label>  <label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" />   <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /> <input type="button" class="btnAddMatrial" value="Add Matrial" /> <input type="button" class="btnRemoveTreatment" value="X" /> <div class="matrialWrap"> </div> </li>');
+                $('#TreatmentList').append('<tr>  <td>  <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label></td> <td> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label></td>  <td> <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label></td>  <td><label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label></td> <td> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" /> </td> <td>  <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /></td> <td> <input type="button" class="btnAddMatrial" value="Matrial" /></td> <td> <input type="button" class="btnRemoveTreatment" value="X" /></td> <div class="matrialWrap"> </div> </<tr>>');
             }
         },
         saveTreatmentToObject: function () {
-            $('#TreatmentListWrap ul li').each(function () {
-                var s = $(this).children('.treatmentItemID').val();
-                var description = $(this).children('.Description').val();
-                var treatmentCost = $(this).children('.TeratmentCost').val();
-
+            $('#TreatmentList tr').each(function () {
+                var s = $(this).find('.treatmentItemID').val();
+                var description = $(this).find('.Description').val();
+                var treatmentCost = $(this).find('.TeratmentCost').val();
                 for (var i = 0; i < vm.length; i++) {
                     if (vm[i].treatmentItemID == s) {
                         vm[i].Description = description;
@@ -216,6 +257,7 @@ var selector,
             });
         },
         saveTreatmentToDatabase: function () {
+            var appointID=$('#AppointmentID').val();
             $.ajax({
                 url: "/DoctorDashboard/TreatmentSession/TreatmentSave",
                 type: "post",
@@ -223,7 +265,7 @@ var selector,
                 contentType: "application/json",
                 cache: false,
                 async: false,
-                data: JSON.stringify({ treatmentList: vm }),
+                data: JSON.stringify({ treatmentList: vm, appointmentID: appointID }),
                 success: function () {
                     alert('Treatments Has Been Saved');
                 }
@@ -233,8 +275,8 @@ var selector,
 
             stage = new Kinetic.Stage({
                 container: 'container',
-                width: 1200,
-                height: 500
+                width: 1100,
+                height: 220
             });
             layer = new Kinetic.Layer();
 
@@ -276,8 +318,8 @@ var selector,
                 return myText;
             }
 
-            var xPosation = 100;
-            var yPosation = 100;
+            var xPosation = 50;
+            var yPosation = 50;
 
             var wedge1color1;
             var wedge1color2;
@@ -285,6 +327,9 @@ var selector,
             var wedge1color4;
             var wedge1color5;
             var count = 0;
+            var courtNum = 1;
+            var courtCounter = 9;
+            var toothID = '';
 
             for (var i = 1; i < 33; i++) {
 
@@ -294,10 +339,25 @@ var selector,
                 wedge1color4 = '#ffffff';
                 wedge1color5 = '#ffffff';
 
+                if (courtNum == 2 || courtNum == 4)
+                    courtCounter++;
+                else
+                    courtCounter--;
+                if (courtCounter > 8 || courtCounter < 1)
+                    courtNum++;
+                if (courtCounter == 0)
+                    courtCounter = 1;
+                if (courtCounter == 9)
+                    courtCounter = 8;
+
+                //alert('courCount ' + courtCounter + 'Num ' + courtNum);
+
+                toothID = courtNum + '*' + courtCounter;
+
                 if (count < vm.length) {
                 for (var k = 0; k < vm.length; k++) {
                    
-                    if (vm[k].toothNumber == i) {
+                    if (vm[k].toothNumber == toothID) {
                             if (vm[k].toothSideNumber == 1)
                                 wedge1color1 = vm[k].opperationColor;
                             else if (vm[k].toothSideNumber == 2)
@@ -313,12 +373,12 @@ var selector,
                     }
                 }
 
-                var wedge1 = drawWadg(xPosation, yPosation, 30, 90, wedge1color1, 'black', 2, 225, i + "-1");
-                var wedge2 = drawWadg(xPosation, yPosation, 30, 90, wedge1color2, 'black', 2, 315, i + "-2");
-                var wedge3 = drawWadg(xPosation, yPosation, 30, 90, wedge1color3, 'black', 2, 45, i + "-3");
-                var wedge4 = drawWadg(xPosation, yPosation, 30, 90, wedge1color4, 'black', 2, 135, i + "-4");
-                var circle1 = drawCircle(xPosation, yPosation, 12, wedge1color5, 'black', 2, i + "-5");
-                var text1 = drawText(xPosation - 5, yPosation + 40, i, 14, 'arial', 'black');
+                var wedge1 = drawWadg(xPosation, yPosation, 30, 90, wedge1color1, 'black', 2, 225, toothID + "-1");
+                var wedge2 = drawWadg(xPosation, yPosation, 30, 90, wedge1color2, 'black', 2, 315, toothID + "-2");
+                var wedge3 = drawWadg(xPosation, yPosation, 30, 90, wedge1color3, 'black', 2, 45, toothID + "-3");
+                var wedge4 = drawWadg(xPosation, yPosation, 30, 90, wedge1color4, 'black', 2, 135, toothID + "-4");
+                var circle1 = drawCircle(xPosation, yPosation, 12, wedge1color5, 'black', 2, toothID + "-5");
+                var text1 = drawText(xPosation - 5, yPosation + 40, toothID, 14, 'arial', 'black');
 
                 wedge1.on("click", Main.clickEventMsg)
                 wedge2.on("click", Main.clickEventMsg);
@@ -337,8 +397,11 @@ var selector,
 
                 if (i == 16) {
                     yPosation += 100;
-                    xPosation = 100;
+                    xPosation = 50;
                 }
+
+
+                
             }
             stage.add(layer);
         },
@@ -354,14 +417,16 @@ var selector,
             var index = this.attrs.id.indexOf('-');
             var toothNumber = this.attrs.id.substr(0, index);
             var toothSideNumber = this.attrs.id.substr(index + 1, this.attrs.id.length - 1);
+
             selector.treatmentItemID = selector.treatmentItemID + 1;
             vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, 0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor, selectedValue));
-            $('#TreatmentList').append('<li> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label> <label id="toothNumber" > ' + toothNumber + '</label>   <label id="opperatioName" > ' + oppName + '</label>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label> <input class="Description" type="text" value="" />   <input class="TeratmentCost" type="text" value="" />  <input type="button" class="btnAddMatrial" value="Add Matrial" /> <input type="button" class="btnRemoveTreatment" value="X" /> </li>');
+            $('#TreatmentList').append('<tr><td> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label></td> <td><label id="toothNumber" > ' + toothNumber + '</label></td><td>   <label id="opperatioName" > ' + oppName + '</label></td><td>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label></td><td> <input class="Description" type="text" value="" /> </td><td>  <input class="TeratmentCost" type="text" value="" /></td><td>  <input type="button" class="btnAddMatrial" value="Add Matrial" /></td><td> <input type="button" class="btnRemoveTreatment" value="X" /></td> </tr>');
             Main.loadGraphDraw();
 
         },
         vmTreatmentList: [],
         vmMatrailList: [],
+        vmTreatmentMatrailList:[],
         matrailToSaveWrap: {
             treatmentID:0,
             vmMatrailListToSave: []

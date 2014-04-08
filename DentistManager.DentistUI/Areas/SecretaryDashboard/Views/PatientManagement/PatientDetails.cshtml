@@ -3,13 +3,11 @@
 @{
     ViewBag.Title = "PatientDetails";
 }
-
-<h2>PatientDetails</h2>
-
+<p>
+    <h2>Patient Details</h2>
+</p>
 <div>
-    <h4>Patient</h4>
-	<hr />
-    <dl class="dl-horizontal">
+    <dl >
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -84,7 +82,7 @@
 
     </dl>
 </div>
-<p>
+<div class="bttomLink">
     @Html.ActionLink("Edit", "Edit", new { patientID = Model.PatientID }) |
     @Html.ActionLink("Back to List", "patientList")
-</p>
+</div>

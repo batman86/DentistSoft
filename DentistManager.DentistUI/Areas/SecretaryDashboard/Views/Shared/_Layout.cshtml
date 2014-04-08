@@ -6,40 +6,34 @@
     <title>@ViewBag.Title - Secretary Dashboard</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
 </head>
 <body>
     <div class="TopBar">
-        <div class="container">
             <div>
                 @{
-                    Html.RenderAction("ActivePatientTopBarSearch", "PatientSearch");
                     Html.RenderAction("ActivePatientTopBar", "PatientSearch");
+                    Html.RenderAction("ActivePatientTopBarSearch", "PatientSearch");
                 }
             </div>
-
-            <aside>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Patient Mangement", "patientList", "PatientManagement")</li>
-                    <li>@Html.ActionLink("Patient History", "patientHistoryList", "PatientIllnessHistory")</li>
-                    <li>@Html.ActionLink("Patient Images", "patientImagesList", "PatientImages")</li>
-                    <li>@Html.ActionLink("Patient Payment", "Index", "PatientPayment")</li>
-                    <li>@Html.ActionLink("Patient Search", "PatientAdvancedSearch", "PatientSearch")</li>
-                </ul>
-            </aside>
-
-        </div>
     </div>
+
+    <aside>
+        <ul class="nav">
+            <li>@Html.ActionLink("Info", "patientList", "PatientManagement")</li>
+            <li>@Html.ActionLink("History", "patientHistoryList", "PatientIllnessHistory")</li>
+            <li>@Html.ActionLink("Images", "patientImagesList", "PatientImages")</li>
+            <li>@Html.ActionLink("Payment", "Index", "PatientPayment")</li>
+            <li>@Html.ActionLink("Search", "PatientAdvancedSearch", "PatientSearch")</li>
+            <li>@Html.ActionLink("Receipt", "patientReceiptList", "PatientPaymentReceipt")</li>
+        </ul>
+    </aside>
 
     <div class="MainWrap">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

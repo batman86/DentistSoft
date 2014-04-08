@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using DentistManager.Domain.BL.Abstract;
 using DentistManager.Domain.DAL.Concrete;
 using DentistManager.Domain.Entities;
+using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.Domain.BL.Concrete
 {
     public class PatientPaymentBL:IPatientPaymentBL
     {
-        public void patientTotalCost(int patientID, int clinecID)
+        public PatientBillInfoWrap patientTotalCost(int patientID, int clinecID)
         {
             decimal? TotalCost = 0;
 
@@ -19,6 +20,8 @@ namespace DentistManager.Domain.BL.Concrete
             decimal? opperationCost = 0;
             decimal? materialCost = 0;
             decimal? customMatrialCost = 0;
+            decimal? patientPayment = 0;
+            decimal? remain = 0;
 
             CustomMatrialRepository customMatrialRepository = new CustomMatrialRepository();
             customMatrialCost = customMatrialRepository.getPatientCusmotMatrialCostTotal(patientID, clinecID);
@@ -39,13 +42,34 @@ namespace DentistManager.Domain.BL.Concrete
                     materialCost += matrialTreatment.MaterialCost * (int)matrialTreatment.Quantity;
                 }
             }
+            if (opperationCost == null)
+                opperationCost = 0;
+
+            if (materialCost == null)
+                materialCost = 0;
+
+            if (customMatrialCost == null)
+                customMatrialCost = 0;
+
             TotalCost = treatmentCost + opperationCost + materialCost + customMatrialCost;
+
+            patientPayment =patientTotalPayment(patientID, clinecID);
+
+            if (patientPayment == null)
+                patientPayment = 0;
+
+            remain = TotalCost - patientPayment;
+
+            PatientBillInfoWrap billInfo = new PatientBillInfoWrap { customMatrialCost = customMatrialCost, materialCost = materialCost, opperationCost = opperationCost, treatmentCost = treatmentCost, TotalCost = TotalCost, PatientPayment = patientPayment , Remain =remain};
+
+            return billInfo;
         }
 
-        public void patientTotalPayment(int patientID, int clinecID)
+        public decimal patientTotalPayment(int patientID, int clinecID)
         {
             PaymentReceiptRerpository patientRecipt = new PaymentReceiptRerpository();
             decimal totalPayment = patientRecipt.getPatientTotalReceiptPayment(patientID, clinecID);
+            return totalPayment;
         }
 
       //  public void patientRemain(decimal patientTotalPayment,)

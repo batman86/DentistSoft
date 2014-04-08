@@ -213,6 +213,7 @@
     <Compile Include="ViewModel\MatrailToSaveWrapViewModel.cs" />
     <Compile Include="ViewModel\MedicineMiniViewModel.cs" />
     <Compile Include="ViewModel\opperationMiniDataViewModel.cs" />
+    <Compile Include="ViewModel\PatientBillInfoWrap.cs" />
     <Compile Include="ViewModel\PatientFullDataViewModel.cs" />
     <Compile Include="ViewModel\PatientHistoryViewModel.cs" />
     <Compile Include="ViewModel\PatientMiniData.cs" />
