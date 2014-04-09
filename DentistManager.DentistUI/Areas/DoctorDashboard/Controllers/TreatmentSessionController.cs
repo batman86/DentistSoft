@@ -135,5 +135,17 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
          
             return check;
         }
+
+        public bool removeTreatmentMatrail(int matrailID = 0, int treatmentID = 0)
+        {
+            if (treatmentID == 0)
+                return false;
+            if (matrailID == 0)
+                return false;
+            bool check = false;
+
+
+            return check;
+        }
 	}
 }

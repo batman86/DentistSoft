@@ -18,12 +18,14 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         IAppointmentRepository appointmentRepository;
         IimagesRepository imageRepository;
         ISessionStateManger sessionStateManger;
-        public PatientManagementController(IPatientRepository _patientRepository, IAppointmentRepository _appointmentRepository, IimagesRepository _imageRepository, ISessionStateManger _sessionStateManger)
+        IDoctorRepository doctorRepository;
+        public PatientManagementController(IPatientRepository _patientRepository, IAppointmentRepository _appointmentRepository, IimagesRepository _imageRepository, ISessionStateManger _sessionStateManger, IDoctorRepository _doctorRepository)
         {
             patientRepository = _patientRepository;
             appointmentRepository = _appointmentRepository;
             imageRepository = _imageRepository;
             sessionStateManger = _sessionStateManger;
+            doctorRepository = _doctorRepository;
         }
 
         [NonAction]
@@ -72,32 +74,36 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         // GET: /SecretaryDashboard/PatientManagement/PatientCreate
         public ActionResult PatientCreate()
         {
-            return View();
+            PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
+            patientCreateWrap.DoctorsList= doctorRepository.getDoctorMiniInfoList();
+
+            return View(patientCreateWrap);
         }
 
         //
         // POST: /SecretaryDashboard/PatientManagement/PatientCreate
         [HttpPost]
-        public ActionResult PatientCreate(PatientFullDataViewModel patient)
+        public ActionResult PatientCreate(PatientFullDataViewModel PatientInfo)
         {
-            try
-            {
-                if (ModelState.IsValid)
+            //try
+            //{
+                PatientInfo.ClinicID = getUserCurrentClinecID();
+                if (!ModelState.IsValid)
                 {
-                    patient.ClinicID = getUserCurrentClinecID();
-                   bool check= patientRepository.addNewPatinetBasicInfo(patient);
-                }
-                else
-                {
-                    return View();
+                    PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
+                    patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
+                    return View(patientCreateWrap);
                 }
 
+                bool check = patientRepository.addNewPatinetBasicInfo(PatientInfo);
                 return RedirectToAction("patientList");
-            }
-            catch
-            {
-                return View();
-            }
+            //}
+            //catch
+            //{
+            //    PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
+            //    patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
+            //    return View(patientCreateWrap);
+            //}
         }
 
         //

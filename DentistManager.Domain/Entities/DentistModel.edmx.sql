@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/19/2014 01:20:54
+-- Date Created: 04/08/2014 23:51:25
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -77,11 +77,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PatientHistory_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatientHistory] DROP CONSTRAINT [FK_PatientHistory_Patient];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Patients_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patients_Doctors];
+GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_AspNetUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_AspNetUsers];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Clinics]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Doctors];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Patients]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Patients];
@@ -435,7 +441,8 @@ CREATE TABLE [dbo].[Patients] (
     [BrithDate] datetime  NOT NULL,
     [gender] nvarchar(50)  NOT NULL,
     [E_mail] nvarchar(50)  NULL,
-    [Notice] nvarchar(50)  NULL
+    [Notice] nvarchar(50)  NULL,
+    [DoctorID] int  NULL
 );
 GO
 
@@ -446,7 +453,8 @@ CREATE TABLE [dbo].[PaymentReceipts] (
     [Amount] decimal(18,4)  NOT NULL,
     [PatientID] int  NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
-    [ClinicID] int  NOT NULL
+    [ClinicID] int  NOT NULL,
+    [DoctorID] int  NOT NULL
 );
 GO
 
@@ -576,7 +584,7 @@ CREATE TABLE [dbo].[Treatments] (
     [PatientID] int  NOT NULL,
     [OpperationID] int  NOT NULL,
     [ToothSideNumber] int  NULL,
-    [ToothNumber] int  NULL,
+    [ToothNumber] nvarchar(50)  NULL,
     [OpperationCost] decimal(18,4)  NULL,
     [TeratmentCost] decimal(18,4)  NOT NULL,
     [ClinicID] int  NOT NULL
@@ -1054,6 +1062,34 @@ ADD CONSTRAINT [FK_CustomMaterial_Doctors]
 -- Creating non-clustered index for FOREIGN KEY 'FK_CustomMaterial_Doctors'
 CREATE INDEX [IX_FK_CustomMaterial_Doctors]
 ON [dbo].[CustomMaterials]
+    ([DoctorID]);
+GO
+
+-- Creating foreign key on [DoctorID] in table 'Patients'
+ALTER TABLE [dbo].[Patients]
+ADD CONSTRAINT [FK_Patients_Doctors]
+    FOREIGN KEY ([DoctorID])
+    REFERENCES [dbo].[Doctors]
+        ([DoctorID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Patients_Doctors'
+CREATE INDEX [IX_FK_Patients_Doctors]
+ON [dbo].[Patients]
+    ([DoctorID]);
+GO
+
+-- Creating foreign key on [DoctorID] in table 'PaymentReceipts'
+ALTER TABLE [dbo].[PaymentReceipts]
+ADD CONSTRAINT [FK_PaymentReceipt_Doctors]
+    FOREIGN KEY ([DoctorID])
+    REFERENCES [dbo].[Doctors]
+        ([DoctorID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PaymentReceipt_Doctors'
+CREATE INDEX [IX_FK_PaymentReceipt_Doctors]
+ON [dbo].[PaymentReceipts]
     ([DoctorID]);
 GO
 

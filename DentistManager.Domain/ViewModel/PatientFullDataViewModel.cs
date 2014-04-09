@@ -28,5 +28,7 @@ namespace DentistManager.Domain.ViewModel
         public string E_mail { get; set; }
         [StringLength(50)]
         public string Notice { get; set; }
+        [Required]
+        public Nullable<int> DoctorID { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             appointmentRepository = _appointmentRepository;
             imageRepository = _imageRepository;
             sessionStateManger = _sessionStateManger;
+            
         }
 
         [NonAction]

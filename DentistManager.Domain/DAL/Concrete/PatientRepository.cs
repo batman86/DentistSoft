@@ -26,10 +26,11 @@ namespace DentistManager.Domain.DAL.Concrete
                 patientEntity.Notice = patientViewModel.Notice;
                 patientEntity.BrithDate = patientViewModel.BrithDate;
                 patientEntity.Age = patientViewModel.Age;
+                patientEntity.DoctorID = patientViewModel.DoctorID;
 
                 ctx.Patients.Add(patientEntity);
                 count = ctx.SaveChanges();
-                int test = patientEntity.PatientID;
+                //int test = patientEntity.PatientID;
             }
             return count > 0 ? true : false;
         }
@@ -77,10 +78,13 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 IEnumerable<PatientMiniData> patientList;
                 var patients = ctx.Patients;
+                var doctorsIQ = ctx.Doctors;
+
                 patientList = (from p in patients
+                               join d in doctorsIQ on p.DoctorID equals d.DoctorID
                                where p.ClinicID == clinectID
                                orderby p.Name
-                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
+                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone , DoctorName=d.Name }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
                 return patientList;
             }
         }
