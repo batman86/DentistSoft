@@ -4,36 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="988e538daab84524aa5af89639b4acaf" Name="Diagram1">
+      <Diagram DiagramId="8e42c55e03f546a0b5b9237767b64569" Name="Diagram1">
         <EntityTypeShape EntityType="DentistModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Appointment" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.AspNetRole" Width="1.5" PointX="1.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Clinic" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.CustomMaterial" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Doctor" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.ImageCategory" Width="1.5" PointX="6.25" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Image" Width="1.5" PointX="8.5" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Material" Width="1.5" PointX="8.25" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.MaterialTreatment" Width="1.5" PointX="10.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Appointment" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetRole" Width="1.5" PointX="1.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Clinic" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.CustomMaterial" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Doctor" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.ImageCategory" Width="1.5" PointX="6.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Image" Width="1.5" PointX="8.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Material" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.MaterialTreatment" Width="1.5" PointX="10.5" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Medicine" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.opperation" Width="1.5" PointX="6" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.OpperationMaterial" Width="1.5" PointX="10.5" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.PatientHistory" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.opperation" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.OpperationMaterial" Width="1.5" PointX="10.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.PatientHistory" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Patient" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.PaymentReceipt" Width="1.5" PointX="11.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.PaymentReceipt" Width="1.5" PointX="11.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Prescription" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.RecivingItem" Width="1.5" PointX="5.25" PointY="32.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Secretary" Width="1.5" PointX="3" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.RecivingItem" Width="1.5" PointX="5.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Secretary" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.SessionsStat" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.SessionValue" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Storage" Width="1.5" PointX="3" PointY="33.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.suppcontact" Width="1.5" PointX="5.25" PointY="29" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.supplier" Width="1.5" PointX="3" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Storage" Width="1.5" PointX="3" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.suppcontact" Width="1.5" PointX="5.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.supplier" Width="1.5" PointX="3" PointY="28.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Treatment" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Treatment" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Warehouse" Width="1.5" PointX="8.25" PointY="33.25" IsExpanded="true" />
         <AssociationConnector Association="DentistModel.FK_Appointments_Clinics" ManuallyRouted="false" />
         <AssociationConnector Association="DentistModel.FK_Appointments_Doctors" ManuallyRouted="false" />
@@ -77,6 +77,7 @@
         <AssociationConnector Association="DentistModel.FK_Warehouse_Storages" ManuallyRouted="false" />
         <AssociationConnector Association="DentistModel.suppcontact_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="DentistModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="DentistModel.MedicinePrescription" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

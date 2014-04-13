@@ -14,6 +14,11 @@ namespace DentistManager.Domain.Entities
     
     public partial class Prescription
     {
+        public Prescription()
+        {
+            this.Medicines = new HashSet<Medicine>();
+        }
+    
         public int PrescriptionID { get; set; }
         public string Notice { get; set; }
         public Nullable<int> MedicineID { get; set; }
@@ -26,5 +31,6 @@ namespace DentistManager.Domain.Entities
         public virtual Doctor Doctor { get; set; }
         public virtual Medicine Medicine { get; set; }
         public virtual Patient Patient { get; set; }
+        public virtual ICollection<Medicine> Medicines { get; set; }
     }
 }

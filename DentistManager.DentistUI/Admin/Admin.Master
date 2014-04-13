@@ -25,8 +25,8 @@
 </html>--%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-     <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+   <%--  <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>--%>
     <dx:ASPxSplitter ID="ContentSplitter" runat="server" Width="100%" Height="100%">
         <Styles>
             <Pane>
@@ -36,7 +36,9 @@
         </Styles>
         <Panes>
             <dx:SplitterPane Name="ContentLeft" ShowCollapseBackwardButton="True" Size="18%">
-				<PaneStyle CssClass="leftPane"></PaneStyle>
+				<PaneStyle CssClass="leftPane">
+<Paddings Padding="1px"></Paddings>
+                </PaneStyle>
                 <PaneStyle>
                     <Paddings Padding="1px" />
                 </PaneStyle>
@@ -45,7 +47,7 @@
                         <div class="leftPanel">
 							<%-- DXCOMMENT: Configure the left panel's ASPxNavBar --%>
 <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" AutoCollapse="True" EnableAnimation="True"
-    Width="100%" RenderMode="Lightweight" DataSourceID="XmlDataSourceLeft">
+    Width="100%" RenderMode="Lightweight" DataSourceID="XmlDataSourceLeft" Theme="Aqua">
     <Border BorderWidth="0px" />
     <Paddings Padding="0px" />
 </dx:ASPxNavBar>
