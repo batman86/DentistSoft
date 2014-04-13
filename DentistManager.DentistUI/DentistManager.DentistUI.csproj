@@ -247,6 +247,13 @@
     <Compile Include="Admin\Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\PaymentByPeriod.aspx.cs">
+      <DependentUpon>PaymentByPeriod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PaymentByPeriod.aspx.designer.cs">
+      <DependentUpon>PaymentByPeriod.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Receiving.aspx.cs">
       <DependentUpon>Receiving.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -347,6 +354,7 @@
     <Content Include="Admin\opperation.aspx" />
     <Content Include="Admin\PatientStatus.aspx" />
     <Content Include="Admin\Payment.aspx" />
+    <Content Include="Admin\PaymentByPeriod.aspx" />
     <Content Include="Admin\Receiving.aspx" />
     <Content Include="Admin\Secretary.aspx" />
     <Content Include="Admin\Storages.aspx" />

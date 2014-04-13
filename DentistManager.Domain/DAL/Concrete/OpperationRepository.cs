@@ -37,7 +37,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
                 IEnumerable<MaterialMiniPresentViewModel> matrailList = (from om in opperationMatrialIQ
                                                                          join m in matrailIQ on om.ItemID equals m.ItemID
-                                                                         where om.OpperationID == opperationID
+                                                                         where  om.OpperationID == opperationID
                                                                          select new MaterialMiniPresentViewModel { ItemID = m.ItemID, ItemName = m.ItemName , Quantity= om.Quantity}).ToList();
                 return matrailList;
             }

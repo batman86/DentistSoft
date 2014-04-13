@@ -21,13 +21,13 @@ namespace DentistManager.DentistUI.Admin
             if (e.Column.FieldName == "Total Required")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllCostTreatmentByClinic(int.Parse(e.GetListSourceFieldValue("ClinicID").ToString()));
+                e.Value = paymentRepository.GetAllCostTreatmentByClinicByPeriod(int.Parse(e.GetListSourceFieldValue("ClinicID").ToString()),txtDateFrom.Date,txtDateTo.Date);
 
             }
             else if (e.Column.FieldName == "Total Payed")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllPayedReceitsByClinic(int.Parse(e.GetListSourceFieldValue("ClinicID").ToString()));
+                e.Value = paymentRepository.GetAllPayedReceitsByClinicByPeriod(int.Parse(e.GetListSourceFieldValue("ClinicID").ToString()),txtDateFrom.Date,txtDateTo.Date);
 
             }
             else if (e.Column.FieldName == "Total Deserved")
@@ -44,13 +44,13 @@ namespace DentistManager.DentistUI.Admin
             if (e.Column.FieldName == "Total Required")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllTeratmentByDoctor(int.Parse(e.GetListSourceFieldValue("DoctorID").ToString()), clinicID);
+                e.Value = paymentRepository.GetAllTeratmentByDoctorByPeriod(int.Parse(e.GetListSourceFieldValue("DoctorID").ToString()), clinicID,txtDateFrom.Date ,txtDateTo.Date);
 
             }
             else if (e.Column.FieldName == "Total Payed")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllPaymentReceitByDoctor(int.Parse(e.GetListSourceFieldValue("DoctorID").ToString()), clinicID);
+                e.Value = paymentRepository.GetAllPaymentReceitByDoctorByPeriod(int.Parse(e.GetListSourceFieldValue("DoctorID").ToString()), clinicID,txtDateFrom.Date,txtDateTo.Date);
             }
             else if (e.Column.FieldName == "Total Deserved")
             {
@@ -73,13 +73,13 @@ namespace DentistManager.DentistUI.Admin
             if (e.Column.FieldName == "Total Required")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllTeratmentByPatient(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID, ClinicID);
+                e.Value = paymentRepository.GetAllTeratmentByPatientByPeriod(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID, ClinicID,txtDateFrom.Date,txtDateTo.Date);
 
             }
             else if (e.Column.FieldName == "Total Payed")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllPaymentReceitByPatient(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID, ClinicID);
+                e.Value = paymentRepository.GetAllPaymentReceitByPatientByPeriod(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID, ClinicID,txtDateFrom.Date,txtDateTo.Date);
             }
             else if (e.Column.FieldName == "Total Deserved")
             {
@@ -96,6 +96,7 @@ namespace DentistManager.DentistUI.Admin
 
         protected void gvxPaymentClinics_DataBound(object sender, EventArgs e)
         {
+            gvxPaymentClinics.TotalSummary.Clear();
             gvxPaymentClinics.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Required").DisplayFormat = "Total : {0:C3}";
             gvxPaymentClinics.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Payed").DisplayFormat = "Total : {0:C3}";
             gvxPaymentClinics.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Deserved").DisplayFormat = "Total : {0:C3}";
@@ -105,6 +106,7 @@ namespace DentistManager.DentistUI.Admin
         protected void gvxDoctor_DataBound(object sender, EventArgs e)
         {
             ASPxGridView gvxDoctor = sender as ASPxGridView;
+            gvxDoctor.TotalSummary.Clear();
             gvxDoctor.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Required").DisplayFormat = "Total : {0:C3}";
             gvxDoctor.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Payed").DisplayFormat = "Total : {0:C3}";
             gvxDoctor.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Deserved").DisplayFormat = "Total : {0:C3}";
@@ -114,6 +116,7 @@ namespace DentistManager.DentistUI.Admin
         protected void gvxPatients_DataBound(object sender, EventArgs e)
         {
             ASPxGridView gvxPatient = sender as ASPxGridView;
+            gvxPatient.TotalSummary.Clear();
             gvxPatient.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Required").DisplayFormat = "Total : {0:C3}";
             gvxPatient.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Payed").DisplayFormat = "Total : {0:C3}";
             gvxPatient.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total Deserved").DisplayFormat = "Total : {0:C3}";
@@ -128,10 +131,17 @@ namespace DentistManager.DentistUI.Admin
             dsReceipts.SelectParameters["PatientID"].DefaultValue = PatientID;
             dsReceipts.SelectParameters["DoctorID"].DefaultValue = DoctorID;
             dsReceipts.SelectParameters["ClinicID"].DefaultValue = ClinicID;
+            dsReceipts.SelectParameters["From"].DefaultValue = txtDateFrom.Date.ToString();
+            dsReceipts.SelectParameters["To"].DefaultValue = txtDateTo.Date.ToString();
             popupReceipts.AllowDragging = true;
             popupReceipts.AllowResize = true;
             popupReceipts.ResizingMode = DevExpress.Web.ASPxClasses.ResizingMode.Live;
             popupReceipts.ShowOnPageLoad = true;
+        }
+
+        protected void btnGet_Click(object sender, EventArgs e)
+        {
+            DataBind();
         }
 
 

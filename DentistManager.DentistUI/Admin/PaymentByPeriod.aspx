@@ -12,6 +12,33 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="auto-style1">
         <tr>
+            <td colspan="4">
+                <table style="width: 800px">
+                    <tr>
+                        <td style="width: 49px">From :</td>
+                        <td>
+                            <dx:ASPxDateEdit ID="txtDateFrom" runat="server">
+                            </dx:ASPxDateEdit>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 49px">To :</td>
+                        <td>
+                            <dx:ASPxDateEdit ID="txtDateTo" runat="server">
+                            </dx:ASPxDateEdit>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 49px">&nbsp;</td>
+                        <td>
+                            <dx:ASPxButton ID="btnGet" runat="server" OnClick="btnGet_Click" Text="Get">
+                            </dx:ASPxButton>
+                        </td>
+                    </tr>
+                </table>
+&nbsp;</td>
+        </tr>
+        <tr>
             <td>
                 <dx:ASPxGridView ID="gvxPaymentClinics" runat="server" AutoGenerateColumns="False" DataSourceID="dsClinis" EnableTheming="True" KeyFieldName="ClinicID" OnCustomUnboundColumnData="gvxPaymentClinics_CustomUnboundColumnData" Theme="Office2003Silver" OnDataBound="gvxPaymentClinics_DataBound">
                     <TotalSummary>
@@ -130,7 +157,7 @@
                 </asp:SqlDataSource>
             </td>
             <td>
-                <dx:ASPxPopupControl ID="popupReceipts" runat="server" RenderMode="Lightweight" Theme="Office2003Silver">
+                <dx:ASPxPopupControl ID="popupReceipts" runat="server" RenderMode="Lightweight" Theme="Office2003Silver" HeaderText="Patien Receipts">
                     <ContentCollection>
 <dx:PopupControlContentControl runat="server" SupportsDisabledAttribute="True">
     <dx:ASPxGridView ID="gvReceipts" runat="server" AutoGenerateColumns="False" DataSourceID="dsReceipts" EnableTheming="True" KeyFieldName="ReceiptID" Theme="Office2003Silver">
@@ -149,11 +176,14 @@
         </Columns>
         <Settings ShowFilterRow="True" />
     </dx:ASPxGridView>
-    <asp:SqlDataSource ID="dsReceipts" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT PaymentReceipt.ReceiptID , PaymentReceipt.Date, PaymentReceipt.Amount, AspNetUsers.UserName, Doctors.Name FROM PaymentReceipt INNER JOIN AspNetUsers ON PaymentReceipt.UserID = AspNetUsers.Id INNER JOIN Doctors ON PaymentReceipt.DoctorID = Doctors.DoctorID WHERE (PaymentReceipt.PatientID = @PatientID) AND (PaymentReceipt.DoctorID = @DoctorID) AND (PaymentReceipt.ClinicID = @ClinicID)">
+    <asp:SqlDataSource ID="dsReceipts" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT PaymentReceipt.ReceiptID , PaymentReceipt.Date, PaymentReceipt.Amount, AspNetUsers.UserName, Doctors.Name FROM PaymentReceipt INNER JOIN AspNetUsers ON PaymentReceipt.UserID = AspNetUsers.Id INNER JOIN Doctors ON PaymentReceipt.DoctorID = Doctors.DoctorID WHERE (PaymentReceipt.PatientID = @PatientID) AND (PaymentReceipt.DoctorID = @DoctorID) AND (PaymentReceipt.ClinicID = @ClinicID)
+and PaymentReceipt.Date  BETWEEN  @From and @To">
         <SelectParameters>
             <asp:Parameter Name="PatientID" />
             <asp:Parameter Name="DoctorID" />
             <asp:Parameter Name="ClinicID" />
+            <asp:Parameter Name="From" />
+            <asp:Parameter Name="To" />
         </SelectParameters>
     </asp:SqlDataSource>
                         </dx:PopupControlContentControl>
