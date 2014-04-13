@@ -51,13 +51,18 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         }
 
         // GET: /DoctorDashboard/PatientManagement/patientList
-        public ActionResult patientList()
+        public ActionResult patientList(int pageNumber = 0)
         {
-            // filter by clinec id
-            IEnumerable<PatientMiniData> patientList = patientRepository.getPatientList(0, 10, getUserCurrentClinecID());
-            if (patientList == null)
-                return HttpNotFound();
-            return View(patientList);
+            patientListViewModelWrap patientlidstWrap = new patientListViewModelWrap();
+
+            patientlidstWrap.pagingInfoHolder = new PagingInfoHolder { areaName = "DoctorDashboard", controllerName = "PatientManagement", ActionName = "patientList", ItemTotal = 12, pageNumber = pageNumber, pageSize = 3 };
+            patientlidstWrap.patientList = patientRepository.getPatientList(pageNumber, 3, getUserCurrentClinecID());
+
+
+            //if (patientList == null)
+            //    return HttpNotFound();
+
+            return View(patientlidstWrap);
         }
 
         //

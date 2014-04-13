@@ -106,5 +106,38 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
         }
+
+        public static MvcHtmlString generatePagingDropDownList(this HtmlHelper helper, PagingInfoHolder pagingInfoHolder)
+        {
+            StringBuilder result = new StringBuilder();
+            //string pageNumber = "";
+
+            int offdev = pagingInfoHolder.ItemTotal % pagingInfoHolder.pageSize;
+            int itemTotal = pagingInfoHolder.ItemTotal - offdev;
+            int pagesTotal = itemTotal / pagingInfoHolder.pageSize;
+            int startpage=0;
+            int endPage = 0;
+
+            if (offdev != 0)
+                pagesTotal++;
+
+            if( pagingInfoHolder.pageNumber >= 2)
+                startpage = pagingInfoHolder.pageNumber - 2;
+
+            if (pagesTotal >= pagingInfoHolder.pageNumber+2)
+                endPage = pagingInfoHolder.pageNumber + 2;
+            else
+                endPage = pagesTotal;
+            
+            for (int i = startpage; i < endPage; i++)
+            {
+               // result.Append("<a href="+"~/" + pagingInfoHolder.areaName + "/" + pagingInfoHolder.controllerName + "/" + pagingInfoHolder.ActionName + "/" + "?pageNumber=" + i.ToString() + ">" + (i+1).ToString()+ "</a>");
+                result.Append("<a href=?pageNumber=" + i.ToString() + ">" + (i + 1).ToString() + "</a>");
+
+            }
+
+
+            return MvcHtmlString.Create(result.ToString());
+        }
     }
 }
