@@ -142,8 +142,8 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 return false;
             if (matrailID == 0)
                 return false;
-            bool check = false;
 
+            bool check = materialRepository.removeTreatmentMatrail(matrailID, treatmentID);
 
             return check;
         }

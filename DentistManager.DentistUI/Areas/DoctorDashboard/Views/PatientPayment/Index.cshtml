@@ -1,0 +1,64 @@
+﻿@model DentistManager.Domain.ViewModel.PatientBillInfoWrap
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <h4>Patient Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Treatment
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.treatmentCost)
+        </dd>
+
+        <dt>
+            Opperation
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opperationCost)
+        </dd>
+
+        <dt>
+            Material
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.materialCost)
+        </dd>
+
+        <dt>
+            Custom Matrial
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customMatrialCost)
+        </dd>
+
+        <dt>
+            Total Cost
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+
+        <dt>
+            Patient Payment
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PatientPayment)
+        </dd>
+
+        <dt>
+            Remain
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Remain)
+        </dd>
+
+    </dl>
+</div>

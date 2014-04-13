@@ -26,12 +26,18 @@ namespace DentistManager.DentistUI.Infrastructure
 
     public enum PatientSchduelStatus
     {
+        Reserved,      
         waiting,
-        postponed,
-        progress,
-        finished
+        InProgress,
+        Finished,
+        Postponed
     };
-
+    public enum SchduelStatusTimeFilter
+    {
+        Daily,
+        Weekly,
+        Monthly
+    };
     public enum ImageExtension
     {
         jpeg

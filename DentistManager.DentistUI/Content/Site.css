@@ -136,6 +136,11 @@ aside  .nav  li a{
     float: left;
     width: 600px;
 }
+.bttomLink a{
+    color: #5f9be3;
+    background-color: #e24903;
+}
+
 .topLink   a{
 	color: #737069;
     font-size: 20px;
@@ -144,11 +149,11 @@ aside  .nav  li a{
     background-color: #d4e5f9;
 }
 
-dl {
+.ActivePAtientTopBar dl {
     margin: 0;
     float:left;
 }
-dl dt {
+.ActivePAtientTopBar dl dt {
     background:#ffffff;
     color: #30363e;
     float:left;
@@ -159,19 +164,74 @@ dl dt {
     text-align:center;
     height: 15px;
 }
-dl dd {
+.ActivePAtientTopBar dl dd {
     width: 600px;
     height: 15px;
     padding :5px 0;
     margin:0 15px 10px 0;
-    color: #30363e;
+    color: #000000;
+    background-color: #82b5c0;
 }
 
-
-table{
+dl {
+    margin: 0;
+    float:left;
+}
+dl dt {
+    background:#ffb3a3;
+    color: #30363e;
+    float:left;
+    font-weight:bold;
+    width:150px;
+    margin:0 15px 10px 0;
+    padding :5px 0;
+    text-align:center;
+    height: 15px;
+}
+dl dd {
+    width: 1000px;
+    height: 15px;
+    padding :5px 0;
+    margin:0 15px 10px 0;
+    color: #000000;
+    background-color: #82b5c0;
+}
+.max{
+    max-width:1050px;
+}
+.form-group{
+    float:left;
+    width:80%;
+    display:block;
+    margin-bottom: 20px;
+}
+.form-group label{
+     float:left;
+     width:200px;
+}
+.form-group p{
+     float:left;
+     width:200px;
+     margin:0;
+}
+.form-group input{
+         float:left;
+         width:180px;
+}
+.col-md-offset-2{
+    margin-left:200px;
+}
+.col-md-10{
+        float:left;
+}
+.form-horizontal{
+    float:left;
+    width:80%;
+    margin-left:20px;
+}
+table {
     width:100%;
     display:block;
-
 }
 table thead{
     background-color: #d4e5f9;
@@ -208,35 +268,41 @@ table td{
 
 #container{
     float:left;
+    margin-bottom: 20px;
 
 }
 #TreatmentListWrap{
     float:left;
-      background-color: blueviolet;
-      width:900px;
-      background-color:#5b5ed7
+    width:1000px;
 }
-#TreatmentListWrap ul li .Treatmentheader{
+#TreatmentListWrap  .Treatmentheader{
     width:50px;
-    margin-right:80px;
 }
-#TreatmentListWrap ul li input{
-    width:50px;
-    margin-left:10px;
+#TreatmentListWrap  input{
+    width:80px;
 }
-#TreatmentListWrap ul li label{
-    width:100px;
-    margin-right:80px;
+#TreatmentListWrap  input[type=button]{
+    width:70px;
 }
 
+#TreatmentListWrap  label{
+    width:100px;
+}
+#TreatmentList{
+
+}
 #MatrailHolder{
     float:left;
-    background-color:red;
+
 }
 #OpperationForm{
     float:left;
     height:900px;
-    width:200px;
+    width: 150px;
+    margin-left:10px;
+}
+#OpperationForm input{
+    margin-bottom:10px;
 }
 #btnSaveTreatments{
     float:left;

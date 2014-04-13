@@ -197,6 +197,8 @@
       <DependentUpon>DentistModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AppointmentStatusViewModel.cs" />
+    <Compile Include="ViewModel\AppointmentStatusViewModelWrap.cs" />
     <Compile Include="ViewModel\AppointmentViewModelFull.cs" />
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
     <Compile Include="ViewModel\CustomMaterialPresentViewModel.cs" />

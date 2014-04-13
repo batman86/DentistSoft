@@ -84,21 +84,17 @@ var selector,
                 var matrailID = $(this).parent().parent().find('.MatrialDropDown').val();
                 var check = false;
 
-                alert($(this).parent().parent().parent().children('.MatrailListHolder').html());
-
-                $(this).parent().parent().parent().children('.MatrailListHolder').each(function () {
+                $(this).parent().parent().parent().find('tr.MatrailListHolder').each(function () {
 
                     var _martailID = $(this).find('.MatrailID').val();
-                    alert(matrailID+'  '+_martailID);
-                    if (matrailID == _matrailID)
+                     if (matrailID == _martailID)
                     {
-                        alert(3);
                         var quqnt = $(this).find('.lblMatrailQuantity').text();
-                        quqnt += Quantity;
-                        alert(quqnt);
+                        quqnt = +quqnt + +Quantity;
+
                         $(this).find('.lblMatrailQuantity').text(quqnt);
                         check = true;
-                        alert(check);
+
                     }
                 });
                 if (check == false)
@@ -280,7 +276,7 @@ var selector,
         },
         loadTreatmentList: function () {
             for (var i = 0; i < vm.length; i++) {
-                $('#TreatmentList').append('<tr>  <td>  <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label></td> <td> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label></td>  <td> <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label></td>  <td><label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label></td> <td> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" /> </td> <td>  <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /></td>  <td> <input type="button" class="btnRemoveTreatment" value="X" /></td> <td> <input type="button" class="btnAddMatrial" value="Matrial" /></td> <td> <table class="matrialWrap"> </table></td> </tr>');
+                $('#TreatmentList').append('<tr>  <td>  <input class="treatmentItemID" type="hidden" value="' + Main.vmTreatmentList[i].treatmentItemID + '" />  <input class="OpperationID" type="hidden" value="' + Main.vmTreatmentList[i].OpperationID + '" /> <input class="TeratmentID" type="hidden" value="' + Main.vmTreatmentList[i].TeratmentID + '" /> <label id="toothSideNumber" > ' + Main.vmTreatmentList[i].toothSideNumber + '</label></td> <td> <label id="toothNumber" > ' + Main.vmTreatmentList[i].toothNumber + '</label></td>  <td> <label id="opperatioName" > ' + Main.vmTreatmentList[i].opperatioName + '</label></td>  <td><label id="AppointmentDate" > ' + Main.vmTreatmentList[i].AppointmentDate + '</label></td> <td> <input class="Description" type="text" value="' + Main.vmTreatmentList[i].Description + '" /> </td> <td>  <input class="TeratmentCost"  type="text" value="' + Main.vmTreatmentList[i].TeratmentCost + '" /></td>  <td> <input type="button" class="btnRemoveTreatment" value="X" /></td> <td> <input type="button" class="btnAddMatrial" value="Matrial" /></td> <td> <table class="matrialWrap "> </table></td> </tr>');
             }
         },
         saveTreatmentToObject: function () {
@@ -315,7 +311,7 @@ var selector,
 
             stage = new Kinetic.Stage({
                 container: 'container',
-                width: 1100,
+                width: 1150,
                 height: 220
             });
             layer = new Kinetic.Layer();
@@ -433,7 +429,7 @@ var selector,
                 layer.add(circle1);
                 layer.add(text1);
 
-                xPosation += 65;
+                xPosation += 70;
 
                 if (i == 16) {
                     yPosation += 100;

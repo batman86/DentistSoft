@@ -47,6 +47,9 @@ namespace DentistManager.Domain.DAL.Concrete
                 Treatment treatment = ctx.Treatments.Find(treatmentID);
                 if (treatment == null)
                     return false;
+
+                ctx.MaterialTreatments.RemoveRange(treatment.MaterialTreatments);
+
                 ctx.Treatments.Remove(treatment);
                 count = ctx.SaveChanges();
             }

@@ -54,9 +54,9 @@ namespace DentistManager.DentistUI.Controllers
             var selectPatientStatus = new LightboxSelect("Status", "Status");
             var Statusitems = new List<object>();
             //Statusitems.Add(new { key = PatientSchduelStatus.canceled, label = PatientSchduelStatus.canceled });
-            Statusitems.Add(new { key = PatientSchduelStatus.finished, label = PatientSchduelStatus.finished });
-            Statusitems.Add(new { key = PatientSchduelStatus.postponed, label = PatientSchduelStatus.postponed });
-            Statusitems.Add(new { key = PatientSchduelStatus.progress, label = PatientSchduelStatus.progress });
+            Statusitems.Add(new { key = PatientSchduelStatus.Finished, label = PatientSchduelStatus.Finished });
+            Statusitems.Add(new { key = PatientSchduelStatus.Postponed, label = PatientSchduelStatus.Postponed });
+            Statusitems.Add(new { key = PatientSchduelStatus.InProgress, label = PatientSchduelStatus.InProgress });
             Statusitems.Add(new { key = PatientSchduelStatus.waiting, label = PatientSchduelStatus.waiting });
             selectPatientStatus.AddOptions(Statusitems);
 

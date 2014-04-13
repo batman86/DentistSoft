@@ -14,5 +14,7 @@ namespace DentistManager.Domain.DAL.Abstract
         bool SaveTreatmentMatrail(IEnumerable<MatrailToSaveViewModel> matrailList,int treatmentID);
 
         IEnumerable<MaterialMiniPresentViewModel> getTreatmentMatrailList(int treatmentID);
+
+        bool removeTreatmentMatrail(int matrailID,int treatmentID);
     }
 }

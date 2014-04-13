@@ -7,17 +7,11 @@
     @Html.ActionLink("Create New", "PatientImagesCreate", new { patientID = ViewBag.patientID })
 </p>
 
-<table class="pure-table pure-table-bordered">
+<table class="pure-table pure-table-bordered max">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ImageID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notice)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.appointmentDate)
@@ -42,13 +36,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImageID)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notice)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.appointmentDate)

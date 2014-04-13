@@ -69,5 +69,23 @@ namespace DentistManager.Domain.DAL.Concrete
                 return matrailList;
             }
         }
+
+
+        public bool removeTreatmentMatrail(int matrailID, int treatmentID)
+        {
+            int count = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var matrailIQ = ctx.Materials;
+
+                MaterialTreatment mt= ctx.MaterialTreatments.Where(x=>x.MaterialID == matrailID && x.TeratmentID == treatmentID).FirstOrDefault();
+                if(mt == null)
+                    return false;
+
+                ctx.MaterialTreatments.Remove(mt);
+                count = ctx.SaveChanges();
+            }
+            return count > 0 ? true : false;
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text;
 using DentistManager.Domain.ViewModel;
-
+using DentistManager.DentistUI.Infrastructure;
 
 namespace DentistManager.DentistUI.HtmlHelpers
 {
@@ -23,19 +23,6 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
         }
-        //public static MvcHtmlString generateImageCategoryDropDownList2(this HtmlHelper helper, IEnumerable<ImageCategoryViewModel> list)
-        //{
-        //    StringBuilder result = new StringBuilder();
-
-        //    result.Append("<select name=ImagesViewModel.ImageCategoryID id=ImageCategoryDropDown>");
-        //    result.Append("<option value=0 \">All Images Categories</option>");
-        //    foreach (ImageCategoryViewModel i in list)
-        //    {
-        //        result.Append("<option value=\"" + i.ImageCategoryID + "\">" + i.Name + "</option>");
-        //    }
-        //    result.Append("</select>");
-        //    return MvcHtmlString.Create(result.ToString());
-        //}
 
         public static MvcHtmlString generatePatientAppointmentDropDownList(this HtmlHelper helper, IEnumerable<AppointmentViewModel> list)
         {
@@ -62,20 +49,6 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
         }
-        //// enhance later
-        //public static MvcHtmlString generatePatientAppointmentDropDownList3(this HtmlHelper helper, IEnumerable<AppointmentViewModel> list)
-        //{
-        //    StringBuilder result = new StringBuilder();
-
-        //    result.Append("<select name=AppointmentID id=appointmentDropDown>");
-        //    result.Append("<option value=0 \">All Appointment</option>");
-        //    foreach (AppointmentViewModel i in list)
-        //    {
-        //        result.Append("<option value=\"" + i.AppointmentID + "\">" + i.Date + "</option>");
-        //    }
-        //    result.Append("</select>");
-        //    return MvcHtmlString.Create(result.ToString());
-        //}
 
         public static MvcHtmlString generatePatientMedicineDropDownList(this HtmlHelper helper, IEnumerable<MedicineMiniViewModel> list)
         {
@@ -90,21 +63,6 @@ namespace DentistManager.DentistUI.HtmlHelpers
             return MvcHtmlString.Create(result.ToString());
         }
 
-        //public static MvcHtmlString generateCustomMatrialFilterDropDown(this HtmlHelper helper,string FilterType)
-        //{
-        //    StringBuilder result = new StringBuilder();
-
-        //    result.Append("<select name=FilterType");
-
-        //    if (FilterType == "1")
-        //        result.Append("<option value="+1+" selected>All Doctor Custom Matrials</option> <option value="+2+">All Patient Custom Matrials</option>");
-        //    else
-        //        result.Append("<option value=" + 1 + ">All Doctor Custom Matrials</option> <option value=" + 2 + " selected>All Patient Custom Matrials</option>");
-
-        //    result.Append("</select>");
-
-        //    return MvcHtmlString.Create(result.ToString());
-        //}
         public static MvcHtmlString generateDoctorsDropDownList(this HtmlHelper helper, IEnumerable<DoctorMiniInfoViewModel> list)
         {
             StringBuilder result = new StringBuilder();
@@ -114,6 +72,37 @@ namespace DentistManager.DentistUI.HtmlHelpers
             {
                 result.Append("<option value=\"" + i.DoctorID + "\">" + i.DoctorName + "</option>");
             }
+            result.Append("</select>");
+            return MvcHtmlString.Create(result.ToString());
+        }
+
+        public static MvcHtmlString generateAppStatusDropDownList(this HtmlHelper helper, string ActiveStatus)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("<select name=statusFilter id=StatusDropDown>");
+
+            result.Append(ActiveStatus == "All" ? "<option value='All' selected>All Status</option>" : "<option value='All'>All Status</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.waiting.ToString() ? "<option value='waiting' selected>waiting</option>" : "<option value='waiting'>waiting</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.InProgress.ToString() ? "<option value='InProgress' selected>In Progress</option>" : "<option value='InProgress'>In Progress</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Postponed.ToString() ? "<option value='Postponed' selected>Postponed</option>" : "<option value='Postponed'>Postponed</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Reserved.ToString() ? "<option value='Reserved' selected>Reserved</option>" : "<option value='Reserved'>Reserved</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Finished.ToString() ? "<option value='Finished' selected>Finished</option>" : "<option value='Finished'>Finished</option>"); 
+
+            result.Append("</select>");
+            return MvcHtmlString.Create(result.ToString());
+        }
+
+        public static MvcHtmlString generateAppDateFilterDropDownList(this HtmlHelper helper, string timeFilter)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("<select name=timeFilter id=timeFilterDropDown>");
+
+            result.Append(timeFilter == SchduelStatusTimeFilter.Daily.ToString() ? "<option value='Daily' selected>Daily</option>" : "<option value='Daily'>Daily</option>");
+            result.Append(timeFilter == SchduelStatusTimeFilter.Weekly.ToString() ? "<option value='Weekly' selected>Weekly</option>" : "<option value='Weekly'>Weekly</option>");
+            result.Append(timeFilter == SchduelStatusTimeFilter.Monthly.ToString() ? "<option value='Monthly' selected>Monthly</option>" : "<option value='Monthly'>Monthly</option>");
+
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
         }

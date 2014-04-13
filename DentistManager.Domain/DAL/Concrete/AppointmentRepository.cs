@@ -131,5 +131,107 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return appointmentID;
         }
+
+
+        public List<AppointmentStatusViewModel> getDoctorDailyMeeting(int ClinecID, int DoctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day == DateTime.Now.Day
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date , PatientName=p.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
+        public List<AppointmentStatusViewModel> getDoctorDailyMeeting(int ClinecID, int DoctorID, string status)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day == DateTime.Now.Day && a.Status == status
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name }).ToList();
+               
+                return appointmentViewModelFull;
+            }
+        }
+        public List<AppointmentStatusViewModel> getDoctorWeeklyMeeting(int ClinecID, int DoctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day >= DateTime.Now.Day && a.Start_date.Day <= DateTime.Now.Day +7
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
+
+        public List<AppointmentStatusViewModel> getDoctorWeeklyMeeting(int ClinecID, int DoctorID, string status)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day >= DateTime.Now.Day && a.Start_date.Day <= DateTime.Now.Day + 7 && a.Status == status
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
+
+        public List<AppointmentStatusViewModel> getDoctorMonthlyMeeting(int ClinecID, int DoctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day >= DateTime.Now.Day && a.Start_date.Day <= DateTime.Now.Day + 30
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
+
+        public List<AppointmentStatusViewModel> getDoctorMonthlyMeeting(int ClinecID, int DoctorID, string status)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            where a.ClinicID == ClinecID && a.DoctorID == DoctorID && a.Start_date.Day >= DateTime.Now.Day && a.Start_date.Day <= DateTime.Now.Day + 30 && a.Status == status
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
     }
 }

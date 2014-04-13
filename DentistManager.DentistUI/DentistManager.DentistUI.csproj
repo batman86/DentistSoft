@@ -298,7 +298,9 @@
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientIllnessHistoryController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientManagementController.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\PatientPaymentController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientSearchController.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\PatientStatusController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PrescriptionController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\TreatmentSessionController.cs" />
     <Compile Include="Areas\DoctorDashboard\DoctorDashboardAreaRegistration.cs" />
@@ -739,6 +741,8 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesDetails.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientImages\PatientImagesEdit.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientImages\patientImagesList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPayment\Index.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
