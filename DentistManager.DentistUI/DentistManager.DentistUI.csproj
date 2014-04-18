@@ -44,10 +44,14 @@
       <HintPath>bin\DevExpress.Data.v13.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Web.ASPxHtmlEditor.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxScheduler.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DevExpress.Web.v13.1.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DHTMLX">
       <HintPath>..\packages\DHTMLX.Scheduler.NET.3.0.1.11\lib\DHTMLX.dll</HintPath>
     </Reference>
@@ -296,6 +300,13 @@
     <Compile Include="Admin\Warehouse.aspx.designer.cs">
       <DependentUpon>Warehouse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Appoiment\Appoiments.aspx.cs">
+      <DependentUpon>Appoiments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\Appoiments.aspx.designer.cs">
+      <DependentUpon>Appoiments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -360,6 +371,7 @@
     <Content Include="Admin\Storages.aspx" />
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Admin\Warehouse.aspx" />
+    <Content Include="Appoiment\Appoiments.aspx" />
     <Content Include="App_Data\SideMenu.xml" />
     <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap.css" />

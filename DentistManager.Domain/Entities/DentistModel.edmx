@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -170,6 +170,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SideEffectDecsription" Type="nvarchar" MaxLength="300" />
           <Property Name="ScaleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dose" Type="nvarchar" MaxLength="50" />
+          <Property Name="Concentration" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MedicinePrescription">
           <Key>
@@ -1142,8 +1144,7 @@
             <End Role="suppcontact" EntitySet="suppcontact" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DentistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1349,6 +1350,8 @@
           <Property Name="ScaleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Medicine" FromRole="Medicine" ToRole="Prescriptions" />
           <NavigationProperty Name="Prescriptions1" Relationship="Self.MedicinePrescription" FromRole="Medicine" ToRole="Prescriptions" />
+          <Property Name="Dose" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concentration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="opperation">
           <Key>
@@ -2467,6 +2470,8 @@
           <EntitySetMapping Name="Medicines">
             <EntityTypeMapping TypeName="DentistModel.Medicine">
               <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="Concentration" ColumnName="Concentration" />
+                <ScalarProperty Name="Dose" ColumnName="Dose" />
                 <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SideEffectDecsription" ColumnName="SideEffectDecsription" />
