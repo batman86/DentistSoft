@@ -48,13 +48,20 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         }
 
         // GET: /SecretaryDashboard/PatientManagement/patientList
-        public ActionResult patientList()
+        public ActionResult patientList(int pageNumber = 0)
         {
-            // filter by clinec id
-            IEnumerable<PatientMiniData> patientList = patientRepository.getPatientList(0, 10, getUserCurrentClinecID());
-            if (patientList == null)
+            int pageSize = 10;
+            int clinecID = getUserCurrentClinecID();
+            int itemTotal = patientRepository.getPatientTotal(clinecID);
+
+            patientListViewModelWrap patientlidstWrap = new patientListViewModelWrap();
+            patientlidstWrap.pagingInfoHolder = new PagingInfoHolder { ItemTotal = itemTotal, pageNumber = pageNumber, pageSize = pageSize };
+            patientlidstWrap.patientList = patientRepository.getPatientList(pageNumber, pageSize, clinecID);
+
+            if (patientlidstWrap.patientList == null)
                 return HttpNotFound();
-            return View(patientList);
+
+            return View(patientlidstWrap);
         }
 
         //

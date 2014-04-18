@@ -119,6 +119,8 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             int DoctorID = doctorRepository.getClinecIDByUserID(User.Identity.GetUserId());
 
             treatmentBL.saveTreatment(treatmentList,AppointmentID,DoctorID,patientID,clinecID);
+
+            //return RedirectToAction("TreatmentSessionMain");
         }
 
         [HttpPost]

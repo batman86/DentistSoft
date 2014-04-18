@@ -14,13 +14,15 @@
 <body>
     <aside>
         <ul class="nav">
-            <li>@Html.ActionLink("Info", "patientList", "PatientManagement")</li>
+            <li>@Html.ActionLink("Patients Status ", "PatientStatusList", "PatientStatus")</li>
+            <li>@Html.ActionLink("Patients", "patientList", "PatientManagement")</li>
             <li>@Html.ActionLink("History", "patientHistoryList", "PatientIllnessHistory")</li>
             <li>@Html.ActionLink("Images", "patientImagesList", "PatientImages")</li>
             <li>@Html.ActionLink("Matrial", "customMatrialList", "CustomMatrial")</li>
             <li>@Html.ActionLink("Search", "PatientAdvancedSearch", "PatientSearch")</li>
             <li>@Html.ActionLink("Prescription", "PrescriptionList", "Prescription")</li>
             <li>@Html.ActionLink("Treatment", "TreatmentSessionMain", "TreatmentSession")</li>
+            <li>@Html.ActionLink("Payment ", "Index", "PatientPayment")</li>
         </ul>
     </aside>
 

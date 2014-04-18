@@ -33,6 +33,11 @@ var selector,
 
                 Main.saveTreatmentToObject();
                 Main.saveTreatmentToDatabase();
+
+                $('#btnSaveTreatments').removeClass('red');
+
+                window.location.href = window.location.href;
+
             });
             $(document).on('click', '.btnAddMatrial', function () {
                 if (vmMatrailList.length == 0)
@@ -456,9 +461,10 @@ var selector,
 
             selector.treatmentItemID = selector.treatmentItemID + 1;
             vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, 0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor, selectedValue));
-            $('#TreatmentList').append('<tr><td> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label></td> <td><label id="toothNumber" > ' + toothNumber + '</label></td><td>   <label id="opperatioName" > ' + oppName + '</label></td><td>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label></td><td> <input class="Description" type="text" value="" /> </td><td>  <input class="TeratmentCost" type="text" value="" /></td><td>  <input type="button" class="btnAddMatrial" value="Add Matrial" /></td><td> <input type="button" class="btnRemoveTreatment" value="X" /></td> </tr>');
+            $('#TreatmentList').append('<tr><td> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label></td> <td><label id="toothNumber"> ' + toothNumber + '</label></td><td>   <label id="opperatioName" > ' + oppName + '</label></td><td>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label></td><td> <input class="Description" type="text" value="" /> </td><td>  <input class="TeratmentCost" type="text" value="" /></td><td> <input type="button" class="btnRemoveTreatment" value="X" /></td> </tr>');
             Main.loadGraphDraw();
-
+            $('#btnSaveTreatments').addClass('red');
+            // 
         },
         vmTreatmentList: [],
         vmMatrailList: [],

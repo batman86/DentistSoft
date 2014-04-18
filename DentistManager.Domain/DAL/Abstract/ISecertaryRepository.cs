@@ -10,5 +10,6 @@ namespace DentistManager.Domain.DAL.Abstract
     {
         bool updateSecertaryUserID(Entities.Secretary secretary);
         int getClinecIDByUserID(string UserID);
+      
     }
 }

@@ -1,0 +1,56 @@
+﻿@model  DentistManager.Domain.ViewModel.AppointmentStatusViewModelWrap
+@using DentistManager.DentistUI.HtmlHelpers
+@{
+    ViewBag.Title = "PatientStatusList";
+}
+<h2>Patient Status List</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.generateAppStatusDropDownList(Model.statusFilter)
+    @Html.generateAppDateFilterDropDownList(Model.timeFilter)
+
+    <input type="submit" value="Filter" class="btn btn-default" />
+}
+<table class="pure-table pure-table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Doctor Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AppointmentStatusViewModelList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+                <td>
+                    @Html.ActionLink("Activate", "doctorPatientActvator", "PatientSearch", new { PatientID = item.PatientID }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

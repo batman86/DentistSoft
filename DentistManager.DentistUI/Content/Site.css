@@ -13,6 +13,7 @@ a{text-decoration: none;}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -137,8 +138,8 @@ aside  .nav  li a{
     width: 600px;
 }
 .bttomLink a{
-    color: #5f9be3;
-    background-color: #e24903;
+    color: #000000;
+    background-color: #82b5c0;
 }
 
 .topLink   a{
@@ -229,40 +230,45 @@ dl dd {
     width:80%;
     margin-left:20px;
 }
-table {
+
+table#TreatmentList {
     width:100%;
     display:block;
 }
-table thead{
+table#TreatmentList  thead{
     background-color: #d4e5f9;
     width:100%;
     display:block;
 }
 
-table a:active   {
+table#TreatmentList  a:active   {
 	background-color: #d4e5f9;
 }
-table a:hover   {
+table#TreatmentList  a:hover   {
 	background-color: #d4e5f9;
 }
-table   a{
+table#TreatmentList    a{
 	color: #737069;
     font-size: 20px;
 }
-table th{
+table#TreatmentList  th{
     height: 20px;
     padding-top: 5px;
     min-width:100px;
     border-right: solid 1px #30363e;
     border-left: solid 1px #30363e;
 }
-table td{
+
+table#TreatmentList  td{
     height: 20px;
     padding-top: 5px;
     min-width:100px;
     text-align:center;
     border: solid 1px #30363e;
 
+}
+table#TreatmentList td.treatmentTableSmall{
+    width:30px !important; 
 }
 
 
@@ -308,3 +314,13 @@ table td{
     float:left;
     
 }
+.red{
+    background-color:red;
+}
+
+
+.PagerHolder  { text-align:left; border-top: 2px solid silver;padding: .5em 0 0 0; margin-top: 1em; }
+.PagerHolder  A { font-size: 1.1em; color: #666; text-decoration: none;padding: 0 .4em 0 .4em; }
+.PagerHolder  A:hover { background-color: Silver; }
+.PagerHolder  A.selected { background-color: #353535; color: White; }
+

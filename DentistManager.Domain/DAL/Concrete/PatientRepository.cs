@@ -369,5 +369,44 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return Name;
         }
+
+
+        public IEnumerable<PatientMiniData> getPatientListForDoctor(int pageNumber, int pageSize, int clinectID, int doctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<PatientMiniData> patientList;
+                var patients = ctx.Patients;
+                var doctorsIQ = ctx.Doctors;
+
+                patientList = (from p in patients
+                               join d in doctorsIQ on p.DoctorID equals d.DoctorID
+                               where p.ClinicID == clinectID && p.DoctorID == doctorID
+                               orderby p.Name
+                               select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone, DoctorName = d.Name }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
+                return patientList;
+            }
+        }
+
+
+        public int getPatientTotalForDoctor(int clinectID, int doctorID)
+        {
+            int total = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                total = ctx.Patients.Where(x => x.ClinicID == clinectID && x.DoctorID == doctorID).Count();
+            }
+            return total;
+        }
+
+        public int getPatientTotal(int clinectID)
+        {
+            int total = 0;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+               total= ctx.Patients.Where(x => x.ClinicID == clinectID).Count();
+            }
+            return total;
+        }
     }
 }

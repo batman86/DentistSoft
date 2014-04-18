@@ -1,0 +1,113 @@
+﻿@model DentistManager.Domain.ViewModel.PatientCreateWrap
+@using DentistManager.DentistUI.HtmlHelpers
+@{
+    ViewBag.Title = "PatientCreate";
+}
+
+<h2>PatientCreate</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Patient</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.Name)
+                @Html.ValidationMessageFor(model => model.PatientInfo.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.BrithDate, new { @class = "control-label col-md-2" })
+            <input type="text" id="datepicker" name="PatientInfo.BrithDate">
+            @Html.ValidationMessageFor(model => model.PatientInfo.BrithDate)
+        </div>
+
+        <div class="form-group">
+            <p> Gender</p>
+            <div class="col-md-10">
+                <select name="PatientInfo.gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p> Select Doctor</p>
+            @Html.generateDoctorsDropDownList(Model.DoctorsList)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.Mobile, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.Mobile)
+                @Html.ValidationMessageFor(model => model.PatientInfo.Mobile)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.Phone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.Phone)
+                @Html.ValidationMessageFor(model => model.PatientInfo.Phone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.Address)
+                @Html.ValidationMessageFor(model => model.PatientInfo.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.E_mail, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.E_mail)
+                @Html.ValidationMessageFor(model => model.PatientInfo.E_mail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientInfo.Notice, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientInfo.Notice)
+                @Html.ValidationMessageFor(model => model.PatientInfo.Notice)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "patientList")
+</div>
+
+@section Scripts {
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1940:2060'
+            });
+        });
+    </script>
+}

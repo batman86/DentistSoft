@@ -140,5 +140,22 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 return View();
             }
         }
+
+
+        public ActionResult PrescriptionAdd()
+        {
+
+            int patientID = getCurrentPatientID();
+            int AppointmentID = appointmentRepository.getLastAppointmentIDByPatientID(patientID);
+            string appointmentDate = appointmentRepository.getAppointmentDateByID(AppointmentID);
+
+            ViewBag.PatientID = patientID;
+            ViewBag.DoctorID = getDoctorIDbyUserID();
+            ViewBag.AppointmentID = AppointmentID;
+            ViewBag.appointmentDate = appointmentDate;
+
+            IEnumerable<MedicineMiniViewModel> medList = medicineRepository.getMedicineList();
+            return View(medList); ;
+        }
 	}
 }

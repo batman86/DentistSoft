@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/08/2014 23:51:25
+-- Date Created: 04/14/2014 03:42:12
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -64,6 +64,12 @@ IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Material]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Treatment]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MaterialTreatment] DROP CONSTRAINT [FK_MaterialTreatment_Treatment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MedicinePrescription_Medicine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MedicinePrescription] DROP CONSTRAINT [FK_MedicinePrescription_Medicine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MedicinePrescription_Prescriptions]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MedicinePrescription] DROP CONSTRAINT [FK_MedicinePrescription_Prescriptions];
 GO
 IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_Material]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_Material];
@@ -195,6 +201,9 @@ IF OBJECT_ID(N'[dbo].[MaterialTreatment]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Medicine]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Medicine];
+GO
+IF OBJECT_ID(N'[dbo].[MedicinePrescription]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MedicinePrescription];
 GO
 IF OBJECT_ID(N'[dbo].[opperation]', 'U') IS NOT NULL
     DROP TABLE [dbo].[opperation];
@@ -610,6 +619,13 @@ CREATE TABLE [dbo].[AspNetUserRoles] (
 );
 GO
 
+-- Creating table 'MedicinePrescription'
+CREATE TABLE [dbo].[MedicinePrescription] (
+    [Medicines_MedicineID] int  NOT NULL,
+    [Prescriptions1_PrescriptionID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -798,6 +814,12 @@ GO
 ALTER TABLE [dbo].[AspNetUserRoles]
 ADD CONSTRAINT [PK_AspNetUserRoles]
     PRIMARY KEY CLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
+GO
+
+-- Creating primary key on [Medicines_MedicineID], [Prescriptions1_PrescriptionID] in table 'MedicinePrescription'
+ALTER TABLE [dbo].[MedicinePrescription]
+ADD CONSTRAINT [PK_MedicinePrescription]
+    PRIMARY KEY CLUSTERED ([Medicines_MedicineID], [Prescriptions1_PrescriptionID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1384,6 +1406,29 @@ ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUsers]
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [Medicines_MedicineID] in table 'MedicinePrescription'
+ALTER TABLE [dbo].[MedicinePrescription]
+ADD CONSTRAINT [FK_MedicinePrescription_Medicine]
+    FOREIGN KEY ([Medicines_MedicineID])
+    REFERENCES [dbo].[Medicines]
+        ([MedicineID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Prescriptions1_PrescriptionID] in table 'MedicinePrescription'
+ALTER TABLE [dbo].[MedicinePrescription]
+ADD CONSTRAINT [FK_MedicinePrescription_Prescriptions]
+    FOREIGN KEY ([Prescriptions1_PrescriptionID])
+    REFERENCES [dbo].[Prescriptions]
+        ([PrescriptionID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MedicinePrescription_Prescriptions'
+CREATE INDEX [IX_FK_MedicinePrescription_Prescriptions]
+ON [dbo].[MedicinePrescription]
+    ([Prescriptions1_PrescriptionID]);
 GO
 
 -- --------------------------------------------------

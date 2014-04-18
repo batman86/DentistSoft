@@ -233,5 +233,44 @@ namespace DentistManager.Domain.DAL.Concrete
                 return appointmentViewModelFull;
             }
         }
+
+
+        public List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID, DateTime begin, DateTime ending)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+                var doctorIQ = ctx.Doctors;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            join d in doctorIQ on a.DoctorID equals d.DoctorID
+                                            where a.ClinicID == ClinecID && a.Start_date.Day >= begin.Day && a.Start_date.Day <= ending.Day
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name, DoctorName=d.Name }).ToList();
+                return appointmentViewModelFull;
+            }
+        }
+
+        public List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID, string status, DateTime begin, DateTime ending)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                List<AppointmentStatusViewModel> appointmentViewModelFull;
+
+                var appointmentsIQ = ctx.Appointments;
+                var patientIQ = ctx.Patients;
+                var doctorIQ = ctx.Doctors;
+
+                appointmentViewModelFull = (from a in appointmentsIQ
+                                            join p in patientIQ on a.PatientID equals p.PatientID
+                                            join d in doctorIQ on a.DoctorID equals d.DoctorID
+                                            where a.ClinicID == ClinecID && a.Start_date.Day >= begin.Day && a.Start_date.Day <= ending.Day&& a.Status == status
+                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name , DoctorName= d.Name}).ToList();
+                return appointmentViewModelFull;
+            }
+        }
     }
 }

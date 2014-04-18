@@ -16,6 +16,9 @@ namespace DentistManager.Domain.DAL.Abstract
         PatientMiniData getPatinetMiniInfo(int patientID);
         bool deletepatientBasicInfo(int patientID);
         IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize,int clinectID);
+        IEnumerable<PatientMiniData> getPatientListForDoctor(int pageNumber, int pageSize, int clinectID,int doctorID);
+        int getPatientTotalForDoctor(int clinectID, int doctorID);
+        int getPatientTotal(int clinectID);
         IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name,int clinectID);
         int getPatientIDSearchResultByMobileOrID(int patientID, string mobileNumber);
         // in case user didn't select active patient i set first patint in clinec as the active patinet

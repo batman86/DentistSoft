@@ -12,8 +12,8 @@ namespace DentistManager.Domain.ViewModel
         public int ItemTotal { get; set; }
         public int pageSize { get; set; }
 
-        public string areaName { get; set; }
-        public string controllerName { get; set; }
-        public string ActionName { get; set; }
+        //public string areaName { get; set; }
+        //public string controllerName { get; set; }
+        //public string ActionName { get; set; }
     }
 }

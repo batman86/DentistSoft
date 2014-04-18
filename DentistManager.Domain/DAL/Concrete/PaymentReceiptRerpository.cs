@@ -17,8 +17,14 @@ namespace DentistManager.Domain.DAL.Concrete
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 decimal total = 0;
-                // change paymentID to patient id  
-                total = ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID ==clinecID).Select(x => x.Amount).Sum();
+                int count = 0;
+                count= ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID == clinecID).Count();
+
+                if(count>0)
+                     total = ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID == clinecID).Select(x => x.Amount).Sum();
+                
+
+
                 return total;
             }
         }

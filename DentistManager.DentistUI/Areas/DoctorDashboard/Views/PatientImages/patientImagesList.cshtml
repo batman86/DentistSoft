@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "patient Images";
 }
-<p>
+<p class="topLink">
     @Html.ActionLink("Create New", "PatientImagesCreate", new { patientID = ViewBag.patientID })
 </p>
 
-<table class="pure-table pure-table-bordered max">
+<table class="pure-table pure-table-bordered">
     <thead>
         <tr>
             <th>
@@ -17,16 +17,16 @@
                 @Html.DisplayNameFor(model => model.appointmentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageCategoryName)
+                Category
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FullImageURL)
+                Full Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MediumImageURL)
+                Medium Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MinImageURL)
+                Min Image
             </th>
             <th></th>
         </tr>

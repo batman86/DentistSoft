@@ -26,5 +26,9 @@ namespace DentistManager.Domain.DAL.Abstract
 
         List<AppointmentStatusViewModel> getDoctorMonthlyMeeting(int ClinecID, int DoctorID);
         List<AppointmentStatusViewModel> getDoctorMonthlyMeeting(int ClinecID, int DoctorID,string status);
+
+
+        List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID,DateTime begin,DateTime ending);
+        List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID, string status, DateTime begin, DateTime ending);
     }
 }

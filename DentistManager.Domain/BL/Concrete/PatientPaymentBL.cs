@@ -73,5 +73,7 @@ namespace DentistManager.Domain.BL.Concrete
         }
 
       //  public void patientRemain(decimal patientTotalPayment,)
+
+
     }
 }

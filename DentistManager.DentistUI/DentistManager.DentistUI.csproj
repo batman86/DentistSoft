@@ -317,6 +317,7 @@
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientPaymentReceiptController.cs" />
     <Compile Include="Areas\SecretaryDashboard\Controllers\PatientSearchController.cs" />
+    <Compile Include="Areas\SecretaryDashboard\Controllers\PatientStatusController.cs" />
     <Compile Include="Areas\SecretaryDashboard\SecretaryDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
@@ -662,6 +663,7 @@
     <Content Include="Scripts\dhtmlxScheduler_debug\locale\locale_sv.js" />
     <Content Include="Scripts\dhtmlxScheduler_debug\locale\locale_tr.js" />
     <Content Include="Scripts\dhtmlxScheduler_debug\locale\locale_ua.js" />
+    <Content Include="Scripts\DoctorDashboard\PrescriptionAdd.js" />
     <Content Include="Scripts\DoctorDashboard\TreatmentSession.js" />
     <Content Include="Scripts\kinetic.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
@@ -751,6 +753,9 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientImages\patientImagesList.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientPayment\Index.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionAdd.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientManagement\PatientCreate.cshtml" />
+    <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -812,9 +817,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

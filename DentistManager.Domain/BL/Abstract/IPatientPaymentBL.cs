@@ -11,6 +11,8 @@ namespace DentistManager.Domain.BL.Abstract
     {
         // what patient should pay
         PatientBillInfoWrap patientTotalCost(int patientID, int clinecID);
+
+       
         // what patient did pay
         decimal patientTotalPayment(int patientID, int clinecID);
 
