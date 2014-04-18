@@ -47,7 +47,7 @@
                         <div class="leftPanel">
 							<%-- DXCOMMENT: Configure the left panel's ASPxNavBar --%>
 <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" AutoCollapse="True" EnableAnimation="True"
-    Width="100%" RenderMode="Lightweight" DataSourceID="XmlDataSourceLeft" Theme="Aqua">
+    Width="100%" RenderMode="Lightweight" DataSourceID="XmlDataSourceLeft" Theme="RedWine">
     <Border BorderWidth="0px" />
     <Paddings Padding="0px" />
 </dx:ASPxNavBar>

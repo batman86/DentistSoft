@@ -24,6 +24,8 @@ namespace DentistManager.Domain.Entities
         public string Name { get; set; }
         public string SideEffectDecsription { get; set; }
         public string ScaleType { get; set; }
+        public string Dose { get; set; }
+        public string Concentration { get; set; }
     
         public virtual ICollection<Prescription> Prescriptions { get; set; }
         public virtual ICollection<Prescription> Prescriptions1 { get; set; }
