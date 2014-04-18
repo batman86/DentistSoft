@@ -4,6 +4,7 @@
     <item Text="Doctors" NavigateUrl="~\Admin\Doctors.aspx" />
     <item Text="Secretaries" NavigateUrl="~\Admin\Secretary.aspx" />
     <item Text="Clinics" NavigateUrl="~\Admin\Clinics.aspx" />
+    <item Text="PatientStatus" NavigateUrl="~\Admin\PatientStatus.aspx" />
   </group>
   <group Text="System Data">
     <item Text="Materials" NavigateUrl="~\Admin\Materials.aspx" />
@@ -18,6 +19,7 @@
   </group>
   <group Text="Payment">
     <item Text="Payments" NavigateUrl="~\Admin\Payment.aspx" />
+    <item Text="PaymentsByPeriod" NavigateUrl="~\Admin\PaymentByPeriod.aspx" />
 
   </group>
 </menu>
