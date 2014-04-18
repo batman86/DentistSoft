@@ -307,6 +307,13 @@
     <Compile Include="Appoiment\Appoiments.aspx.designer.cs">
       <DependentUpon>Appoiments.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Appoiment\SecretaryMaster.Master.cs">
+      <DependentUpon>SecretaryMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\SecretaryMaster.Master.designer.cs">
+      <DependentUpon>SecretaryMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -768,6 +775,7 @@
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionAdd.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientManagement\PatientCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
+    <Content Include="Appoiment\SecretaryMaster.Master" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
