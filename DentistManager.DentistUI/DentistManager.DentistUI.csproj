@@ -51,7 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DevExpress.Web.v13.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DevExpress.XtraScheduler.v13.1.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DHTMLX">
       <HintPath>..\packages\DHTMLX.Scheduler.NET.3.0.1.11\lib\DHTMLX.dll</HintPath>
     </Reference>
@@ -821,9 +824,10 @@
   <ItemGroup>
     <Folder Include="Areas\DoctorDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
-    <Folder Include="Content\Images\xray\large\" />
-    <Folder Include="Content\Images\xray\medium\" />
-    <Folder Include="Content\Images\xray\small\" />
+    <Folder Include="Content\Images\PHOTO\" />
+    <Folder Include="Content\Images\X-RAY\large\" />
+    <Folder Include="Content\Images\X-RAY\medium\" />
+    <Folder Include="Content\Images\X-RAY\small\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

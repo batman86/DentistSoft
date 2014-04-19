@@ -20,6 +20,12 @@ var selector,
                 var _medID = $("#MedicineDropDown option:selected").val();
                 var _medName = $("#MedicineDropDown option:selected").text();
 
+                var _doseVal = $("#MedicineDropDown option:selected").data('Dose');
+                var _ScaleType = $("#MedicineDropDown option:selected").data('ScaleType');
+                var _Concentration = $("#MedicineDropDown option:selected").data('Concentration');
+                var _SideEffectDecsription = $("#MedicineDropDown option:selected").data('SideEffectDecsription');
+
+
                 var _txtDose = $('#txtDose').val();
                 var _txtUnite = $('#txtUnite').val();
                 var _txtFocuse = $('#txtFocuse').val();

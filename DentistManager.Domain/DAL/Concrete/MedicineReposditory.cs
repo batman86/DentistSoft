@@ -16,7 +16,7 @@ namespace DentistManager.Domain.DAL.Concrete
             {
                 var medicenIQ= ctx.Medicines;
                 IEnumerable<MedicineMiniViewModel> medicineList = (from m in medicenIQ
-                                                                   select new MedicineMiniViewModel { MedicineID = m.MedicineID, Name = m.Name }).ToList();
+                                                                   select new MedicineMiniViewModel { MedicineID = m.MedicineID, Name = m.Name, Dose=m.Dose, ScaleType=m.ScaleType, Concentration=m.Concentration, SideEffectDecsription=m.SideEffectDecsription }).ToList();
                 return medicineList;
             }
         }

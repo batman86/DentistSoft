@@ -10,5 +10,10 @@ namespace DentistManager.Domain.ViewModel
     {
         public int MedicineID { get; set; }
         public string Name { get; set; }
+
+        public string SideEffectDecsription { get; set; }
+        public string ScaleType { get; set; }
+        public string Dose { get; set; }
+        public string Concentration { get; set; }
     }
 }

@@ -57,7 +57,7 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("<select name=prescriptionViewModel.MedicineID id=MedicineDropDown>");
             foreach (MedicineMiniViewModel i in list)
             {
-                result.Append("<option value=\"" + i.MedicineID + "\">" + i.Name + "</option>");
+                result.Append("<option value=\"" + i.MedicineID + "\"  data-Dose=" + i.Dose + " data-ScaleType=" + i.ScaleType + " data-Concentration=" + i.Concentration + " data-SideEffectDecsription=" + i.SideEffectDecsription + " >" + i.Name + "</option>");
             }
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
