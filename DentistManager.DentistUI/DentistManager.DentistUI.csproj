@@ -824,7 +824,9 @@
   <ItemGroup>
     <Folder Include="Areas\DoctorDashboard\Models\" />
     <Folder Include="Areas\SecretaryDashboard\Models\" />
-    <Folder Include="Content\Images\PHOTO\" />
+    <Folder Include="Content\Images\PHOTO\large\" />
+    <Folder Include="Content\Images\PHOTO\medium\" />
+    <Folder Include="Content\Images\PHOTO\small\" />
     <Folder Include="Content\Images\X-RAY\large\" />
     <Folder Include="Content\Images\X-RAY\medium\" />
     <Folder Include="Content\Images\X-RAY\small\" />
