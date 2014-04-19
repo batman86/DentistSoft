@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
+    [Authorize(Roles = "Secretary")]
     public class PatientIllnessHistoryController : Controller
     {
 

@@ -11,6 +11,7 @@ using DentistManager.Domain.DAL.Abstract;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class PatientPaymentController : Controller
     {
         IPatientPaymentBL patientPaymentBL;

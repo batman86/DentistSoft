@@ -10,6 +10,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class PrescriptionController : Controller
     {
         //

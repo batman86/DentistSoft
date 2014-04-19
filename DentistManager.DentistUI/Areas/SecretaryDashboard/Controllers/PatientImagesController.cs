@@ -11,6 +11,7 @@ using DentistManager.Domain.DAL.Abstract;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
+    [Authorize(Roles = "Secretary")]
     public class PatientImagesController : Controller
     {
 
