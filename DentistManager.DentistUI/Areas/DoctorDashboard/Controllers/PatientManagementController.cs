@@ -11,6 +11,7 @@ using DentistManager.DentistUI.Infrastructure;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class PatientManagementController : Controller
     {
         //
