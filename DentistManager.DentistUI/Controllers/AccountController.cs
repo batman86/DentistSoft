@@ -37,6 +37,30 @@ namespace DentistManager.DentistUI.Controllers
         }
 
         //
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        }
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -48,7 +72,36 @@ namespace DentistManager.DentistUI.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    await SignInAsync(user, false);
+                    IEnumerable<IdentityUserRole> role = user.Roles;
+                    IdentityRole myrole = new IdentityRole() ;
+                    foreach (var item in role)
+	               {
+
+                        myrole = item.Role;
+                       break;
+                    
+                    }
+                    //admin
+                    if (myrole.Id == "1")
+                    {
+                        return RedirectToLocal("~/Admin/Doctors.aspx");
+                    }
+                    //Doctor
+                    else if (myrole.Id=="2")
+                    {
+                       return RedirectToAction("patientList","PatientManagement",new { area = "DoctorDashboard" });
+                    }
+                   // secartary
+                    else if (myrole.Id=="3")
+                    {
+
+                        return RedirectToAction("patientList", "PatientManagement", new { area = "SecretaryDashboard" });
+                    }
+                    else
+                    {
+                        Redirect("");
+                    }
                     return RedirectToLocal(returnUrl);
                 }
                 else
@@ -62,40 +115,41 @@ namespace DentistManager.DentistUI.Controllers
         }
 
         //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //// GET: /Account/Register
+        //[AllowAnonymous]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: true);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
-            }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = new ApplicationUser() { UserName = model.UserName };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await SignInAsync(user, isPersistent: true);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            AddErrors(result);
+        //        }
+        //    }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
 
         //
+       /*
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -323,20 +377,9 @@ namespace DentistManager.DentistUI.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+      
 
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-        }
+    
 
         private void AddErrors(IdentityResult result)
         {
@@ -364,17 +407,7 @@ namespace DentistManager.DentistUI.Controllers
             Error
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
+      
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
@@ -404,5 +437,6 @@ namespace DentistManager.DentistUI.Controllers
             }
         }
         #endregion
+         */
     }
 }

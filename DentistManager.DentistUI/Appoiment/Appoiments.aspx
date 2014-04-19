@@ -18,7 +18,35 @@
         <table class="auto-style1">
             <tr style="vertical-align: top">
                 <td>
-                    <dx:ASPxScheduler ID="ASPxScheduler1" runat="server" AppointmentDataSourceID="dsAppoiments" ClientIDMode="AutoID" Start="2014-04-18" Theme="PlasticBlue">
+                    <dx:ASPxScheduler ID="ASPxScheduler1" runat="server" AppointmentDataSourceID="dsAppoiments" ClientIDMode="AutoID" Start="2014-04-18" Theme="Office2010Silver">
+                        <Storage>
+                            <Appointments AutoRetrieveId="True">
+                                <Mappings AppointmentId="AppointmentID" End="End_date" Start="Start_date" />
+                                <CustomFieldMappings>
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="ClinicID" Name="ClinicID" />
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="DoctorID" Name="DoctorID" />
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="PatientID" Name="PatientID" />
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="Reason" Name="Reason" />
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="Status" Name="Status" />
+                                    <dx:ASPxAppointmentCustomFieldMapping Member="Text" Name="Text" />
+                                </CustomFieldMappings>
+                            </Appointments>
+                        </Storage>
+<Views>
+<DayView><TimeRulers>
+<dx:TimeRuler></dx:TimeRuler>
+</TimeRulers>
+</DayView>
+
+<WorkWeekView><TimeRulers>
+<dx:TimeRuler></dx:TimeRuler>
+</TimeRulers>
+</WorkWeekView>
+    <TimelineView Enabled="False">
+    </TimelineView>
+</Views>
+                        <OptionsForms AppointmentFormTemplateUrl="~/Appoiment/UserAppoiment/UserAppForm.ascx" AppointmentInplaceEditorFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/InplaceEditor.ascx" GotoDateFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/GotoDateForm.ascx" RecurrentAppointmentDeleteFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/RecurrentAppointmentDeleteForm.ascx" RecurrentAppointmentEditFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/RecurrentAppointmentEditForm.ascx" RemindersFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/ReminderForm.ascx" />
+                        <OptionsToolTips AppointmentDragToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/AppointmentDragToolTip.ascx" AppointmentToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/AppointmentToolTip.ascx" SelectionToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/SelectionToolTip.ascx" />
                     </dx:ASPxScheduler>
                     <asp:SqlDataSource ID="dsAppoiments" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [Appointments] WHERE [AppointmentID] = @AppointmentID" InsertCommand="INSERT INTO [Appointments] ([DoctorID], [PatientID], [Reason], [ClinicID], [Status], [Start_date], [End_date], [Text]) VALUES (@DoctorID, @PatientID, @Reason, @ClinicID, @Status, @Start_date, @End_date, @Text)" SelectCommand="SELECT * FROM [Appointments]" UpdateCommand="UPDATE [Appointments] SET [DoctorID] = @DoctorID, [PatientID] = @PatientID, [Reason] = @Reason, [ClinicID] = @ClinicID, [Status] = @Status, [Start_date] = @Start_date, [End_date] = @End_date, [Text] = @Text WHERE [AppointmentID] = @AppointmentID">
                         <DeleteParameters>

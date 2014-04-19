@@ -48,10 +48,14 @@
                                 </ValidationSettings>
                             </PropertiesComboBox>
                         </dx:GridViewDataComboBoxColumn>
+                        <dx:GridViewDataTextColumn FieldName="Dose" VisibleIndex="5">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn FieldName="Concentration" VisibleIndex="6">
+                        </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFilterRow="True" />
                 </dx:ASPxGridView>
-                <asp:SqlDataSource ID="dsMedicine" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [Medicine] WHERE [MedicineID] = @MedicineID" InsertCommand="INSERT INTO [Medicine] ([Name], [SideEffectDecsription], [ScaleType]) VALUES (@Name, @SideEffectDecsription, @ScaleType)" SelectCommand="SELECT * FROM [Medicine]" UpdateCommand="UPDATE [Medicine] SET [Name] = @Name, [SideEffectDecsription] = @SideEffectDecsription, [ScaleType] = @ScaleType WHERE [MedicineID] = @MedicineID">
+                <asp:SqlDataSource ID="dsMedicine" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [Medicine] WHERE [MedicineID] = @MedicineID" InsertCommand="INSERT INTO [Medicine] ([Name], [SideEffectDecsription], [ScaleType], [Dose], [Concentration]) VALUES (@Name, @SideEffectDecsription, @ScaleType, @Dose, @Concentration)" SelectCommand="SELECT * FROM [Medicine]" UpdateCommand="UPDATE [Medicine] SET [Name] = @Name, [SideEffectDecsription] = @SideEffectDecsription, [ScaleType] = @ScaleType, [Dose] = @Dose, [Concentration] = @Concentration WHERE [MedicineID] = @MedicineID">
                     <DeleteParameters>
                         <asp:Parameter Name="MedicineID" Type="Int32" />
                     </DeleteParameters>
@@ -59,11 +63,15 @@
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="SideEffectDecsription" Type="String" />
                         <asp:Parameter Name="ScaleType" Type="String" />
+                        <asp:Parameter Name="Dose" Type="String" />
+                        <asp:Parameter Name="Concentration" Type="String" />
                     </InsertParameters>
                     <UpdateParameters>
                         <asp:Parameter Name="Name" Type="String" />
                         <asp:Parameter Name="SideEffectDecsription" Type="String" />
                         <asp:Parameter Name="ScaleType" Type="String" />
+                        <asp:Parameter Name="Dose" Type="String" />
+                        <asp:Parameter Name="Concentration" Type="String" />
                         <asp:Parameter Name="MedicineID" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>

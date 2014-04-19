@@ -54,6 +54,7 @@
     <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DevExpress.XtraScheduler.v13.1.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DHTMLX">
       <HintPath>..\packages\DHTMLX.Scheduler.NET.3.0.1.11\lib\DHTMLX.dll</HintPath>
@@ -191,6 +192,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Accounts.aspx.cs">
       <DependentUpon>Accounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,6 +325,20 @@
     <Compile Include="Appoiment\SecretaryMaster.Master.designer.cs">
       <DependentUpon>SecretaryMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Appoiment\UserAppoiment\UserAppForm.ascx.cs">
+      <DependentUpon>UserAppForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\UserAppoiment\UserAppForm.ascx.designer.cs">
+      <DependentUpon>UserAppForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -346,6 +368,97 @@
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx.cs">
+      <DependentUpon>AppointmentDragToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx.designer.cs">
+      <DependentUpon>AppointmentDragToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentForm.ascx.cs">
+      <DependentUpon>AppointmentForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentForm.ascx.designer.cs">
+      <DependentUpon>AppointmentForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx.cs">
+      <DependentUpon>AppointmentFormEx.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx.designer.cs">
+      <DependentUpon>AppointmentFormEx.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx.cs">
+      <DependentUpon>AppointmentToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx.designer.cs">
+      <DependentUpon>AppointmentToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\GotoDateForm.ascx.cs">
+      <DependentUpon>GotoDateForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\GotoDateForm.ascx.designer.cs">
+      <DependentUpon>GotoDateForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx.cs">
+      <DependentUpon>HorizontalAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx.designer.cs">
+      <DependentUpon>HorizontalAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx.cs">
+      <DependentUpon>HorizontalSameDayAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx.designer.cs">
+      <DependentUpon>HorizontalSameDayAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\InplaceEditor.ascx.cs">
+      <DependentUpon>InplaceEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\InplaceEditor.ascx.designer.cs">
+      <DependentUpon>InplaceEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx.cs">
+      <DependentUpon>RecurrentAppointmentDeleteForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx.designer.cs">
+      <DependentUpon>RecurrentAppointmentDeleteForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx.cs">
+      <DependentUpon>RecurrentAppointmentEditForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx.designer.cs">
+      <DependentUpon>RecurrentAppointmentEditForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\ReminderForm.ascx.cs">
+      <DependentUpon>ReminderForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\ReminderForm.ascx.designer.cs">
+      <DependentUpon>ReminderForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx.cs">
+      <DependentUpon>SelectionToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx.designer.cs">
+      <DependentUpon>SelectionToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx.cs">
+      <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx.designer.cs">
+      <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -358,6 +471,13 @@
     <Compile Include="Models\UserManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
@@ -368,6 +488,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\Login.aspx" />
     <Content Include="Admin\Accounts.aspx" />
     <Content Include="Admin\Clinics.aspx" />
     <Content Include="Admin\Doctors.aspx" />
@@ -383,6 +504,8 @@
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Admin\Warehouse.aspx" />
     <Content Include="Appoiment\Appoiments.aspx" />
+    <Content Include="Appoiment\UserAppoiment\UserAppForm.ascx" />
+    <Content Include="Appoiment\WebForm1.aspx" />
     <Content Include="App_Data\SideMenu.xml" />
     <Content Include="Content\Admin.css" />
     <Content Include="Content\bootstrap.css" />
@@ -393,6 +516,19 @@
     <Content Include="Content\Images\PlasticBlueHeader.jpg" />
     <Content Include="Content\Images\RedWineHeader.jpg" />
     <Content Include="Content\styleRest.css" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentForm.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\GotoDateForm.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\InplaceEditor.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\ReminderForm.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx" />
+    <Content Include="Appoiment\DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -780,6 +916,7 @@
     <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
     <Content Include="Appoiment\SecretaryMaster.Master" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
+    <Content Include="Main.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -843,6 +980,9 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e42c55e03f546a0b5b9237767b64569" Name="Diagram1">
+      <Diagram DiagramId="acc2be8a1bb84ddc84814df5857b2dae" Name="Diagram1">
         <EntityTypeShape EntityType="DentistModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Appointment" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.AspNetRole" Width="1.5" PointX="1.5" PointY="8.375" IsExpanded="true" />
@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="DentistModel.Image" Width="1.5" PointX="8.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.Material" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.MaterialTreatment" Width="1.5" PointX="10.5" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentistModel.Medicine" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DentistModel.Medicine" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.opperation" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.OpperationMaterial" Width="1.5" PointX="10.5" PointY="24.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DentistModel.PatientHistory" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
