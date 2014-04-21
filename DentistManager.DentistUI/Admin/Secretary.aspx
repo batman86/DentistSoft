@@ -84,7 +84,7 @@
             <td style="width:500px ">
 
                  <dx:ASPxGridView ID="gvxSecretary" runat="server" AutoGenerateColumns="False" ClientInstanceName="SecretaryGrid"
-                DataSourceID="dsSecretary" EnableTheming="True" KeyFieldName="SecretaryID" Theme="Office2003Silver" OnInitNewRow="gvxSecretary_InitNewRow" Width="100%" style="margin-bottom: 5px">
+                DataSourceID="dsSecretary" EnableTheming="True" KeyFieldName="SecretaryID" Theme="RedWine" OnInitNewRow="gvxSecretary_InitNewRow" Width="100%" style="margin-bottom: 5px">
                 
                 <Columns>
                     

@@ -6,7 +6,7 @@
         <tr>
             <td style="width:500px "> 
                 <dx:ASPxGridView ID="gvxClinics" runat="server" AutoGenerateColumns="False" DataSourceID="dsClinics"
-                     EnableTheming="True" KeyFieldName="ClinicID" Theme="Office2003Silver" ClientInstanceName="ClinicGrid" 
+                     EnableTheming="True" KeyFieldName="ClinicID" Theme="RedWine" ClientInstanceName="ClinicGrid" 
                     OnInitNewRow="gvxClinics_InitNewRow">
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">

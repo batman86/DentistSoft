@@ -7,11 +7,13 @@
 <head runat="server">
     <title></title>
     <link rel="stylesheet" type="text/css" href="../Content/Admin.css" />
+ 
 </head>
-<body runat="server" id="Body">
+
+    <body runat="server" id="Body" >
     <form id="form1" runat="server">
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" AllowResize="False" Orientation="Vertical"
-        FullscreenMode="True" SeparatorVisible="False" Height="100%" Width="100%">
+        FullscreenMode="True" SeparatorVisible="False" Height="100%" Width="100%" Theme="RedWine">
         <Styles>
             <Pane>
                 <Paddings Padding="0px" />
@@ -27,9 +29,9 @@
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                         <div class="headerTop">
                             <div class="templateTitle">
-                                <a id="TitleLink" href="~/" runat="server">DentistSoftware</a>
+                                <a id="TitleLink" href="~/Admin/Doctors.aspx" runat="server">DentistManager</a>
                             </div>
-                            <div class="loginControl">
+                            <div class="loginControl " >
                                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                                     <AnonymousTemplate>
                                         <a href="~/Account/Login.aspx" runat="server" id="loginLink">Log In</a> 
@@ -48,7 +50,9 @@
                             </div>
                         </div>
                         <div class="headerMenu">
-                            
+                            <%-- DXCOMMENT: Configure the header menu --%>
+
+
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -85,6 +89,8 @@
         </Panes>
     </dx:ASPxSplitter>
 	
+<%-- DXCOMMENT: Configure a datasource for the header menu --%>
+
 	
     </form>
 </body>

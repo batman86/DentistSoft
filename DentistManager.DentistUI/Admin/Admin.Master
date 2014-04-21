@@ -25,9 +25,9 @@
 </html>--%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-   <%--  <asp:ContentPlaceHolder ID="head" runat="server">
+    <%--  <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>--%>
-    <dx:ASPxSplitter ID="ContentSplitter" runat="server" Width="100%" Height="100%">
+    <dx:ASPxSplitter ID="ContentSplitter" runat="server" Width="100%" Height="100%" Theme="RedWine">
         <Styles>
             <Pane>
                 <Paddings Padding="0px" />

@@ -7,7 +7,7 @@
     <table class="auto-style1">
         <tr>
             <td>
-                <dx:ASPxGridView ID="gvxAppoiments" runat="server" AutoGenerateColumns="False" DataSourceID="dsAppoiment" EnableTheming="True" KeyFieldName="AppointmentID" Theme="Office2003Silver">
+                <dx:ASPxGridView ID="gvxAppoiments" runat="server" AutoGenerateColumns="False" DataSourceID="dsAppoiment" EnableTheming="True" KeyFieldName="AppointmentID" Theme="RedWine">
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
                             <ClearFilterButton Visible="True">

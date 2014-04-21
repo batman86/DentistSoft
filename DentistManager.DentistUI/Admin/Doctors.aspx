@@ -97,7 +97,7 @@
             <td class="auto-style2" colspan="2">
                 <div style="width: 100%; height: 100%; position: relative">
                 <dx:ASPxGridView ID="gvxDoctors" runat="server" AutoGenerateColumns="False" ClientInstanceName="MainGirdDoctors" 
-                    DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" Theme="Office2003Silver" Width="100%" OnInitNewRow="gvxDoctors_InitNewRow" OnCustomButtonCallback="gvxDoctors_CustomButtonCallback">
+                    DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" Theme="RedWine" Width="100%" OnInitNewRow="gvxDoctors_InitNewRow" OnCustomButtonCallback="gvxDoctors_CustomButtonCallback">
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
                             <EditButton Visible="True">

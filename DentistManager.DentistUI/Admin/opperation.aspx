@@ -8,7 +8,7 @@
         <tr>
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxOpperation" runat="server" AutoGenerateColumns="False" DataSourceID="dsOpperation"
-                     EnableTheming="True" KeyFieldName="OpperationID" Theme="Office2003Silver"
+                     EnableTheming="True" KeyFieldName="OpperationID" Theme="RedWine"
                      ClientInstanceName="OpperationGrid" OnRowInserted="gvxOpperation_RowInserted" OnCellEditorInitialize="gvxOpperation_CellEditorInitialize" OnRowUpdated="gvxOpperation_RowUpdated" OnStartRowEditing="gvxOpperation_StartRowEditing" 
                    >
                     <Columns>

@@ -7,7 +7,7 @@
     <table class="auto-style1">
         <tr>
             <td>
-                <dx:ASPxGridView ID="gvxWarehouse" runat="server" AutoGenerateColumns="False" DataSourceID="dsWarehouse" EnableTheming="True" KeyFieldName="WarehouseID" Theme="Office2003Silver">
+                <dx:ASPxGridView ID="gvxWarehouse" runat="server" AutoGenerateColumns="False" DataSourceID="dsWarehouse" EnableTheming="True" KeyFieldName="WarehouseID" Theme="RedWine">
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">
                             <ClearFilterButton Visible="True">
@@ -51,7 +51,7 @@
                 </asp:SqlDataSource>
                 <asp:SqlDataSource ID="dsStorages" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" SelectCommand="SELECT [StorageID], [Name] FROM [Storages]">
                 </asp:SqlDataSource>
-            </td>
+                s</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>

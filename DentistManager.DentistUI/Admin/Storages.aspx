@@ -9,7 +9,7 @@
         <tr>
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxStorages" runat="server" AutoGenerateColumns="False" DataSourceID="dsStorages"
-                     EnableTheming="True" KeyFieldName="StorageID" Theme="Office2003Silver"
+                     EnableTheming="True" KeyFieldName="StorageID" Theme="RedWine"
                      ClientInstanceName="StoragesGrid" OnInitNewRow="gvxStorages_InitNewRow" 
                    >
                     <Columns>

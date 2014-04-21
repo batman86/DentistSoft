@@ -10,7 +10,7 @@
 
                  <dx:ASPxGridView ID="gvxSuppliers" runat="server" AutoGenerateColumns="False" ClientInstanceName="SuppliersGrid"
                 DataSourceID="dsSuppliers" EnableTheming="True" 
-                  KeyFieldName="SuppID" Theme="Office2003Silver"  Width="100%" style="margin-bottom: 5px">
+                  KeyFieldName="SuppID" Theme="RedWine"  Width="100%" style="margin-bottom: 5px">
                 
                 <Columns>
                     

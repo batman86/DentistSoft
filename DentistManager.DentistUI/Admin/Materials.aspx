@@ -9,7 +9,7 @@
         <tr>
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxMedicine" runat="server" AutoGenerateColumns="False" DataSourceID="dsMaterials"
-                     EnableTheming="True" KeyFieldName="ItemID" Theme="Office2003Silver" ClientInstanceName="MaterialsGrid" 
+                     EnableTheming="True" KeyFieldName="ItemID" Theme="RedWine" ClientInstanceName="MaterialsGrid" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">

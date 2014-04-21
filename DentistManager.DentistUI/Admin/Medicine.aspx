@@ -11,7 +11,7 @@
             
             <td style="width:500px ">
                 <dx:ASPxGridView ID="gvxMedicine" runat="server" AutoGenerateColumns="False" DataSourceID="dsMedicine"
-                     EnableTheming="True" KeyFieldName="MedicineID" Theme="Office2003Silver" ClientInstanceName="MedicinGrid" 
+                     EnableTheming="True" KeyFieldName="MedicineID" Theme="RedWine" ClientInstanceName="MedicinGrid" 
                    >
                     <Columns>
                         <dx:GridViewCommandColumn VisibleIndex="0">

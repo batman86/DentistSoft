@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td>
-                <dx:ASPxGridView ID="gvxPaymentClinics" runat="server" AutoGenerateColumns="False" DataSourceID="dsClinis" EnableTheming="True" KeyFieldName="ClinicID" OnCustomUnboundColumnData="gvxPaymentClinics_CustomUnboundColumnData" Theme="Office2003Silver" OnDataBound="gvxPaymentClinics_DataBound">
+                <dx:ASPxGridView ID="gvxPaymentClinics" runat="server" AutoGenerateColumns="False" DataSourceID="dsClinis" EnableTheming="True" KeyFieldName="ClinicID" OnCustomUnboundColumnData="gvxPaymentClinics_CustomUnboundColumnData" Theme="RedWine" OnDataBound="gvxPaymentClinics_DataBound">
                     <TotalSummary>
                         <dx:ASPxSummaryItem SummaryType="Sum" />
                     </TotalSummary>
@@ -73,7 +73,7 @@
                     <SettingsDetail ShowDetailRow="True" />
                     <Templates>
                         <DetailRow>
-                            <dx:ASPxGridView ID="gvxDoctor" runat="server" AutoGenerateColumns="False" DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" OnBeforePerformDataSelect="gvxDoctor_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxDoctor_CustomUnboundColumnData" OnDataBound="gvxDoctor_DataBound" Theme="Office2003Silver">
+                            <dx:ASPxGridView ID="gvxDoctor" runat="server" AutoGenerateColumns="False" DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" OnBeforePerformDataSelect="gvxDoctor_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxDoctor_CustomUnboundColumnData" OnDataBound="gvxDoctor_DataBound" Theme="RedWine">
                                 <Columns>
                                     <dx:GridViewCommandColumn VisibleIndex="0">
                                         <ClearFilterButton Visible="True">
@@ -103,7 +103,7 @@
                                 <SettingsDetail ShowDetailRow="True" />
                                 <Templates>
                                     <DetailRow>
-                                        <dx:ASPxGridView ID="gvxPatients" runat="server" AutoGenerateColumns="False" DataSourceID="dsPatients" EnableTheming="True" KeyFieldName="PatientID" OnBeforePerformDataSelect="gvxPatients_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxPatients_CustomUnboundColumnData" OnDataBound="gvxPatients_DataBound" Theme="Office2003Silver">
+                                        <dx:ASPxGridView ID="gvxPatients" runat="server" AutoGenerateColumns="False" DataSourceID="dsPatients" EnableTheming="True" KeyFieldName="PatientID" OnBeforePerformDataSelect="gvxPatients_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxPatients_CustomUnboundColumnData" OnDataBound="gvxPatients_DataBound" Theme="RedWine">
                                             <Columns>
                                                 <dx:GridViewCommandColumn VisibleIndex="0">
                                                     <ClearFilterButton Visible="True">
@@ -157,10 +157,10 @@
                 </asp:SqlDataSource>
             </td>
             <td>
-                <dx:ASPxPopupControl ID="popupReceipts" runat="server" RenderMode="Lightweight" Theme="Office2003Silver" HeaderText="Patien Receipts">
+                <dx:ASPxPopupControl ID="popupReceipts" runat="server" RenderMode="Lightweight" Theme="RedWine" HeaderText="Patien Receipts">
                     <ContentCollection>
 <dx:PopupControlContentControl runat="server" SupportsDisabledAttribute="True">
-    <dx:ASPxGridView ID="gvReceipts" runat="server" AutoGenerateColumns="False" DataSourceID="dsReceipts" EnableTheming="True" KeyFieldName="ReceiptID" Theme="Office2003Silver">
+    <dx:ASPxGridView ID="gvReceipts" runat="server" AutoGenerateColumns="False" DataSourceID="dsReceipts" EnableTheming="True" KeyFieldName="ReceiptID" Theme="RedWine">
         <Columns>
             <dx:GridViewDataTextColumn FieldName="ReceiptID" ReadOnly="True" ShowInCustomizationForm="True" VisibleIndex="0">
                 <EditFormSettings Visible="False" />
