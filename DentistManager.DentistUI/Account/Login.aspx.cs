@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-
+using DentistManager.Domain.Entities;
 namespace DentistManager.DentistUI.Account
 {
     public partial class Login : System.Web.UI.Page
@@ -16,22 +16,32 @@ namespace DentistManager.DentistUI.Account
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if (Membership.ValidateUser(tbUserName.Text, tbPassword.Text))
+            using (Entities ctx = new Entities())
             {
-
-                if (string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+                AspNetUser user = ctx.AspNetUsers.Where(u => u.UserName == tbUserName.Text && u.PasswordHash == tbPassword.Text).FirstOrDefault();
+                if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(tbUserName.Text, false);
-                    Response.Redirect("~/");
+                    Session["SuperAdmin"] = true;
+                    Response.Redirect("~/Admin/SuperAdmin.aspx");
+ 
                 }
-                else
-                    FormsAuthentication.RedirectFromLoginPage(tbUserName.Text, false);
             }
-            else
-            {
-                tbUserName.ErrorText = "Invalid user";
-                tbUserName.IsValid = false;
-            }
+            //if (Membership.ValidateUser(tbUserName.Text, tbPassword.Text))
+            //{
+
+            //    if (string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+            //    {
+            //        FormsAuthentication.SetAuthCookie(tbUserName.Text, false);
+            //        Response.Redirect("~/");
+            //    }
+            //    else
+            //        FormsAuthentication.RedirectFromLoginPage(tbUserName.Text, false);
+            //}
+            //else
+            //{
+            //    tbUserName.ErrorText = "Invalid user";
+            //    tbUserName.IsValid = false;
+            //}
         }
     }
 }

@@ -78,6 +78,17 @@ namespace DentistManager.DentistUI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
+                using(Entities ctx = new Entities ())
+	             {
+                    AspNetUser inuse = ctx.AspNetUsers.Where(u => u.Id == user.Id).FirstOrDefault();
+
+
+                    if (!(bool)inuse.Active)
+                     {
+                         user = null;
+                     }
+		                   
+                 }
                 if (user != null)
                 {
                     await SignInAsync(user, false);

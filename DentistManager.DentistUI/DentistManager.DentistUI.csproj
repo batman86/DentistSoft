@@ -298,6 +298,13 @@
     <Compile Include="Admin\Storages.aspx.designer.cs">
       <DependentUpon>Storages.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\SuperAdmin.aspx.cs">
+      <DependentUpon>SuperAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SuperAdmin.aspx.designer.cs">
+      <DependentUpon>SuperAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Suppliers.aspx.cs">
       <DependentUpon>Suppliers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -503,6 +510,7 @@
     <Content Include="Admin\Receiving.aspx" />
     <Content Include="Admin\Secretary.aspx" />
     <Content Include="Admin\Storages.aspx" />
+    <Content Include="Admin\SuperAdmin.aspx" />
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Admin\Warehouse.aspx" />
     <Content Include="Appoiment\Appoiments.aspx" />

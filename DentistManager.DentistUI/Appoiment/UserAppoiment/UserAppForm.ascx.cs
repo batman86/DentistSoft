@@ -164,9 +164,10 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment
                 text = string.Empty
 
             };
-
+            
             AppointmentRepository apprep = new AppointmentRepository();
             apprep.AddNewAppointment(app);
+            Response.Redirect("~/Appoiment/Appoiments.aspx");
             //AppointmentFormTemplateContainer container = (AppointmentFormTemplateContainer)Parent;
             //string s = container.Appointment.Id.ToString();
            

@@ -46,7 +46,7 @@
                     <SettingsDetail ShowDetailRow="True" />
                     <Templates>
                         <DetailRow>
-                            <dx:ASPxGridView ID="gvxDoctor" runat="server" AutoGenerateColumns="False" DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" OnBeforePerformDataSelect="gvxDoctor_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxDoctor_CustomUnboundColumnData" OnDataBound="gvxDoctor_DataBound" Theme="Office2003Silver">
+                            <dx:ASPxGridView ID="gvxDoctor" runat="server" AutoGenerateColumns="False" DataSourceID="dsDoctors" EnableTheming="True" KeyFieldName="DoctorID" OnBeforePerformDataSelect="gvxDoctor_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxDoctor_CustomUnboundColumnData" OnDataBound="gvxDoctor_DataBound" Theme="RedWine">
                                 <Columns>
                                     <dx:GridViewCommandColumn VisibleIndex="0">
                                         <ClearFilterButton Visible="True">
@@ -76,7 +76,7 @@
                                 <SettingsDetail ShowDetailRow="True" />
                                 <Templates>
                                     <DetailRow>
-                                        <dx:ASPxGridView ID="gvxPatients" runat="server" AutoGenerateColumns="False" DataSourceID="dsPatients" EnableTheming="True" KeyFieldName="PatientID" OnBeforePerformDataSelect="gvxPatients_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxPatients_CustomUnboundColumnData" OnDataBound="gvxPatients_DataBound" Theme="Office2003Silver">
+                                        <dx:ASPxGridView ID="gvxPatients" runat="server" AutoGenerateColumns="False" DataSourceID="dsPatients" EnableTheming="True" KeyFieldName="PatientID" OnBeforePerformDataSelect="gvxPatients_BeforePerformDataSelect" OnCustomUnboundColumnData="gvxPatients_CustomUnboundColumnData" OnDataBound="gvxPatients_DataBound" Theme="RedWine">
                                             <Columns>
                                                 <dx:GridViewCommandColumn VisibleIndex="0">
                                                     <ClearFilterButton Visible="True">

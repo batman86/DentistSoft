@@ -4,21 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Security;
+
 namespace DentistManager.DentistUI.Admin
 {
-    public partial class Root : System.Web.UI.MasterPage
+    public partial class SuperAdmin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if ( Session["SuperAdmin"] == null || !(bool)Session["SuperAdmin"] )
+            {
+                Response.Redirect("~/Account/login.aspx");
+            }
+          
         }
-
-        protected void HeadLoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
-        {
-            
-
-        }
-
     }
 }
