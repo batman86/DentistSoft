@@ -13,19 +13,30 @@ var selector,
             btnRemoveTreatment: $('.btnRemoveTreatment'),
             btnSaveTreatments: $('#btnSaveTreatments'),
             btnAddMatrial:$('#btnAddMatrial'),
-            treatmentItemID:1
+            treatmentItemID: 1,
+            tempOpperationID: 0,
+            tempToothNumber:0,
+            
         },
         Init: function () {
+
+           
 
             selector = this.selectors;
             vm = this.vmTreatmentList;
             vmMatrailList = this.vmMatrailList;
             vmMatrailWrap = this.matrailToSaveWrap;
             vmTreatmentMatrailList = this.vmTreatmentMatrailList
+            ArToothSidesNumbers = this.arToothSidesNumbers;
+
+            //Main.test('1-');
+
             this.getTreatmentList();
             this.loadTreatmentList();
             this.loadGraphDraw();
             this.BindUiActions();
+
+           
         },
         BindUiActions: function () {
 
@@ -398,17 +409,33 @@ var selector,
                 if (count < vm.length) {
                 for (var k = 0; k < vm.length; k++) {
                    
+                    Main.test(vm[k].toothSideNumber);
+
                     if (vm[k].toothNumber == toothID) {
-                            if (vm[k].toothSideNumber == 1)
-                                wedge1color1 = vm[k].opperationColor;
-                            else if (vm[k].toothSideNumber == 2)
-                                wedge1color2 = vm[k].opperationColor;
-                            else if (vm[k].toothSideNumber == 3)
-                                wedge1color3 = vm[k].opperationColor;
-                            else if (vm[k].toothSideNumber == 4)
-                                wedge1color4 = vm[k].opperationColor;
-                            else if (vm[k].toothSideNumber == 5)
-                                wedge1color5 = vm[k].opperationColor;
+
+                        for (var j = 0; j < ArToothSidesNumbers.length; j++) {
+
+                                if (ArToothSidesNumbers[j] == "1"){
+                                    wedge1color1 = vm[k].opperationColor;
+                                    continue;
+                                }
+                                else if (ArToothSidesNumbers[j] == "2"){
+                                    wedge1color2 = vm[k].opperationColor;
+                                    continue;
+                                }
+                                else if (ArToothSidesNumbers[j] == "3"){
+                                    wedge1color3 = vm[k].opperationColor;
+                                    continue;
+                                }
+                                else if (ArToothSidesNumbers[j] == "4"){
+                                    wedge1color4 = vm[k].opperationColor;
+                                    continue;
+                                }
+                                else if (ArToothSidesNumbers[j] == "5") {
+                                    wedge1color5 = vm[k].opperationColor;
+                                    continue;
+                                }
+                            }
                             count++;
                         }
                     }
@@ -447,6 +474,9 @@ var selector,
             stage.add(layer);
         },
         clickEventMsg: function () {
+            var tempOpperationID= selector.tempOpperationID;
+            var tempToothNumber= selector.tempToothNumber;
+
             var selectedValue = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').val();
             if (typeof selectedValue === 'undefined') {
                 alert('Please Select Opperation');
@@ -455,23 +485,58 @@ var selector,
 
             var oppName = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('opperationname');
             var oppColor = $('input[name=SelectedOpperation]:radio:checked', '#OpperationForm').data('fillcolor');
+
             var index = this.attrs.id.indexOf('-');
             var toothNumber = this.attrs.id.substr(0, index);
-            var toothSideNumber = this.attrs.id.substr(index + 1, this.attrs.id.length - 1);
+            var graphtoothSideNumber = this.attrs.id.substr(index+1 , this.attrs.id.length - 1);
+            var toothSideNumber = graphtoothSideNumber + '+';
 
-            selector.treatmentItemID = selector.treatmentItemID + 1;
-            vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, 0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor, selectedValue));
-            $('#TreatmentList').append('<tr><td> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label></td> <td><label id="toothNumber"> ' + toothNumber + '</label></td><td>   <label id="opperatioName" > ' + oppName + '</label></td><td>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label></td><td> <input class="Description" type="text" value="" /> </td><td>  <input class="TeratmentCost" type="text" value="" /></td><td> <input type="button" class="btnRemoveTreatment" value="X" /></td> </tr>');
+            if (tempOpperationID == selectedValue && tempToothNumber == toothNumber)
+            {
+                for (var i = 0; i < vm.length; i++) {
+                    if(vm[i].treatmentItemID ==  selector.treatmentItemID && vm[i].OpperationID ==tempOpperationID &&  vm[i].toothNumber == tempToothNumber)
+                    {
+                        vm[i].toothSideNumber = vm[i].toothSideNumber + toothSideNumber;
+                        $('#TreatmentList tr:last').find('#toothSideNumber').text(vm[i].toothSideNumber);
+                      
+                    }
+                }
+            }
+            else
+            {
+                selector.treatmentItemID = selector.treatmentItemID + 1;
+                vm.push(new Main.obTreatmentListItem(selector.treatmentItemID, 0, '', selector.appointmentDate, oppName, '', 'State : in progress', toothNumber, toothSideNumber, oppColor, selectedValue));
+                $('#TreatmentList').append('<tr><td> <input class="treatmentItemID" type="hidden" value="' + selector.treatmentItemID + '" /> <input class="OpperationID" type="hidden" value="' + selectedValue + '" />  <input class="TeratmentID" type="hidden" value="' + 0 + '" /> <label id="toothSideNumber" > ' + toothSideNumber + '</label></td> <td><label id="toothNumber"> ' + toothNumber + '</label></td><td>   <label id="opperatioName" > ' + oppName + '</label></td><td>  <label id="AppointmentDate" > ' + selector.appointmentDate + '</label></td><td> <input class="Description" type="text" value="" /> </td><td>  <input class="TeratmentCost" type="text" value="" /></td><td> <input type="button" class="btnRemoveTreatment" value="X" /></td> </tr>');
+                
+                selector.tempOpperationID = selectedValue;
+                selector.tempToothNumber = toothNumber;
+            }
+          
+
             Main.loadGraphDraw();
             $('#btnSaveTreatments').addClass('red');
             // 
         },
         vmTreatmentList: [],
+        arToothSidesNumbers: [],
         vmMatrailList: [],
         vmTreatmentMatrailList:[],
         matrailToSaveWrap: {
             treatmentID:0,
             vmMatrailListToSave: []
+        },
+        test: function (toothSide) {
+
+            ArToothSidesNumbers.length = 0;
+            var index;
+            var toothSideNumber;
+
+            while (toothSide.length > 0) {
+                index = toothSide.indexOf('+');
+                toothSideNumber = toothSide.substr(0, index);
+                ArToothSidesNumbers.push(toothSideNumber);
+                toothSide = toothSide.substr(index + 1, toothSide.length);
+            }
         }
        
     };

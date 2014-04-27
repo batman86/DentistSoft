@@ -43,6 +43,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 paymentRercieptEntity.Amount = paymentRecieptViewModel.Amount;
                 paymentRercieptEntity.Date = DateTime.Now;
                 paymentRercieptEntity.PatientID = paymentRecieptViewModel.PatientID;
+                paymentRercieptEntity.DoctorID = paymentRecieptViewModel.doctorID;
 
                 ctx.PaymentReceipts.Add(paymentRercieptEntity);
                 count = ctx.SaveChanges();

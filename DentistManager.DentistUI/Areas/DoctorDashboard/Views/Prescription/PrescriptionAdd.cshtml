@@ -2,7 +2,7 @@
 @using DentistManager.DentistUI.HtmlHelpers
 
 @{
-    ViewBag.Title = "PrescriptionAdd";
+    ViewBag.Title = "Prescription Add";
 }
 
 <h2>Prescription Create</h2>
@@ -21,14 +21,13 @@
     <table id="TreatmentList">
         <tr>
             <td> @Html.generatePatientMedicineDropDownList(Model)</td>
-            <td><input type="text" id="txtDose" name="txtDose" placeholder="Dose" />   </td>
-            <td><input type="text" id="txtUnite" name="txtUnite" placeholder="Unite" /> </td>
-            <td><input type="text" id="txtFocuse" name="txtFocuse" placeholder="Focuse" /></td>
+            <td>Dose </td>
+            <td>ScaleType </td>
+            <td>Concentration </td>
             <td><input type="button" id="btnAdd" name="btnAdd" value="Add" /></td>
         </tr>
     </table>
 </div>
-
 
 <input type="button" id="btnSavePresc" value="Save" />
 
