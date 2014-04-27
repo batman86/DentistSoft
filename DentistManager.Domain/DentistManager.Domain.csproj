@@ -73,7 +73,6 @@
     <Compile Include="DAL\Abstract\IPaymentReceiptRerpository.cs" />
     <Compile Include="DAL\Abstract\IPrescriptionRepository.cs" />
     <Compile Include="DAL\Abstract\ISessionState.cs" />
-    <Compile Include="DAL\Abstract\IstorgeRepository.cs" />
     <Compile Include="DAL\Abstract\ITreatmentRepository.cs" />
     <Compile Include="DAL\Abstract\ISecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\AppointmentRepository.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="DAL\Concrete\PrescriptionRepository.cs" />
     <Compile Include="DAL\Concrete\SecertaryRepository.cs" />
     <Compile Include="DAL\Concrete\SessionState.cs" />
-    <Compile Include="DAL\Concrete\StorgeRepository.cs" />
     <Compile Include="DAL\Concrete\TreatmentRepository.cs" />
     <Compile Include="DAL\Concrete\WarehouseRepository.cs" />
     <Compile Include="Entities\Appointment.cs">
@@ -230,7 +228,6 @@
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionWrapViewModel.cs" />
     <Compile Include="ViewModel\SessionValuesViewModel.cs" />
-    <Compile Include="ViewModel\StorageMatrailViewModel.cs" />
     <Compile Include="ViewModel\TreatmentPresntViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

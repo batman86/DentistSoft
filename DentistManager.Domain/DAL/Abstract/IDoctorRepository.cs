@@ -13,6 +13,5 @@ namespace DentistManager.Domain.DAL.Abstract
         string getDoctorNameByID(int doctorID);
         int getClinecIDByUserID(string UserID);
         int getDoctorIDByUserID(string UserID);
-        int getDoctorIDByPatientID(int patientID);
     }
 }

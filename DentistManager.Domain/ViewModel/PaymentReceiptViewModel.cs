@@ -17,6 +17,5 @@ namespace DentistManager.Domain.ViewModel
         public int PatientID { get; set; }
         public string UserID { get; set; }
         public int ClinicID { get; set; }
-        public int doctorID { get; set; }
     }
 }

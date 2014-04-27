@@ -52,7 +52,7 @@
                             </table>
                         </td>
                         <td class="dxscCellWithPadding" style="width: 100%">
-                            <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblTitle" Text='<%#((HorizontalAppointmentTemplateContainer)Container).Items.Title.Text%>'> </dxe:ASPxLabel>            
+                            <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblTitle" Text='<%#((HorizontalAppointmentTemplateContainer)Container).AppointmentViewInfo.Appointment.CustomFields["Text"]%>'> </dxe:ASPxLabel>            
                         </td>
                     </tr>
                 </table>

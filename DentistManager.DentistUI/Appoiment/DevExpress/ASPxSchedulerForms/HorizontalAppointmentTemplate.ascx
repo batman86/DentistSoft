@@ -32,7 +32,7 @@
     <table style="width:100%; height:100%;" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
         <tr>
             <td runat="server" id="statusContainer" style="vertical-align: top">    
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td>

@@ -25,6 +25,7 @@
     <dxe:ASPxLabel ID="lblInterval" runat="server" Text="CustomDragAppointmentTooltip" EnableClientSideAPI="true">
         </dxe:ASPxLabel>
     <br />
+    
     <dxe:ASPxLabel ID="lblInfo" runat="server" EnableClientSideAPI="true"></dxe:ASPxLabel>
 </div>
 

@@ -44,7 +44,9 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment
         {
             base.OnLoad(e);
             Localize();
-            cbDoctors.Focus();
+          
+              
+            
         }
         void Localize()
         {
@@ -81,10 +83,17 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment
             {
                
             }
-
             btnOk.ClientSideEvents.Click = container.SaveHandler;
             btnCancel.ClientSideEvents.Click = container.CancelHandler;
             btnDelete.ClientSideEvents.Click = container.DeleteHandler;
+            //fill data on Edit
+            if (container.Appointment.CustomFields["PatientID"] != null)
+            {
+                cbDoctors.SelectedIndex = cbDoctors.Items.IndexOfValue(container.Appointment.CustomFields["DoctorID"].ToString());
+                cbPatients.SelectedIndex = cbPatients.Items.IndexOfValue(container.Appointment.CustomFields["PatientID"].ToString());
+                cbClinics.SelectedIndex = cbClinics.Items.IndexOfValue(container.Appointment.CustomFields["ClinicID"].ToString());
+                cbStatus.SelectedIndex = cbStatus.Items.IndexOfText(container.Appointment.CustomFields["Status"].ToString());
+            }
 
             //btnDelete.Enabled = !container.IsNewAppointment;
         }
@@ -116,9 +125,13 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment
         {
             AppointmentFormTemplateContainer container = (AppointmentFormTemplateContainer)Parent;
             ASPxScheduler control = container.Control;
-
             AppointmentRecurrenceForm1.EditorsInfo = new EditorsInfo(control, control.Styles.FormEditors, control.Images.FormEditors, control.Styles.Buttons);
             base.PrepareChildControls();
+
+            // me 
+            //AppointmentFormTemplateContainer container = (AppointmentFormTemplateContainer)Parent;
+            //string s = container.Appointment.Id.ToString();
+           
         }
         protected override ASPxEditBase[] GetChildEditors()
         {
@@ -149,27 +162,64 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment
         {
             return new Control[] { ValidationContainer };
         }
-
+       
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            AppointmentViewModelFull app = new AppointmentViewModelFull()
+            AppointmentFormTemplateContainer container = (AppointmentFormTemplateContainer)Parent;
+            if (cbPatients.SelectedItem != null || cbDoctors.SelectedItem != null || cbClinics.SelectedItem != null || cbStatus.SelectedItem != null)
             {
-                ClinicID = int.Parse(cbClinics.SelectedItem.Value.ToString()),
-                DoctorID = int.Parse(cbDoctors.SelectedItem.Value.ToString()),
-                PatientID = int.Parse(cbPatients.SelectedItem.Value.ToString()),
-                start_date = edtStartDate.Date,
-                end_date = edtEndDate.Date,
-                Reason =string.Empty ,
-                Status = string.Empty,
-                text = string.Empty
 
-            };
+                if (container.IsNewAppointment)
+                {
+                    AppointmentViewModelFull app = new AppointmentViewModelFull()
+                    {
+                        ClinicID = int.Parse(cbClinics.SelectedItem.Value.ToString()),
+                        DoctorID = int.Parse(cbDoctors.SelectedItem.Value.ToString()),
+                        PatientID = int.Parse(cbPatients.SelectedItem.Value.ToString()),
+                        start_date = edtStartDate.Date,
+                        end_date = edtEndDate.Date,
+                        Reason = string.Empty,
+                        Status = cbStatus.SelectedItem.Text,
+                        text = tbDescription.Text
+
+                    };
+                    AppointmentRepository apprep = new AppointmentRepository();
+                    apprep.AddNewAppointment(app);
+                }
+
+
+                else
+                {
+                    AppointmentViewModelFull app = new AppointmentViewModelFull()
+                    {
+                        id = int.Parse(container.Appointment.Id.ToString()),
+                        ClinicID = int.Parse(cbClinics.SelectedItem.Value.ToString()),
+                        DoctorID = int.Parse(cbDoctors.SelectedItem.Value.ToString()),
+                        PatientID = int.Parse(cbPatients.SelectedItem.Value.ToString()),
+                        start_date = edtStartDate.Date,
+                        end_date = edtEndDate.Date,
+                        Reason = string.Empty,
+                        Status = cbStatus.SelectedItem.Text,
+                        text = tbDescription.Text
+                    };
+                    AppointmentRepository apprep = new AppointmentRepository();
+                    apprep.alterAppointment(app);
+                }
+                Response.Redirect("~/Appoiment/Appoiments.aspx");
+                
+            }
+            else
+            {
+                //warining
+ 
+            }
+          
+           
+        }
+
+        protected void cbPatients_DataBound(object sender, EventArgs e)
+        {
             
-            AppointmentRepository apprep = new AppointmentRepository();
-            apprep.AddNewAppointment(app);
-            Response.Redirect("~/Appoiment/Appoiments.aspx");
-            //AppointmentFormTemplateContainer container = (AppointmentFormTemplateContainer)Parent;
-            //string s = container.Appointment.Id.ToString();
            
         } 
     }

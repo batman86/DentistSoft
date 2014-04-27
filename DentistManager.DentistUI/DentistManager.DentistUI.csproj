@@ -932,8 +932,6 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientManagement\PatientCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
     <Content Include="Appoiment\SecretaryMaster.Master" />
-    <Content Include="Areas\DoctorDashboard\Views\PatientStatus\PatientStatusEdit.cshtml" />
-    <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusEdit.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <Content Include="Main.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -999,6 +997,9 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

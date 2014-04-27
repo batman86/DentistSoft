@@ -28,7 +28,7 @@
 <table runat="server" id="mainContainer" style="width:100%; height:100%">
     <tr>
         <td class="dx-p2" style="width:100%">
-            <dxe:ASPxMemo ClientInstanceName="_dx" ID="memSubject" runat="server" Width="100%" Rows="5" Text='<%# ((AppointmentInplaceEditorTemplateContainer)Container).Appointment.Subject %>'>
+            <dxe:ASPxMemo ClientInstanceName="_dx" ID="memSubject" runat="server" Width="100%" Rows="5" Text='<%# ((AppointmentInplaceEditorTemplateContainer)Container).Appointment.CustomFields["Text"] %>'>
             </dxe:ASPxMemo>
         </td>
         <td runat="server" id="buttonContainer" class="dx-p2" style="vertical-align: top">

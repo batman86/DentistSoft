@@ -112,6 +112,24 @@ namespace DentistManager.DentistUI.Appoiment.UserAppoiment {
         protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit edtEndDate;
         
         /// <summary>
+        /// lblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblStatus;
+        
+        /// <summary>
+        /// cbStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbStatus;
+        
+        /// <summary>
         /// tbDescription control.
         /// </summary>
         /// <remarks>

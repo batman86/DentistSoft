@@ -272,44 +272,5 @@ namespace DentistManager.Domain.DAL.Concrete
                 return appointmentViewModelFull;
             }
         }
-
-
-        public AppointmentStatusViewModel getPatientStatus(int appointmentID)
-        {
-            using (Entities.Entities ctx = new Entities.Entities())
-            {
-                AppointmentStatusViewModel appointmentViewModelFull;
-
-                var appointmentsIQ = ctx.Appointments;
-                var patientIQ = ctx.Patients;
-                var doctorIQ = ctx.Doctors;
-
-                appointmentViewModelFull = (from a in appointmentsIQ
-                                            join p in patientIQ on a.PatientID equals p.PatientID
-                                            join d in doctorIQ on a.DoctorID equals d.DoctorID
-                                            where a.AppointmentID == appointmentID
-                                            select new AppointmentStatusViewModel { id = a.AppointmentID, PatientID = a.PatientID, Status = a.Status, start_date = a.Start_date, PatientName = p.Name, DoctorName = d.Name }).FirstOrDefault();
-                return appointmentViewModelFull;
-            }
-        }
-
-
-        public bool updatePatientStatus(AppointmentStatusViewModel appointmentStatusViewModel)
-        {
-            int count = 0;
-            using (Entities.Entities ctx = new Entities.Entities())
-            {
-                Appointment appointmentEntity = ctx.Appointments.Find(appointmentStatusViewModel.id);
-
-                if (appointmentEntity == null)
-                    return false;
-
-                appointmentEntity.Status = appointmentStatusViewModel.Status;
-
-                ctx.Entry(appointmentEntity).State = System.Data.Entity.EntityState.Modified;
-                count = ctx.SaveChanges();
-            }
-            return count > 0 ? true : false;
-        }
     }
 }

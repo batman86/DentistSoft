@@ -10,7 +10,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    //[Authorize(Roles = "Doctor")]
+    [Authorize(Roles = "Doctor")]
     public class PatientStatusController : Controller
     {
         IDoctorRepository doctorRepository;
@@ -96,22 +96,5 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             return View(viewModel);
         }
 
-        public ActionResult PatientStatusEdit(int AppointmentID=0)
-        {
-            AppointmentStatusViewModel vm = appointmentRepository.getPatientStatus(AppointmentID);
-            return View(vm);
-        }
-
-        [HttpPost]
-        public ActionResult PatientStatusEdit(AppointmentStatusViewModel appointmentStatusViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                AppointmentStatusViewModel vm = appointmentRepository.getPatientStatus(appointmentStatusViewModel.id);
-                return View(vm);
-            }
-            appointmentRepository.updatePatientStatus(appointmentStatusViewModel);
-            return RedirectToAction("PatientStatusList");
-        }
 	}
 }

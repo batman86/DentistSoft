@@ -10,27 +10,17 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
-   // [Authorize(Roles = "Secretary")]
+    [Authorize(Roles = "Secretary")]
     public class PatientPaymentReceiptController : Controller
     {
 
         ISessionStateManger sessionStateManger;
         IPaymentReceiptRerpository paymentReceiptRerpository;
-        IDoctorRepository doctorRepository;
-        public PatientPaymentReceiptController(ISessionStateManger _sessionStateManger, IPaymentReceiptRerpository _paymentReceiptRerpository, IDoctorRepository _doctorRepository)
+        public PatientPaymentReceiptController(ISessionStateManger _sessionStateManger, IPaymentReceiptRerpository _paymentReceiptRerpository)
         {
             sessionStateManger = _sessionStateManger;
             paymentReceiptRerpository = _paymentReceiptRerpository;
-            doctorRepository = _doctorRepository;
         }
-
-
-        [NonAction]
-        public int getDoctorIDbyPatientID(int patientID=0)
-        {
-            return doctorRepository.getDoctorIDByPatientID(patientID);
-        }
-
 
         [NonAction]
         public int getCurrentPatientID()
@@ -91,13 +81,10 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    int patientID = getCurrentPatientID();
-                    
                     paymentReceiptViewModel.ClinicID = getClinecIDForCurrentUser();
                     paymentReceiptViewModel.Date = DateTime.Now;
                     paymentReceiptViewModel.UserID = User.Identity.GetUserId();
-                    paymentReceiptViewModel.PatientID = patientID;
-                    paymentReceiptViewModel.doctorID = getDoctorIDbyPatientID(patientID);
+                    paymentReceiptViewModel.PatientID = getCurrentPatientID();
 
                     bool check = paymentReceiptRerpository.addNewPatientReceipt(paymentReceiptViewModel);
                 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/23/2014 01:25:52
+-- Date Created: 04/14/2014 03:42:12
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -311,8 +311,7 @@ CREATE TABLE [dbo].[AspNetUsers] (
     [UserName] nvarchar(max)  NULL,
     [PasswordHash] nvarchar(max)  NULL,
     [SecurityStamp] nvarchar(max)  NULL,
-    [Discriminator] nvarchar(128)  NOT NULL,
-    [Active] bit  NULL
+    [Discriminator] nvarchar(128)  NOT NULL
 );
 GO
 
@@ -409,9 +408,7 @@ CREATE TABLE [dbo].[Medicines] (
     [MedicineID] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(50)  NOT NULL,
     [SideEffectDecsription] nvarchar(300)  NULL,
-    [ScaleType] nvarchar(50)  NOT NULL,
-    [Dose] nvarchar(50)  NULL,
-    [Concentration] nvarchar(50)  NULL
+    [ScaleType] nvarchar(50)  NOT NULL
 );
 GO
 

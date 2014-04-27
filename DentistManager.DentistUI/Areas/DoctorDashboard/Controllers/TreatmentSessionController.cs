@@ -11,7 +11,7 @@ using DentistManager.DentistUI.Infrastructure;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    //[Authorize(Roles = "Doctor")]
+    [Authorize(Roles = "Doctor")]
     public class TreatmentSessionController : Controller
     {
         IOpperationRepository opperationRepository;
@@ -134,10 +134,8 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             if (matrailToSave.vmMatrailListToSave.Count() == 0)
                 return false;
 
-            int clinecID=getUserCurrentClinecID();
-           
-            bool check = treatmentBL.SaveMatrailOfTreatment(matrailToSave.vmMatrailListToSave, matrailToSave.treatmentID, clinecID);
-
+            bool check=  materialRepository.SaveTreatmentMatrail(matrailToSave.vmMatrailListToSave, matrailToSave.treatmentID);
+         
             return check;
         }
 

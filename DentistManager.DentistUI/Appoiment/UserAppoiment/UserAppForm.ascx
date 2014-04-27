@@ -5,13 +5,27 @@
 
 <style type="text/css">
     .auto-style1 {
-        width: 244px;
+        width: 239px;
     }
     .auto-style2 {
         height: 30px;
     }
     .auto-style3 {
         width: 54px;
+    }
+    .auto-style4 {
+        width: 239px;
+        height: 43px;
+    }
+    .auto-style5 {
+        height: 43px;
+    }
+    .auto-style6 {
+        width: 239px;
+        height: 38px;
+    }
+    .auto-style7 {
+        height: 38px;
     }
 </style>
 
@@ -29,9 +43,11 @@
                     </td>
                     <td class="dxscControlCell">
                         
-                        <dxe:ASPxComboBox ID="cbPatients" runat="server" DataSourceID="dsPatients" TextField="Name" ValueField="PatientID">
+                        <dxe:ASPxComboBox ID="cbPatients" runat="server" DataSourceID="dsPatients"  TextField="Name" ValueField="PatientID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith" OnDataBound="cbPatients_DataBound">
+                            <ValidationSettings>
+                                <RequiredField IsRequired="True" />
+                            </ValidationSettings>
                         </dxe:ASPxComboBox>
-                        
                     </td>
                 </tr>
             </table>
@@ -48,7 +64,10 @@
                    
                     </td>
                     <td class="dxscControlCell">
-                        <dxe:ASPxComboBox ID="cbDoctors" runat="server" DataSourceID="dsDoctors" TextField="Name" ValueField="DoctorID">
+                        <dxe:ASPxComboBox ID="cbDoctors" runat="server" DataSourceID="dsDoctors" TextField="Name" ValueField="DoctorID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith">
+                            <ValidationSettings>
+                                <RequiredField IsRequired="True" />
+                            </ValidationSettings>
                         </dxe:ASPxComboBox>
                     </td>
                 </tr>
@@ -64,7 +83,10 @@
                    
                     </td>
                     <td class="dxscControlCell">
-                        <dxe:ASPxComboBox ID="cbClinics" runat="server" DataSourceID="dsClinics" TextField="Name" ValueField="ClinicID">
+                        &nbsp;<dxe:ASPxComboBox ID="cbClinics" runat="server" DataSourceID="dsClinics" TextField="Name" ValueField="ClinicID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith">
+                            <ValidationSettings>
+                                <RequiredField IsRequired="True" />
+                            </ValidationSettings>
                         </dxe:ASPxComboBox>
                     </td>
                 </tr>
@@ -72,7 +94,7 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
+        <td class="auto-style4">
             <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
                 <tr>
                     <td class="dxscLabelCell">
@@ -89,7 +111,7 @@
                 </tr>
             </table>
         </td>
-        <td class="dxscSingleCell">
+        <td class="auto-style5">
             <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
                 <tr>
                     <td class="dxscLabelCell" style="padding-left: 25px;">
@@ -107,17 +129,33 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style1">
+        <td class="auto-style6">
             <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
                 <tr>
                     <td class="dxscLabelCell">
-                        &nbsp;</td>
+                   
+                        <dxe:ASPxLabel ID="lblStatus" runat="server" Font-Size="Medium" Text="Status :">
+                        </dxe:ASPxLabel>
+                   
+                    </td>
                     <td class="dxscControlCell">
-                        &nbsp;</td>
+                        <dxe:ASPxComboBox ID="cbStatus" runat="server" TextField="Name" ValueField="DoctorID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith" EnableIncrementalFiltering="True" SelectedIndex="0">
+                            <Items>
+                                <dxe:ListEditItem Selected="True" Text="Reserved" Value="Reserved" />
+                                <dxe:ListEditItem Text="waiting" Value="waiting" />
+                                <dxe:ListEditItem Text="InProgress" Value="InProgress" />
+                                <dxe:ListEditItem Text="Finished" Value="Finished" />
+                                <dxe:ListEditItem Text="Postponed" Value="Postponed" />
+                            </Items>
+                            <ValidationSettings>
+                                <RequiredField IsRequired="True" />
+                            </ValidationSettings>
+                        </dxe:ASPxComboBox>
+                    </td>
                 </tr>
             </table>
         </td>
-        <td class="dxscSingleCell" style="padding-left: 22px;">
+        <td class="auto-style7" style="padding-left: 22px;">
             <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
                 <tr>
                     <td style="width: 20px; height: 20px;">
@@ -139,7 +177,7 @@
                     <td class="dxscLabelCell">
                         &nbsp;</td>
                     <td class="dxscControlCell">
-                        <% if(ResourceSharing) { %>                        <% } else { %>                        <% } %>             
+                        <% if(ResourceSharing) { %><% } else { %><% } %>             
                     </td>
 
                 </tr>
@@ -168,7 +206,11 @@
     </tr>
     <tr>
         <td class="dxscDoubleCell" colspan="2" style="height: 90px;">
-            <dxe:ASPxMemo ClientInstanceName="_dx" ID="tbDescription" runat="server" Width="100%" Rows="6" Text='<%# ((AppointmentFormTemplateContainer)Container).Appointment.Description %>' />
+            <dxe:ASPxMemo ClientInstanceName="_dx" ID="tbDescription" runat="server" Width="100%" Rows="6" Text='<%# ((AppointmentFormTemplateContainer)Container).Appointment.CustomFields["Text"] %>' >
+                <ValidationSettings>
+                    <RequiredField IsRequired="True" />
+                </ValidationSettings>
+            </dxe:ASPxMemo>
         </td>
     </tr>
 </table>
@@ -197,7 +239,7 @@
                     <td class="dxscCellWithPadding">
                         <dxe:ASPxButton runat="server" ID="btnOk" UseSubmitBehavior="false" AutoPostBack="false" 
                             EnableViewState="false" Width="91px" EnableClientSideAPI="true" Visible="False"/>
-                        <dxe:ASPxButton ID="btnSave" runat="server" AutoPostBack="False" OnClick="btnSave_Click" Text="Save">
+                        <dxe:ASPxButton ID="btnSave" runat="server" AutoPostBack="False" OnClick="btnSave_Click" Text="Save" Width="91px">
                         </dxe:ASPxButton>
                     </td>
                     <td class="dxscCellWithPadding">

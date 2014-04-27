@@ -30,8 +30,5 @@ namespace DentistManager.Domain.DAL.Abstract
 
         List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID,DateTime begin,DateTime ending);
         List<AppointmentStatusViewModel> getClinecMeeting(int ClinecID, string status, DateTime begin, DateTime ending);
-
-        AppointmentStatusViewModel getPatientStatus(int appointmentID);
-        bool updatePatientStatus(AppointmentStatusViewModel appointmentStatusViewModel);
     }
 }
