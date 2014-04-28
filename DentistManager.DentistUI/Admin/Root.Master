@@ -42,7 +42,8 @@
                                         Welcome <span class="bold">
                                             <asp:LoginName ID="HeadLoginName" runat="server" />
                                         </span>! [
-                                       <a href="~/Account/Logout">log off</a>
+                                      <%-- <a href="~/Account/Logout">log off</a>--%>
+                                         <asp:LoginStatus ID="HeadLoginStatus" runat="server"   LogoutAction="RedirectToLoginPage" LogoutText="Log Out" />
                                         ]
                                     </LoggedInTemplate>
                                 </asp:LoginView>
