@@ -11,7 +11,7 @@ using DentistManager.DentistUI.Infrastructure;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    //[Authorize(Roles = "Doctor")]
+    [Authorize(Roles = "Doctor")]
     public class TreatmentSessionController : Controller
     {
         IOpperationRepository opperationRepository;

@@ -13,7 +13,7 @@ using System.Net;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
-    //[Authorize(Roles = "Secretary")]
+    [Authorize(Roles = "Secretary")]
     public class PatientManagementController : Controller
     {
         IPatientRepository patientRepository;

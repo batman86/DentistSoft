@@ -10,7 +10,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-   // [Authorize(Roles = "Doctor")]
+    [Authorize(Roles = "Doctor")]
     public class PatientSearchController : Controller
     {
         //
