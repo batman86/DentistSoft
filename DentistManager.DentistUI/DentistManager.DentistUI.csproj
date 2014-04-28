@@ -326,6 +326,13 @@
     <Compile Include="Admin\Warehouse.aspx.designer.cs">
       <DependentUpon>Warehouse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Appoiment\Appoiment.aspx.cs">
+      <DependentUpon>Appoiment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Appoiment\Appoiment.aspx.designer.cs">
+      <DependentUpon>Appoiment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Appoiment\Appoiments.aspx.cs">
       <DependentUpon>Appoiments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -520,6 +527,7 @@
     <Content Include="Admin\SuperAdmin.aspx" />
     <Content Include="Admin\Suppliers.aspx" />
     <Content Include="Admin\Warehouse.aspx" />
+    <Content Include="Appoiment\Appoiment.aspx" />
     <Content Include="Appoiment\Appoiments.aspx" />
     <Content Include="Appoiment\UserAppoiment\UserAppForm.ascx" />
     <Content Include="Appoiment\WebForm1.aspx" />

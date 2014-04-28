@@ -28,6 +28,7 @@
 <%@ Register Assembly="DevExpress.Web.ASPxScheduler.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
 <div id="appointmentDiv" runat="server" class='<%#((VerticalAppointmentTemplateContainer)Container).Items.AppointmentStyle.CssClass %>'>
+   
     <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %> style="width: 100%">
         <tr <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(this, null, "top") %> style="vertical-align: top">
             <td runat="server" id="statusContainer">    
@@ -44,9 +45,17 @@
                             <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 1, 0) %> style="width: 100%">                        
                                 <tr>
                                     <td class="dxscCellWithPadding">
-                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblStartTime" Text='<%#((VerticalAppointmentTemplateContainer)Container).Items.StartTimeText.Text%>' Visible='<%#((VerticalAppointmentTemplateContainer)Container).Items.StartTimeText.Visible%>'></dxe:ASPxLabel>
-                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" style="margin-left: -4px;" ID="lblEndTime" Text='<%#((VerticalAppointmentTemplateContainer)Container).Items.EndTimeText.Text%>' Visible='<%#((VerticalAppointmentTemplateContainer)Container).Items.EndTimeText.Visible%>'></dxe:ASPxLabel>        
-                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblTitle" Text='<%#((VerticalAppointmentTemplateContainer)Container).Items.Title.Text%>'></dxe:ASPxLabel>
+                                        
+                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblStartTime" Text='<%#((VerticalAppointmentTemplateContainer)Container).AppointmentViewInfo.Appointment.Start.ToString()%>' Visible ="true"></dxe:ASPxLabel>
+                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" style="margin-left: -4px;" ID="lblEndTime" Text='<%#((VerticalAppointmentTemplateContainer)Container).AppointmentViewInfo.Appointment.End.ToString()%>' Visible='<%#((VerticalAppointmentTemplateContainer)Container).Items.EndTimeText.Visible%>'></dxe:ASPxLabel>        
+                                        &nbsp;&nbsp; Patient:
+                                        <dxe:ASPxLabel ID="lblPatientName" runat="server">
+                                        </dxe:ASPxLabel>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Doctor :
+                                        <dxe:ASPxLabel ID="lblDoctorName" runat="server">
+                                        </dxe:ASPxLabel>
+&nbsp;&nbsp;&nbsp;&nbsp; Note :        
+                                        <dxe:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblTitle" Text='<%#((VerticalAppointmentTemplateContainer)Container).AppointmentViewInfo.Appointment.CustomFields["Text"].ToString()%>'> </dxe:ASPxLabel>
                                     </td>
                                 </tr>
                                 <tr>

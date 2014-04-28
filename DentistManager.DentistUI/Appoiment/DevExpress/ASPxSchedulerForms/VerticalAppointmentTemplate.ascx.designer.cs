@@ -57,6 +57,24 @@ public partial class VerticalAppointmentTemplate {
     protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblEndTime;
     
     /// <summary>
+    /// lblPatientName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblPatientName;
+    
+    /// <summary>
+    /// lblDoctorName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblDoctorName;
+    
+    /// <summary>
     /// lblTitle control.
     /// </summary>
     /// <remarks>

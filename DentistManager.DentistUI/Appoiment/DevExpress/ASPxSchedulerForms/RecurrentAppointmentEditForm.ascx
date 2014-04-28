@@ -21,7 +21,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="RecurrentAppointmentEditForm" Codebehind="RecurrentAppointmentEditForm.ascx.cs" %>
 <%@ Register Assembly="DevExpress.Web.ASPxScheduler.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
-
+<%@ Register Src="~/Appoiment/DevExpress/ASPxSchedulerForms/VerticalAppointmentTemplate.ascx" TagName="VerticalAppointment" TagPrefix="va" %>
 <table style="width:100%; height:100%">
     <tr>
         <td rowspan="2"  style="vertical-align:top;">

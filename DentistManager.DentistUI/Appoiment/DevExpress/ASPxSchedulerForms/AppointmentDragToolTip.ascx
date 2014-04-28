@@ -20,7 +20,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" Inherits="AppointmentDragToolTip" Codebehind="AppointmentDragToolTip.ascx.cs" %>
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors"
     TagPrefix="dxe" %>
-
+<%@ Register Src="~/Appoiment/DevExpress/ASPxSchedulerForms/VerticalAppointmentTemplate.ascx" TagName="VerticalAppointment" TagPrefix="va" %>
 <div style="white-space:nowrap;">
     <dxe:ASPxLabel ID="lblInterval" runat="server" Text="CustomDragAppointmentTooltip" EnableClientSideAPI="true">
         </dxe:ASPxLabel>

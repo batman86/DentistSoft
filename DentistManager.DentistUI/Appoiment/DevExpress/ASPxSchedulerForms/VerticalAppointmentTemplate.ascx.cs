@@ -30,7 +30,7 @@ using System.Web.UI.HtmlControls;
 using DevExpress.Web.ASPxClasses.Internal;
 using DevExpress.Web.ASPxScheduler;
 using DevExpress.Web.ASPxScheduler.Drawing;
-
+using DentistManager.Domain.DAL.Concrete;
 public partial class VerticalAppointmentTemplate: DevExpress.Web.ASPxScheduler.SchedulerUserControl {
     VerticalAppointmentTemplateContainer Container { get { return (VerticalAppointmentTemplateContainer)Parent; } }
     VerticalAppointmentTemplateItems Items { get { return Container.Items; } }
@@ -39,7 +39,7 @@ public partial class VerticalAppointmentTemplate: DevExpress.Web.ASPxScheduler.S
         base.OnLoad(e);
         appointmentDiv.Style.Value = Items.AppointmentStyle.GetStyleAttributes(Page).Value;
         horizontalSeparator.Style.Value = Items.HorizontalSeparator.Style.GetStyleAttributes(Page).Value;
-
+        
         lblStartTime.ControlStyle.MergeWith(Items.StartTimeText.Style);
         lblEndTime.ControlStyle.MergeWith(Items.EndTimeText.Style);
         lblTitle.ControlStyle.MergeWith(Items.Title.Style);
@@ -48,6 +48,14 @@ public partial class VerticalAppointmentTemplate: DevExpress.Web.ASPxScheduler.S
         PrepareImageContainer();
         statusContainer.Controls.Add(Items.StatusControl);
         LayoutAppointmentImages();
+    }
+    public override void DataBind()
+    {
+        base.DataBind();
+        PatientRepository patient = new PatientRepository();
+        DoctorRepository doctor = new DoctorRepository();
+        lblPatientName.Text= patient.getPatientNameByID(int.Parse(Container.AppointmentViewInfo.Appointment.CustomFields["PatientID"].ToString()));
+        lblDoctorName.Text = doctor.getDoctorNameByID(int.Parse(Container.AppointmentViewInfo.Appointment.CustomFields["DoctorID"].ToString()));
     }
     void PrepareImageContainer() {
         RenderUtils.SetTableSpacings(imageContainer, 1, 0);

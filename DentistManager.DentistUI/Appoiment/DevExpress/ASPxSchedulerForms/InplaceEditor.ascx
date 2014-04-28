@@ -25,6 +25,7 @@
     TagPrefix="cc1" %>
 <%@ Register Assembly="DevExpress.Web.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors"
     TagPrefix="dxe" %>
+<%@ Register Src="~/Appoiment/DevExpress/ASPxSchedulerForms/VerticalAppointmentTemplate.ascx" TagName="VerticalAppointment" TagPrefix="va" %>
 <table runat="server" id="mainContainer" style="width:100%; height:100%">
     <tr>
         <td class="dx-p2" style="width:100%">
