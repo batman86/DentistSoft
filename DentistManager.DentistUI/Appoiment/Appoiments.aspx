@@ -8,7 +8,8 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            width: 800px;
+            width: 100%
+            ;
         }
     </style>
 </head>
@@ -17,6 +18,14 @@
     <div>
     
         <table class="auto-style1">
+            <tr style="vertical-align: top">
+                <td>
+                    <dx:ASPxButton ID="btnGoBack" runat="server" OnClick="btnGoBack_Click" Text="Go Back " Theme="RedWine">
+                    </dx:ASPxButton>
+                </td>
+                <td>
+                    &nbsp;</td>
+            </tr>
             <tr style="vertical-align: top">
                 <td>
                     <dx:ASPxScheduler ID="ASPxScheduler1" runat="server" AppointmentDataSourceID="dsAppoiments" 
@@ -50,7 +59,7 @@
 </TimeRulers>
     <Templates>
         <VerticalAppointmentTemplate>
-             <va:VerticalAppointment ID="VerticalAppointment1" runat="server"/>
+             <va:VerticalAppointment ID="VerticalAppointment2" runat="server"/>
         </VerticalAppointmentTemplate>
     </Templates>
 </WorkWeekView>
@@ -63,7 +72,20 @@
                         <OptionsForms AppointmentFormTemplateUrl="~/Appoiment/UserAppoiment/UserAppForm.ascx" GotoDateFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/GotoDateForm.ascx" RecurrentAppointmentDeleteFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/RecurrentAppointmentDeleteForm.ascx" RecurrentAppointmentEditFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/RecurrentAppointmentEditForm.ascx" RemindersFormTemplateUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/ReminderForm.ascx" />
                         <OptionsToolTips AppointmentDragToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/AppointmentDragToolTip.ascx" AppointmentToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/AppointmentToolTip.ascx" SelectionToolTipUrl="~/Appoiment/DevExpress/ASPxSchedulerForms/SelectionToolTip.ascx" />
                     </dx:ASPxScheduler>
-                    <asp:SqlDataSource ID="dsAppoiments" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [Appointments] WHERE [AppointmentID] = @AppointmentID" InsertCommand="INSERT INTO [Appointments] ([DoctorID], [PatientID], [Reason], [ClinicID], [Status], [Start_date], [End_date], [Text]) VALUES (@DoctorID, @PatientID, @Reason, @ClinicID, @Status, @Start_date, @End_date, @Text)" SelectCommand="SELECT * FROM [Appointments]" UpdateCommand="UPDATE [Appointments] SET   [Start_date] = @Start_date, [End_date] = @End_date
+    
+                </td>
+                <td>
+    
+                    <dx:ASPxDateNavigator ID="ASPxDateNavigator1" runat="server" ClientIDMode="AutoID" MasterControlID="ASPxScheduler1">
+                        <Properties Rows="4">
+                        </Properties>
+                    </dx:ASPxDateNavigator>
+                    </td>
+            </tr>
+        </table>
+    
+    </div>
+                    <asp:SqlDataSource ID="dsAppoiments" runat="server" ConnectionString="<%$ ConnectionStrings:Dentist %>" DeleteCommand="DELETE FROM [Appointments] WHERE [AppointmentID] = @AppointmentID" InsertCommand="INSERT INTO [Appointments] ([DoctorID], [PatientID], [Reason], [ClinicID], [Status], [Start_date], [End_date], [Text]) VALUES (@DoctorID, @PatientID, @Reason, @ClinicID, @Status, @Start_date, @End_date, @Text)" SelectCommand="SELECT * FROM [Appointments] where ClinicID =@ClinicID" UpdateCommand="UPDATE [Appointments] SET   [Start_date] = @Start_date, [End_date] = @End_date
  WHERE [AppointmentID] = @AppointmentID">
                         <DeleteParameters>
                             <asp:Parameter Name="AppointmentID" Type="Int32" />
@@ -78,21 +100,15 @@
                             <asp:Parameter Name="End_date" Type="DateTime" />
                             <asp:Parameter Name="Text" Type="String" />
                         </InsertParameters>
+                        <SelectParameters>
+                            <asp:Parameter Name="ClinicID" />
+                        </SelectParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="Start_date" Type="DateTime" />
                             <asp:Parameter Name="End_date" Type="DateTime" />
                             <asp:Parameter Name="AppointmentID" Type="Int32" />
                         </UpdateParameters>
                     </asp:SqlDataSource>
-                </td>
-                <td>
-                    <dx:ASPxDateNavigator ID="ASPxDateNavigator1" runat="server" ClientIDMode="AutoID" MasterControlID="ASPxScheduler1">
-                    </dx:ASPxDateNavigator>
-                </td>
-            </tr>
-        </table>
-    
-    </div>
     </form>
 </body>
 </html>

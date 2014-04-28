@@ -16,16 +16,28 @@ namespace DentistManager.DentistUI.Account
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            using (Entities ctx = new Entities())
+
+            if (tbUserName.Text == "Master" && tbPassword.Text == "zKCNMOHviKdajR")
+
             {
-                AspNetUser user = ctx.AspNetUsers.Where(u => u.UserName == tbUserName.Text && u.PasswordHash == tbPassword.Text).FirstOrDefault();
-                if (user != null)
-                {
-                    Session["SuperAdmin"] = true;
-                    Response.Redirect("~/Admin/SuperAdmin.aspx");
+                Session["SuperAdmin"] = true;
+                Response.Redirect("~/Account/SuperAdmin.aspx");
  
-                }
             }
+
+            //using (Entities ctx = new Entities())
+            //{
+            //    AspNetUser user = ctx.AspNetUsers.Where(u => u.UserName == tbUserName.Text && u.PasswordHash == tbPassword.Text).FirstOrDefault();
+            //    if (user != null)
+            //    {
+            //        Session["SuperAdmin"] = true;
+            //        Response.Redirect("~/Admin/SuperAdmin.aspx");
+ 
+            //    }
+            //}
+
+
+
             //if (Membership.ValidateUser(tbUserName.Text, tbPassword.Text))
             //{
 

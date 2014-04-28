@@ -10,9 +10,6 @@
     .auto-style2 {
         height: 30px;
     }
-    .auto-style3 {
-        width: 54px;
-    }
     .auto-style4 {
         width: 239px;
         height: 43px;
@@ -26,6 +23,12 @@
     }
     .auto-style7 {
         height: 38px;
+    }
+    .auto-style9 {
+        width: 214px;
+    }
+    .auto-style10 {
+        width: 146px;
     }
 </style>
 
@@ -76,18 +79,24 @@
         <td class="dxscSingleCell">
             <table class="dxscLabelControlPair" <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(this, 0, 0) %>>
                 <tr>
-                    <td class="auto-style3" style="padding-left: 25px;">
+                    <td style=" width:300px;">
                    
-                        <dxe:ASPxLabel ID="lblClinic" runat="server" Font-Size="Medium" Text="Clinic :">
+                        <table style="width:200px !important">
+                            <tr style="width:200px">
+                                <td style="width:100px">
+                        <dxe:ASPxLabel ID="lblClinic" runat="server" Font-Size="Medium" Text="Clinic">
                         </dxe:ASPxLabel>
                    
-                    </td>
-                    <td class="dxscControlCell">
-                        &nbsp;<dxe:ASPxComboBox ID="cbClinics" runat="server" DataSourceID="dsClinics" TextField="Name" ValueField="ClinicID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith">
+                                </td>
+                                <td><dxe:ASPxComboBox ID="cbClinics" runat="server" DataSourceID="dsClinics" TextField="Name" ValueField="ClinicID" DropDownStyle="DropDown" IncrementalFilteringMode="StartsWith" style="margin-left: 12px">
                             <ValidationSettings>
                                 <RequiredField IsRequired="True" />
                             </ValidationSettings>
                         </dxe:ASPxComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                   
                     </td>
                 </tr>
             </table>

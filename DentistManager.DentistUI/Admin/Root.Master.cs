@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using DentistManager.DentistUI.Controllers;
 namespace DentistManager.DentistUI.Admin
 {
     public partial class Root : System.Web.UI.MasterPage
@@ -14,11 +16,7 @@ namespace DentistManager.DentistUI.Admin
            
         }
 
-        protected void HeadLoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
-        {
-            
-
-        }
+       
 
     }
 }
