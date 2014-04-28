@@ -45,7 +45,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         [NonAction]
         public int getUserCurrentClinecID()
         {
-            var aa = sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
+            //var aa = sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
             return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
         }
 
@@ -117,7 +117,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             int patientID = getCurrentPatientID();
             int AppointmentID = appointmentID;
             int clinecID = getUserCurrentClinecID();
-            int DoctorID = doctorRepository.getClinecIDByUserID(User.Identity.GetUserId());
+            int DoctorID = doctorRepository.getDoctorIDByUserID(User.Identity.GetUserId());
 
             treatmentBL.saveTreatment(treatmentList,AppointmentID,DoctorID,patientID,clinecID);
 

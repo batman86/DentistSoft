@@ -15,7 +15,7 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             using(Entities.Entities ctx =new Entities.Entities ())
             {
-                 IEnumerable<int> storages=  ctx.Storages.Where(x => x.ClinicID == clinecID && x.Active == true).Select(x => x.StorageID);
+                 IEnumerable<int> storages=  ctx.Storages.Where(x => x.ClinicID == clinecID && x.Active == true).Select(x => x.StorageID).ToList();
                  return storages;
             }
         }
@@ -25,6 +25,7 @@ namespace DentistManager.Domain.DAL.Concrete
             using (Entities.Entities ctx = new Entities.Entities())
             {
                 List<StorageMatrailViewModel> storageMatrailList=new List<StorageMatrailViewModel> ();
+
                 var warehouseIQ = ctx.Warehouses;
                 StorageMatrailViewModel storageMatrailViewModel;
 
@@ -34,7 +35,8 @@ namespace DentistManager.Domain.DAL.Concrete
                                               where w.StorageID == item
                                               select new StorageMatrailViewModel { StorageID = item, Quantity = w.Available }).FirstOrDefault();
 
-                    storageMatrailList.Add(storageMatrailViewModel);
+                    if (storageMatrailViewModel != null)
+                        storageMatrailList.Add(storageMatrailViewModel);
 	            }
 
                 storageMatrailList.TrimExcess();
@@ -45,7 +47,7 @@ namespace DentistManager.Domain.DAL.Concrete
         }
 
 
-        public bool withdrawMatrailFromWarehouse(int matrailID, int storgeID, int quantity)
+        public bool withdrawMatrailFromWarehouse(int matrailID, int? storgeID, int quantity)
         {
             int count = 0;
             using (Entities.Entities ctx = new Entities.Entities())

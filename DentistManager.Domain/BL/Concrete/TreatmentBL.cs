@@ -32,7 +32,7 @@ namespace DentistManager.Domain.BL.Concrete
             StorgeRepository storgeRepository = new StorgeRepository();
             IEnumerable<int> ClinecstorgeIDList = storgeRepository.getClinecStorgesList(clinecID);
             List<StorageMatrailViewModel> storageMatrailViewModelList;
-            int storgeID =0;
+            int? storgeID =0;
             int total = 0;
             foreach (MatrailToSaveViewModel item in matrailList)
             {
@@ -43,9 +43,9 @@ namespace DentistManager.Domain.BL.Concrete
                    
                 
                 // test if it's gonna return null
-                storgeID = storageMatrailViewModelList.Where(x => x.Quantity >= item.Quantity).Select(x => x.StorageID).FirstOrDefault();
-
-                if (storgeID != 0)
+              //  storgeID = storageMatrailViewModelList.Where(x => x.Quantity > item.Quantity).Select(x => x.StorageID).First();
+                var  aa= storageMatrailViewModelList.Where(x => x.Quantity > item.Quantity);
+                if (storgeID != null)
                 {
                     storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storgeID, item.Quantity);
                     break;

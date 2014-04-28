@@ -15,6 +15,6 @@ namespace DentistManager.Domain.DAL.Abstract
         List<StorageMatrailViewModel> getStrogesMatrailsQuantity(IEnumerable<int> storagesIDList, int matrailID);
 
 
-        bool withdrawMatrailFromWarehouse(int matrailID, int storgeID, int quantity);
+        bool withdrawMatrailFromWarehouse(int matrailID, int? storgeID, int quantity);
     }
 }

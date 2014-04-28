@@ -9,6 +9,7 @@ using DentistManager.Domain.ViewModel;
 using DentistManager.Domain.BL.Abstract;
 using DentistManager.DentistUI.Infrastructure;
 using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
@@ -28,6 +29,8 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             sessionStateManger = _sessionStateManger;
             doctorRepository = _doctorRepository;
         }
+
+
 
         [NonAction]
         public int getCurrentPatientID()
