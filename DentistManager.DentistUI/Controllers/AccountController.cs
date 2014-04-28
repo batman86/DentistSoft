@@ -82,6 +82,11 @@ namespace DentistManager.DentistUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
+            DentistManager.DentistUI.core.security ob = new core.security();
+            if (!ob.mainInLogin())
+                return HttpNotFound();
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
