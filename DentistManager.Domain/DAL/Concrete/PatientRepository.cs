@@ -55,16 +55,6 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return patient;
         }
-        public string getPatinetName(int patientID)
-        {
-            string Name = string.Empty;
-            using (Entities.Entities ctx = new Entities.Entities())
-            {
-               var patient = ctx.Patients.Find(patientID);
-               Name = patient.Name;
-            }
-            return Name;
-        }
 
         public bool deletepatientBasicInfo(int patientID)
         {

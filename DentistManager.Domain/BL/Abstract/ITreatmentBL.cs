@@ -10,5 +10,7 @@ namespace DentistManager.Domain.BL.Abstract
     public interface ITreatmentBL
     {
         bool saveTreatment(IEnumerable<TreatmentPresntViewModel> treatmentList, int AppointmentID, int DoctorID, int PatientID, int clinecID);
+
+        bool SaveMatrailOfTreatment( IEnumerable<MatrailToSaveViewModel> matrailList, int treatmentID,int clinecID);
     }
 }
