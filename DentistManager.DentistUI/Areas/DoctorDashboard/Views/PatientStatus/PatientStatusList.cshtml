@@ -44,6 +44,9 @@
                 <td>
                     @Html.ActionLink("Activate", "doctorPatientActvator", "PatientSearch", new { PatientID = item.PatientID }, null)
                 </td>
+                <td>
+                    @Html.ActionLink("Edit", "PatientStatusEdit", "PatientStatus", new { AppointmentID = item.id }, null)
+                </td>
             </tr>
         }
     </tbody>

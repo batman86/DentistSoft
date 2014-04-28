@@ -10,7 +10,8 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    [Authorize(Roles = "Doctor")]
+    //[Authorize(Roles = "Doctor")]
+    //[AllowAnonymous]
     public class PrescriptionController : Controller
     {
         //
@@ -142,7 +143,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             }
         }
 
-
+       
         public ActionResult PrescriptionAdd()
         {
 
@@ -157,6 +158,19 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 
             IEnumerable<MedicineMiniViewModel> medList = medicineRepository.getMedicineList();
             return View(medList); ;
+        }
+
+        [HttpPost]
+        public ActionResult SavePrescraptionMedcList(IEnumerable<MedicineMiniViewModel> medList)
+        {
+            int patientID = getCurrentPatientID();
+            int AppointmentID = appointmentRepository.getLastAppointmentIDByPatientID(patientID);
+            int doctorID = getDoctorIDbyUserID();
+
+            medicineRepository.saveMedicineList(medList, AppointmentID,doctorID,patientID);
+
+            return Json(new { RedirectUrl = Url.Action("PrescriptionList", "Prescription", new { area = "DoctorDashboard" }) });
+
         }
 	}
 }

@@ -57,7 +57,7 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append("<select name=prescriptionViewModel.MedicineID id=MedicineDropDown>");
             foreach (MedicineMiniViewModel i in list)
             {
-                result.Append("<option value=\"" + i.MedicineID + "\"  data-Dose=" + i.Dose + " data-ScaleType=" + i.ScaleType + " data-Concentration=" + i.Concentration + " data-SideEffectDecsription=" + i.SideEffectDecsription + " >" + i.Name + "</option>");
+                result.Append("<option value=\"" + i.MedicineID + "\"  data-dose=" + i.Dose + " data-scaletype=" + i.ScaleType + " data-concentration=" + i.Concentration + " data-sideeffectdecsription=" + i.SideEffectDecsription + " >" + i.Name + "</option>");
             }
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
@@ -87,6 +87,22 @@ namespace DentistManager.DentistUI.HtmlHelpers
             result.Append(ActiveStatus == PatientSchduelStatus.Postponed.ToString() ? "<option value='Postponed' selected>Postponed</option>" : "<option value='Postponed'>Postponed</option>");
             result.Append(ActiveStatus == PatientSchduelStatus.Reserved.ToString() ? "<option value='Reserved' selected>Reserved</option>" : "<option value='Reserved'>Reserved</option>");
             result.Append(ActiveStatus == PatientSchduelStatus.Finished.ToString() ? "<option value='Finished' selected>Finished</option>" : "<option value='Finished'>Finished</option>"); 
+
+            result.Append("</select>");
+            return MvcHtmlString.Create(result.ToString());
+        }
+
+        public static MvcHtmlString generateAppStatusEditDropDownList(this HtmlHelper helper, string ActiveStatus)
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append("<select name=Status id=StatusDropDown>");
+
+            result.Append(ActiveStatus == PatientSchduelStatus.waiting.ToString() ? "<option value='waiting' selected>waiting</option>" : "<option value='waiting'>waiting</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.InProgress.ToString() ? "<option value='InProgress' selected>In Progress</option>" : "<option value='InProgress'>In Progress</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Postponed.ToString() ? "<option value='Postponed' selected>Postponed</option>" : "<option value='Postponed'>Postponed</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Reserved.ToString() ? "<option value='Reserved' selected>Reserved</option>" : "<option value='Reserved'>Reserved</option>");
+            result.Append(ActiveStatus == PatientSchduelStatus.Finished.ToString() ? "<option value='Finished' selected>Finished</option>" : "<option value='Finished'>Finished</option>");
 
             result.Append("</select>");
             return MvcHtmlString.Create(result.ToString());
