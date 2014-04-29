@@ -1,58 +1,29 @@
-﻿@model DentistManager.Domain.ViewModel.PrescriptionPresnetViewModel
+﻿@model DentistManager.Domain.ViewModel.PrescriptionPrintViewModel
 
 @{
     ViewBag.Title = "PrescriptionDetails";
 }
 
-<h2>PrescriptionDetails</h2>
 
-<div>
-    <h4>PrescriptionPresnetViewModel</h4>
-	<hr />
-    <dl class="dl-horizontal">
+<div id="PrescPrint">
+    <h1>مركز البسمة</h1>
+    <h2>لطب الاسنان التجميلى</h2>
+    <hr />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Notice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Notice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MedicineName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MedicineName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DoctorName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DoctorName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dose)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dose)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AppointmentDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AppointmentDate)
-        </dd>
-
-    </dl>
-</div>
+    <div class="presInfo">
+        <p>الاسم</p> <p>    @Html.DisplayFor(model => model.patientName)</p>
+    </div>
+   
+    <div class="presInfo">
+        <p>التاريخ</p>  <p> @Html.DisplayFor(model => model.AppointmentDate)</p>
+    </div>
+        <ul>
+            @foreach (var item in Model.Medicines)
+            {
+                <li> <p>   @Html.DisplayFor(modelitem => item.Name)  </p>  <p> @Html.DisplayFor(modelitem => item.ScaleType)  </p>  <p> @Html.DisplayFor(modelitem => item.Dose)  </p> <p> @Html.DisplayFor(modelitem => item.Concentration) </p></li>
+            }
+        </ul>
+    </div>
 <div class="bttomLink">
     @Html.ActionLink("Back to List", "PrescriptionList")
 </div>

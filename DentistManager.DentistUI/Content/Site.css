@@ -324,3 +324,49 @@ table#TreatmentList td.treatmentTableSmall{
 .PagerHolder  A:hover { background-color: Silver; }
 .PagerHolder  A.selected { background-color: #353535; color: White; }
 
+#PrescPrint{
+    text-align:center;
+}
+#PrescPrint ul {
+    margin-top:20px;
+}
+#PrescPrint ul li{
+     width:900px;
+     float:right;
+}
+#PrescPrint ul li p{
+    float:left;
+    width:200px;
+   
+}
+#PrescPrint .presInfo{
+    display:block;
+   
+}
+
+#PrescPrint .presInfo p{
+    float:right;
+    width:400px;
+}
+@media print {
+   .nav{
+       display:none;
+   }
+
+   .TopBar{
+       display:none;
+   }
+
+   #PrescPrint{
+       width:100%;
+   }
+   
+   #PrescPrint ul{
+        width:100%;
+        float:right;
+        display:block;
+   }
+   #PrescPrint .presInfo p{
+       width:100%;
+   }
+}

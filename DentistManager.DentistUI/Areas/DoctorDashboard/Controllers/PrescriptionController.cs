@@ -67,7 +67,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         {
             if (prescriptionID == 0)
                 return HttpNotFound();
-            PrescriptionPresnetViewModel prescription = prescriptionRepository.getPrescriptionDetails(prescriptionID);
+            PrescriptionPrintViewModel prescription = prescriptionRepository.getPrescriptionDetailsForPrint(prescriptionID);
             if (prescription == null)
                 return HttpNotFound();
             return View(prescription);

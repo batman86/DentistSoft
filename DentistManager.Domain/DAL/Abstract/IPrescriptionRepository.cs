@@ -14,5 +14,6 @@ namespace DentistManager.Domain.DAL.Abstract
         PrescriptionPresnetViewModel getPrescriptionDetails(int prescriptiontID);
         bool deletePrescription(int prescriptiontID);
         IEnumerable<PrescriptionPresnetViewModel> getPrescriptionList(int patientID);
+        PrescriptionPrintViewModel getPrescriptionDetailsForPrint(int prescriptiontID);
     }
 }

@@ -87,5 +87,20 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false;
         }
+
+
+        public int getQuanityOfMatrailTreatment(int matrailID, int treatmentID)
+        {
+           int quantity = 0;
+           using (Entities.Entities ctx = new Entities.Entities())
+           {
+               MaterialTreatment mt = ctx.MaterialTreatments.Where(x => x.MaterialID == matrailID && x.TeratmentID == treatmentID).FirstOrDefault();
+               if (mt == null)
+                   return 0;
+
+               quantity =(int) mt.Quantity;
+           }
+           return quantity;
+        }
     }
 }

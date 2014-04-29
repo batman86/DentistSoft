@@ -110,5 +110,31 @@ namespace DentistManager.Domain.DAL.Concrete
                 return PrescriptionList;
             }
         }
+
+
+        public PrescriptionPrintViewModel getPrescriptionDetailsForPrint(int prescriptiontID)
+        {
+            PrescriptionPrintViewModel prescriptionViewModel;
+
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                Prescription prescriptionEntity = ctx.Prescriptions.Find(prescriptiontID);
+                if (prescriptionEntity != null)
+                {
+                    prescriptionViewModel = new PrescriptionPrintViewModel
+                    {
+                        PrescriptionID = prescriptionEntity.PrescriptionID,
+                        Notice = prescriptionEntity.Notice,
+                        DoctorName = prescriptionEntity.Doctor.Name,
+                        AppointmentDate = prescriptionEntity.Appointment.Start_date,
+                         Medicines=prescriptionEntity.Medicines.ToList(),
+                         patientName=prescriptionEntity.Patient.Name
+                    };
+                }
+                else
+                    prescriptionViewModel = null;
+            }
+            return prescriptionViewModel;
+        }
     }
 }

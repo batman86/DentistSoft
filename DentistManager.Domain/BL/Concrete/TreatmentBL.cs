@@ -30,53 +30,73 @@ namespace DentistManager.Domain.BL.Concrete
         {
             // substract form the warehouse
             StorgeRepository storgeRepository = new StorgeRepository();
+            MaterialRepository materialRepository = new MaterialRepository();
             IEnumerable<int> ClinecstorgeIDList = storgeRepository.getClinecStorgesList(clinecID);
             List<StorageMatrailViewModel> storageMatrailViewModelList;
-            int? storgeID =0;
+
+            int storgeID =0;
             int total = 0;
+            int oldQuantity = 0;
+            int quantityToWisdraw = 0;
+
             foreach (MatrailToSaveViewModel item in matrailList)
             {
                 storageMatrailViewModelList = storgeRepository.getStrogesMatrailsQuantity(ClinecstorgeIDList, item.MatrailID);
-
                 if (storageMatrailViewModelList.Count < 1)
                     return false; // there is no stoge for this clinec
-                   
-                
+
+                // substract the old matrail in case he update the same matrail to avoid doblcate the delete form warehouse
+                oldQuantity=materialRepository.getQuanityOfMatrailTreatment(item.MatrailID, treatmentID);
+                quantityToWisdraw = item.Quantity - oldQuantity;
+
+
                 // test if it's gonna return null
-              //  storgeID = storageMatrailViewModelList.Where(x => x.Quantity > item.Quantity).Select(x => x.StorageID).First();
-                var  aa= storageMatrailViewModelList.Where(x => x.Quantity > item.Quantity);
-                if (storgeID != null)
+                storgeID = storageMatrailViewModelList.Where(x => x.Quantity > item.Quantity).Select(x => x.StorageID).FirstOrDefault();
+                if (storgeID != 0)
                 {
-                    storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storgeID, item.Quantity);
+                    storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storgeID, quantityToWisdraw);
                     break;
                 }
 
                 total = storageMatrailViewModelList.Sum(x => x.Quantity);
 
-                if (total >= item.Quantity)
+                if (total >= quantityToWisdraw)
                 {
                     foreach (StorageMatrailViewModel storge in storageMatrailViewModelList)
                     {
-                        item.Quantity -= storge.Quantity;
-                        storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storge.StorageID, storge.Quantity);
-
-                        if (item.Quantity < 1)
+                        if(quantityToWisdraw >= storge.Quantity)
+                        {
+                            storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storge.StorageID, storge.Quantity);
+                            quantityToWisdraw -= storge.Quantity;
+                        }
+                        else
+                        {
+                            storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storge.StorageID, quantityToWisdraw);
+                            quantityToWisdraw =0;
+                        }
+                        if (quantityToWisdraw < 1)
                             break; // 
                     }
 
                 }
+                else {
+                    // if this run that mean it's will empty every warehouse and still not cover it
+                    foreach (StorageMatrailViewModel storge in storageMatrailViewModelList)
+                    {
+                        storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storge.StorageID, storge.Quantity);
+                    }
 
-                // if we go this far this mean no enough matrail  retun false in this one
-                return false;
+                    // if we go this far this mean no enough matrail  retun false in this one
+                    break;
+                }
+
+
+            
             }
 
+          bool check= materialRepository.SaveTreatmentMatrail(matrailList, treatmentID);
 
-            MaterialRepository materialRepository =new MaterialRepository ();
-            materialRepository.SaveTreatmentMatrail(matrailList, treatmentID);
-
-
-            // return
-            return false;
+          return check;
         }
     }
 }

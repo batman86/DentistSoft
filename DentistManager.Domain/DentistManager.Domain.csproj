@@ -49,9 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Abstract\IMatrailBL.cs" />
     <Compile Include="BL\Abstract\IPatientPaymentBL.cs" />
     <Compile Include="BL\Abstract\ISeassionStateBL.cs" />
     <Compile Include="BL\Abstract\ITreatmentBL.cs" />
+    <Compile Include="BL\Concrete\MatrailBL.cs" />
     <Compile Include="BL\Concrete\PatientPaymentBL.cs" />
     <Compile Include="BL\Concrete\SeassionStateBL.cs" />
     <Compile Include="BL\Concrete\TreatmentBL.cs" />
@@ -227,6 +229,7 @@
     <Compile Include="ViewModel\PaymentReceiptPresentViewModel.cs" />
     <Compile Include="ViewModel\PaymentReceiptViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionPresnetViewModel.cs" />
+    <Compile Include="ViewModel\PrescriptionPrintViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionWrapViewModel.cs" />
     <Compile Include="ViewModel\SessionValuesViewModel.cs" />

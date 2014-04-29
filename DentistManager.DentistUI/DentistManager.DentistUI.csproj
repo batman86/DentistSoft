@@ -848,7 +848,7 @@
     <Content Include="Scripts\dhtmlxScheduler_debug\locale\locale_ua.js" />
     <Content Include="Scripts\DoctorDashboard\PrescriptionAdd.js" />
     <Content Include="Scripts\DoctorDashboard\TreatmentSession.js" />
-    <Content Include="Scripts\kinetic.js" />
+    <Content Include="Scripts\kinetic.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />

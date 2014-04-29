@@ -12,11 +12,10 @@ namespace DentistManager.Domain.BL.Concrete
 
        public bool InsertMangment(int ItemID , int StorageID , int Amount)
        {
-           
-            Warehouse warehouse = new Warehouse() { ItemID = ItemID
-                , StorageID = StorageID};
-            WarehouseRepository warehouseRepository = new WarehouseRepository();
-          Warehouse Getwarehouse = warehouseRepository.Getwarehouse(warehouse);
+
+           Warehouse warehouse = new Warehouse() { ItemID = ItemID, StorageID = StorageID };
+           WarehouseRepository warehouseRepository = new WarehouseRepository();
+           Warehouse Getwarehouse = warehouseRepository.Getwarehouse(warehouse);
             if (Getwarehouse == null )
             {
                 warehouse.Available = Amount;

@@ -21,7 +21,8 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         ISessionStateManger sessionStateManger;
         IDoctorRepository doctorRepository;
         IAppointmentRepository appointmentRepository;
-        public TreatmentSessionController(IOpperationRepository _opperationRepository, ITreatmentRepository _treatmentRepository, ITreatmentBL _treatmentBL, IMaterialRepository _materialRepository, ISessionStateManger _sessionStateManger, IDoctorRepository _doctorRepository, IAppointmentRepository _appointmentRepository)
+        IMatrailBL matrailBL;
+        public TreatmentSessionController(IOpperationRepository _opperationRepository, ITreatmentRepository _treatmentRepository, ITreatmentBL _treatmentBL, IMaterialRepository _materialRepository, ISessionStateManger _sessionStateManger, IDoctorRepository _doctorRepository, IAppointmentRepository _appointmentRepository, IMatrailBL _matrailBL)
         {
             opperationRepository = _opperationRepository;
             treatmentRepository = _treatmentRepository;
@@ -30,6 +31,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             sessionStateManger = _sessionStateManger;
             doctorRepository = _doctorRepository;
             appointmentRepository = _appointmentRepository;
+            matrailBL = _matrailBL;
         }
 
         //
@@ -141,15 +143,17 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             return check;
         }
 
+        [HttpPost]
         public bool removeTreatmentMatrail(int matrailID = 0, int treatmentID = 0)
         {
             if (treatmentID == 0)
                 return false;
             if (matrailID == 0)
                 return false;
-
-            bool check = materialRepository.removeTreatmentMatrail(matrailID, treatmentID);
-
+            bool check;
+            int clinecID = getUserCurrentClinecID();
+            check=matrailBL.RemoveMatrailofTreatment(clinecID, matrailID, treatmentID);
+           
             return check;
         }
 	}

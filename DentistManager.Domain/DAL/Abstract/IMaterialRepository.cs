@@ -16,5 +16,7 @@ namespace DentistManager.Domain.DAL.Abstract
         IEnumerable<MaterialMiniPresentViewModel> getTreatmentMatrailList(int treatmentID);
 
         bool removeTreatmentMatrail(int matrailID,int treatmentID);
+
+        int getQuanityOfMatrailTreatment(int matrailID, int treatmentID);
     }
 }

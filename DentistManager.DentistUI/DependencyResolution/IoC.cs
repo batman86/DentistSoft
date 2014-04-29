@@ -49,7 +49,7 @@ namespace DentistManager.DentistUI.DependencyResolution {
                             x.For<IMedicineRepository>().Use<MedicineReposditory>();
                             x.For<IPaymentReceiptRerpository>().Use<PaymentReceiptRerpository>();
                             x.For<IPatientPaymentBL>().Use<PatientPaymentBL>();
-
+                            x.For<IMatrailBL>().Use<MatrailBL>();
 
                             x.For<Microsoft.AspNet.Identity.IUserStore<ApplicationUser>>()
                             .Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>>();
