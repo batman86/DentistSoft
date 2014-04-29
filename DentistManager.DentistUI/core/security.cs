@@ -31,7 +31,9 @@ namespace DentistManager.DentistUI.core
 
         public bool mainInLogin()
         {
-            byte[] thekey = readKey();
+            try
+            {
+                byte[] thekey = readKey();
             string theText= GetString(readtext());
 
             string decText = decryptData(theText);
@@ -40,6 +42,12 @@ namespace DentistManager.DentistUI.core
                 return true;
             else
                 return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        
         }
 
         static byte[] GetBytes(string str)
@@ -80,7 +88,7 @@ namespace DentistManager.DentistUI.core
                 fs.Read(key, 0, (int)fs.Length);
                 fs.Close();
             }
-            key = ProtectedData.Unprotect(key, null, DataProtectionScope.LocalMachine);
+           // key = ProtectedData.Unprotect(key, null, DataProtectionScope.LocalMachine);
 
             return key;
         }

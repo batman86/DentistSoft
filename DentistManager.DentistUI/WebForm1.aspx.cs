@@ -15,9 +15,7 @@ namespace DentistManager.DentistUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PaymentRepository pr = new PaymentRepository();
-           Response.Write (pr.GetAllCostTreatmentByClinicByPeriod(1,new DateTime(2014,4,4),new DateTime(2014,4,4)).ToString());
-           Response.Write(pr.GetAllPayedReceitsByClinicByPeriod(1, new DateTime(2014, 4, 4), new DateTime(2014, 4, 4)).ToString());
+           
         }
 
         protected void Button1_Click(object sender, EventArgs e)
