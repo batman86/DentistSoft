@@ -219,6 +219,10 @@ dl dd {
          float:left;
          width:180px;
 }
+.form-group select{
+         float:left;
+         width:180px;
+}
 .col-md-offset-2{
     margin-left:200px;
 }
@@ -326,30 +330,67 @@ table#TreatmentList td.treatmentTableSmall{
 
 #PrescPrint{
     text-align:center;
-}
-#PrescPrint ul {
-    margin-top:20px;
-}
-#PrescPrint ul li{
-     width:900px;
-     float:right;
-}
-#PrescPrint ul li p{
-    float:left;
-    width:200px;
-   
-}
-#PrescPrint .presInfo{
-    display:block;
-   
+        width:80%;
+   display:block;
 }
 
-#PrescPrint .presInfo p{
+#PrescPrint #prescHead{
+    width:80%;
+   display:block;
     float:right;
-    width:400px;
 }
+#PrescPrint #prescPatientInfo{
+     width:80%;
+     display:block;
+     float:right;
+}
+
+#PrescPrint #prescPatientInfo .presInfo{
+   width:100%;
+   display:block;
+   float:right;
+}
+#PrescPrint #prescPatientInfo .presInfo p{
+    float:right;
+    margin-left:30px;
+    width:70%;
+    background-color:#f1f1f1;
+}
+#PrescPrint #prescPatientInfo .presInfo p.prescInfoTitle{
+    width:100px;
+}
+
+#PrescPrint #prescContant{
+     width:80%;
+     display:block;
+    float:right;
+}
+#PrescPrint #prescContant li{
+    float:left;
+    width:80%;
+    background-color:#d4e5f9;
+    margin-bottom:10px;
+}
+#PrescPrint #prescContant li p{
+    display:inline-block;
+     float:left;
+     margin-right:20px;
+}
+
+
+#PrescPrint #prescFooter{
+     width:80%;
+     display:block;
+     float:right;
+}
+
+
+
 @media print {
-   .nav{
+   .noPrint{
+        display:none;
+   }
+    .nav{
        display:none;
    }
 
@@ -357,16 +398,50 @@ table#TreatmentList td.treatmentTableSmall{
        display:none;
    }
 
-   #PrescPrint{
-       width:100%;
-   }
+   .bttomLink{
+             display:none;
    
-   #PrescPrint ul{
+   }
+  .preview-area-messages{
+        display:none;
+   }
+
+#PrescPrint{
         width:100%;
-        float:right;
-        display:block;
-   }
-   #PrescPrint .presInfo p{
-       width:100%;
-   }
+        margin-top:0px;
+}
+
+#PrescPrint #prescHead{
+    width:100%;
+
+}
+#PrescPrint #prescHead hr{
+    width:50%;
+}
+#PrescPrint #prescPatientInfo{
+    width:100%;
+}
+
+#PrescPrint #prescContant{
+     width:100%;
+}
+#PrescPrint #prescContant li{
+    width:100%;
+}
+#PrescPrint #prescFooter{
+     width:100%;
+}
+#PrescPrint #prescFooter .footerLine{
+    width:50%;
+    color:silver;
+}
+
+#PrescPrint #prescFooter{
+   position:fixed;
+   bottom:0px;
+   height:180px;
+   width:100%;
+   left:60px;
+}
+   
 }

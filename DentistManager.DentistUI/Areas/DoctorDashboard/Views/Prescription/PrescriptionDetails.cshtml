@@ -6,23 +6,45 @@
 
 
 <div id="PrescPrint">
-    <h1>مركز البسمة</h1>
-    <h2>لطب الاسنان التجميلى</h2>
-    <hr />
+    <div id="prescHead">
+        <h1>مركز البسمة</h1>
+        <h2>لطب الاسنان التجميلى</h2>
+        <hr />
+    </div>
 
-    <div class="presInfo">
-        <p>الاسم</p> <p>    @Html.DisplayFor(model => model.patientName)</p>
+    <div id="prescPatientInfo">
+        <div class="presInfo">
+            <p class="prescInfoTitle">: الأسم</p> <p>    @Html.DisplayFor(model => model.patientName)</p>
+        </div>
+
+        <div class="presInfo">
+            <p class="prescInfoTitle"> : التاريخ</p>  <p> @Html.DisplayFor(model => model.AppointmentDate)</p>
+        </div>
     </div>
-   
-    <div class="presInfo">
-        <p>التاريخ</p>  <p> @Html.DisplayFor(model => model.AppointmentDate)</p>
-    </div>
+    <div id="prescContant">
         <ul>
             @foreach (var item in Model.Medicines)
             {
                 <li> <p>   @Html.DisplayFor(modelitem => item.Name)  </p>  <p> @Html.DisplayFor(modelitem => item.ScaleType)  </p>  <p> @Html.DisplayFor(modelitem => item.Dose)  </p> <p> @Html.DisplayFor(modelitem => item.Concentration) </p></li>
             }
-        </ul>
+        </ul> 
+    </div>
+   
+    <div id="prescFooter">
+        <hr />
+        <p> 45 ش الفتح محطة ترام فلمنج 01142870287 * عيادة 03/5826567 </p> 
+        <p>المواعيد من 10-4 مساء ماعدا الجمعة
+                    </p>
+        <p> (الحجز بميعاد مسبق)
+                    </p>
+
+        <hr class="footerLine"/>
+        <p> رشيد - ش عبد السلام عارف - بجوار مسجد الفساسى
+</p>
+        <p> 01288609002   -   0452920010
+</p>
+    </div>
+
     </div>
 <div class="bttomLink">
     @Html.ActionLink("Back to List", "PrescriptionList")

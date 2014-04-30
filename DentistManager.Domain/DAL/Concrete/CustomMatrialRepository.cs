@@ -103,6 +103,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
                                                                          join p in patientIQ on cm.PatientID equals p.PatientID
                                                                          where cm.DoctorID == DoctorID
+                                                                         orderby cm.RequestDate descending
                                                                          select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
                 return customMatrailViewModel;
             }

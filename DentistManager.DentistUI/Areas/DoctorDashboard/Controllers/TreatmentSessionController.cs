@@ -67,7 +67,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             
             string appointmentDate = appointmentRepository.getAppointmentDateByID(AppointmentID);
             if (appointmentDate == string.Empty)
-                return RedirectToAction("", "redirect to select appointment");
+                return Redirect("~/Appoiment/Appoiments.aspx");
 
             ViewBag.AppointmentID = AppointmentID;
             ViewBag.DoctorID = doctorRepository.getClinecIDByUserID(User.Identity.GetUserId());

@@ -7,16 +7,13 @@
 <h2>Prescription List</h2>
 
 <p class="topLink">
-    @Html.ActionLink("Create New", "PrescriptionCreate")
+    @Html.ActionLink("Create New", "PrescriptionAdd")
 </p>
 <table class="pure-table pure-table-bordered">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Notice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MedicineName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DoctorName)
@@ -33,9 +30,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Notice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MedicineName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DoctorName)

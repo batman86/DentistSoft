@@ -916,7 +916,6 @@
     <Content Include="Areas\DoctorDashboard\Views\Shared\NoActivePatientView.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionList.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionDetails.cshtml" />
-    <Content Include="Areas\DoctorDashboard\Views\Prescription\PrescriptionCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptList.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptDetails.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientPaymentReceipt\patientReceiptCreate.cshtml" />

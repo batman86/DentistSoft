@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Doctor Dashboard</title>
+    <title class="siteTitle"> Doctor Dashboard</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="/Content/styleRest.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
 </head>
 <body>
-    <aside>  
+    <aside class="noPrint">  
         <ul class="nav">
             <li><a href="~/Appoiment/Appoiments.aspx">Appoiments</a></li>
             <li>@Html.ActionLink("Patients Status ", "PatientStatusList", "PatientStatus")</li>

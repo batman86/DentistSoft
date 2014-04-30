@@ -40,7 +40,20 @@ namespace DentistManager.Domain.DAL.Concrete
             int count = 0;
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                ctx.Entry(patient).State = System.Data.Entity.EntityState.Modified;
+                Patient patientEntity = ctx.Patients.Find(patient.PatientID);
+                if (patientEntity == null)
+                    return false;
+
+                patientEntity.Name = patient.Name;
+                patientEntity.Mobile = patient.Mobile;
+                patientEntity.Notice = patient.Notice;
+                patientEntity.Phone = patient.Phone;
+                patientEntity.Address = patient.Address;
+                patientEntity.BrithDate = patient.BrithDate;
+                patientEntity.E_mail = patient.E_mail;
+                patientEntity.gender = patient.gender;
+
+                ctx.Entry(patientEntity).State = System.Data.Entity.EntityState.Modified;
                 count = ctx.SaveChanges();
             }
             return count > 0 ? true : false;
@@ -83,7 +96,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 patientList = (from p in patients
                                join d in doctorsIQ on p.DoctorID equals d.DoctorID
                                where p.ClinicID == clinectID
-                               orderby p.Name
+                               orderby p.PatientID descending
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone , DoctorName=d.Name }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
                 return patientList;
             }
@@ -294,7 +307,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 patientImagesList = (from i in patientsImagesIQ
                                      join a in appointmnetIQ on i.appointmentID equals a.AppointmentID
                                      join ic in ImageCategoryIQ on i.ImageCategoryID equals ic.ImageCategoryID
-                                     where i.PatientID == patientID
+                                     where i.PatientID == patientID 
                                      select new ImagesPresentViewModel { Name = i.Name, Notice = i.Notice, ImageID = i.ImageID, MinImageURL = i.MinImageURL, MediumImageURL = i.MediumImageURL, FullImageURL = i.FullImageURL, LocalImageURL = i.LocalImageURL, appointmentDate=a.Start_date, ImageCategoryName=ic.Name}).ToList();
                 return patientImagesList;
             }
@@ -382,7 +395,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 patientList = (from p in patients
                                join d in doctorsIQ on p.DoctorID equals d.DoctorID
                                where p.ClinicID == clinectID && p.DoctorID == doctorID
-                               orderby p.Name
+                               orderby p.PatientID descending
                                select new PatientMiniData { PatientID = p.PatientID, Address = p.Address, Mobile = p.Mobile, Name = p.Name, Phone = p.Phone, DoctorName = d.Name }).Skip(pageNumber * pageSize).Take(pageSize).ToList();
                 return patientList;
             }

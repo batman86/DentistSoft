@@ -119,7 +119,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                             string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
 
                             ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"/Content/Images/" + imageCategoryName),@"/Content/Images/" + imageCategoryName, imagesViewModel);
+                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/") + imageCategoryName, @"../../Content/Images/" + imageCategoryName, imagesViewModel);
 
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }

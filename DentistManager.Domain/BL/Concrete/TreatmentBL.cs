@@ -55,7 +55,7 @@ namespace DentistManager.Domain.BL.Concrete
                 if (storgeID != 0)
                 {
                     storgeRepository.withdrawMatrailFromWarehouse(item.MatrailID, storgeID, quantityToWisdraw);
-                    break;
+                    continue;
                 }
 
                 total = storageMatrailViewModelList.Sum(x => x.Quantity);
@@ -79,7 +79,8 @@ namespace DentistManager.Domain.BL.Concrete
                     }
 
                 }
-                else {
+                else 
+                {
                     // if this run that mean it's will empty every warehouse and still not cover it
                     foreach (StorageMatrailViewModel storge in storageMatrailViewModelList)
                     {
@@ -87,7 +88,7 @@ namespace DentistManager.Domain.BL.Concrete
                     }
 
                     // if we go this far this mean no enough matrail  retun false in this one
-                    break;
+                    continue;
                 }
 
 

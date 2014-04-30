@@ -34,17 +34,17 @@
         </div>
 
         <div class="form-group">
-            select appointment
+            <p>select appointment</p> 
             @Html.generatePatientAppointmentDropDownList(Model.appointmentList)
         </div>
 
         <div class="form-group">
-            select image category
+            <p>select image category</p> 
             @Html.generateImageCategoryDropDownList(Model.imageCategoryList)
 
         </div>
 
-        <div>Upload  image:<input type="file" name="files" id="files1" /></div>
+        <div class="form-group"><p>Upload Image :</p> <input type="file" name="files" id="files1" /></div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -54,7 +54,7 @@
     </div>
 }
 
-<div>
+<div class="bttomLink">
     @Html.ActionLink("Back to List", "patientImagesList", new { patientID = ViewBag.patientID })
 </div>
 

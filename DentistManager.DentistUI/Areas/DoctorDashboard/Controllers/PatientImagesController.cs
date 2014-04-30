@@ -99,7 +99,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                             string imageCategoryName = imageRepository.getIMageCategoryNameByID(imagesViewModel.ImageCategoryID);
 
                             ImagesDrawing ob = new ImagesDrawing();
-                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/" + imageCategoryName), @"~/Content/Images/" + imageCategoryName, imagesViewModel);
+                            ob.PatientImageSaver(System.Drawing.Image.FromStream(list[0].InputStream), Server.MapPath(@"~/Content/Images/") + imageCategoryName, @"../../Content/Images/" + imageCategoryName, imagesViewModel);
 
                             return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
                         }
@@ -114,7 +114,11 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 else
                 {
                     ViewBag.patientID = imagesViewModel.PatientID;
-                    return View();
+                    ImageCreateViewModel imageCreateViewModel = new ImageCreateViewModel();
+
+                    imageCreateViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
+                    imageCreateViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(imagesViewModel.PatientID);
+                    return View(imageCreateViewModel);
                 }
 
                 return RedirectToAction("patientImagesList", new { patientID = imagesViewModel.PatientID });
@@ -122,7 +126,11 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             catch
             {
                 ViewBag.patientID = imagesViewModel.PatientID;
-                return View();
+                ImageCreateViewModel imageCreateViewModel = new ImageCreateViewModel();
+
+                imageCreateViewModel.imageCategoryList = imageRepository.getImagesCategoryList();
+                imageCreateViewModel.appointmentList = appointmentRepository.getPatientAppountmentList(imagesViewModel.PatientID);
+                return View(imageCreateViewModel);
             }
         }
 

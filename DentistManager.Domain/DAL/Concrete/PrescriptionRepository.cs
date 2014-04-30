@@ -82,6 +82,12 @@ namespace DentistManager.Domain.DAL.Concrete
                 Prescription prescription = ctx.Prescriptions.Find(prescriptiontID);
                 if (prescription != null)
                 {
+                    IEnumerable<Medicine> med = prescription.Medicines.ToList();
+                    foreach (Medicine item in med)
+                    {
+                        prescription.Medicines.Remove(item);
+                    }
+
                     ctx.Prescriptions.Remove(prescription);
                     count = ctx.SaveChanges();
                 }

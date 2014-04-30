@@ -43,7 +43,10 @@
 
         </div>
 
-        <div class="form-group"> <p>Upload  image:</p> <input type="file" name="files" id="files1" /></div>
+        <div class="form-group">
+             <p>Upload Image :</p> 
+        <input type="file" name="files" id="files1" />
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -53,7 +56,7 @@
     </div>
 }
 
-<div>
+<div class="bttomLink">
     @Html.ActionLink("Back to List", "patientImagesList", new { patientID = ViewBag.patientID })
 </div>
 

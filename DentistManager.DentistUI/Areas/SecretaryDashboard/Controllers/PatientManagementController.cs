@@ -96,8 +96,8 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         [HttpPost]
         public ActionResult PatientCreate(PatientFullDataViewModel PatientInfo)
         {
-            //try
-            //{
+            try
+            {
                 PatientInfo.ClinicID = getUserCurrentClinecID();
                 if (!ModelState.IsValid)
                 {
@@ -107,14 +107,16 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
                 }
 
                 bool check = patientRepository.addNewPatinetBasicInfo(PatientInfo);
+
+                //return RedirectToAction("SecyrtaryPatientActvator","PatientSearch",new{PatientID=})
                 return RedirectToAction("patientList");
-            //}
-            //catch
-            //{
-            //    PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
-            //    patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
-            //    return View(patientCreateWrap);
-            //}
+            }
+            catch
+            {
+                PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
+                patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
+                return View(patientCreateWrap);
+            }
         }
 
         //

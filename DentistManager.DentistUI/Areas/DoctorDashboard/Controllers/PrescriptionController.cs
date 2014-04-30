@@ -73,45 +73,45 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             return View(prescription);
         }
 
-        public ActionResult PrescriptionCreate(int patientID = 0)
-        {
-            if (patientID == 0)
-                patientID = getCurrentPatientID();
+        //public ActionResult PrescriptionCreate(int patientID = 0)
+        //{
+        //    if (patientID == 0)
+        //        patientID = getCurrentPatientID();
 
-            var medList = medicineRepository.getMedicineList();
-            var applist = appointmentRepository.getPatientAppountmentList(patientID);
-            PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
+        //    var medList = medicineRepository.getMedicineList();
+        //    var applist = appointmentRepository.getPatientAppountmentList(patientID);
+        //    PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
 
-            return View(prescriptionWrapViewModel);
-        }
+        //    return View(prescriptionWrapViewModel);
+        //}
 
-        [HttpPost]
-        public ActionResult PrescriptionCreate(PrescriptionViewModel prescriptionViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid && prescriptionViewModel.MedicineID != 0 && prescriptionViewModel.AppointmentID != 0)
-                {
-                    prescriptionViewModel.DoctorID = getDoctorIDbyUserID();
-                    prescriptionViewModel.PatientID = getCurrentPatientID();
-                    bool check = prescriptionRepository.addNewPrescription(prescriptionViewModel);
-                }
-                else
-                {
-                    var medList = medicineRepository.getMedicineList();
-                    var applist = appointmentRepository.getPatientAppountmentList(getCurrentPatientID());
-                    PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
-                    return View(prescriptionWrapViewModel);
-                }
+        //[HttpPost]
+        //public ActionResult PrescriptionCreate(PrescriptionViewModel prescriptionViewModel)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid && prescriptionViewModel.MedicineID != 0 && prescriptionViewModel.AppointmentID != 0)
+        //        {
+        //            prescriptionViewModel.DoctorID = getDoctorIDbyUserID();
+        //            prescriptionViewModel.PatientID = getCurrentPatientID();
+        //            bool check = prescriptionRepository.addNewPrescription(prescriptionViewModel);
+        //        }
+        //        else
+        //        {
+        //            var medList = medicineRepository.getMedicineList();
+        //            var applist = appointmentRepository.getPatientAppountmentList(getCurrentPatientID());
+        //            PrescriptionWrapViewModel prescriptionWrapViewModel = new PrescriptionWrapViewModel { appointmentList = applist, MedicineList = medList };
+        //            return View(prescriptionWrapViewModel);
+        //        }
 
-                return RedirectToAction("PrescriptionList", new { patientID = prescriptionViewModel.PatientID });
-            }
-            catch
-            {
-                ViewBag.patientID = prescriptionViewModel.PatientID;
-                return View();
-            }
-        }
+        //        return RedirectToAction("PrescriptionList", new { patientID = prescriptionViewModel.PatientID });
+        //    }
+        //    catch
+        //    {
+        //        ViewBag.patientID = prescriptionViewModel.PatientID;
+        //        return View();
+        //    }
+        //}
 
         public ActionResult PrescriptionDelete(int prescriptionID)
         {
@@ -162,13 +162,21 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         [HttpPost]
         public ActionResult SavePrescraptionMedcList(IEnumerable<MedicineMiniViewModel> medList)
         {
-            int patientID = getCurrentPatientID();
-            int AppointmentID = appointmentRepository.getLastAppointmentIDByPatientID(patientID);
-            int doctorID = getDoctorIDbyUserID();
+            try
+            {
+                int patientID = getCurrentPatientID();
+                int AppointmentID = appointmentRepository.getLastAppointmentIDByPatientID(patientID);
+                int doctorID = getDoctorIDbyUserID();
 
-            medicineRepository.saveMedicineList(medList, AppointmentID,doctorID,patientID);
 
-            return Json(new { RedirectUrl = Url.Action("PrescriptionList", "Prescription", new { area = "DoctorDashboard" }) });
+                medicineRepository.saveMedicineList(medList, AppointmentID, doctorID, patientID);
+
+                return Json(new { RedirectUrl = Url.Action("PrescriptionList", "Prescription", new { area = "DoctorDashboard" }) });
+            }
+            catch
+            {
+                return null;
+            }
 
         }
 	}

@@ -102,25 +102,25 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         [HttpPost]
         public ActionResult PatientCreate(PatientFullDataViewModel PatientInfo)
         {
-            //try
-            //{
-            PatientInfo.ClinicID = getUserCurrentClinecID();
-            if (!ModelState.IsValid)
+            try
+            {
+                PatientInfo.ClinicID = getUserCurrentClinecID();
+                if (!ModelState.IsValid)
+                {
+                    PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
+                    patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
+                    return View(patientCreateWrap);
+                }
+
+                bool check = patientRepository.addNewPatinetBasicInfo(PatientInfo);
+                return RedirectToAction("patientList");
+                }
+            catch
             {
                 PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
                 patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
                 return View(patientCreateWrap);
             }
-
-            bool check = patientRepository.addNewPatinetBasicInfo(PatientInfo);
-            return RedirectToAction("patientList");
-            //}
-            //catch
-            //{
-            //    PatientCreateWrap patientCreateWrap = new PatientCreateWrap();
-            //    patientCreateWrap.DoctorsList = doctorRepository.getDoctorMiniInfoList();
-            //    return View(patientCreateWrap);
-            //}
         }
 	}
 }

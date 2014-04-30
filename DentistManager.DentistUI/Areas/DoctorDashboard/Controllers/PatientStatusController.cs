@@ -110,8 +110,16 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 AppointmentStatusViewModel vm = appointmentRepository.getPatientStatus(appointmentStatusViewModel.id);
                 return View(vm);
             }
-            appointmentRepository.updatePatientStatus(appointmentStatusViewModel);
-            return RedirectToAction("PatientStatusList");
+            try
+            {
+                appointmentRepository.updatePatientStatus(appointmentStatusViewModel);
+                return RedirectToAction("PatientStatusList");
+            }
+            catch
+            {
+                return RedirectToAction("PatientStatusList");
+            }
+
         }
 	}
 }
