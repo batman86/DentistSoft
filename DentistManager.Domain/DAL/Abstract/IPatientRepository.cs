@@ -17,7 +17,7 @@ namespace DentistManager.Domain.DAL.Abstract
         bool deletepatientBasicInfo(int patientID);
         IEnumerable<PatientMiniData> getPatientList(int pageNumber, int pageSize,int clinectID);
         IEnumerable<PatientMiniData> getPatientListForDoctor(int pageNumber, int pageSize, int clinectID,int doctorID);
-        IEnumerable<PatientMiniData> getPatientListForDoctor(int clinectID, int doctorID,DateTime From,DateTime to)
+        IEnumerable<PatientMiniData> getPatientListForDoctor(int clinectID, int doctorID, DateTime From, DateTime to);
         int getPatientTotalForDoctor(int clinectID, int doctorID);
         int getPatientTotal(int clinectID);
         IEnumerable<PatientMiniData> getPatientListSearchResult(int patientID, string mobileNumber, string phoneNumber, string Name,int clinectID);
