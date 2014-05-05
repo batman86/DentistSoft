@@ -1,13 +1,13 @@
 ﻿@model DentistManager.Domain.ViewModel.PaymentReceiptPresentViewModel
 
 @{
-    ViewBag.Title = "patient Receipt Details";
+    ViewBag.Title = "patient Receipt Delete<";
 }
 
-<h2>patient Receipt Details</h2>
+<h2>patient Receipt Delete</h2>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
-
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.receiptID)
@@ -42,7 +42,14 @@
         </dd>
 
     </dl>
-</div>
-<div class="bttomLink">
-    @Html.ActionLink("Back to List", "patientReceiptList")
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="bttomLink">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "patientReceiptList")
+        </div>
+    }
 </div>

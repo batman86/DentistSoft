@@ -8,11 +8,13 @@ using DentistManager.DentistUI.Infrastructure;
 using DentistManager.Domain.DAL.Abstract;
 using DentistManager.Domain.ViewModel;
 
-namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
+namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    [Authorize(Roles = "Secretary")]
+    [Authorize(Roles = "Doctor")]
     public class PatientPaymentReceiptController : Controller
     {
+        //
+        // GET: /DoctorDashboard/PatientPaymentReceipt/
 
         ISessionStateManger sessionStateManger;
         IPaymentReceiptRerpository paymentReceiptRerpository;
@@ -35,13 +37,13 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
         [NonAction]
         public int getCurrentPatientID()
         {
-            return int.Parse(sessionStateManger.getSecyrtaryActivePatinet(User.Identity.GetUserId()));
+            return int.Parse(sessionStateManger.getDoctorActivePatinet(User.Identity.GetUserId()));
         }
 
         [NonAction]
         public int getClinecIDForCurrentUser()
         {
-            return sessionStateManger.getClinecIDForCurrentSecurtary(User.Identity.GetUserId());
+            return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
         }
 
         public ActionResult patientReceiptList(int patientID = 0)
@@ -58,8 +60,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(patientReceiptList);
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientHistoryDetails/PatientDetails/5
         public ActionResult patientReceiptDetails(int receiptID=0)
         {
             if(receiptID ==0)
@@ -71,8 +71,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(receipt);
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
+
         public ActionResult patientReceiptCreate(int patientID = 0)
         {
             if (patientID == 0)
@@ -82,8 +81,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View();
         }
 
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryCreate
+
         [HttpPost]
         public ActionResult patientReceiptCreate(PaymentReceiptViewModel paymentReceiptViewModel)
         {
@@ -114,8 +112,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             }
         }
 
-        //
-        // GET: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
         public ActionResult patientReceiptDelete(int receiptID)
         {
             PaymentReceiptPresentViewModel receipt = paymentReceiptRerpository.getPaymentReceiptDetails(receiptID);
@@ -124,8 +120,6 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             return View(receipt);
         }
 
-        //
-        // POST: /SecretaryDashboard/PatientManagement/PatientHistoryDelete/5
         [HttpPost]
         [ActionName("patientReceiptDelete")]
         public ActionResult ConfirmpatientReceiptDelete(int receiptID)

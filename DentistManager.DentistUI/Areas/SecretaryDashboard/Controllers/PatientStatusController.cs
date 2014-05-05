@@ -75,10 +75,14 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             }
             else
             {
+                DateTime date = DateTime.Now;
+                DateTime from = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0);
+                DateTime to = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59, 999);
+
                 if (statusFilter == "All")
-                    appList = appointmentRepository.getClinecMeeting(clinecID, DateTime.Now, DateTime.Now);
+                    appList = appointmentRepository.getClinecMeeting(clinecID, from, to);
                 else
-                    appList = appointmentRepository.getClinecMeeting(clinecID, statusFilter, DateTime.Now, DateTime.Now);
+                    appList = appointmentRepository.getClinecMeeting(clinecID, statusFilter, from, to);
             }
 
             AppointmentStatusViewModelWrap viewModel = new AppointmentStatusViewModelWrap();

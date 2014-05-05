@@ -400,6 +400,26 @@ namespace DentistManager.Domain.DAL.Concrete
                 return patientList;
             }
         }
+        public IEnumerable<PatientMiniData> getPatientListForDoctor(int clinectID, int doctorID,DateTime From,DateTime to)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<PatientMiniData> patientList;
+                var patients = ctx.Patients;
+                var doctorsIQ = ctx.Doctors;
+                var appointmentIQ = ctx.Appointments;
+
+                patientList = (from p in patients
+                               join ap in appointmentIQ on p.PatientID equals ap.PatientID
+                               where p.ClinicID == clinectID && p.DoctorID == doctorID && ap.Start_date >= From && ap.Start_date <= to
+                               select new PatientMiniData { PatientID = p.PatientID, Name = p.Name}).ToList();
+
+                return patientList;
+            }
+        }
+
+
+
 
 
         public int getPatientTotalForDoctor(int clinectID, int doctorID)
@@ -421,5 +441,8 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return total;
         }
+
+
+
     }
 }
