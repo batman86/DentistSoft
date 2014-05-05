@@ -72,13 +72,13 @@ namespace DentistManager.DentistUI.Admin
             if (e.Column.FieldName == "Total Required")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllTeratmentByPatient(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID,ClinicID);
+                e.Value = paymentRepository.GetAllTeratmentByPatient(DoctorID, ClinicID, int.Parse(e.GetListSourceFieldValue("PatientID").ToString()));
 
             }
             else if (e.Column.FieldName == "Total Payed")
             {
                 PaymentRepository paymentRepository = new PaymentRepository();
-                e.Value = paymentRepository.GetAllPaymentReceitByPatient(int.Parse(e.GetListSourceFieldValue("PatientID").ToString()), DoctorID, ClinicID);
+                e.Value = paymentRepository.GetAllPaymentReceitByPatient(DoctorID, ClinicID, int.Parse(e.GetListSourceFieldValue("PatientID").ToString()));
             }
             else if (e.Column.FieldName == "Total Deserved")
             {
