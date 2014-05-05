@@ -371,6 +371,7 @@
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientManagementController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientPaymentController.cs" />
+    <Compile Include="Areas\DoctorDashboard\Controllers\PatientPaymentReceiptController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientSearchController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientStatusController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PrescriptionController.cs" />
@@ -939,6 +940,11 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientManagement\PatientCreate.cshtml" />
     <Content Include="Areas\SecretaryDashboard\Views\PatientStatus\PatientStatusList.cshtml" />
     <Content Include="Appoiment\SecretaryMaster.Master" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptCreate.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptDetails.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptList.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptDelete.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\PatientPayment\DoctorClinecPaymnet.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <Content Include="Main.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1004,9 +1010,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

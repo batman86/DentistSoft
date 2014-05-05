@@ -70,6 +70,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             PrescriptionPrintViewModel prescription = prescriptionRepository.getPrescriptionDetailsForPrint(prescriptionID);
             if (prescription == null)
                 return HttpNotFound();
+            prescription.AppointmentDate = DateTime.Now;
             return View(prescription);
         }
 

@@ -208,6 +208,7 @@
     <Compile Include="ViewModel\CustomMaterialPresentViewModel.cs" />
     <Compile Include="ViewModel\CustomMaterialViewModel.cs" />
     <Compile Include="ViewModel\DoctorMiniInfoViewModel.cs" />
+    <Compile Include="ViewModel\DoctorPatientBillInfoWrap.cs" />
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
     <Compile Include="ViewModel\ImageCreateViewModel.cs" />
     <Compile Include="ViewModel\ImageListWrapViewModel.cs" />

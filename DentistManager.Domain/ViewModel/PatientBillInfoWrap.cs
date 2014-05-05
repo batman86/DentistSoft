@@ -23,5 +23,8 @@ namespace DentistManager.Domain.ViewModel
         public decimal? PatientPayment { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? Remain { get; set; }
+
+        public string patientName { get; set; }
+        public int patientID { get; set; }
     }
 }

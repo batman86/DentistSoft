@@ -1,0 +1,138 @@
+﻿@model  DentistManager.Domain.ViewModel.DoctorPatientBillInfoWrap
+@{
+    ViewBag.Title = "Doctor Clinec Paymnet";
+}
+
+<h2>Doctor Clinec Paymnet</h2>
+
+<div>
+    <h4>Patient Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            Treatment
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.treatmentCost)
+        </dd>
+
+        <dt>
+            Opperation
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.opperationCost)
+        </dd>
+
+        <dt>
+            Material
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.materialCost)
+        </dd>
+
+        <dt>
+            Custom Matrial
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.customMatrialCost)
+        </dd>
+
+        <dt>
+            Total Cost
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.TotalCost)
+        </dd>
+        <hr />
+        <dt>
+            Patient Payment
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.PatientPayment)
+        </dd>
+        <hr />
+        <dt>
+            Remain
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPatientPaymentInfo.Remain)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+
+
+<table class="pure-table pure-table-bordered">
+    <thead>
+        <tr>
+            <th>
+                PatientID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                treatmentCost
+            </th>
+            <th>
+                opperationCost
+            </th>
+            <th>
+                materialCost
+            </th>
+            <th>
+                customMatrialCost
+            </th>
+            <th>
+                TotalCost
+            </th>
+            <th>
+                PatientPayment
+            </th>
+            <th>
+                Remain
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.patientPaymentInfoList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patientID)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.patientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.treatmentCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.opperationCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.materialCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customMatrialCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientPayment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remain)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

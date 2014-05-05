@@ -339,6 +339,12 @@ table#TreatmentList td.treatmentTableSmall{
    display:block;
     float:right;
 }
+#PrescPrint #prescHead h1{
+    font-size:40px;
+}
+#PrescPrint #prescHead h2{
+    font-size:30px;
+}
 #PrescPrint #prescPatientInfo{
      width:80%;
      display:block;

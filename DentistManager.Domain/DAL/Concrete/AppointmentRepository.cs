@@ -166,6 +166,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 return appointmentViewModelFull;
             }
         }
+
         public List<AppointmentStatusViewModel> getDoctorWeeklyMeeting(int ClinecID, int DoctorID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
