@@ -33,14 +33,12 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         [NonAction]
         public int getCurrentPatientID()
         {
-            var aa = User.Identity.GetUserId();
             return int.Parse(sessionStateManger.getDoctorActivePatinet(User.Identity.GetUserId()));
         }
 
         [NonAction]
         public int getUserCurrentClinecID()
         {
-            var aa = sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
             return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
         }
         [NonAction]

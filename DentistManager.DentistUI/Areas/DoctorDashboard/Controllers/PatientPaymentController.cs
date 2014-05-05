@@ -82,7 +82,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 
                 foreach (PatientMiniData item in patientList)
                 {
-                    billInfo = patientPaymentBL.patientTotalCost(item.PatientID, clinecID);
+                    billInfo = patientPaymentBL.patientTotalCost(item.PatientID, clinecID,from,to);
                     billInfo.patientID = item.PatientID;
                     billInfo.patientName = item.Name;
                     patientBillInfoWrap.Add(billInfo);

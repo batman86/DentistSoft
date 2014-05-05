@@ -10,6 +10,7 @@ namespace DentistManager.Domain.DAL.Abstract
     public interface IPaymentReceiptRerpository
     {
         decimal getPatientTotalReceiptPayment(int patientID, int clinecID);
+        decimal getPatientTotalReceiptPayment(int patientID, int clinecID,DateTime from,DateTime to);
 
         bool addNewPatientReceipt(PaymentReceiptViewModel paymentRecieptViewModel);
         bool deletePatientReceipt(int ReceiptID);

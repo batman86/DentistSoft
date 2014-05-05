@@ -16,5 +16,6 @@ namespace DentistManager.Domain.ViewModel
         public string Description { get; set; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
+        public int clinecid { get; set; }
     }
 }

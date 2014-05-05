@@ -22,6 +22,16 @@ namespace DentistManager.Domain.DAL.Concrete
             }
         }
 
+        public decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID, DateTime from, DateTime to)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                decimal? total = 0;
+
+                total = ctx.CustomMaterials.Where(x => x.PatientID == patientID && x.ClinicID == clinecID && x.RequestDate >= from && x.RequestDate <= to).Select(x => x.Cost).Sum();
+                return total;
+            }
+        }
 
 
 
@@ -38,6 +48,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 customMatrailEntity.Name = customMaterialViewModel.Name;
                 customMatrailEntity.Description = customMaterialViewModel.Description;
                 customMatrailEntity.Cost = customMaterialViewModel.Cost;
+                customMatrailEntity.ClinicID = customMaterialViewModel.clinecid;
 
                 ctx.CustomMaterials.Add(customMatrailEntity);
                 count = ctx.SaveChanges();
@@ -124,5 +135,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 return customMatrailViewModel;
             }
         }
+
+
     }
 }
