@@ -28,7 +28,20 @@ namespace DentistManager.Domain.DAL.Concrete
                 return total;
             }
         }
+        public decimal getPatientTotalReceiptPayment(int patientID, int clinecID, DateTime from, DateTime to)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                decimal total = 0;
+                int count = 0;
+                count = ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID == clinecID && x.Date >= from && x.Date <= to).Count();
 
+                if (count > 0)
+                    total = ctx.PaymentReceipts.Where(x => x.PatientID == patientID && x.ClinicID == clinecID && x.Date >= from && x.Date <= to).Select(x => x.Amount).Sum();
+
+                return total;
+            }
+        }
 
         public bool addNewPatientReceipt(PaymentReceiptViewModel paymentRecieptViewModel)
         {
@@ -100,5 +113,8 @@ namespace DentistManager.Domain.DAL.Concrete
                 return reciptpresentViewModel;
             }
         }
+
+
+
     }
 }

@@ -21,6 +21,16 @@ namespace DentistManager.Domain.DAL.Concrete
             }
         }
 
+        public IEnumerable<Treatment> getPatientTreatmentList(int patientID, int clinecID, DateTime from, DateTime to)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                IEnumerable<Treatment> treatmentList = ctx.Treatments.Include("MaterialTreatments").Where(x => x.PatientID == patientID && x.ClinicID == clinecID && x.Appointment.Start_date >= from && x.Appointment.Start_date <= to).ToList();
+                return treatmentList;
+            }
+        }
+
+
         public IEnumerable<TreatmentPresntViewModel> getPatientPresntTreatmentList(int patientID)
         {
             using (Entities.Entities ctx = new Entities.Entities())
@@ -123,5 +133,8 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return count > 0 ? true : false;
         }
+
+
+
     }
 }

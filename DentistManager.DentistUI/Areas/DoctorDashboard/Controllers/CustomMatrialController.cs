@@ -37,6 +37,11 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             return doctorRepository.getDoctorIDByUserID(User.Identity.GetUserId());
         }
 
+        [NonAction]
+        public int getUserCurrentClinecID()
+        {
+            return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
+        }
         //
         // GET: /DoctorDashboard/CustomMatrial/
         public ActionResult Index()
@@ -118,6 +123,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                     customMaterialViewModel.RequestDate = DateTime.Now;
                     customMaterialViewModel.PatientID = getCurrentPatientID();
                     customMaterialViewModel.DoctorID = getDoctorIDbyUserID();
+                    customMaterialViewModel.clinecid = getUserCurrentClinecID();
 
                     bool check = customMatrialRepository.addNewCustomMaterial(customMaterialViewModel);
                 }

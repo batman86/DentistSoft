@@ -10,7 +10,7 @@ namespace DentistManager.Domain.DAL.Abstract
     public interface ICustomMatrialRepository
     {
         decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID);
-
+        decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID,DateTime from,DateTime to);
 
 
         bool addNewCustomMaterial(CustomMaterialViewModel customMaterialViewModel);
