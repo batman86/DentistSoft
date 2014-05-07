@@ -103,18 +103,15 @@ namespace DentistManager.Domain.DAL.Concrete
         {
             using (Entities.Entities ctx = new Entities.Entities())
             {
-                // in where change payment ID to patient id
                 var paymentReciptIQ=ctx.PaymentReceipts;
-                var secertaryIQ= ctx.Secretaries;
+                var aspusersIQ = ctx.AspNetUsers;
                 IEnumerable<PaymentReceiptPresentViewModel> reciptpresentViewModel = (from p in paymentReciptIQ
-                                                                         join s in secertaryIQ on p.UserID equals s.UserID
-                                                                         where p.PatientID == patientID && p.ClinicID == clinecID
-                                                                         select new PaymentReceiptPresentViewModel { receiptID =p.ReceiptID, receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.Name }).ToList();
+                                                                                      join s in aspusersIQ on p.UserID equals s.Id
+                                                                         where p.PatientID == patientID && p.ClinicID == clinecID                                                                      
+                                                                         select new PaymentReceiptPresentViewModel { receiptID =p.ReceiptID, receiptAmount = p.Amount, ReviceDate = p.Date, reciverName = s.UserName }).ToList();
                 return reciptpresentViewModel;
             }
         }
-
-
 
     }
 }
