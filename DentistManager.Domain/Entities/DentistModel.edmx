@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DentistModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -98,6 +98,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ClinicID" Type="int" />
+          <Property Name="Payed" Type="bit" />
         </EntityType>
         <EntityType Name="Doctors">
           <Key>
@@ -1145,8 +1146,7 @@
             <End Role="suppcontact" EntitySet="suppcontact" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DentistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1260,6 +1260,7 @@
           <Property Name="ClinicID" Type="Int32" />
           <NavigationProperty Name="Clinic" Relationship="Self.FK_CustomMaterial_Clinics" FromRole="CustomMaterial" ToRole="Clinics" />
           <NavigationProperty Name="Doctor" Relationship="Self.FK_CustomMaterial_Doctors" FromRole="CustomMaterial" ToRole="Doctors" />
+          <Property Name="Payed" Type="Boolean" />
         </EntityType>
         <EntityType Name="Doctor">
           <Key>
@@ -2391,6 +2392,7 @@
           <EntitySetMapping Name="CustomMaterials">
             <EntityTypeMapping TypeName="DentistModel.CustomMaterial">
               <MappingFragment StoreEntitySet="CustomMaterial">
+                <ScalarProperty Name="Payed" ColumnName="Payed" />
                 <ScalarProperty Name="CustomMaterialID" ColumnName="CustomMaterialID" />
                 <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
                 <ScalarProperty Name="ReciveDate" ColumnName="ReciveDate" />

@@ -56,6 +56,7 @@ namespace DentistManager.DentistUI.Controllers
         {
             get
             {
+                
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
@@ -98,48 +99,78 @@ namespace DentistManager.DentistUI.Controllers
 
                         if (!(bool)inuse.Active)
                         {
-                            user = null;
+                            //user = null;
+                            ModelState.AddModelError("", "Invalid username or password.");
+                            AuthenticationManager.SignOut();
                         }
                         //code for active for user
+                        else
+                        {
+                            await SignInAsync(user, false);
+                            IEnumerable<IdentityUserRole> role = user.Roles;
+                            IdentityRole myrole = new IdentityRole();
+                            foreach (var item in role)
+                            {
 
+                                myrole = item.Role;
+                                break;
+
+                            }
+                            
+                            //admin
+                            if (myrole.Id == "1")
+                            {
+                                if (!(bool)ctx.Doctors.Where(d=>d.UserID == user.Id).FirstOrDefault().Active)
+                                {
+                                    ModelState.AddModelError("", "User Is Not Active...");
+                                    AuthenticationManager.SignOut();
+                                }
+                                else
+                                {
+                                    return RedirectToLocal("~/Admin/Doctors.aspx");
+                                }
+                               
+                            }
+                            //Doctor
+                            else if (myrole.Id == "2")
+                            {
+                                if (!(bool)ctx.Doctors.Where(d => d.UserID == user.Id).FirstOrDefault().Active)
+                                {
+                                    ModelState.AddModelError("", "User Is Not Active...");
+                                    AuthenticationManager.SignOut();
+                                }
+                                else
+                                {
+                                    return RedirectToAction("patientList", "PatientManagement", new { area = "DoctorDashboard" });
+                                }
+                               
+                            }
+                            // secartary
+                            else if (myrole.Id == "3")
+                            {
+                                if (!(bool)ctx.Secretaries.Where(d => d.UserID == user.Id).FirstOrDefault().Active)
+                                {
+                                    ModelState.AddModelError("", "User Is Not Active...");
+                                    AuthenticationManager.SignOut();
+                                }
+                                else
+                                {
+                                    return RedirectToAction("patientList", "PatientManagement", new { area = "SecretaryDashboard" });
+
+                                }
+                                
+                            }
+                            //else
+                            //{
+                            //    Redirect("");
+                            //}
+                            //return RedirectToLocal(returnUrl);
+                        }
+                        
 
                     }
                 } 
               
-                if (user != null)
-                {
-                    await SignInAsync(user, false);
-                    IEnumerable<IdentityUserRole> role = user.Roles;
-                    IdentityRole myrole = new IdentityRole() ;
-                    foreach (var item in role)
-	               {
-
-                        myrole = item.Role;
-                       break;
-                    
-                    }
-                    //admin
-                    if (myrole.Id == "1")
-                    {
-                        return RedirectToLocal("~/Admin/Doctors.aspx");
-                    }
-                    //Doctor
-                    else if (myrole.Id=="2")
-                    {
-                       return RedirectToAction("patientList","PatientManagement",new { area = "DoctorDashboard" });
-                    }
-                   // secartary
-                    else if (myrole.Id=="3")
-                    {
-
-                        return RedirectToAction("patientList", "PatientManagement", new { area = "SecretaryDashboard" });
-                    }
-                    else
-                    {
-                        Redirect("");
-                    }
-                    return RedirectToLocal(returnUrl);
-                }
                 else
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
