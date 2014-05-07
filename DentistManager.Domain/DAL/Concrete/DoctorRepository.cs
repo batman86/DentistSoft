@@ -103,5 +103,16 @@ namespace DentistManager.Domain.DAL.Concrete
             }
             return DoctorID;
         }
+
+        public string getUserNameByUserID(string UserID)
+        {
+            string userName = string.Empty;
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                userName = ctx.AspNetUsers.Where(u => u.Id == UserID).FirstOrDefault().UserName;
+            }
+
+            return userName;
+        }
     }
 }

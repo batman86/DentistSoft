@@ -12,6 +12,7 @@ using DentistManager.Domain.Entities;
 using DentistManager.Domain.DAL.Concrete;
 using DentistManager.DentistUI.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.Security;
 namespace DentistManager.DentistUI.Admin
 {
     public partial class Doctors : System.Web.UI.Page
@@ -44,6 +45,7 @@ namespace DentistManager.DentistUI.Admin
             identiyRole.UserId = user.Id;
             user.Roles.Add(identiyRole);
             IdentityResult result = manager.Create(user, Password.Text);
+            
             if (result.Succeeded)
             {
                   var doc = new Doctor() { DoctorID = int.Parse(ViewState["DoctorID"].ToString()), UserID = identiyRole.UserId };
@@ -95,5 +97,46 @@ namespace DentistManager.DentistUI.Admin
            
           
         }
+
+        protected void btnChangePasswordpopup_Click(object sender, EventArgs e)
+        {
+            string key = ASPxGridView.GetDetailRowKeyValue((Control)sender).ToString();
+            ViewState["DoctorID"] = key;
+            DoctorRepository doctorRepository = new DoctorRepository();
+            string UserID = doctorRepository.GetUserIDByDoctorID(int.Parse(key));
+            ViewState["UserID"] = UserID;
+            if (UserID!= null)
+            {
+                lblUserName.Text = doctorRepository.getUserNameByUserID(UserID);
+                ChangePSpopup.Left = 400;
+                ChangePSpopup.Top = 600;
+                ChangePSpopup.ResizingMode = DevExpress.Web.ASPxClasses.ResizingMode.Live;
+                ChangePSpopup.ShowOnPageLoad = true;
+
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('This Doctor Don't Have An Account ');", true);
+            }
+        }
+
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            //MembershipUser user = Membership.GetUser(lblUserName.Text);
+            UserManager user = new UserManager();
+            string userid = ViewState["UserID"].ToString();
+            user.RemovePassword(userid);
+            IdentityResult result = user.AddPassword(userid, tbPassword.Text);
+           if(result.Succeeded)
+           {
+               ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Password Changed ');window.location ='Doctors.aspx';", true);
+           }
+           else
+           {
+               ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Password Changed Faild ');", true);
+           }
+        }
+
+        
     }
 }

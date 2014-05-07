@@ -22,7 +22,7 @@
       <asp:ScriptManager ID="sm" runat="server" />
       
     <dx:ASPxPopupControl ID="popup" runat="server" ClientInstanceName="popup" RenderMode="Lightweight"
-         Height="251px" Theme="Office2003Silver" Width="328px" AllowResize="True"
+         Height="251px" Theme="RedWine" Width="328px" AllowResize="True"
          PopupHorizontalAlign ="Center" AllowDragging="True" >
         <ContentCollection>
             <dx:PopupControlContentControl>
@@ -93,6 +93,72 @@
     </dx:ASPxPopupControl>
 
     <table class="auto-style1">
+        <tr>
+            <td class="auto-style2" colspan="2">
+      
+    <dx:ASPxPopupControl ID="ChangePSpopup" runat="server" ClientInstanceName="popup" RenderMode="Lightweight"
+         Height="203px" Theme="RedWine" Width="328px" AllowResize="True"
+         PopupHorizontalAlign ="Center" AllowDragging="True" >
+        <ContentCollection>
+            <dx:PopupControlContentControl>
+                <asp:Panel runat="server">  
+        <table style="width:231px">
+                                    <tr>
+                                        <td align="center" colspan="2" style="font-weight: 700; font-style: italic">Change Password</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            UserName:</td>
+                                        <td>
+                                            &nbsp;&nbsp;
+                                            <dx:ASPxLabel ID="lblUserName" runat="server">
+                                            </dx:ASPxLabel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            Password:</td>
+                                        <td class="auto-style1">
+                                            <dx:ASPxTextBox ID="tbPassword" runat="server" Password="True" Width="170px" Theme="Office2010Silver">
+                                                <ValidationSettings CausesValidation="True" SetFocusOnError="True">
+                                                    <RequiredField IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style2">
+                                            &nbsp;</td>
+                                        <td>
+                                           
+                                            <dx:ASPxButton ID="btnChangePassword0" runat="server" OnClick="btnChangePassword_Click" Text="Change Password" Theme="RedWine" ValidationGroup="ChangeUserPasswordValidationGroup">
+                                            </dx:ASPxButton>
+                                            
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="auto-style3">
+                                            </td>
+                                        <td style="text-align: right" class="auto-style1">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="2">
+                                            <asp:Literal ID="ChangePasswordErrorMessage" runat="server"></asp:Literal>
+                                        </td>
+                                    </tr>
+                                    </table>
+        </asp:Panel> 
+            </dx:PopupControlContentControl>     
+        </ContentCollection>
+           
+    </dx:ASPxPopupControl>
+
+            </td>
+            <td>&nbsp;</td>
+        </tr>
         <tr>
             <td class="auto-style2" colspan="2">
                 <div style="width: 100%; height: 100%; position: relative">
@@ -203,6 +269,13 @@
                                 </ValidationSettings>
                             </PropertiesComboBox>
                         </dx:GridViewDataComboBoxColumn>
+                        <dx:GridViewDataTextColumn Caption="Change Password" VisibleIndex="14">
+                            <EditFormSettings Visible="False" />
+                            <DataItemTemplate>
+                                <dx:ASPxButton ID="btnChangePasswordpopup" runat="server" OnClick="btnChangePasswordpopup_Click" Text="Change Password">
+                                </dx:ASPxButton>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFilterRow="True" />
                     <SettingsDetail ShowDetailRow="True" />

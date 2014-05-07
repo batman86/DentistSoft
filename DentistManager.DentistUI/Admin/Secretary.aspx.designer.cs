@@ -103,6 +103,51 @@ namespace DentistManager.DentistUI.Admin {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
+        /// ChangePSpopup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ChangePSpopup;
+        
+        /// <summary>
+        /// lblUserName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblUserName;
+        
+        /// <summary>
+        /// tbPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox tbPassword;
+        
+        /// <summary>
+        /// btnChangePassword0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnChangePassword0;
+        
+        /// <summary>
+        /// ChangePasswordErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ChangePasswordErrorMessage;
+        
+        /// <summary>
         /// gvxSecretary control.
         /// </summary>
         /// <remarks>
