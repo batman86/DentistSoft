@@ -55,6 +55,7 @@ namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
             if (patientReceiptList == null)
                 return HttpNotFound();
 
+
             return View(patientReceiptList);
         }
 

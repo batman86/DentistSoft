@@ -37,6 +37,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
         {
             return sessionStateManger.getClinecIDForCurrentDoctor(User.Identity.GetUserId());
         }
+
         [NonAction]
         public int getDoctorIDbyUserID()
         {
@@ -89,7 +90,6 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
                 }
 
                 patientBillInfoWrap.TrimExcess();
-
 
                 billInfo = new PatientBillInfoWrap();
 
