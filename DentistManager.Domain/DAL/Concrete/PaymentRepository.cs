@@ -19,7 +19,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
            using (Entities.Entities ctx = new Entities.Entities())
            {
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID).ToList().Select(c => c.Cost).Sum();
                IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Where(t => t.ClinicID == clinicID).ToList();
                treatmentCost = patientTreatmentList.Select(t => t.TeratmentCost).Sum();
                opperationCost = patientTreatmentList.Select(t=>t.OpperationCost).Sum();
@@ -50,7 +50,7 @@ namespace DentistManager.Domain.DAL.Concrete
            using (Entities.Entities ctx = new Entities.Entities())
            {
              
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID && c.RequestDate >= from && c.RequestDate <= to ).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID && c.RequestDate >= from && c.RequestDate <= to ).ToList().Select(c => c.Cost).Sum();
               IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Join
                   (ctx.Appointments,
                     tr => tr.AppointmentID,
@@ -109,7 +109,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
            using (Entities.Entities ctx = new Entities.Entities())
            {
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.DoctorID == DoctorID).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.DoctorID == DoctorID).ToList().Select(c => c.Cost).Sum();
                IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Where(t => t.ClinicID == ClinicID && t.DoctorID == DoctorID).ToList();
                treatmentCost = patientTreatmentList.Select(t => t.TeratmentCost).Sum();
                opperationCost = patientTreatmentList.Select(t => t.OpperationCost).Sum();
@@ -139,7 +139,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
            using (Entities.Entities ctx = new Entities.Entities())
            {
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID &&c.DoctorID == DoctorID  && c.RequestDate >= from && c.RequestDate <= to).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == clinicID &&c.DoctorID == DoctorID  && c.RequestDate >= from && c.RequestDate <= to).ToList().Select(c => c.Cost).Sum();
                IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Join
                    (ctx.Appointments,
                      tr => tr.AppointmentID,
@@ -203,7 +203,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
            using (Entities.Entities ctx = new Entities.Entities())
            {
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.DoctorID == DoctorID && c.PatientID == PatientID).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.DoctorID == DoctorID && c.PatientID == PatientID).ToList().Select(c => c.Cost).Sum();
                IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Where(t => t.ClinicID == ClinicID && t.DoctorID == DoctorID && t.PatientID==PatientID).ToList();
                treatmentCost = patientTreatmentList.Select(t => t.TeratmentCost).Sum();
                opperationCost = patientTreatmentList.Select(t => t.OpperationCost).Sum();
@@ -233,7 +233,7 @@ namespace DentistManager.Domain.DAL.Concrete
 
            using (Entities.Entities ctx = new Entities.Entities())
            {
-               customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.PatientID == PatientID && c.DoctorID == DoctorID && c.RequestDate >= from && c.RequestDate <= to).ToList().Select(c => c.Cost).Sum();
+               //customMatrialCost = ctx.CustomMaterials.Where(c => c.ClinicID == ClinicID && c.PatientID == PatientID && c.DoctorID == DoctorID && c.RequestDate >= from && c.RequestDate <= to).ToList().Select(c => c.Cost).Sum();
                IEnumerable<Treatment> patientTreatmentList = ctx.Treatments.Join
                    (ctx.Appointments,
                      tr => tr.AppointmentID,
