@@ -181,8 +181,8 @@ namespace DentistManager.DentistUI.Controllers
             return View(model);
         }
 
-        //
-        ////// GET: /Account/Register
+        ////
+        //////// GET: /Account/Register
         //[AllowAnonymous]
         //public ActionResult Register()
         //{

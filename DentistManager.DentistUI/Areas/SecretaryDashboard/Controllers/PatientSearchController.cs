@@ -12,7 +12,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.SecretaryDashboard.Controllers
 {
-    [Authorize(Roles = "Secretary")]
+    //[Authorize(Roles = "Secretary")]
     public class PatientSearchController : Controller
     {
 

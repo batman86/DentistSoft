@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/28/2014 14:45:41
+-- Date Created: 05/08/2014 16:30:19
 -- Generated from EDMX file: E:\MVC\projects\DentistSoft\DentistManager.Domain\Entities\DentistModel.edmx
 -- --------------------------------------------------
 
@@ -26,14 +26,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Appointments_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Appointments] DROP CONSTRAINT [FK_Appointments_Patient];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Images_Appointments]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_Images_Appointments];
+IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomMaterial] DROP CONSTRAINT [FK_CustomMaterial_Clinics];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Appointments]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Appointments];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Treatment_Appointments]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Treatments] DROP CONSTRAINT [FK_Treatment_Appointments];
+IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CustomMaterial] DROP CONSTRAINT [FK_CustomMaterial_Doctors];
 GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id];
@@ -41,50 +38,20 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId];
 GO
+IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Doctors_AspNetUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Doctors] DROP CONSTRAINT [FK_Doctors_AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_AspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentReceipts] DROP CONSTRAINT [FK_PaymentReceipt_AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Secretary_AspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Secretaries] DROP CONSTRAINT [FK_Secretary_AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomMaterials] DROP CONSTRAINT [FK_CustomMaterial_Clinics];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Doctors_Clinics]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Doctors] DROP CONSTRAINT [FK_Doctors_Clinics];
 GO
-IF OBJECT_ID(N'[dbo].[FK_Patient_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patient_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentReceipts] DROP CONSTRAINT [FK_PaymentReceipt_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Secretaries_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Secretaries] DROP CONSTRAINT [FK_Secretaries_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Storages_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Storages] DROP CONSTRAINT [FK_Storages_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Treatment_Clinics]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Treatments] DROP CONSTRAINT [FK_Treatment_Clinics];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CustomMaterial_Doctors]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomMaterials] DROP CONSTRAINT [FK_CustomMaterial_Doctors];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Patients_Doctors]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patients_Doctors];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Doctors]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentReceipts] DROP CONSTRAINT [FK_PaymentReceipt_Doctors];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Doctors]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Doctors];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Treatment_Doctors]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Treatments] DROP CONSTRAINT [FK_Treatment_Doctors];
+IF OBJECT_ID(N'[dbo].[FK_Images_Appointments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_Images_Appointments];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Images_ImageCategory]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_Images_ImageCategory];
@@ -93,58 +60,10 @@ IF OBJECT_ID(N'[dbo].[FK_Images_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_Images_Patient];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Material]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MaterialTreatments] DROP CONSTRAINT [FK_MaterialTreatment_Material];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_Material]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_Material];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RecivingItems_Material]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_Material];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Warehouse_Material]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Warehouses] DROP CONSTRAINT [FK_Warehouse_Material];
+    ALTER TABLE [dbo].[MaterialTreatment] DROP CONSTRAINT [FK_MaterialTreatment_Material];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MaterialTreatment_Treatment]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MaterialTreatments] DROP CONSTRAINT [FK_MaterialTreatment_Treatment];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Medicine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Medicine];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_opperation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_opperation];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Treatment_opperation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Treatments] DROP CONSTRAINT [FK_Treatment_opperation];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PatientHistory_Patient]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatientHistories] DROP CONSTRAINT [FK_PatientHistory_Patient];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Patients]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PaymentReceipts] DROP CONSTRAINT [FK_PaymentReceipt_Patients];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Patient]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Patient];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RecivingItems_Storages]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_Storages];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RecivingItems_suppliers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_suppliers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SessionValues_SessionsStats]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SessionValues] DROP CONSTRAINT [FK_SessionValues_SessionsStats];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Warehouse_Storages]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Warehouses] DROP CONSTRAINT [FK_Warehouse_Storages];
-GO
-IF OBJECT_ID(N'[dbo].[FK_suppcontact_ibfk_1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[suppcontacts] DROP CONSTRAINT [FK_suppcontact_ibfk_1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRoles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetRoles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUsers];
+    ALTER TABLE [dbo].[MaterialTreatment] DROP CONSTRAINT [FK_MaterialTreatment_Treatment];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MedicinePrescription_Medicine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedicinePrescription] DROP CONSTRAINT [FK_MedicinePrescription_Medicine];
@@ -152,13 +71,94 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MedicinePrescription_Prescriptions]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedicinePrescription] DROP CONSTRAINT [FK_MedicinePrescription_Prescriptions];
 GO
+IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_Material]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_Material];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OpperationMaterials_opperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OpperationMaterials] DROP CONSTRAINT [FK_OpperationMaterials_opperation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Patient_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patient_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatientHistory_Patient]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatientHistory] DROP CONSTRAINT [FK_PatientHistory_Patient];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Patients_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patients_Doctors];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_AspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Doctors];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PaymentReceipt_Patients]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PaymentReceipt] DROP CONSTRAINT [FK_PaymentReceipt_Patients];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Appointments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Appointments];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Doctors];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Medicine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Medicine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Prescriptions_Patient]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prescriptions] DROP CONSTRAINT [FK_Prescriptions_Patient];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RecivingItems_Material]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_Material];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RecivingItems_Storages]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_Storages];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RecivingItems_suppliers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RecivingItems] DROP CONSTRAINT [FK_RecivingItems_suppliers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Secretaries_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Secretaries] DROP CONSTRAINT [FK_Secretaries_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Secretary_AspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Secretaries] DROP CONSTRAINT [FK_Secretary_AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SessionValues_SessionsStats]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SessionValues] DROP CONSTRAINT [FK_SessionValues_SessionsStats];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Storages_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Storages] DROP CONSTRAINT [FK_Storages_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Treatment_Appointments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Appointments];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Treatment_Clinics]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Clinics];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Treatment_Doctors]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_Doctors];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Treatment_opperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Treatment] DROP CONSTRAINT [FK_Treatment_opperation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Warehouse_Material]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Warehouse] DROP CONSTRAINT [FK_Warehouse_Material];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Warehouse_Storages]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Warehouse] DROP CONSTRAINT [FK_Warehouse_Storages];
+GO
+IF OBJECT_ID(N'[dbo].[FK_suppcontact_ibfk_1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[suppcontact] DROP CONSTRAINT [FK_suppcontact_ibfk_1];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[C__MigrationHistory];
+IF OBJECT_ID(N'[dbo].[__MigrationHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[__MigrationHistory];
 GO
 IF OBJECT_ID(N'[dbo].[Appointments]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Appointments];
@@ -172,47 +172,53 @@ GO
 IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUserLogins];
 GO
+IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserRoles];
+GO
 IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUsers];
 GO
 IF OBJECT_ID(N'[dbo].[Clinics]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Clinics];
 GO
-IF OBJECT_ID(N'[dbo].[CustomMaterials]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CustomMaterials];
+IF OBJECT_ID(N'[dbo].[CustomMaterial]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CustomMaterial];
 GO
 IF OBJECT_ID(N'[dbo].[Doctors]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Doctors];
 GO
-IF OBJECT_ID(N'[dbo].[ImageCategories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ImageCategories];
+IF OBJECT_ID(N'[dbo].[ImageCategory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ImageCategory];
 GO
 IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Images];
 GO
-IF OBJECT_ID(N'[dbo].[Materials]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Materials];
+IF OBJECT_ID(N'[dbo].[Material]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Material];
 GO
-IF OBJECT_ID(N'[dbo].[MaterialTreatments]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MaterialTreatments];
+IF OBJECT_ID(N'[dbo].[MaterialTreatment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MaterialTreatment];
 GO
-IF OBJECT_ID(N'[dbo].[Medicines]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Medicines];
+IF OBJECT_ID(N'[dbo].[Medicine]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Medicine];
 GO
-IF OBJECT_ID(N'[dbo].[opperations]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[opperations];
+IF OBJECT_ID(N'[dbo].[MedicinePrescription]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MedicinePrescription];
+GO
+IF OBJECT_ID(N'[dbo].[opperation]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[opperation];
 GO
 IF OBJECT_ID(N'[dbo].[OpperationMaterials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[OpperationMaterials];
 GO
-IF OBJECT_ID(N'[dbo].[PatientHistories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PatientHistories];
+IF OBJECT_ID(N'[dbo].[PatientHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PatientHistory];
 GO
 IF OBJECT_ID(N'[dbo].[Patients]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Patients];
 GO
-IF OBJECT_ID(N'[dbo].[PaymentReceipts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PaymentReceipts];
+IF OBJECT_ID(N'[dbo].[PaymentReceipt]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PaymentReceipt];
 GO
 IF OBJECT_ID(N'[dbo].[Prescriptions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Prescriptions];
@@ -232,8 +238,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Storages]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Storages];
 GO
-IF OBJECT_ID(N'[dbo].[suppcontacts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[suppcontacts];
+IF OBJECT_ID(N'[dbo].[suppcontact]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[suppcontact];
 GO
 IF OBJECT_ID(N'[dbo].[suppliers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[suppliers];
@@ -241,17 +247,11 @@ GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
 GO
-IF OBJECT_ID(N'[dbo].[Treatments]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Treatments];
+IF OBJECT_ID(N'[dbo].[Treatment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Treatment];
 GO
-IF OBJECT_ID(N'[dbo].[Warehouses]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Warehouses];
-GO
-IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserRoles];
-GO
-IF OBJECT_ID(N'[dbo].[MedicinePrescription]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MedicinePrescription];
+IF OBJECT_ID(N'[dbo].[Warehouse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Warehouse];
 GO
 
 -- --------------------------------------------------
@@ -337,7 +337,8 @@ CREATE TABLE [dbo].[CustomMaterials] (
     [DoctorID] int  NOT NULL,
     [Description] nvarchar(200)  NULL,
     [Name] nvarchar(50)  NOT NULL,
-    [ClinicID] int  NULL
+    [ClinicID] int  NULL,
+    [Payed] bit  NULL
 );
 GO
 

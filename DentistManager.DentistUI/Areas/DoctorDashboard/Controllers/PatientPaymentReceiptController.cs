@@ -10,7 +10,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    [Authorize(Roles = "Doctor")]
+    //[Authorize(Roles = "Doctor")]
     public class PatientPaymentReceiptController : Controller
     {
         //
@@ -112,7 +112,7 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             }
         }
 
-        public ActionResult patientReceiptDelete(int receiptID)
+        public ActionResult patientReceiptDelete(int receiptID=0)
         {
             PaymentReceiptPresentViewModel receipt = paymentReceiptRerpository.getPaymentReceiptDetails(receiptID);
             if (receipt == null)

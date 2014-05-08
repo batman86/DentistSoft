@@ -10,7 +10,7 @@ using DentistManager.Domain.ViewModel;
 
 namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 {
-    [Authorize(Roles = "Doctor")]
+    //[Authorize(Roles = "Doctor")]
     public class CustomMatrialController : Controller
     {
         //
@@ -58,12 +58,20 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
 
             if(FilterType=="1")
                 customMatrialList = customMatrialRepository.getCustomMaterialList(DoctorID);
-            else
+            else if(FilterType=="2")
             {
-              int patientID=  getCurrentPatientID();
-              customMatrialList = customMatrialRepository.getCustomMaterialList(DoctorID, patientID);
+                customMatrialList = customMatrialRepository.getOldCustomMaterialList(DoctorID);
             }
-
+            else if (FilterType == "3")
+            {
+                int patientID = getCurrentPatientID();
+                customMatrialList = customMatrialRepository.getCustomMaterialList(DoctorID, patientID);
+            }
+            else 
+            {
+                int patientID = getCurrentPatientID();
+                customMatrialList = customMatrialRepository.getOldCustomMaterialList(DoctorID, patientID);
+            }
             if (customMatrialList == null)
                 return HttpNotFound();
             ViewBag.FilterType = FilterType;
@@ -80,10 +88,19 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             sessionStateManger.setDoctorCustomMatrailFilter(User.Identity.GetUserId(), FilterType);
             if (FilterType == "1")
                 customMatrialList = customMatrialRepository.getCustomMaterialList(DoctorID);
-            else
+            else if (FilterType == "2")
+            {
+                customMatrialList = customMatrialRepository.getOldCustomMaterialList(DoctorID);
+            }
+            else if (FilterType == "3")
             {
                 int patientID = getCurrentPatientID();
                 customMatrialList = customMatrialRepository.getCustomMaterialList(DoctorID, patientID);
+            }
+            else 
+            {
+                int patientID = getCurrentPatientID();
+                customMatrialList = customMatrialRepository.getOldCustomMaterialList(DoctorID, patientID);
             }
 
             if (customMatrialList == null)
@@ -197,6 +214,20 @@ namespace DentistManager.DentistUI.Areas.DoctorDashboard.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult getCustomMatrailPayment()
+        {
+            int doctorID = getDoctorIDbyUserID();
+            int clinicID = getUserCurrentClinecID();
+
+            CustomMatrailPaymentViewModel customMatrailPaymentViewModel = new CustomMatrailPaymentViewModel();
+
+            customMatrailPaymentViewModel.Payed = customMatrialRepository.getDoctorCustomMatrailCostTotalPayed(clinicID, doctorID);
+            customMatrailPaymentViewModel.unPayed = customMatrialRepository.getDoctorCustomMatrailCostTotalUnPayed(clinicID, doctorID);
+
+
+            return View(customMatrailPaymentViewModel);
         }
 	}
 }

@@ -156,5 +156,21 @@ namespace DentistManager.DentistUI.HtmlHelpers
 
             return MvcHtmlString.Create(result.ToString());
         }
+
+        public static MvcHtmlString generatePayedDropDownList(this HtmlHelper helper, bool? payed)
+        {
+            if (payed == null)
+                payed = false;
+
+            StringBuilder result = new StringBuilder();
+
+            result.Append("<select name=payed id=payedDropDown>");
+
+            result.Append(payed == true ? "<option value='1' selected>Payed</option>" : "<option value='1'>Payed</option>");
+            result.Append(payed == false ? "<option value='0' selected>not Payed</option>" : "<option value='0'>not Payed</option>");
+
+            result.Append("</select>");
+            return MvcHtmlString.Create(result.ToString());
+        }
     }
 }
