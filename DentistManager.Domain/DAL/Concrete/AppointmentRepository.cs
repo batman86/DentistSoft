@@ -11,6 +11,31 @@ namespace DentistManager.Domain.DAL.Concrete
 {
     public class AppointmentRepository : IAppointmentRepository
     {
+        // for api
+        public IEnumerable<patientAppoInfo> getPatientAppountmenInfo(int patientID, string mobile)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+
+                Patient patient = ctx.Patients.Where(x => x.PatientID == patientID && x.Mobile == mobile).FirstOrDefault();
+
+                if (patient == null)
+                    return null;
+
+                IEnumerable<patientAppoInfo> appointmentViewModel;
+
+                var appointmentsIQ = ctx.Appointments;
+                var doctorIQ = ctx.Doctors;
+
+                appointmentViewModel = (from a in appointmentsIQ
+                                        join d in doctorIQ on a.DoctorID equals d.DoctorID
+                                        where a.PatientID == patientID
+                                        select new patientAppoInfo {  AppDate=a.Start_date, DoctorName=d.Name}).ToList();
+
+                return appointmentViewModel;
+            }
+        }
+
         // this is a mini list i use it in drop down list
         public IEnumerable<AppointmentViewModel> getPatientAppountmentList(int patientID)
         {

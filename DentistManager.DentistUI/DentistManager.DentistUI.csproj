@@ -366,6 +366,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\CustomMatrialController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientIllnessHistoryController.cs" />
     <Compile Include="Areas\DoctorDashboard\Controllers\PatientImagesController.cs" />
@@ -388,6 +389,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatientAppController.cs" />
     <Compile Include="core\security.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />

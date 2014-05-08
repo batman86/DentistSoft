@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DentistManager.Domain.DAL.Abstract;
+
 
 namespace DentistManager.DentistUI.Controllers
 {
@@ -32,5 +32,7 @@ namespace DentistManager.DentistUI.Controllers
 
             return View();
         }
+
+
     }
 }

@@ -222,6 +222,7 @@
     <Compile Include="ViewModel\MedicineMiniViewModel.cs" />
     <Compile Include="ViewModel\opperationMiniDataViewModel.cs" />
     <Compile Include="ViewModel\PagingInfoHolder.cs" />
+    <Compile Include="ViewModel\patientAppoInfo.cs" />
     <Compile Include="ViewModel\PatientBillInfoWrap.cs" />
     <Compile Include="ViewModel\PatientCreateWrap.cs" />
     <Compile Include="ViewModel\PatientFullDataViewModel.cs" />
