@@ -12,6 +12,8 @@ namespace DentistManager.Domain.DAL.Abstract
         decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID);
         decimal? getPatientCusmotMatrialCostTotal(int patientID, int clinecID,DateTime from,DateTime to);
 
+        decimal? getDoctorCustomMatrailCostTotalPayed(int clinecID, int doctorID);
+        decimal? getDoctorCustomMatrailCostTotalUnPayed(int clinecID, int doctorID);
 
         bool addNewCustomMaterial(CustomMaterialViewModel customMaterialViewModel);
         bool updateCustomMaterial(CustomMaterialViewModel customMaterialViewModel);
@@ -19,6 +21,8 @@ namespace DentistManager.Domain.DAL.Abstract
         bool deleteCustomMaterial(int customMaterialtID);
 
         IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID);
+        IEnumerable<CustomMaterialPresentViewModel> getOldCustomMaterialList(int DoctorID);
         IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID, int patientID);
+        IEnumerable<CustomMaterialPresentViewModel> getOldCustomMaterialList(int DoctorID, int patientID);
     }
 }

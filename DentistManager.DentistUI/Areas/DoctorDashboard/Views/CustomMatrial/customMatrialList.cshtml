@@ -19,16 +19,40 @@
     {
         <select name="FilterType">
             <option value="1" selected>All Doctor Custom Matrials</option>
-            <option value="2">All Patient Custom Matrials</option>
+            <option value="2">All Doctor Custom Matrials payed</option>
+            <option value="3">All Patient Custom Matrials</option>
+            <option value="4">All Patient Custom Matrials payed</option>
         </select>
     }
-    else
+    else if (ViewBag.FilterType == "2")
     {
         <select name="FilterType">
             <option value="1">All Doctor Custom Matrials</option>
-            <option value="2" selected>All Patient Custom Matrials</option>
+            <option value="2" selected>All Doctor Custom Matrials payed</option>
+            <option value="3">All Patient Custom Matrials</option>
+            <option value="4">All Patient Custom Matrials payed</option>
         </select>
     }
+    else  if (ViewBag.FilterType == "3")
+    {
+        <select name="FilterType">
+            <option value="1">All Doctor Custom Matrials</option>
+            <option value="2">All Doctor Custom Matrials payed</option>
+            <option value="3" selected>All Patient Custom Matrials</option>
+            <option value="4">All Patient Custom Matrials payed</option>
+        </select>
+    }
+        else 
+    {
+        <select name="FilterType">
+            <option value="1">All Doctor Custom Matrials</option>
+            <option value="2">All Doctor Custom Matrials payed</option>
+            <option value="3">All Patient Custom Matrials</option>
+            <option value="4" selected>All Patient Custom Matrials payed</option>
+        </select>
+    }
+
+    
     <input type="submit" value="Filter" class="btn btn-default" />
 }
 

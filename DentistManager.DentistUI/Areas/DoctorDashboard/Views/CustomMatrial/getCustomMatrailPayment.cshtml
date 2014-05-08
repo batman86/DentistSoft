@@ -1,0 +1,29 @@
+﻿@model DentistManager.Domain.ViewModel.CustomMatrailPaymentViewModel
+@{
+    ViewBag.Title = "getCustomMatrailPayment";
+}
+
+<h2>Doctor current clinic Custom Matrail Payment</h2>
+
+<div>
+    <h4>CustomMaterialPresentViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Payed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unPayed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unPayed)
+        </dd>
+
+    </dl>
+</div>

@@ -49,6 +49,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 customMatrailEntity.Description = customMaterialViewModel.Description;
                 customMatrailEntity.Cost = customMaterialViewModel.Cost;
                 customMatrailEntity.ClinicID = customMaterialViewModel.clinecid;
+                customMatrailEntity.Payed = false;
 
                 ctx.CustomMaterials.Add(customMatrailEntity);
                 count = ctx.SaveChanges();
@@ -67,7 +68,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 customMatrailEntity.Name = customMaterialViewModel.Name;
                 customMatrailEntity.Description = customMaterialViewModel.Description;
                 customMatrailEntity.Cost = customMaterialViewModel.Cost;
-
+                customMatrailEntity.Payed = customMaterialViewModel.payed == 1 ? true : false;
                 ctx.Entry(customMatrailEntity).State = System.Data.Entity.EntityState.Modified;
                 count = ctx.SaveChanges();
             }
@@ -84,7 +85,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 CustomMaterialPresentViewModel customMatrailViewModel = (from cm in customMatrailIQ
                                                                          join p in patientIQ on cm.PatientID equals p.PatientID
                                                                          where cm.CustomMaterialID == customMaterialtID
-                                                                         select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).FirstOrDefault();
+                                                                         select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name , payed=cm.Payed}).FirstOrDefault();
                 return customMatrailViewModel;
             }
         }
@@ -113,13 +114,28 @@ namespace DentistManager.Domain.DAL.Concrete
 
                 IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
                                                                          join p in patientIQ on cm.PatientID equals p.PatientID
-                                                                         where cm.DoctorID == DoctorID
+                                                                         where cm.DoctorID == DoctorID && cm.Payed == false
                                                                          orderby cm.RequestDate descending
                                                                          select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
                 return customMatrailViewModel;
             }
         }
 
+        public IEnumerable<CustomMaterialPresentViewModel> getOldCustomMaterialList(int DoctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var customMatrailIQ = ctx.CustomMaterials;
+                var patientIQ = ctx.Patients;
+
+                IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
+                                                                                      join p in patientIQ on cm.PatientID equals p.PatientID
+                                                                                      where cm.DoctorID == DoctorID && cm.Payed == true
+                                                                                      orderby cm.RequestDate descending
+                                                                                      select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
+                return customMatrailViewModel;
+            }
+        }
 
         public IEnumerable<CustomMaterialPresentViewModel> getCustomMaterialList(int DoctorID, int patientID)
         {
@@ -130,12 +146,50 @@ namespace DentistManager.Domain.DAL.Concrete
 
                 IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
                                                                                       join p in patientIQ on cm.PatientID equals p.PatientID
-                                                                                      where cm.DoctorID == DoctorID && cm.PatientID == patientID
+                                                                                      where cm.DoctorID == DoctorID && cm.PatientID == patientID && cm.Payed == false
+                                                                                      select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
+                return customMatrailViewModel;
+            }
+        }
+
+        public IEnumerable<CustomMaterialPresentViewModel> getOldCustomMaterialList(int DoctorID, int patientID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                var customMatrailIQ = ctx.CustomMaterials;
+                var patientIQ = ctx.Patients;
+
+                IEnumerable<CustomMaterialPresentViewModel> customMatrailViewModel = (from cm in customMatrailIQ
+                                                                                      join p in patientIQ on cm.PatientID equals p.PatientID
+                                                                                      where cm.DoctorID == DoctorID && cm.PatientID == patientID && cm.Payed == true
                                                                                       select new CustomMaterialPresentViewModel { Cost = cm.Cost, CustomMaterialID = cm.CustomMaterialID, Description = cm.Description, Name = cm.Name, ReciveDate = cm.RequestDate, RequestDate = cm.RequestDate, patienName = p.Name }).ToList();
                 return customMatrailViewModel;
             }
         }
 
 
+        public decimal? getDoctorCustomMatrailCostTotalPayed(int clinecID, int doctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                decimal? total = 0;
+
+                total = ctx.CustomMaterials.Where(x => x.DoctorID == doctorID && x.ClinicID == clinecID && x.Payed == true).Select(x => x.Cost).Sum();
+
+                return total;
+            }
+        }
+
+        public decimal? getDoctorCustomMatrailCostTotalUnPayed(int clinecID, int doctorID)
+        {
+            using (Entities.Entities ctx = new Entities.Entities())
+            {
+                decimal? total = 0;
+
+                total = ctx.CustomMaterials.Where(x => x.DoctorID == doctorID && x.ClinicID == clinecID && x.Payed == false).Select(x => x.Cost).Sum();
+
+                return total;
+            }
+        }
     }
 }

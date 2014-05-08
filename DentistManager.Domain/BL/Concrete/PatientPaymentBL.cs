@@ -51,7 +51,7 @@ namespace DentistManager.Domain.BL.Concrete
             if (customMatrialCost == null)
                 customMatrialCost = 0;
 
-            TotalCost = treatmentCost + opperationCost + materialCost + customMatrialCost;
+            TotalCost = treatmentCost + opperationCost + materialCost;// +customMatrialCost;
 
             patientPayment =patientTotalPayment(patientID, clinecID);
 
@@ -105,7 +105,7 @@ namespace DentistManager.Domain.BL.Concrete
             if (customMatrialCost == null)
                 customMatrialCost = 0;
 
-            TotalCost = treatmentCost + opperationCost + materialCost + customMatrialCost;
+            TotalCost = treatmentCost + opperationCost + materialCost;// +customMatrialCost;
 
             patientPayment = patientTotalPayment(patientID, clinecID,from,to);
 

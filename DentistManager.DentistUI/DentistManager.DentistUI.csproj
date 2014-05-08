@@ -945,6 +945,7 @@
     <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptList.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientPaymentReceipt\patientReceiptDelete.cshtml" />
     <Content Include="Areas\DoctorDashboard\Views\PatientPayment\DoctorClinecPaymnet.cshtml" />
+    <Content Include="Areas\DoctorDashboard\Views\CustomMatrial\getCustomMatrailPayment.cshtml" />
     <None Include="Properties\PublishProfiles\Marc.pubxml" />
     <Content Include="Main.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1010,9 +1011,6 @@
       <Project>{b2a7b0b8-878d-41a1-b816-c18f783db9c6}</Project>
       <Name>DentistManager.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

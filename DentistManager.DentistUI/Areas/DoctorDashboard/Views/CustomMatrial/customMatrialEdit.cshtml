@@ -1,4 +1,5 @@
 ﻿@model DentistManager.Domain.ViewModel.CustomMaterialPresentViewModel
+@using DentistManager.DentistUI.HtmlHelpers
 
 @{
     ViewBag.Title = "customMatrialEdit";
@@ -23,6 +24,11 @@
                 @Html.EditorFor(model => model.ReciveDate)
                 @Html.ValidationMessageFor(model => model.ReciveDate)
             </div>
+        </div>
+
+        <div class="form-group">
+             <p> Payed</p>
+                @Html.generatePayedDropDownList(Model.payed)
         </div>
 
         <div class="form-group">

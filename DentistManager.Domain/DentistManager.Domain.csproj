@@ -207,6 +207,7 @@
     <Compile Include="ViewModel\AppointmentViewModel.cs" />
     <Compile Include="ViewModel\CustomMaterialPresentViewModel.cs" />
     <Compile Include="ViewModel\CustomMaterialViewModel.cs" />
+    <Compile Include="ViewModel\CustomMatrailPaymentViewModel.cs" />
     <Compile Include="ViewModel\DoctorMiniInfoViewModel.cs" />
     <Compile Include="ViewModel\DoctorPatientBillInfoWrap.cs" />
     <Compile Include="ViewModel\ImageCategoryViewModel.cs" />
