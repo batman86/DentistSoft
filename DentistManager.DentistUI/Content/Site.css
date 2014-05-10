@@ -332,6 +332,8 @@ table#TreatmentList td.treatmentTableSmall{
     text-align:center;
         width:80%;
    display:block;
+   	font-family: 'Droid Arabic Kufi', serif;
+
 }
 
 #PrescPrint #prescHead{
@@ -389,7 +391,11 @@ table#TreatmentList td.treatmentTableSmall{
      display:block;
      float:right;
 }
-
+#PrescPrint #prescFooter span{
+    float :right;
+    margin:0 100px 0 0 ;
+    text-align:left;
+}
 
 
 @media print {

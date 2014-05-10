@@ -93,10 +93,7 @@ namespace DentistManager.Domain.DAL.Concrete
                 reciptpresentViewModel.receiptID = recipt.ReceiptID;
                 reciptpresentViewModel.receiptAmount = recipt.Amount;
                 reciptpresentViewModel.ReviceDate = recipt.Date;
-<<<<<<< HEAD
-=======
-                //reciptpresentViewModel.reciverName = ctx.Secretaries.Where(x => x.UserID == recipt.UserID).FirstOrDefault().Name;
->>>>>>> 00da31a502bf4b34b82310e66715c678f0484011
+
                 reciptpresentViewModel.reciverName = ctx.AspNetUsers.Where(x => x.Id == recipt.UserID).FirstOrDefault().UserName;
             }
             return reciptpresentViewModel;
